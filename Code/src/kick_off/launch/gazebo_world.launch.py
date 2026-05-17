@@ -8,8 +8,8 @@ from launch.actions import ExecuteProcess
 
 
 def generate_launch_description():
-    pkg_dir = get_package_share_directory('robot_simulation')
-    world_file = os.path.join(pkg_dir, 'worlds', 'corridors.sdf')
+    robot_sim_dir = get_package_share_directory('robot_simulation')
+    world_file = os.path.join(robot_sim_dir, 'worlds', 'corridors.sdf')
 
     return LaunchDescription([
         ExecuteProcess(
