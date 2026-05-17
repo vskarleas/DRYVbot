@@ -1,3 +1,6 @@
+# gazebo_world.launch.py
+# This launch file starts the Gazebo simulator with the specified world corridors.sdf file
+
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
@@ -5,7 +8,7 @@ from launch.actions import ExecuteProcess
 
 
 def generate_launch_description():
-    pkg_dir = get_package_share_directory('digital_twin_robot')
+    pkg_dir = get_package_share_directory('robot_simulation')
     world_file = os.path.join(pkg_dir, 'worlds', 'corridors.sdf')
 
     return LaunchDescription([

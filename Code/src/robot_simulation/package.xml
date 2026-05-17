@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>digital_twin_robot</name>
+  <name>robot_simulation</name>
   <version>0.1.0</version>
-  <description>Digital Twin Robotics - Cloud-offloaded trajectory planning and obstacle avoidance</description>
+  <description>Simulated robot environment - Gazebo world, TurtleBot3, and dynamic obstacles</description>
   <maintainer email="dimitrios@todo.com">Dimitrios</maintainer>
   <license>MIT</license>
 
@@ -17,11 +17,6 @@
   <exec_depend>turtlebot3_gazebo</exec_depend>
   <exec_depend>turtlebot3_description</exec_depend>
   <exec_depend>turtlebot3_teleop</exec_depend>
-
-  <!-- Navigation & SLAM -->
-  <exec_depend>nav2_bringup</exec_depend>
-  <exec_depend>slam_toolbox</exec_depend>
-  <exec_depend>nav2_map_server</exec_depend>
 
   <!-- ROS2 core -->
   <exec_depend>rclpy</exec_depend>
