@@ -73,6 +73,24 @@ A package was created to simply integrate all teh different launch files of the 
 ros2 launch launch_project gazebo_world.launch.py
 ```
 
+## Creating the map
+
+For that we will use the SAML toolbox for ROS. So here we do the following :
+
+1. Launch our world with the robot `ros2 launch launch_project gazebo_world.launch.py`
+2. Launch the SAML toolbox `ros2 launch slam_toolbox online_async_launch.py use_sim_time:=true`
+3. We need the teleoperation so that we can navigate the scene. In real world scenrio this could be a remote control `ros2 run turtlebot3_teleop teleop_keyboard`
+4. See the map being contrusted in real time at by launching `rviz2`
+   1. **Add** → **By topic** → `/map` → **Map** → OK
+   2. **Add** → **By topic** → `/scan` → **LaserScan** → OK
+   3. Change the **Fixed Frame** (upper left corner) of the `map` if it is not already selected
+5. Save the result using the following code on aterminal '
+
+```bash
+cd ~/Documents/ROB5-S10-SYS880/Code/src/robot_simulation/maps
+ros2 run nav2_map_server map_saver_cli -f corridors_map
+```
+
 ## Versions
 
 | Version | Details                                                                                                                                                                                                                                                                                                                                               |
@@ -87,6 +105,7 @@ ros2 launch launch_project gazebo_world.launch.py
 | V2.3.0  | Updated teh setup.py for the digital twin package                                                                                                                                                                                                                                                                                                     |
 | V2.3.1  | Created the visualization package.                                                                                                                                                                                                                                                                                                                    |
 | V2.3.2  | Modfied the Gazebo world so that it can have sun and lighting conditions. Also, we modfied the launch file so that Gazebo server can run our world, open the URDF of the robot for control and also render the 3d model of the robot using the spawn entoty. The teleop is is tested using th enode turtlebot3_teleop that comes by default with ROS2 |
+| V2.3.3  | Created a map using the SAML toolbox. All the details on how to redoit for another world can be found above.                                                                                                                                                                                                                                          |
 |         | Creating the planner node on python using the Nav2 dependancy as solver for that task                                                                                                                                                                                                                                                                 |
 
 ## TO-DO
@@ -98,7 +117,7 @@ ros2 launch launch_project gazebo_world.launch.py
 * [ ] Modify the corridors.sdf with Yanis's desoign
 * [X] Spawn TurtleBot3 in the corridor world and verify sensors are working
 * [X] Implement teleop to manually drive the robot in the corridors - We use the `ros2 run turtlebot3_teleop teleop_keyboard`
-* [ ] Run SLAM to generate a map of the corridor environment. The idea is create a map to the slam encoder that can be used for path planning analysis
+* [X] Run SLAM to generate a map of the corridor environment. The idea is create a map to the slam encoder that can be used for path planning analysis
 * [ ] See if we can simulate people like detection on gazebo
 * [ ] Implement the obstacle spawner to inject dynamic people at known positions on the map
 * [ ] Maybe apply some computer vision to the system so that we do not give directly teh information that on a specific point of the map there are people moving. We could use OpenCV if applicable
