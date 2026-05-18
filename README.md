@@ -81,6 +81,7 @@ ros2 launch robot_simulation gazebo_world.launch.py
 | V1.1.0  | Started building the robot_simulation package that will be used to simulate the real robot so that if we had a real robot navigating on the real world |
 | V2.1.1  | Created kick_off package for centralised launch. Basicly it only insludes the launch file for vetter centralisation                                    |
 | V2.1.2  | Renamed the kick_off package to launch_project                                                                                                         |
+| V2.2.1  | Created the digital_twin package                                                                                                                       |
 
 ## TO-DO
 
@@ -98,6 +99,7 @@ ros2 launch robot_simulation gazebo_world.launch.py
 
 ### digital_twin
 
+* [X] Create the digital twin package
 * [ ] Create the planner node that receives robot position + goal + affluence data
 * [ ] Integrate Nav2 (or custom A*) for path planning on the saved map
 * [ ] Implement the continuous replanning loop: recompute path every time new obstacle data arrives, until robot reaches destination
