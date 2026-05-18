@@ -96,7 +96,7 @@ ros2 launch robot_simulation gazebo_world.launch.py
 * [ ] Modify the corridors.sdf with Yanis's desoign
 * [X] Spawn TurtleBot3 in the corridor world and verify sensors are working
 * [X] Implement teleop to manually drive the robot in the corridors - We use the `ros2 run turtlebot3_teleop teleop_keyboard`
-* [ ] Run SLAM to generate a map of the corridor environment
+* [ ] Run SLAM to generate a map of the corridor environment. The idea is create a map to the slam encoder that can be used for path planning analysis
 * [ ] See if we can simulate people like detection on gazebo
 * [ ] Implement the obstacle spawner to inject dynamic people at known positions on the map
 * [ ] Maybe apply some computer vision to the system so that we do not give directly teh information that on a specific point of the map there are people moving. We could use OpenCV if applicable
