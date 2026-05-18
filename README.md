@@ -80,6 +80,7 @@ ros2 launch robot_simulation gazebo_world.launch.py
 | V1.0.1  | Created test Gazebo world and a launch script that allows to launch that world on Gazebo                                                               |
 | V1.1.0  | Started building the robot_simulation package that will be used to simulate the real robot so that if we had a real robot navigating on the real world |
 | V2.1.1  | Created kick_off package for centralised launch. Basicly it only insludes the launch file for vetter centralisation                                    |
+| V2.1.2  | Renamed the kick_off package to launch_project                                                                                                         |
 
 ## TO-DO
 
