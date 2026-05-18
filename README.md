@@ -50,10 +50,9 @@ The project is organised in three ROS2 packages:
 
 ### Environment Setup
 
-Add the following to your `~/.bashrc`:
+Add the following to your `~/.bashrc` if not already there:
 
 ```bash
-export TURTLEBOT3_MODEL=burger
 source /opt/ros/humble/setup.bash
 ```
 
@@ -61,14 +60,17 @@ source /opt/ros/humble/setup.bash
 
 ```bash
 cd ~/Documents/ROB5-S10-SYS880/Code
+export TURTLEBOT3_MODEL=burger
 colcon build
 source install/setup.bash
 ```
 
 ### Launch the Gazebo World
 
+A package was created to simply integrate all teh different launch files of the project. This is not the usual method of organising stuff but it helps a lot for a clrearer image. We just need to pass the correct paths so that the launcher can find the directories
+
 ```bash
-ros2 launch robot_simulation gazebo_world.launch.py
+ros2 launch launch_project gazebo_world.launch.py
 ```
 
 ## Versions

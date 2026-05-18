@@ -9,6 +9,8 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 
 def generate_launch_description():
+
+    # Paths
     robot_sim_dir = get_package_share_directory('robot_simulation')
     world_file = os.path.join(robot_sim_dir, 'worlds', 'corridors.world')
     turtlebot3_gazebo_dir = get_package_share_directory('turtlebot3_gazebo')
