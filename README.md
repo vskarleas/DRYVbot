@@ -73,18 +73,19 @@ ros2 launch robot_simulation gazebo_world.launch.py
 
 ## Versions
 
-| Version | Details                                                                                                                                                |
-| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| V0.1.0  | Repo initialisation with Doxygen configuration                                                                                                         |
-| V0.1.1  | Tested doxygen                                                                                                                                         |
-| V1.0.1  | Created test Gazebo world and a launch script that allows to launch that world on Gazebo                                                               |
-| V1.1.0  | Started building the robot_simulation package that will be used to simulate the real robot so that if we had a real robot navigating on the real world |
-| V2.1.1  | Created kick_off package for centralised launch. Basicly it only insludes the launch file for vetter centralisation                                    |
-| V2.1.2  | Renamed the kick_off package to launch_project                                                                                                         |
-| V2.2.1  | Created the digital_twin package                                                                                                                       |
-| V2.3.0  | Updated teh setup.py for the digital twin package                                                                                                      |
-| V2.3.1  | Created the visualization package.                                                                                                                     |
-|         | Creating the planner node on python using the Nav2 dependancy as solver for that task                                                                  |
+| Version | Details                                                                                                                                                                                                                                                                                                                                               |
+| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| V0.1.0  | Repo initialisation with Doxygen configuration                                                                                                                                                                                                                                                                                                        |
+| V0.1.1  | Tested doxygen                                                                                                                                                                                                                                                                                                                                        |
+| V1.0.1  | Created test Gazebo world and a launch script that allows to launch that world on Gazebo                                                                                                                                                                                                                                                              |
+| V1.1.0  | Started building the robot_simulation package that will be used to simulate the real robot so that if we had a real robot navigating on the real world                                                                                                                                                                                                |
+| V2.1.1  | Created kick_off package for centralised launch. Basicly it only insludes the launch file for vetter centralisation                                                                                                                                                                                                                                   |
+| V2.1.2  | Renamed the kick_off package to launch_project                                                                                                                                                                                                                                                                                                        |
+| V2.2.1  | Created the digital_twin package                                                                                                                                                                                                                                                                                                                      |
+| V2.3.0  | Updated teh setup.py for the digital twin package                                                                                                                                                                                                                                                                                                     |
+| V2.3.1  | Created the visualization package.                                                                                                                                                                                                                                                                                                                    |
+| V2.3.2  | Modfied the Gazebo world so that it can have sun and lighting conditions. Also, we modfied the launch file so that Gazebo server can run our world, open the URDF of the robot for control and also render the 3d model of the robot using the spawn entoty. The teleop is is tested using th enode turtlebot3_teleop that comes by default with ROS2 |
+|         | Creating the planner node on python using the Nav2 dependancy as solver for that task                                                                                                                                                                                                                                                                 |
 
 ## TO-DO
 
@@ -93,8 +94,8 @@ ros2 launch robot_simulation gazebo_world.launch.py
 ### robot_simulation
 
 * [ ] Modify the corridors.sdf with Yanis's desoign
-* [ ] Spawn TurtleBot3 in the corridor world and verify sensors are working
-* [ ] Implement teleop to manually drive the robot in the corridors
+* [X] Spawn TurtleBot3 in the corridor world and verify sensors are working
+* [X] Implement teleop to manually drive the robot in the corridors - We use the `ros2 run turtlebot3_teleop teleop_keyboard`
 * [ ] Run SLAM to generate a map of the corridor environment
 * [ ] See if we can simulate people like detection on gazebo
 * [ ] Implement the obstacle spawner to inject dynamic people at known positions on the map
