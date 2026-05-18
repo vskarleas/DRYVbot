@@ -4,7 +4,7 @@
   <name>robot_simulation</name>
   <version>0.1.0</version>
   <description>Simulated robot environment - Gazebo world, TurtleBot3, and dynamic obstacles</description>
-  <maintainer email="dimitrios@todo.com">Dimitrios</maintainer>
+  <maintainer email="vskarleas@icloud.com">vskarleas</maintainer>
   <license>MIT</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
