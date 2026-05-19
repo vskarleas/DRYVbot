@@ -26,7 +26,7 @@ def generate_launch_description():
         }.items(),
     )
 
-    # ===== 2. Static TF: map -> odom (bypasses AMCL timing issues) =====
+    # ===== 2. Static TF: map -> odom =====
     static_tf_map_odom = Node(
         package='tf2_ros',
         executable='static_transform_publisher',
@@ -35,9 +35,18 @@ def generate_launch_description():
         output='screen',
     )
 
-    # ===== 3. Nav2 stack (delayed 10s for Gazebo to be ready) =====
+    # ===== 3. cmd_vel relay: Nav2 -> robot =====
+    cmd_vel_relay = Node(
+        package='topic_tools',
+        executable='relay',
+        name='cmd_vel_relay',
+        arguments=['/cmd_vel', '/bcr_bot/cmd_vel'],
+        output='screen',
+    )
+
+    # ===== 4. Nav2 stack (delayed 15s for Gazebo to fully start) =====
     nav2_bringup = TimerAction(
-        period=10.0,
+        period=15.0,
         actions=[
             IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(
@@ -52,12 +61,14 @@ def generate_launch_description():
         ]
     )
 
-    # ===== 4. Auto initial pose (delayed 20s) =====
+    # ===== 5. Publish initial pose repeatedly until it sticks =====
+    # Using --times 10 with --rate 0.2 = publishes every 5s for 50s total
     set_initial_pose = TimerAction(
-        period=20.0,
+        period=30.0,
         actions=[
             ExecuteProcess(
-                cmd=['ros2', 'topic', 'pub', '--once', '/initialpose',
+                cmd=['ros2', 'topic', 'pub', '--times', '10', '--rate', '0.2',
+                     '/initialpose',
                      'geometry_msgs/PoseWithCovarianceStamped',
                      '{header: {frame_id: "map"}, pose: {pose: {position: {x: 0.0, y: 0.0, z: 0.0}, orientation: {w: 1.0}}}}'],
                 output='screen',
@@ -65,29 +76,7 @@ def generate_launch_description():
         ]
     )
 
-    # ===== 5. Retry initial pose (delayed 25s) =====
-    set_initial_pose_retry = TimerAction(
-        period=25.0,
-        actions=[
-            ExecuteProcess(
-                cmd=['ros2', 'topic', 'pub', '--once', '/initialpose',
-                     'geometry_msgs/PoseWithCovarianceStamped',
-                     '{header: {frame_id: "map"}, pose: {pose: {position: {x: 0.0, y: 0.0, z: 0.0}, orientation: {w: 1.0}}}}'],
-                output='screen',
-            ),
-        ]
-    )
-
-    # ===== 6. cmd_vel relay: Nav2 -> robot =====
-    cmd_vel_relay = Node(
-        package='topic_tools',
-        executable='relay',
-        name='cmd_vel_relay',
-        arguments=['/cmd_vel', '/bcr_bot/cmd_vel'],
-        output='screen',
-    )
-
-    # ===== 7. Foxglove Bridge =====
+    # ===== 6. Foxglove Bridge =====
     foxglove_bridge = Node(
         package='foxglove_bridge',
         executable='foxglove_bridge',
@@ -107,6 +96,5 @@ def generate_launch_description():
         cmd_vel_relay,
         nav2_bringup,
         set_initial_pose,
-        set_initial_pose_retry,
         foxglove_bridge,
     ])

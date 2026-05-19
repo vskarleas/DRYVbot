@@ -15,11 +15,8 @@ A **Foxglove** web interface (running on localhost) allows the user to visualise
 The project is organised in the following ROS2 packages:
 
 - **`robot_simulation`** — Contains the world files, saved maps, and the obstacle spawner script. In a real deployement, this package would be replaced by the actual physical robot and its sensors.
-
 - **`digital_twin`** — This is the core of the project. It is the cloud-side intelligence that the robot cannot run onboard due to its limited CPU. It contains the Nav2 configuration, the warehouse map, and the main launch file (`full.launch.py`) that starts the entire system: Gazebo simulation, Nav2 navigation, cmd_vel relay, and Foxglove bridge. It receives real-time data (robot position, lidar scans, destination goal) and runs the Nav2 path planning to compute the optimal trajectory.
-
 - **`visualization`** — Reserved for future Foxglove custom panels and visualization tools. Currently, the Foxglove bridge is launched from the digital_twin launch file.
-
 - **`bcr_bot`** — The simulated robot. A differential drive robot with lidar, camera, and IMU that works natively with Gazebo Harmonic.
 
 ### Technologies
@@ -31,7 +28,6 @@ The project is organised in the following ROS2 packages:
 - **slam_toolbox** — SLAM for map generation
 - **Foxglove** — Web-based visualisation interface (free edition, localhost)
 - **ros_gz_bridge** — Bridge between Gazebo Harmonic and ROS2 topics
-
 
 ## Installation
 
@@ -89,64 +85,64 @@ ros2 topic pub --once /goal_pose geometry_msgs/PoseStamped \
   "{header: {frame_id: 'map'}, pose: {position: {x: 3.0, y: 0.0, z: 0.0}, orientation: {w: 1.0}}}"
 ```
 
-
 ## Creating the map
 
 The warehouse map was generated using slam_toolbox. To recreate it or create a map for a different world:
 
 1. Launch the robot in the world:
+
    ```bash
    ros2 launch bcr_bot gz.launch.py two_d_lidar_enabled:=True camera_enabled:=True world_file:=small_warehouse.sdf
    ```
-
 2. Launch slam_toolbox (in a new terminal):
+
    ```bash
    ros2 run slam_toolbox async_slam_toolbox_node --ros-args -p use_sim_time:=true -r scan:=/bcr_bot/scan
    ```
-
 3. Launch teleop to drive the robot arround (in a new terminal):
+
    ```bash
    ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/bcr_bot/cmd_vel
    ```
-
 4. Visualize the map in RViz (in a new terminal):
+
    ```bash
    rviz2
    ```
+
    - Set **Fixed Frame** to `odom`
    - **Add** → **By topic** → `/map` → **Map**
    - **Add** → **By topic** → `/bcr_bot/scan` → **LaserScan**
-
 5. Drive the robot through the entire environment to complete the map.
-
 6. Save the map:
+
    ```bash
    cd ~/Documents/ROB5-S10-SYS880/Code/src/digital_twin/maps
    ros2 run nav2_map_server map_saver_cli -f warehouse_map
    ```
 
-
 ## Versions
 
-| Version | Details                                                                                                                                                |
-| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| V0.1.0  | Repo initialisation with Doxygen configuration                                                                                                         |
-| V0.1.1  | Tested doxygen                                                                                                                                         |
-| V1.0.1  | Created test Gazebo world and a launch script that allows to launch that world on Gazebo                                                               |
-| V1.1.0  | Started building the robot_simulation package that will be used to simulate the real robot so that if we had a real robot navigating on the real world |
-| V2.1.1  | Created kick_off package for centralised launch. Basicly it only insludes the launch file for vetter centralisation                                    |
-| V2.1.2  | Renamed the kick_off package to launch_project                                                                                                         |
-| V2.2.1  | Created the digital_twin package                                                                                                                       |
-| V2.3.0  | Updated teh setup.py for the digital twin package                                                                                                      |
-| V2.3.1  | Created the visualization package                                                                                                                      |
-| V2.3.2  | Modfied the Gazebo world so that it can have sun and lighting conditions. Also, we modfied the launch file so that Gazebo server can run our world     |
-| V2.3.3  | Created a map using the SLAM toolbox                                                                                                                   |
-| V3.0.0  | Migration to Gazebo Harmonic + bcr_bot + small_warehouse. Nav2 integration for path planning. Foxglove bridge. Removed launch_project package          |
-
+| Version | Details                                                                                                                                                             |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| V0.1.0  | Repo initialisation with Doxygen configuration                                                                                                                      |
+| V0.1.1  | Tested doxygen                                                                                                                                                      |
+| V1.0.1  | Created test Gazebo world and a launch script that allows to launch that world on Gazebo                                                                            |
+| V1.1.0  | Started building the robot_simulation package that will be used to simulate the real robot so that if we had a real robot navigating on the real world              |
+| V2.1.1  | Created kick_off package for centralised launch. Basicly it only insludes the launch file for vetter centralisation                                                 |
+| V2.1.2  | Renamed the kick_off package to launch_project                                                                                                                      |
+| V2.2.1  | Created the digital_twin package                                                                                                                                    |
+| V2.3.0  | Updated teh setup.py for the digital twin package                                                                                                                   |
+| V2.3.1  | Created the visualization package                                                                                                                                   |
+| V2.3.2  | Modfied the Gazebo world so that it can have sun and lighting conditions. Also, we modfied the launch file so that Gazebo server can run our world                  |
+| V2.3.3  | Created a map using the SLAM toolbox                                                                                                                                |
+| V3.0.0  | Migration to Gazebo Harmonic + bcr_bot + small_warehouse. Nav2 integration for path planning. Foxglove bridge. Removed launch_project package                       |
+| V3.1.0  | Removed ACML startup for the nav2 because it is not needed for robot's navigation using the /odom topic. ALso increased the acceleration and teh speed of the robot |
 
 ## TO-DO
 
 ### robot_simulation
+
 * [X] Spawn robot in the world and verify sensors are working
 * [X] Implement teleop to manually drive the robot
 * [X] Run SLAM to generate a map of the environment
@@ -155,6 +151,7 @@ The warehouse map was generated using slam_toolbox. To recreate it or create a m
 * [ ] Maybe apply some computer vision to the system so that we do not give directly teh information that on a specific point of the map there are people moving. We could use OpenCV if applicable
 
 ### digital_twin
+
 * [X] Create the digital twin package
 * [X] Integrate Nav2 for path planning on the saved map
 * [X] Navigation with obstacle avoidance via Nav2 costmaps
@@ -163,6 +160,7 @@ The warehouse map was generated using slam_toolbox. To recreate it or create a m
 * [ ] Create demo scenarios: nominal navigation, dynamic obstacle avoidance, latency stress test
 
 ### visualization
+
 * [X] Connect Foxglove to the system via websocket bridge
 * [X] Send navigation goals from Foxglove
 * [ ] On foxglove show an approve first_path when Nav2 proposes the path. This path however is free to be updated on real time when the robots runs and the digital twin control's its mouvement
