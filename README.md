@@ -20,7 +20,7 @@ The project is organised in the following ROS2 packages:
 
 - **`visualization`** — Reserved for future Foxglove custom panels and visualization tools. Currently, the Foxglove bridge is launched from the digital_twin launch file.
 
-- **`bcr_bot`** (external) — The simulated robot. A differential drive robot with lidar, camera, and IMU that works natively with Gazebo Harmonic.
+- **`bcr_bot`** — The simulated robot. A differential drive robot with lidar, camera, and IMU that works natively with Gazebo Harmonic.
 
 ### Technologies
 
