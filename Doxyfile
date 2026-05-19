@@ -1353,7 +1353,6 @@ HTML_EXTRA_FILES       = Documentation/extras/favicon-96x96.png \
                         Documentation/extras/favicon.ico \
                         Documentation/extras/apple-touch-icon.png \
                         Documentation/extras/site.webmanifest \
-                        Documentation/gantt.png \
                         Documentation/style/doxygen-awesome-darkmode-toggle.js
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
