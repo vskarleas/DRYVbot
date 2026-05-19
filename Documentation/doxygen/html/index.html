@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>DigitalTwin Planner: ROB5-S10-SYS880</title>
+<title>Digital Twin - Cloud Robotics: ROB5-S10-SYS880</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">DigitalTwin Planner
+   <div id="projectname">Digital Twin - Cloud Robotics
    &#160;<span id="projectnumber">ROS2 Humble</span>
    </div>
    <div id="projectbrief">Digital twin for path and trajectory optimisation</div>
@@ -71,9 +71,86 @@ $(function() {
 <div class="textblock"><p><a class="anchor" id="md_README"></a> </p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Description</h1>
-<h1><a class="anchor" id="autotoc_md2"></a>
+<p>This project is a proof-of-concept for a <b>Digital Twin</b> application applied to mobile robotics. The core idea is that we have budget robots with limited onboard processing power that cannot handle heavy computation tasks like trajectory planning and real-time obstacle avoidance on their own. Instead, these robots offload that computation to their digital twin running on a cloud server (in our case, our local computer).</p>
+<p>The digital twin receives real-time data from the robot (position, sensor data) and from the environment (people affluence, obstacle positions), processes all this information to compute the optimal path, and sends back motion commands to the robot. This creates a closed-loop system where the robot is essentially "remote-controlled" by its intelligent twin that has access to far more computational resources.</p>
+<p>Since we do not have a physical robot available, the project uses <b>Gazebo Harmonic</b> to simulate the robot navigating in a warehouse environment. The simulation represents what would be a real robot connected via a 5G local network to the cloud. The digital twin runs the <b>Nav2</b> navigation stack, which is too computationnaly heavy for a budget robot's onboard CPU.</p>
+<p>A <b>Foxglove</b> web interface (running on localhost) allows the user to visualise the robot in real-time on the map, select a destination, and monitor the planned path. When a destination is selected, the robot's real-time position and environment affluence data are sent to the digital twin, which continuously computes and updates the best path until the robot reaches its final position. All those info are also shown live on the web interface.</p>
+<h2><a class="anchor" id="autotoc_md2"></a>
+Architecture</h2>
+<p>The project is organised in the following ROS2 packages:</p>
+<ul>
+<li>**<code>robot_simulation</code>** — Contains the world files, saved maps, and the obstacle spawner script. In a real deployement, this package would be replaced by the actual physical robot and its sensors.</li>
+<li>**<code><a class="el" href="namespacedigital__twin.html">digital_twin</a></code>** — This is the core of the project. It is the cloud-side intelligence that the robot cannot run onboard due to its limited CPU. It contains the Nav2 configuration, the warehouse map, and the main launch file (<code><a class="el" href="full_8launch_8py.html">full.launch.py</a></code>) that starts the entire system: Gazebo simulation, Nav2 navigation, cmd_vel relay, and Foxglove bridge. It receives real-time data (robot position, lidar scans, destination goal) and runs the Nav2 path planning to compute the optimal trajectory.</li>
+<li>**<code>visualization</code>** — Reserved for future Foxglove custom panels and visualization tools. Currently, the Foxglove bridge is launched from the <a class="el" href="namespacedigital__twin.html">digital_twin</a> launch file.</li>
+<li>**<code>bcr_bot</code>** — The simulated robot. A differential drive robot with lidar, camera, and IMU that works natively with Gazebo Harmonic.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Technologies</h2>
+<ul>
+<li><b>ROS2 Humble</b> — Robotics framework</li>
+<li><b>Gazebo Harmonic</b> — Robot and environment simulation</li>
+<li><b>bcr_bot</b> — Mobile robot model (differential drive with lidar and camera)</li>
+<li><b>Nav2</b> — Navigation stack for path planning and obstacle avoidance</li>
+<li><b>slam_toolbox</b> — SLAM for map generation</li>
+<li><b>Foxglove</b> — Web-based visualisation interface (free edition, localhost)</li>
+<li><b>ros_gz_bridge</b> — Bridge between Gazebo Harmonic and ROS2 topics</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md4"></a>
 Installation</h1>
-<h1><a class="anchor" id="autotoc_md3"></a>
+<h2><a class="anchor" id="autotoc_md5"></a>
+Prerequisites</h2>
+<ul>
+<li>Ubuntu 22.04</li>
+<li>ROS2 Humble (<code>sudo apt install ros-humble-desktop</code>)</li>
+<li>Gazebo Harmonic: <div class="fragment"><div class="line">sudo apt install gz-harmonic ros-humble-ros-gzharmonic</div>
+</div><!-- fragment --></li>
+<li>Nav2 and SLAM: <div class="fragment"><div class="line">sudo apt install ros-humble-navigation2 ros-humble-nav2-bringup ros-humble-slam-toolbox</div>
+</div><!-- fragment --></li>
+<li>Foxglove Bridge: <div class="fragment"><div class="line">sudo apt install ros-humble-foxglove-bridge</div>
+</div><!-- fragment --></li>
+<li>Topic tools (for cmd_vel relay): <div class="fragment"><div class="line">sudo apt install ros-humble-topic-tools</div>
+</div><!-- fragment --></li>
+</ul>
+<h2><a class="anchor" id="autotoc_md6"></a>
+Environment Setup</h2>
+<p>Add the following to your <code>~/.bashrc</code> if not already there:</p>
+<div class="fragment"><div class="line">source /opt/ros/humble/setup.bash</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md7"></a>
+Build</h2>
+<div class="fragment"><div class="line">cd ~/Documents/ROB5-S10-SYS880/Code</div>
+<div class="line">colcon build</div>
+<div class="line">source install/setup.bash</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md8"></a>
+Launch everything</h2>
+<p>The <code><a class="el" href="full_8launch_8py.html">full.launch.py</a></code> starts the entire system in one command: Gazebo with the warehouse world and the bcr_bot, Nav2 navigation stack, cmd_vel relay, initial pose publisher, and Foxglove bridge.</p>
+<div class="fragment"><div class="line">ros2 launch digital_twin full.launch.py</div>
+</div><!-- fragment --><p>Wait approximately 30 seconds for everything to start. Then open Foxglove at <code><a href="https://app.foxglove.dev">https://app.foxglove.dev</a></code>, connect to <code>ws://localhost:8765</code>, and send a navigation goal.</p>
+<p>You can also send a goal from the terminal:</p>
+<div class="fragment"><div class="line">ros2 topic pub --once /goal_pose geometry_msgs/PoseStamped \</div>
+<div class="line">  &quot;{header: {frame_id: &#39;map&#39;}, pose: {position: {x: 3.0, y: 0.0, z: 0.0}, orientation: {w: 1.0}}}&quot;</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md9"></a>
+Creating the map</h1>
+<p>The warehouse map was generated using slam_toolbox. To recreate it or create a map for a different world:</p>
+<ol type="1">
+<li>Launch the robot in the world: <div class="fragment"><div class="line">ros2 launch bcr_bot gz.launch.py two_d_lidar_enabled:=True camera_enabled:=True world_file:=small_warehouse.sdf</div>
+</div><!-- fragment --></li>
+<li>Launch slam_toolbox (in a new terminal): <div class="fragment"><div class="line">ros2 run slam_toolbox async_slam_toolbox_node --ros-args -p use_sim_time:=true -r scan:=/bcr_bot/scan</div>
+</div><!-- fragment --></li>
+<li>Launch teleop to drive the robot arround (in a new terminal): <div class="fragment"><div class="line">ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/bcr_bot/cmd_vel</div>
+</div><!-- fragment --></li>
+<li>Visualize the map in RViz (in a new terminal): <div class="fragment"><div class="line">rviz2</div>
+</div><!-- fragment --><ul>
+<li>Set <b>Fixed Frame</b> to <code>odom</code></li>
+<li><b>Add</b> → <b>By topic</b> → <code>/map</code> → <b>Map</b></li>
+<li><b>Add</b> → <b>By topic</b> → <code>/bcr_bot/scan</code> → <b>LaserScan</b></li>
+</ul>
+</li>
+<li>Drive the robot through the entire environment to complete the map.</li>
+<li>Save the map: <div class="fragment"><div class="line">cd ~/Documents/ROB5-S10-SYS880/Code/src/digital_twin/maps</div>
+<div class="line">ros2 run nav2_map_server map_saver_cli -f warehouse_map</div>
+</div><!-- fragment --></li>
+</ol>
+<h1><a class="anchor" id="autotoc_md10"></a>
 Versions</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -81,8 +158,59 @@ Versions</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">V0.1.0   </td><td class="markdownTableBodyNone">Repo initialisation with Doxygen configuration    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">V0.1.1   </td><td class="markdownTableBodyNone">Tested doxygen   </td></tr>
+<td class="markdownTableBodyNone">V0.1.1   </td><td class="markdownTableBodyNone">Tested doxygen    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">V1.0.1   </td><td class="markdownTableBodyNone">Created test Gazebo world and a launch script that allows to launch that world on Gazebo    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">V1.1.0   </td><td class="markdownTableBodyNone">Started building the robot_simulation package that will be used to simulate the real robot so that if we had a real robot navigating on the real world    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">V2.1.1   </td><td class="markdownTableBodyNone">Created kick_off package for centralised launch. Basicly it only insludes the launch file for vetter centralisation    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">V2.1.2   </td><td class="markdownTableBodyNone">Renamed the kick_off package to launch_project    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">V2.2.1   </td><td class="markdownTableBodyNone">Created the <a class="el" href="namespacedigital__twin.html">digital_twin</a> package    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">V2.3.0   </td><td class="markdownTableBodyNone">Updated teh setup.py for the digital twin package    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">V2.3.1   </td><td class="markdownTableBodyNone">Created the visualization package    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">V2.3.2   </td><td class="markdownTableBodyNone">Modfied the Gazebo world so that it can have sun and lighting conditions. Also, we modfied the launch file so that Gazebo server can run our world    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">V2.3.3   </td><td class="markdownTableBodyNone">Created a map using the SLAM toolbox    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">V3.0.0   </td><td class="markdownTableBodyNone">Migration to Gazebo Harmonic + bcr_bot + small_warehouse. Nav2 integration for path planning. Foxglove bridge. Removed launch_project package   </td></tr>
 </table>
+<h1><a class="anchor" id="autotoc_md11"></a>
+TO-DO</h1>
+<h2><a class="anchor" id="autotoc_md12"></a>
+robot_simulation</h2>
+<ul>
+<li>[X] Spawn robot in the world and verify sensors are working</li>
+<li>[X] Implement teleop to manually drive the robot</li>
+<li>[X] Run SLAM to generate a map of the environment</li>
+<li>[ ] See if we can simulate people detection on gazebo using Fuel models (standing_person, walking_person)</li>
+<li>[ ] Implement the obstacle spawner to inject dynamic people at known positions on the map</li>
+<li>[ ] Maybe apply some computer vision to the system so that we do not give directly teh information that on a specific point of the map there are people moving. We could use OpenCV if applicable</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md13"></a>
+digital_twin</h2>
+<ul>
+<li>[X] Create the digital twin package</li>
+<li>[X] Integrate Nav2 for path planning on the saved map</li>
+<li>[X] Navigation with obstacle avoidance via Nav2 costmaps</li>
+<li>[ ] Add simulated 5G latency on the communication between robot and digital twin</li>
+<li>[ ] Implement a local safety controller on the robot side for emergency braking (cannot depend on network)</li>
+<li>[ ] Create demo scenarios: nominal navigation, dynamic obstacle avoidance, latency stress test</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md14"></a>
+visualization</h2>
+<ul>
+<li>[X] Connect Foxglove to the system via websocket bridge</li>
+<li>[X] Send navigation goals from Foxglove</li>
+<li>[ ] On foxglove show an approve first_path when Nav2 proposes the path. This path however is free to be updated on real time when the robots runs and the digital twin control's its mouvement</li>
+<li>[ ] If possible show on real time on foxglove the updated path that is provided from the digital twin to the robot, as well as the afluence of things, people from lidar data, and simulation info</li>
+<li>[ ] Display robot's current coordinates, goal coordinates, and planning status on the interface </li>
+</ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!--END GENERATE_TREEVIEW-->
