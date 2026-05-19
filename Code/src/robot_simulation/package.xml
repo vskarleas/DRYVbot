@@ -24,6 +24,9 @@
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>nav_msgs</exec_depend>
 
+  <!-- Gazebo -->
+  <exec_depend>gazebo_msgs</exec_depend>
+
   <export>
     <build_type>ament_cmake</build_type>
   </export>

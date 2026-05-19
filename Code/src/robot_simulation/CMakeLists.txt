@@ -7,6 +7,11 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 
+install(PROGRAMS
+  scripts/obstacle_spawner.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 install(DIRECTORY
   worlds
   models

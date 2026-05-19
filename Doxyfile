@@ -42,7 +42,7 @@ DOXYFILE_ENCODING      = UTF-8
 # title of most generated pages and in a few other places.
 # The default value is: My Project.
 
-PROJECT_NAME           = "DigitalTwin Planner"
+PROJECT_NAME           = "Digital Twin - Cloud Robotics"
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. This
 # could be handy for archiving the generated documentation or if some version
@@ -348,7 +348,7 @@ OPTIMIZE_OUTPUT_SLICE  = NO
 #
 # Note see also the list of default file extension mappings.
 
-EXTENSION_MAPPING      =
+EXTENSION_MAPPING      = yaml=Python xml=IDL
 
 # If the MARKDOWN_SUPPORT tag is enabled then Doxygen pre-processes all comments
 # according to the Markdown format, which allows for more readable
@@ -966,12 +966,9 @@ WARN_LOGFILE           =
 # Note: If this tag is empty the current directory is searched.
 
 INPUT                  = README.md \
-                       Codebase/renault/src/simulation/simulation/code.py \
-                       Codebase/renault/src/simulation/simulation/submodules/forward_kinematics.py \
-                       Codebase/renault/src/simulation/simulation/submodules/inverse_kinematics_ur3e.py \
-                       Codebase/renault/src/simulation/simulation/submodules/inverse_kinematics_ur5e.py \
-                       Codebase/renault/src/volant/volant/code.py \
-                       Codebase/renault/src/portiere/portiere/code.py \
+                       Code/src/digital_twin \
+                       Code/src/robot_simulation \
+                       Code/src/visualization \
                        Documentation/pages
 
 # This tag can be used to specify the character encoding of the source files
@@ -1015,8 +1012,10 @@ INPUT_FILE_ENCODING    =
 FILE_PATTERNS          = .py \
                        *.md
 
-# The RECURSIVE tag can be used to specify whether or not subdirectories should
-# be searched for input files as well.
+FILE_PATTERNS          = *.py \
+                       *.md \
+                       *.yaml \
+                       *.xml
 # The default value is: NO.
 
 RECURSIVE              = YES
