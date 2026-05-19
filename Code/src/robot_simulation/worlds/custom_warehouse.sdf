@@ -1,0 +1,605 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.6">
+  <world name="default">
+
+    
+    <model name="aws_robomaker_warehouse_RoofB_01_001">
+        <include>
+            <uri>model://aws_robomaker_warehouse_RoofB_01</uri>
+        </include>
+        <pose frame="">0.0 0.0 0 0 0 0</pose>
+	</model>
+
+    <model name="aws_robomaker_warehouse_ShelfF_01_001">
+        <include>
+            <uri>model://aws_robomaker_warehouse_ShelfF_01</uri>
+        </include>
+        <pose frame="">-5.795143 -0.956635 0 0 0 0</pose>
+	</model>
+
+        <model name="aws_robomaker_warehouse_WallB_01_001">
+        <include>
+            <uri>model://aws_robomaker_warehouse_WallB_01</uri>
+        </include>
+        <pose frame="">0.0 0.0 0 0 0 0</pose>
+	</model>
+
+        <model name="aws_robomaker_warehouse_ShelfE_01_001">
+        <include>
+            <uri>model://aws_robomaker_warehouse_ShelfE_01</uri>
+        </include>
+        <pose frame="">4.731560230255127 -0.39210417866706848 0 0 0 0</pose>
+	</model>
+
+        <model name="aws_robomaker_warehouse_ShelfE_01_002">
+        <include>
+            <uri>model://aws_robomaker_warehouse_ShelfE_01</uri>
+        </include>
+        <pose frame="">4.73156 -4.827049 0 0 0 0</pose>
+	</model>
+        
+        <model name="aws_robomaker_warehouse_ShelfE_01_003">
+        <include>
+            <uri>model://aws_robomaker_warehouse_ShelfE_01</uri>
+        </include>
+        <pose frame="">4.73156 -8.6651 0 0 0 0</pose>
+	</model>
+
+        <model name="aws_robomaker_warehouse_ShelfD_01_001">
+        <include>
+            <uri>model://aws_robomaker_warehouse_ShelfD_01</uri>
+        </include>
+        <pose frame="">4.73156 -1.242668 0 0 0 0</pose>
+	</model>
+
+        <model name="aws_robomaker_warehouse_ShelfD_01_002">
+        <include>
+            <uri>model://aws_robomaker_warehouse_ShelfD_01</uri>
+        </include>
+        <pose frame="">4.731560230255127 -3.9639229774475098 0 0 0 0</pose>
+	</model>
+
+        <model name="aws_robomaker_warehouse_ShelfD_01_003">
+        <include>
+            <uri>model://aws_robomaker_warehouse_ShelfD_01</uri>
+        </include>
+        <pose frame="">4.731560230255127 -7.7449488639831543 0 0 0 0</pose>
+	</model>
+
+        <model name="aws_robomaker_warehouse_GroundB_01_001">
+        <include>
+            <uri>model://aws_robomaker_warehouse_GroundB_01</uri>
+        </include>
+        <pose frame="">0.0 0.0 -0.090092 0 0 0</pose>
+	</model> 
+       
+        <model name="aws_robomaker_warehouse_Lamp_01_005">
+        <include>
+            <uri>model://aws_robomaker_warehouse_Lamp_01</uri>
+        </include>
+        <pose frame="">0 0 -4 0 0 0</pose>
+	</model>
+       
+        <model name="aws_robomaker_warehouse_Bucket_01_020">
+        <include>
+            <uri>model://aws_robomaker_warehouse_Bucket_01</uri>
+        </include>
+        <pose frame="">0.433449 9.631706 0 0 0 -1.563161</pose>
+	</model>
+
+        <model name="aws_robomaker_warehouse_Bucket_01_022">
+        <include>
+            <uri>model://aws_robomaker_warehouse_Bucket_01</uri>
+        </include>
+        <pose frame="">0.433449 8.59 0 0 0 -1.563161</pose>
+	</model> 
+
+  <model name='aws_robomaker_warehouse_ClutteringA_01_016'>
+        <include>
+            <uri>model://aws_robomaker_warehouse_ClutteringA_01</uri>
+        </include>
+        <pose frame=''>5.708138 8.616844 -0.017477 0 0 0</pose>
+	</model>
+
+      <model name='aws_robomaker_warehouse_ClutteringA_01_017'>
+        <include>
+            <uri>model://aws_robomaker_warehouse_ClutteringA_01</uri>
+        </include>
+        <pose frame=''>3.408638 8.616844 -0.017477 0 0 0</pose>
+	</model>
+
+      <model name='aws_robomaker_warehouse_ClutteringA_01_018'>
+        <include>
+            <uri>model://aws_robomaker_warehouse_ClutteringA_01</uri>
+        </include>
+        <pose frame=''>-1.491287 5.222435 -0.017477 0 0 -1.583185</pose>
+	</model>
+
+
+     <model name="aws_robomaker_warehouse_ClutteringC_01_027">
+        <include>
+            <uri>model://aws_robomaker_warehouse_ClutteringC_01</uri>
+        </include>
+        <pose frame="">4.3249816894531259 4.1353287696838379 -0.012064 0 0 1.563871</pose>
+	</model>
+
+     <model name="aws_robomaker_warehouse_ClutteringC_01_028">
+        <include>
+            <uri>model://aws_robomaker_warehouse_ClutteringC_01</uri>
+        </include>
+        <pose frame="">-1.2883157730102539 -6.8613228797912607 -0.015663 0 0 -1.583191</pose>
+	</model>
+
+     <model name="aws_robomaker_warehouse_ClutteringC_01_029">
+        <include>
+            <uri>model://aws_robomaker_warehouse_ClutteringC_01</uri>
+        </include>
+        <pose frame="">5.384239 6.137154 0 0 0 3.150000</pose>
+	</model>
+
+     <model name="aws_robomaker_warehouse_ClutteringC_01_030">
+        <include>
+            <uri>model://aws_robomaker_warehouse_ClutteringC_01</uri>
+        </include>
+        <pose frame="">3.236 6.137154 0 0 0 3.150000</pose>
+	</model>
+
+     <model name="aws_robomaker_warehouse_ClutteringC_01_031">
+        <include>
+            <uri>model://aws_robomaker_warehouse_ClutteringC_01</uri>
+        </include>
+        <pose frame="">-1.5709874629974365 1.9815524816513057 -0.015663 0 0 -3.133191</pose>
+	</model>
+
+     <model name="aws_robomaker_warehouse_ClutteringC_01_032">
+        <include>
+            <uri>model://aws_robomaker_warehouse_ClutteringC_01</uri>
+        </include>
+        <pose frame="">-1.2196 9.407 -0.015663 0 0 1.563871</pose>
+	</model>
+
+     <model name='aws_robomaker_warehouse_ClutteringD_01_005'>
+        <include>
+            <uri>model://aws_robomaker_warehouse_ClutteringD_01</uri>
+        </include>
+        <pose frame=''>-1.634682 -7.811813 -0.319559 0 0 0</pose>
+	</model>
+                                                 
+      <model name='aws_robomaker_warehouse_TrashCanC_01_002'>
+        <include>
+            <uri>model://aws_robomaker_warehouse_TrashCanC_01</uri>
+        </include>
+        <pose frame=''>4.1498599052429199 0.65653198957443237 0 0 0 -2.948050</pose>
+	</model>
+
+
+      <!-- <model name='aws_robomaker_warehouse_PalletJackB_01_001'>
+        <include>
+            <uri>model://aws_robomaker_warehouse_PalletJackB_01</uri>
+        </include>
+        <pose frame=''>-0.276098 -9.481944 0.023266 0 0 0</pose>
+	</model>  -->
+
+    	
+    <light name="Warehouse_CeilingLight_003" type="point">
+      <pose frame="">0 0 9 0 0 0</pose>
+      <diffuse>0.5 0.5 0.5 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>800</range>
+        <constant>0.2</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>1</cast_shadows>
+      <direction>0.1 0.1 -1</direction>
+    </light>
+
+        <light type="directional" name="sun">
+            <cast_shadows>true</cast_shadows>
+            <pose>0 0 10 0 0 0</pose>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.2 0.2 0.2 1</specular>
+            <attenuation>
+                <range>1000</range>
+                <constant>0.9</constant>
+                <linear>0.01</linear>
+                <quadratic>0.001</quadratic>
+            </attenuation>
+            <direction>-0.5 0.1 -0.9</direction>
+        </light>
+        
+        <model name="ground_plane">
+            <static>true</static>
+           <link name="link">
+                <collision name="collision">
+                    <geometry>
+                        <plane>
+                            <normal>0 0 1</normal>
+                        </plane>
+                    </geometry>
+                </collision>
+                <visual name="visual">
+                    <geometry>
+                        <plane>
+                            <normal>0 0 1</normal>
+                            <size>100 100</size>
+                        </plane>
+                    </geometry>
+                    <material>
+                        <ambient>0.8 0.8 0.8 1</ambient>
+                        <diffuse>0.8 0.8 0.8 1</diffuse>
+                        <specular>0.8 0.8 0.8 1</specular>
+                    </material>
+                </visual>
+            </link>
+        </model>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>-3.90827 -4.65526 4.77216 0 0.623643 0.728194</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+      <model name='aws_robomaker_warehouse_ClutteringA_01_018_1'>
+      <model name='aws_robomaker_warehouse_ClutteringA_01'>
+        <link name='link'>
+          <inertial>
+            <mass>2</mass>
+            <inertia>
+              <ixx>0.84099999999999997</ixx>
+              <ixy>0</ixy>
+              <ixz>0</ixz>
+              <iyy>0.95399999999999996</iyy>
+              <iyz>0</iyz>
+              <izz>1.4219999999999999</izz>
+            </inertia>
+          </inertial>
+          <collision name='collision'>
+            <geometry>
+              <mesh>
+                <uri>model://aws_robomaker_warehouse_ClutteringA_01/meshes/aws_robomaker_warehouse_ClutteringA_01_collision.DAE</uri>
+                <scale>1 1 1</scale>
+              </mesh>
+            </geometry>
+            <surface>
+              <friction>
+                <ode>
+                  <mu>0.59999999999999998</mu>
+                  <mu2>0.59999999999999998</mu2>
+                  <fdir1>0 0 0</fdir1>
+                  <slip1>0</slip1>
+                  <slip2>0</slip2>
+                </ode>
+                <torsional>
+                  <coefficient>1</coefficient>
+                  <patch_radius>0</patch_radius>
+                  <surface_radius>0</surface_radius>
+                  <use_patch_radius>true</use_patch_radius>
+                  <ode>
+                    <slip>0</slip>
+                  </ode>
+                </torsional>
+              </friction>
+            </surface>
+          </collision>
+          <visual name='visual'>
+            <geometry>
+              <mesh>
+                <uri>model://aws_robomaker_warehouse_ClutteringA_01/meshes/aws_robomaker_warehouse_ClutteringA_01_visual.DAE</uri>
+              </mesh>
+            </geometry>
+            <meta>
+              <layer>1</layer>
+            </meta>
+          </visual>
+        </link>
+        <static>true</static>
+      </model>
+      <pose>-5.7654810196886075 2.3644457504116887 -0.017477000132203102 0 0 -1.5831900502372414</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+
+    <model name='aws_robomaker_warehouse_ClutteringA_01_018_2'>
+      <model name='aws_robomaker_warehouse_ClutteringA_01'>
+        <link name='link'>
+          <inertial>
+            <mass>2</mass>
+            <inertia>
+              <ixx>0.84099999999999997</ixx>
+              <ixy>0</ixy>
+              <ixz>0</ixz>
+              <iyy>0.95399999999999996</iyy>
+              <iyz>0</iyz>
+              <izz>1.4219999999999999</izz>
+            </inertia>
+          </inertial>
+          <collision name='collision'>
+            <geometry>
+              <mesh>
+                <uri>model://aws_robomaker_warehouse_ClutteringA_01/meshes/aws_robomaker_warehouse_ClutteringA_01_collision.DAE</uri>
+                <scale>1 1 1</scale>
+              </mesh>
+            </geometry>
+            <surface>
+              <friction>
+                <ode>
+                  <mu>0.59999999999999998</mu>
+                  <mu2>0.59999999999999998</mu2>
+                  <fdir1>0 0 0</fdir1>
+                  <slip1>0</slip1>
+                  <slip2>0</slip2>
+                </ode>
+                <torsional>
+                  <coefficient>1</coefficient>
+                  <patch_radius>0</patch_radius>
+                  <surface_radius>0</surface_radius>
+                  <use_patch_radius>true</use_patch_radius>
+                  <ode>
+                    <slip>0</slip>
+                  </ode>
+                </torsional>
+              </friction>
+            </surface>
+          </collision>
+          <visual name='visual'>
+            <geometry>
+              <mesh>
+                <uri>model://aws_robomaker_warehouse_ClutteringA_01/meshes/aws_robomaker_warehouse_ClutteringA_01_visual.DAE</uri>
+              </mesh>
+            </geometry>
+            <meta>
+              <layer>1</layer>
+            </meta>
+          </visual>
+        </link>
+        <static>true</static>
+      </model>
+      <pose>6.0333864345675332 -4.5127992416595522 -0.017477000132203102 0 0 -1.5831900502372414</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+
+    <model name='aws_robomaker_warehouse_ClutteringA_01_018_3'>
+      <model name='aws_robomaker_warehouse_ClutteringA_01'>
+        <link name='link'>
+          <inertial>
+            <mass>2</mass>
+            <inertia>
+              <ixx>0.84099999999999997</ixx>
+              <ixy>0</ixy>
+              <ixz>0</ixz>
+              <iyy>0.95399999999999996</iyy>
+              <iyz>0</iyz>
+              <izz>1.4219999999999999</izz>
+            </inertia>
+          </inertial>
+          <collision name='collision'>
+            <geometry>
+              <mesh>
+                <uri>model://aws_robomaker_warehouse_ClutteringA_01/meshes/aws_robomaker_warehouse_ClutteringA_01_collision.DAE</uri>
+                <scale>1 1 1</scale>
+              </mesh>
+            </geometry>
+            <surface>
+              <friction>
+                <ode>
+                  <mu>0.59999999999999998</mu>
+                  <mu2>0.59999999999999998</mu2>
+                  <fdir1>0 0 0</fdir1>
+                  <slip1>0</slip1>
+                  <slip2>0</slip2>
+                </ode>
+                <torsional>
+                  <coefficient>1</coefficient>
+                  <patch_radius>0</patch_radius>
+                  <surface_radius>0</surface_radius>
+                  <use_patch_radius>true</use_patch_radius>
+                  <ode>
+                    <slip>0</slip>
+                  </ode>
+                </torsional>
+              </friction>
+            </surface>
+          </collision>
+          <visual name='visual'>
+            <geometry>
+              <mesh>
+                <uri>model://aws_robomaker_warehouse_ClutteringA_01/meshes/aws_robomaker_warehouse_ClutteringA_01_visual.DAE</uri>
+              </mesh>
+            </geometry>
+            <meta>
+              <layer>1</layer>
+            </meta>
+          </visual>
+        </link>
+        <static>true</static>
+      </model>
+      <pose>3.9260702140105392 -8.347216101429991 -0.017477000132203102 0 0 -1.5831900502372414</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+
+    <model name='aws_robomaker_warehouse_ClutteringA_01_018_4'>
+      <model name='aws_robomaker_warehouse_ClutteringA_01'>
+        <link name='link'>
+          <inertial>
+            <mass>2</mass>
+            <inertia>
+              <ixx>0.84099999999999997</ixx>
+              <ixy>0</ixy>
+              <ixz>0</ixz>
+              <iyy>0.95399999999999996</iyy>
+              <iyz>0</iyz>
+              <izz>1.4219999999999999</izz>
+            </inertia>
+          </inertial>
+          <collision name='collision'>
+            <geometry>
+              <mesh>
+                <uri>model://aws_robomaker_warehouse_ClutteringA_01/meshes/aws_robomaker_warehouse_ClutteringA_01_collision.DAE</uri>
+                <scale>1 1 1</scale>
+              </mesh>
+            </geometry>
+            <surface>
+              <friction>
+                <ode>
+                  <mu>0.59999999999999998</mu>
+                  <mu2>0.59999999999999998</mu2>
+                  <fdir1>0 0 0</fdir1>
+                  <slip1>0</slip1>
+                  <slip2>0</slip2>
+                </ode>
+                <torsional>
+                  <coefficient>1</coefficient>
+                  <patch_radius>0</patch_radius>
+                  <surface_radius>0</surface_radius>
+                  <use_patch_radius>true</use_patch_radius>
+                  <ode>
+                    <slip>0</slip>
+                  </ode>
+                </torsional>
+              </friction>
+            </surface>
+          </collision>
+          <visual name='visual'>
+            <geometry>
+              <mesh>
+                <uri>model://aws_robomaker_warehouse_ClutteringA_01/meshes/aws_robomaker_warehouse_ClutteringA_01_visual.DAE</uri>
+              </mesh>
+            </geometry>
+            <meta>
+              <layer>1</layer>
+            </meta>
+          </visual>
+        </link>
+        <static>true</static>
+      </model>
+      <pose>3.911689295605385 -0.84853580859507827 -0.017477000132203102 0 0 -1.5831900502372414</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+
+    <model name='aws_robomaker_warehouse_ClutteringD_01_005_1'>
+      <model name='aws_robomaker_warehouse_ClutteringD_01'>
+        <link name='link'>
+          <inertial>
+            <mass>1</mass>
+            <inertia>
+              <ixx>1.5580000000000001</ixx>
+              <ixy>0</ixy>
+              <ixz>0</ixz>
+              <iyy>1.821</iyy>
+              <iyz>0</iyz>
+              <izz>1.8919999999999999</izz>
+            </inertia>
+          </inertial>
+          <collision name='collision'>
+            <geometry>
+              <mesh>
+                <uri>model://aws_robomaker_warehouse_ClutteringD_01/meshes/aws_robomaker_warehouse_ClutteringD_01_collision.DAE</uri>
+                <scale>1 1 1</scale>
+              </mesh>
+            </geometry>
+            <surface>
+              <friction>
+                <ode>
+                  <mu>0.59999999999999998</mu>
+                  <mu2>0.59999999999999998</mu2>
+                  <fdir1>0 0 0</fdir1>
+                  <slip1>0</slip1>
+                  <slip2>0</slip2>
+                </ode>
+                <torsional>
+                  <coefficient>1</coefficient>
+                  <patch_radius>0</patch_radius>
+                  <surface_radius>0</surface_radius>
+                  <use_patch_radius>true</use_patch_radius>
+                  <ode>
+                    <slip>0</slip>
+                  </ode>
+                </torsional>
+              </friction>
+            </surface>
+          </collision>
+          <visual name='visual'>
+            <geometry>
+              <mesh>
+                <uri>model://aws_robomaker_warehouse_ClutteringD_01/meshes/aws_robomaker_warehouse_ClutteringD_01_visual.DAE</uri>
+              </mesh>
+            </geometry>
+            <meta>
+              <layer>1</layer>
+            </meta>
+          </visual>
+        </link>
+        <static>true</static>
+      </model>
+      <pose>-0.49226806974502502 -3.5473407940529662 -0.3195590078830719 0 0 0</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+
+    <model name='aws_robomaker_warehouse_ClutteringD_01_005_2'>
+      <model name='aws_robomaker_warehouse_ClutteringD_01'>
+        <link name='link'>
+          <inertial>
+            <mass>1</mass>
+            <inertia>
+              <ixx>1.5580000000000001</ixx>
+              <ixy>0</ixy>
+              <ixz>0</ixz>
+              <iyy>1.821</iyy>
+              <iyz>0</iyz>
+              <izz>1.8919999999999999</izz>
+            </inertia>
+          </inertial>
+          <collision name='collision'>
+            <geometry>
+              <mesh>
+                <uri>model://aws_robomaker_warehouse_ClutteringD_01/meshes/aws_robomaker_warehouse_ClutteringD_01_collision.DAE</uri>
+                <scale>1 1 1</scale>
+              </mesh>
+            </geometry>
+            <surface>
+              <friction>
+                <ode>
+                  <mu>0.59999999999999998</mu>
+                  <mu2>0.59999999999999998</mu2>
+                  <fdir1>0 0 0</fdir1>
+                  <slip1>0</slip1>
+                  <slip2>0</slip2>
+                </ode>
+                <torsional>
+                  <coefficient>1</coefficient>
+                  <patch_radius>0</patch_radius>
+                  <surface_radius>0</surface_radius>
+                  <use_patch_radius>true</use_patch_radius>
+                  <ode>
+                    <slip>0</slip>
+                  </ode>
+                </torsional>
+              </friction>
+            </surface>
+          </collision>
+          <visual name='visual'>
+            <geometry>
+              <mesh>
+                <uri>model://aws_robomaker_warehouse_ClutteringD_01/meshes/aws_robomaker_warehouse_ClutteringD_01_visual.DAE</uri>
+              </mesh>
+            </geometry>
+            <meta>
+              <layer>1</layer>
+            </meta>
+          </visual>
+        </link>
+        <static>true</static>
+      </model>
+      <pose>-5.6653457854494897 -6.9158317258066315 -0.3195590078830719 0 0 -1.5631400710447547</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+
+</world>
+</sdf>

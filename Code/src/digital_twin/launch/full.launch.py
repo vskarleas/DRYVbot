@@ -11,7 +11,7 @@ def generate_launch_description():
     nav2_bringup_dir = get_package_share_directory('nav2_bringup')
     bcr_bot_dir = get_package_share_directory('bcr_bot')
 
-    map_file = os.path.join(digital_twin_dir, 'maps', 'warehouse_map.yaml')
+    map_file = os.path.join(digital_twin_dir, 'maps', 'custom_warehouse_map.yaml')
     nav2_params = os.path.join(digital_twin_dir, 'config', 'nav2_params.yaml')
 
     # ===== 1. BCR_BOT in Gazebo Harmonic with warehouse world =====
@@ -22,7 +22,7 @@ def generate_launch_description():
         launch_arguments={
             'two_d_lidar_enabled': 'True',
             'camera_enabled': 'True',
-            'world_file': 'small_warehouse.sdf',
+            'world_file': '/home/vskarleas/Documents/ROB5-S10-SYS880/Code/src/robot_simulation/worlds/custom_warehouse.sdf',
         }.items(),
     )
 

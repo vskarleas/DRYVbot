@@ -13,6 +13,8 @@ setup(
         ('share/' + package_name + '/maps', [
             'maps/warehouse_map.pgm',
             'maps/warehouse_map.yaml',
+            'maps/custom_warehouse_map.pgm',
+            'maps/custom_warehouse_map.yaml',
             'maps/corridors_map.pgm',
             'maps/corridors_map.yaml',
         ]),
