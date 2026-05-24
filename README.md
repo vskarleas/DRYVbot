@@ -73,7 +73,7 @@ source install/setup.bash
 The `full.launch.py` starts the entire system in one command: Gazebo with the warehouse world and the bcr_bot, Nav2 navigation stack, cmd_vel relay, initial pose publisher, and Foxglove bridge.
 
 ```bash
-ros2 launch digital_twin full.launch.py
+ros2 launch digital_twin hospital.launch.py
 ```
 
 Wait approximately 30 seconds for everything to start. Then open Foxglove at `https://app.foxglove.dev`, connect to `ws://localhost:8765`, and send a navigation goal.
@@ -92,17 +92,29 @@ The warehouse map was generated using slam_toolbox. To recreate it or create a m
 1. Launch the robot in the world:
 
    ```bash
-   ros2 launch bcr_bot gz.launch.py two_d_lidar_enabled:=True camera_enabled:=True world_file:=small_warehouse.sdf
+   export GAZEBO_MODEL_PATH=$HOME/Documents/ROB5-S10-SYS880/Code/src/robot_simulation/models:$GAZEBO_MODEL_PATH
+
+   ros2 launch bcr_bot gazebo.launch.py \
+     two_d_lidar_enabled:=True \
+     camera_enabled:=True \
+     world_file:=$HOME/Documents/ROB5-S10-SYS880/Code/src/robot_simulation/worlds/hospital.world \
+     position_x:=0.0 \
+     position_y:=5.0
    ```
 2. Launch slam_toolbox (in a new terminal):
 
    ```bash
-   ros2 run slam_toolbox async_slam_toolbox_node --ros-args -p use_sim_time:=true -r scan:=/bcr_bot/scan
+   source /opt/ros/humble/setup.bash
+   ros2 run slam_toolbox async_slam_toolbox_node --ros-args \
+     -p use_sim_time:=true \
+     -r scan:=/bcr_bot/scan
    ```
 3. Launch teleop to drive the robot arround (in a new terminal):
 
    ```bash
-   ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/bcr_bot/cmd_vel
+   source /opt/ros/humble/setup.bash
+   ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args \
+     -r cmd_vel:=/bcr_bot/cmd_vel
    ```
 4. Visualize the map in RViz (in a new terminal):
 
@@ -117,8 +129,8 @@ The warehouse map was generated using slam_toolbox. To recreate it or create a m
 6. Save the map:
 
    ```bash
-   cd ~/Documents/ROB5-S10-SYS880/Code/src/digital_twin/maps
-   ros2 run nav2_map_server map_saver_cli -f warehouse_map
+   cd ~/path_to_save_SAML_map
+   ros2 run nav2_map_server map_saver_cli -f hospital_map
    ```
 
 ## Versions
