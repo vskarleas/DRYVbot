@@ -139,6 +139,7 @@ The warehouse map was generated using slam_toolbox. To recreate it or create a m
 | V3.0.0  | Migration to Gazebo Harmonic + bcr_bot + small_warehouse. Nav2 integration for path planning. Foxglove bridge. Removed launch_project package                       |
 | V3.1.0  | Removed ACML startup for the nav2 because it is not needed for robot's navigation using the /odom topic. ALso increased the acceleration and teh speed of the robot |
 | V3.2.0  | Created a custom warehouse for better navigation results and applied palnning                                                                                       |
+| V4.0.0  | Chnaged to Gazebo classic from Gazebo Harmonic, installed and prpeared a jospital world with its map. The bcr robot was implemented into to that                    |
 
 ## TO-DO
 

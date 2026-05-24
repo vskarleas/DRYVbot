@@ -80,7 +80,7 @@ Architecture</h2>
 <p>The project is organised in the following ROS2 packages:</p>
 <ul>
 <li>**<code>robot_simulation</code>** — Contains the world files, saved maps, and the obstacle spawner script. In a real deployement, this package would be replaced by the actual physical robot and its sensors.</li>
-<li>**<code><a class="el" href="namespacedigital__twin.html">digital_twin</a></code>** — This is the core of the project. It is the cloud-side intelligence that the robot cannot run onboard due to its limited CPU. It contains the Nav2 configuration, the warehouse map, and the main launch file (<code><a class="el" href="full_8launch_8py.html">full.launch.py</a></code>) that starts the entire system: Gazebo simulation, Nav2 navigation, cmd_vel relay, and Foxglove bridge. It receives real-time data (robot position, lidar scans, destination goal) and runs the Nav2 path planning to compute the optimal trajectory.</li>
+<li>**<code><a class="el" href="namespacedigital__twin.html">digital_twin</a></code>** — This is the core of the project. It is the cloud-side intelligence that the robot cannot run onboard due to its limited CPU. It contains the Nav2 configuration, the warehouse map, and the main launch file (<code>full.launch.py</code>) that starts the entire system: Gazebo simulation, Nav2 navigation, cmd_vel relay, and Foxglove bridge. It receives real-time data (robot position, lidar scans, destination goal) and runs the Nav2 path planning to compute the optimal trajectory.</li>
 <li>**<code>visualization</code>** — Reserved for future Foxglove custom panels and visualization tools. Currently, the Foxglove bridge is launched from the <a class="el" href="namespacedigital__twin.html">digital_twin</a> launch file.</li>
 <li>**<code>bcr_bot</code>** — The simulated robot. A differential drive robot with lidar, camera, and IMU that works natively with Gazebo Harmonic.</li>
 </ul>
@@ -122,7 +122,7 @@ Build</h2>
 <div class="line">source install/setup.bash</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md8"></a>
 Launch everything</h2>
-<p>The <code><a class="el" href="full_8launch_8py.html">full.launch.py</a></code> starts the entire system in one command: Gazebo with the warehouse world and the bcr_bot, Nav2 navigation stack, cmd_vel relay, initial pose publisher, and Foxglove bridge.</p>
+<p>The <code>full.launch.py</code> starts the entire system in one command: Gazebo with the warehouse world and the bcr_bot, Nav2 navigation stack, cmd_vel relay, initial pose publisher, and Foxglove bridge.</p>
 <div class="fragment"><div class="line">ros2 launch digital_twin full.launch.py</div>
 </div><!-- fragment --><p>Wait approximately 30 seconds for everything to start. Then open Foxglove at <code><a href="https://app.foxglove.dev">https://app.foxglove.dev</a></code>, connect to <code>ws://localhost:8765</code>, and send a navigation goal.</p>
 <p>You can also send a goal from the terminal:</p>
@@ -132,25 +132,32 @@ Launch everything</h2>
 Creating the map</h1>
 <p>The warehouse map was generated using slam_toolbox. To recreate it or create a map for a different world:</p>
 <ol type="1">
-<li>Launch the robot in the world: <div class="fragment"><div class="line">ros2 launch bcr_bot gz.launch.py two_d_lidar_enabled:=True camera_enabled:=True world_file:=small_warehouse.sdf</div>
-</div><!-- fragment --></li>
-<li>Launch slam_toolbox (in a new terminal): <div class="fragment"><div class="line">ros2 run slam_toolbox async_slam_toolbox_node --ros-args -p use_sim_time:=true -r scan:=/bcr_bot/scan</div>
-</div><!-- fragment --></li>
-<li>Launch teleop to drive the robot arround (in a new terminal): <div class="fragment"><div class="line">ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/bcr_bot/cmd_vel</div>
-</div><!-- fragment --></li>
-<li>Visualize the map in RViz (in a new terminal): <div class="fragment"><div class="line">rviz2</div>
+<li>Launch the robot in the world:</li>
+</ol>
+<div class="fragment"><div class="line">ros2 launch bcr_bot gz.launch.py two_d_lidar_enabled:=True camera_enabled:=True world_file:=small_warehouse.sdf</div>
+</div><!-- fragment --><ol type="1">
+<li>Launch slam_toolbox (in a new terminal):</li>
+</ol>
+<div class="fragment"><div class="line">ros2 run slam_toolbox async_slam_toolbox_node --ros-args -p use_sim_time:=true -r scan:=/bcr_bot/scan</div>
+</div><!-- fragment --><ol type="1">
+<li>Launch teleop to drive the robot arround (in a new terminal):</li>
+</ol>
+<div class="fragment"><div class="line">ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/bcr_bot/cmd_vel</div>
+</div><!-- fragment --><ol type="1">
+<li>Visualize the map in RViz (in a new terminal):</li>
+</ol>
+<div class="fragment"><div class="line">rviz2</div>
 </div><!-- fragment --><ul>
 <li>Set <b>Fixed Frame</b> to <code>odom</code></li>
 <li><b>Add</b> → <b>By topic</b> → <code>/map</code> → <b>Map</b></li>
 <li><b>Add</b> → <b>By topic</b> → <code>/bcr_bot/scan</code> → <b>LaserScan</b></li>
 </ul>
-</li>
-<li>Drive the robot through the entire environment to complete the map.</li>
-<li>Save the map: <div class="fragment"><div class="line">cd ~/Documents/ROB5-S10-SYS880/Code/src/digital_twin/maps</div>
-<div class="line">ros2 run nav2_map_server map_saver_cli -f warehouse_map</div>
-</div><!-- fragment --></li>
+<p>Drive the robot through the entire environment to complete the map.</p><ol type="1">
+<li>Save the map:</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md10"></a>
+<div class="fragment"><div class="line">cd ~/Documents/ROB5-S10-SYS880/Code/src/digital_twin/maps</div>
+<div class="line">ros2 run nav2_map_server map_saver_cli -f warehouse_map</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md10"></a>
 Versions</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -178,7 +185,13 @@ Versions</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">V2.3.3   </td><td class="markdownTableBodyNone">Created a map using the SLAM toolbox    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">V3.0.0   </td><td class="markdownTableBodyNone">Migration to Gazebo Harmonic + bcr_bot + small_warehouse. Nav2 integration for path planning. Foxglove bridge. Removed launch_project package   </td></tr>
+<td class="markdownTableBodyNone">V3.0.0   </td><td class="markdownTableBodyNone">Migration to Gazebo Harmonic + bcr_bot + small_warehouse. Nav2 integration for path planning. Foxglove bridge. Removed launch_project package    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">V3.1.0   </td><td class="markdownTableBodyNone">Removed ACML startup for the nav2 because it is not needed for robot's navigation using the /odom topic. ALso increased the acceleration and teh speed of the robot    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">V3.2.0   </td><td class="markdownTableBodyNone">Created a custom warehouse for better navigation results and applied palnning    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">V4.0.0   </td><td class="markdownTableBodyNone">Chnaged to Gazebo classic from Gazebo Harmonic, installed and prpeared a jospital world with its map. The bcr robot was implemented into to that   </td></tr>
 </table>
 <h1><a class="anchor" id="autotoc_md11"></a>
 TO-DO</h1>

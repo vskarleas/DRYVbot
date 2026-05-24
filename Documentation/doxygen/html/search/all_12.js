@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['x_67',['x',['../classobstacle__spawner_1_1PersonPath.html#a84a74f38aa95a9afd9568214a6431e33',1,'obstacle_spawner::PersonPath']]]
+  ['waypoints_67',['waypoints',['../classobstacle__spawner_1_1PersonPath.html#a81f0d4b9443f5583a549be2b749741bb',1,'obstacle_spawner::PersonPath']]],
+  ['world_68',['world',['../robot__simulation_2package_8xml.html#afb93d83062d617e9133d1c39ccd25c5c',1,'package.xml']]]
 ];

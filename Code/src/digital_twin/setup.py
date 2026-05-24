@@ -11,18 +11,17 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         ('share/' + package_name + '/maps', [
-            'maps/warehouse_map.pgm',
-            'maps/warehouse_map.yaml',
-            'maps/custom_warehouse_map.pgm',
-            'maps/custom_warehouse_map.yaml',
             'maps/corridors_map.pgm',
             'maps/corridors_map.yaml',
+            'maps/hospital_map.pgm',
+            'maps/hospital_map.yaml',
         ]),
         ('share/' + package_name + '/config', [
             'config/nav2_params.yaml',
         ]),
         ('share/' + package_name + '/launch', [
-            'launch/full.launch.py',
+            'launch/corridors.launch.py',
+            'launch/hospital.launch.py',
         ]),
     ],
     install_requires=['setuptools'],
