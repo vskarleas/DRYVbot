@@ -32,6 +32,7 @@ setup(
     license='MIT',
     entry_points={
         'console_scripts': [
+            'goal_relay = digital_twin.goal_relay:main',
         ],
     },
 )

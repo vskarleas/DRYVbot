@@ -135,23 +135,24 @@ The warehouse map was generated using slam_toolbox. To recreate it or create a m
 
 ## Versions
 
-| Version | Details                                                                                                                                                             |
-| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| V0.1.0  | Repo initialisation with Doxygen configuration                                                                                                                      |
-| V0.1.1  | Tested doxygen                                                                                                                                                      |
-| V1.0.1  | Created test Gazebo world and a launch script that allows to launch that world on Gazebo                                                                            |
-| V1.1.0  | Started building the robot_simulation package that will be used to simulate the real robot so that if we had a real robot navigating on the real world              |
-| V2.1.1  | Created kick_off package for centralised launch. Basicly it only insludes the launch file for vetter centralisation                                                 |
-| V2.1.2  | Renamed the kick_off package to launch_project                                                                                                                      |
-| V2.2.1  | Created the digital_twin package                                                                                                                                    |
-| V2.3.0  | Updated teh setup.py for the digital twin package                                                                                                                   |
-| V2.3.1  | Created the visualization package                                                                                                                                   |
-| V2.3.2  | Modfied the Gazebo world so that it can have sun and lighting conditions. Also, we modfied the launch file so that Gazebo server can run our world                  |
-| V2.3.3  | Created a map using the SLAM toolbox                                                                                                                                |
-| V3.0.0  | Migration to Gazebo Harmonic + bcr_bot + small_warehouse. Nav2 integration for path planning. Foxglove bridge. Removed launch_project package                       |
-| V3.1.0  | Removed ACML startup for the nav2 because it is not needed for robot's navigation using the /odom topic. ALso increased the acceleration and teh speed of the robot |
-| V3.2.0  | Created a custom warehouse for better navigation results and applied palnning                                                                                       |
-| V4.0.0  | Chnaged to Gazebo classic from Gazebo Harmonic, installed and prpeared a jospital world with its map. The bcr robot was implemented into to that                    |
+| Version | Details                                                                                                                                                                         |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| V0.1.0  | Repo initialisation with Doxygen configuration                                                                                                                                  |
+| V0.1.1  | Tested doxygen                                                                                                                                                                  |
+| V1.0.1  | Created test Gazebo world and a launch script that allows to launch that world on Gazebo                                                                                        |
+| V1.1.0  | Started building the robot_simulation package that will be used to simulate the real robot so that if we had a real robot navigating on the real world                          |
+| V2.1.1  | Created kick_off package for centralised launch. Basicly it only insludes the launch file for vetter centralisation                                                             |
+| V2.1.2  | Renamed the kick_off package to launch_project                                                                                                                                  |
+| V2.2.1  | Created the digital_twin package                                                                                                                                                |
+| V2.3.0  | Updated teh setup.py for the digital twin package                                                                                                                               |
+| V2.3.1  | Created the visualization package                                                                                                                                               |
+| V2.3.2  | Modfied the Gazebo world so that it can have sun and lighting conditions. Also, we modfied the launch file so that Gazebo server can run our world                              |
+| V2.3.3  | Created a map using the SLAM toolbox                                                                                                                                            |
+| V3.0.0  | Migration to Gazebo Harmonic + bcr_bot + small_warehouse. Nav2 integration for path planning. Foxglove bridge. Removed launch_project package                                   |
+| V3.1.0  | Removed ACML startup for the nav2 because it is not needed for robot's navigation using the /odom topic. ALso increased the acceleration and teh speed of the robot             |
+| V3.2.0  | Created a custom warehouse for better navigation results and applied palnning                                                                                                   |
+| V4.0.0  | Chnaged to Gazebo classic from Gazebo Harmonic, installed and prpeared a jospital world with its map. The bcr robot was implemented into to that                                |
+| V4.0.1  | Added a new topic /goal_pose_foxglove in order to treat correctly the messages sent from the 3D map of foxglove. It works as a relay between foxglove and the robots cmd topics |
 
 ## TO-DO
 

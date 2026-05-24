@@ -39,8 +39,8 @@ def generate_launch_description():
             'two_d_lidar_enabled': 'True',
             'camera_enabled': 'True',
             'world_file': hospital_world,
-            'position_x': '-10.0',
-            'position_y': '5.0',
+            'position_x': '0.0',
+            'position_y': '2.0',
         }.items(),
     )
 
@@ -59,6 +59,13 @@ def generate_launch_description():
         executable='relay',
         name='cmd_vel_relay',
         arguments=['/cmd_vel', '/bcr_bot/cmd_vel'],
+        output='screen',
+    )
+
+    goal_relay = Node(
+        package='digital_twin',
+        executable='goal_relay',
+        name='goal_relay',
         output='screen',
     )
 
@@ -87,7 +94,7 @@ def generate_launch_description():
                 cmd=['ros2', 'topic', 'pub', '--times', '10', '--rate', '0.2',
                      '/initialpose',
                      'geometry_msgs/PoseWithCovarianceStamped',
-                     '{header: {frame_id: "map"}, pose: {pose: {position: {x: -10.0, y: 5.0, z: 0.0}, orientation: {w: 1.0}}}}'],
+                     '{header: {frame_id: "map"}, pose: {pose: {position: {x: 0.0, y: 2.0, z: 0.0}, orientation: {w: 1.0}}}}'],
                 output='screen',
             ),
         ]
@@ -116,4 +123,5 @@ def generate_launch_description():
         nav2_bringup,
         set_initial_pose,
         foxglove_bridge,
+        goal_relay,
     ])
