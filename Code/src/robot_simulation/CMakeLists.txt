@@ -15,7 +15,6 @@ install(PROGRAMS
 install(DIRECTORY
   worlds
   models
-  config
   maps
   scripts
   DESTINATION share/${PROJECT_NAME}
