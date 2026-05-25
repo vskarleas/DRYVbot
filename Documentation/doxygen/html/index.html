@@ -101,48 +101,97 @@ Installation</h1>
 Prerequisites</h2>
 <ul>
 <li>Ubuntu 22.04</li>
-<li>ROS2 Humble (<code>sudo apt install ros-humble-desktop</code>)</li>
-<li>Gazebo Harmonic: <div class="fragment"><div class="line">sudo apt install gz-harmonic ros-humble-ros-gzharmonic</div>
-</div><!-- fragment --></li>
-<li>Nav2 and SLAM: <div class="fragment"><div class="line">sudo apt install ros-humble-navigation2 ros-humble-nav2-bringup ros-humble-slam-toolbox</div>
-</div><!-- fragment --></li>
-<li>Foxglove Bridge: <div class="fragment"><div class="line">sudo apt install ros-humble-foxglove-bridge</div>
-</div><!-- fragment --></li>
-<li>Topic tools (for cmd_vel relay): <div class="fragment"><div class="line">sudo apt install ros-humble-topic-tools</div>
-</div><!-- fragment --></li>
+<li>Install ROS2 Humble following the instructions at<a href="https://foxglove.dev/blog/installing-ros2-humble-on-ubuntu">https://foxglove.dev/blog/installing-ros2-humble-on-ubuntu</a></li>
 </ul>
 <h2><a class="anchor" id="autotoc_md6"></a>
+Install Gazebo Classic and ROS2 Bridge</h2>
+<div class="fragment"><div class="line">sudo apt install ros-humble-gazebo-ros-pkgs ros-humble-gazebo-ros</div>
+</div><!-- fragment --><p>This installs Gazebo 11 (Classic) and the <code>gazebo_ros</code> bridge for ROS2.</p>
+<blockquote class="doxtable">
+<p><b>Note:</b> Gazebo Classic and Gazebo Harmonic (gz-tools2) cannot coexist on the same system. If you have Harmonic installed, remove it first: <code>sudo apt remove gz-harmonic gz-tools2 ros-humble-ros-gzharmonic*</code> </p>
+</blockquote>
+<h2><a class="anchor" id="autotoc_md7"></a>
+Install Navigation and SLAM Packages</h2>
+<div class="fragment"><div class="line">sudo apt install ros-humble-navigation2 \</div>
+<div class="line">                 ros-humble-nav2-bringup \</div>
+<div class="line">                 ros-humble-slam-toolbox</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md8"></a>
+Install Foxglove Bridge</h2>
+<div class="fragment"><div class="line">sudo apt install ros-humble-foxglove-bridge</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md9"></a>
+Install Additional ROS2 Tools</h2>
+<div class="fragment"><div class="line">sudo apt install python3-colcon-common-extensions \</div>
+<div class="line">                 ros-humble-teleop-twist-keyboard \</div>
+<div class="line">                 ros-humble-topic-tools \</div>
+<div class="line">                 ros-humble-tf2-ros</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md10"></a>
+Clone the Repository</h2>
+<div class="fragment"><div class="line">git clone https://github.com/vskarleas/ROB5-S10-SYS880</div>
+<div class="line">cd ROB5-S10-SYS880/Code</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md11"></a>
+Install bcr_bot from Source</h2>
+<p>The <code>bcr_bot</code> package must be present in the workspace <code>src/</code> folder. If it is not already there after cloning:</p>
+<div class="fragment"><div class="line">cd src</div>
+<div class="line">git clone https://github.com/blackcoffeerobotics/bcr_bot.git</div>
+<div class="line">cd ..</div>
+</div><!-- fragment --><blockquote class="doxtable">
+<p><b>Note:</b> The <code>bcr_bot</code> supports multiple Gazebo versions. For this project we use its <b>Gazebo Classic</b> mode via <code>gazebo.launch.py</code>. </p>
+</blockquote>
+<h2><a class="anchor" id="autotoc_md12"></a>
+Install Dependencies with rosdep</h2>
+<div class="fragment"><div class="line">sudo apt install python3-rosdep</div>
+<div class="line">sudo rosdep init   # skip if already initialised</div>
+<div class="line">rosdep update</div>
+<div class="line">rosdep install --from-paths src --ignore-src -r -y</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md13"></a>
+Install xarco</h2>
+<p>Xarco needs to be installed for this repo. Check the installation process depending on your system</p>
+<h2><a class="anchor" id="autotoc_md14"></a>
 Environment Setup</h2>
 <p>Add the following to your <code>~/.bashrc</code> if not already there:</p>
 <div class="fragment"><div class="line">source /opt/ros/humble/setup.bash</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md7"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md15"></a>
 Build</h2>
 <div class="fragment"><div class="line">cd ~/Documents/ROB5-S10-SYS880/Code</div>
 <div class="line">colcon build</div>
 <div class="line">source install/setup.bash</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md8"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md16"></a>
 Launch everything</h2>
 <p>The <code>full.launch.py</code> starts the entire system in one command: Gazebo with the warehouse world and the bcr_bot, Nav2 navigation stack, cmd_vel relay, initial pose publisher, and Foxglove bridge.</p>
-<div class="fragment"><div class="line">ros2 launch digital_twin full.launch.py</div>
+<div class="fragment"><div class="line">ros2 launch digital_twin hospital.launch.py</div>
 </div><!-- fragment --><p>Wait approximately 30 seconds for everything to start. Then open Foxglove at <code><a href="https://app.foxglove.dev">https://app.foxglove.dev</a></code>, connect to <code>ws://localhost:8765</code>, and send a navigation goal.</p>
 <p>You can also send a goal from the terminal:</p>
 <div class="fragment"><div class="line">ros2 topic pub --once /goal_pose geometry_msgs/PoseStamped \</div>
 <div class="line">  &quot;{header: {frame_id: &#39;map&#39;}, pose: {position: {x: 3.0, y: 0.0, z: 0.0}, orientation: {w: 1.0}}}&quot;</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md9"></a>
+</div><!-- fragment --><p>You can launch the obstacles spawner as follows :</p>
+<div class="fragment"><div class="line">ros2 run robot_simulation obstacle_spawner.py  --ros-args -p scenario:=hospital</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md17"></a>
 Creating the map</h1>
 <p>The warehouse map was generated using slam_toolbox. To recreate it or create a map for a different world:</p>
 <ol type="1">
 <li>Launch the robot in the world:</li>
 </ol>
-<div class="fragment"><div class="line">ros2 launch bcr_bot gz.launch.py two_d_lidar_enabled:=True camera_enabled:=True world_file:=small_warehouse.sdf</div>
+<div class="fragment"><div class="line">export GAZEBO_MODEL_PATH=$HOME/Documents/ROB5-S10-SYS880/Code/src/robot_simulation/models:$GAZEBO_MODEL_PATH</div>
+<div class="line"> </div>
+<div class="line">ros2 launch bcr_bot gazebo.launch.py \</div>
+<div class="line">  two_d_lidar_enabled:=True \</div>
+<div class="line">  camera_enabled:=True \</div>
+<div class="line">  world_file:=$HOME/Documents/ROB5-S10-SYS880/Code/src/robot_simulation/worlds/hospital.world \</div>
+<div class="line">  position_x:=0.0 \</div>
+<div class="line">  position_y:=5.0</div>
 </div><!-- fragment --><ol type="1">
 <li>Launch slam_toolbox (in a new terminal):</li>
 </ol>
-<div class="fragment"><div class="line">ros2 run slam_toolbox async_slam_toolbox_node --ros-args -p use_sim_time:=true -r scan:=/bcr_bot/scan</div>
+<div class="fragment"><div class="line">source /opt/ros/humble/setup.bash</div>
+<div class="line">ros2 run slam_toolbox async_slam_toolbox_node --ros-args \</div>
+<div class="line">  -p use_sim_time:=true \</div>
+<div class="line">  -r scan:=/bcr_bot/scan</div>
 </div><!-- fragment --><ol type="1">
 <li>Launch teleop to drive the robot arround (in a new terminal):</li>
 </ol>
-<div class="fragment"><div class="line">ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/bcr_bot/cmd_vel</div>
+<div class="fragment"><div class="line">source /opt/ros/humble/setup.bash</div>
+<div class="line">ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args \</div>
+<div class="line">  -r cmd_vel:=/bcr_bot/cmd_vel</div>
 </div><!-- fragment --><ol type="1">
 <li>Visualize the map in RViz (in a new terminal):</li>
 </ol>
@@ -155,9 +204,9 @@ Creating the map</h1>
 <p>Drive the robot through the entire environment to complete the map.</p><ol type="1">
 <li>Save the map:</li>
 </ol>
-<div class="fragment"><div class="line">cd ~/Documents/ROB5-S10-SYS880/Code/src/digital_twin/maps</div>
-<div class="line">ros2 run nav2_map_server map_saver_cli -f warehouse_map</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md10"></a>
+<div class="fragment"><div class="line">cd ~/path_to_save_SAML_map</div>
+<div class="line">ros2 run nav2_map_server map_saver_cli -f hospital_map</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md18"></a>
 Versions</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -191,11 +240,15 @@ Versions</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">V3.2.0   </td><td class="markdownTableBodyNone">Created a custom warehouse for better navigation results and applied palnning    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">V4.0.0   </td><td class="markdownTableBodyNone">Chnaged to Gazebo classic from Gazebo Harmonic, installed and prpeared a jospital world with its map. The bcr robot was implemented into to that   </td></tr>
+<td class="markdownTableBodyNone">V4.0.0   </td><td class="markdownTableBodyNone">Chnaged to Gazebo classic from Gazebo Harmonic, installed and prpeared a jospital world with its map. The bcr robot was implemented into to that    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">V4.0.1   </td><td class="markdownTableBodyNone">Added a new topic /goal_pose_foxglove in order to treat correctly the messages sent from the 3D map of foxglove. It works as a relay between foxglove and the robots cmd topics    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">V4.1.0   </td><td class="markdownTableBodyNone">Added bcr_robot on the tree of the project, updated the README and tried a first version for spawning automaticly different cylinders that represent the people   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md11"></a>
+<h1><a class="anchor" id="autotoc_md19"></a>
 TO-DO</h1>
-<h2><a class="anchor" id="autotoc_md12"></a>
+<h2><a class="anchor" id="autotoc_md20"></a>
 robot_simulation</h2>
 <ul>
 <li>[X] Spawn robot in the world and verify sensors are working</li>
@@ -205,7 +258,7 @@ robot_simulation</h2>
 <li>[ ] Implement the obstacle spawner to inject dynamic people at known positions on the map</li>
 <li>[ ] Maybe apply some computer vision to the system so that we do not give directly teh information that on a specific point of the map there are people moving. We could use OpenCV if applicable</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md13"></a>
+<h2><a class="anchor" id="autotoc_md21"></a>
 digital_twin</h2>
 <ul>
 <li>[X] Create the digital twin package</li>
@@ -215,7 +268,7 @@ digital_twin</h2>
 <li>[ ] Implement a local safety controller on the robot side for emergency braking (cannot depend on network)</li>
 <li>[ ] Create demo scenarios: nominal navigation, dynamic obstacle avoidance, latency stress test</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md14"></a>
+<h2><a class="anchor" id="autotoc_md22"></a>
 visualization</h2>
 <ul>
 <li>[X] Connect Foxglove to the system via websocket bridge</li>

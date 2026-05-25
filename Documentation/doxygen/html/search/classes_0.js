@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['obstaclespawnernode_72',['ObstacleSpawnerNode',['../classobstacle__spawner_1_1ObstacleSpawnerNode.html',1,'obstacle_spawner']]]
+  ['goalrelay_70',['GoalRelay',['../classdigital__twin_1_1goal__relay_1_1GoalRelay.html',1,'digital_twin::goal_relay']]]
 ];

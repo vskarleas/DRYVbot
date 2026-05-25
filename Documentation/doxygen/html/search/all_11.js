@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['version_65',['version',['../namespacesetup.html#a2aa722b36a933088812b50ea79b97a5c',1,'setup']]],
-  ['visualization_66',['visualization',['../namespacevisualization.html',1,'']]]
+  ['walkingperson_67',['WalkingPerson',['../classobstacle__spawner_1_1WalkingPerson.html',1,'obstacle_spawner']]],
+  ['world_68',['world',['../robot__simulation_2package_8xml.html#afb93d83062d617e9133d1c39ccd25c5c',1,'package.xml']]]
 ];

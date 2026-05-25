@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['update_109',['update',['../classobstacle__spawner_1_1PersonPath.html#a8bf5fc016477c2c9af49d4ea19306252',1,'obstacle_spawner::PersonPath']]]
+  ['spawn_5fpeople_105',['spawn_people',['../classobstacle__spawner_1_1ObstacleSpawner.html#a65a4e39af4c0cd6f4a87426178014bc1',1,'obstacle_spawner::ObstacleSpawner']]]
 ];

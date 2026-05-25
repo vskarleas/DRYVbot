@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['personpath_73',['PersonPath',['../classobstacle__spawner_1_1PersonPath.html',1,'obstacle_spawner']]]
+  ['obstaclespawner_71',['ObstacleSpawner',['../classobstacle__spawner_1_1ObstacleSpawner.html',1,'obstacle_spawner']]]
 ];

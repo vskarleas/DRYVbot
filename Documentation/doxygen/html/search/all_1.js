@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['color_6',['color',['../classobstacle__spawner_1_1PersonPath.html#ad9fe0bc96d8473b9abdb6f60d5bf284d',1,'obstacle_spawner::PersonPath']]],
-  ['corridors_7',['corridors',['../namespacecorridors.html',1,'']]],
-  ['corridors_2elaunch_2epy_8',['corridors.launch.py',['../corridors_8launch_8py.html',1,'']]],
-  ['corridors_5fmap_9',['corridors_map',['../namespacecorridors__map.html',1,'']]],
-  ['corridors_5fmap_2eyaml_10',['corridors_map.yaml',['../digital__twin_2maps_2corridors__map_8yaml.html',1,'(Global Namespace)'],['../robot__simulation_2maps_2corridors__map_8yaml.html',1,'(Global Namespace)']]],
-  ['current_5findex_11',['current_index',['../classobstacle__spawner_1_1PersonPath.html#aa555a37c94a1f7ecef8510dae8a19ca1',1,'obstacle_spawner::PersonPath']]]
+  ['callback_2',['callback',['../classdigital__twin_1_1goal__relay_1_1GoalRelay.html#a46ccf5b52cd02d30466e36c8f2988e1d',1,'digital_twin::goal_relay::GoalRelay']]],
+  ['color_3',['color',['../classobstacle__spawner_1_1WalkingPerson.html#aadbaffc7840f827f5589dccffcc5b4cb',1,'obstacle_spawner::WalkingPerson']]],
+  ['corridors_4',['corridors',['../namespacecorridors.html',1,'']]],
+  ['corridors_2elaunch_2epy_5',['corridors.launch.py',['../corridors_8launch_8py.html',1,'']]],
+  ['corridors_5fmap_6',['corridors_map',['../namespacecorridors__map.html',1,'']]],
+  ['corridors_5fmap_2eyaml_7',['corridors_map.yaml',['../digital__twin_2maps_2corridors__map_8yaml.html',1,'(Global Namespace)'],['../robot__simulation_2maps_2corridors__map_8yaml.html',1,'(Global Namespace)']]]
 ];
