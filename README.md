@@ -88,7 +88,7 @@ cd ..
 
 > **Note:** The `bcr_bot` supports multiple Gazebo versions. For this project we use its **Gazebo Classic** mode via `gazebo.launch.py`.
 
-### 9. Install Dependencies with rosdep
+### Install Dependencies with rosdep
 
 ```bash
 sudo apt install python3-rosdep
@@ -96,6 +96,10 @@ sudo rosdep init   # skip if already initialised
 rosdep update
 rosdep install --from-paths src --ignore-src -r -y
 ```
+
+### Install xarco
+
+Xarco needs to be installed for this repo. Check the installation process depending on your system
 
 ### Environment Setup
 
@@ -128,6 +132,12 @@ You can also send a goal from the terminal:
 ```bash
 ros2 topic pub --once /goal_pose geometry_msgs/PoseStamped \
   "{header: {frame_id: 'map'}, pose: {position: {x: 3.0, y: 0.0, z: 0.0}, orientation: {w: 1.0}}}"
+```
+
+You can launch the obstacles spawner as follows :
+
+```bash
+ros2 run robot_simulation obstacle_spawner.py  --ros-args -p scenario:=hospital
 ```
 
 ## Creating the map
