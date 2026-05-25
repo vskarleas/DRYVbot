@@ -34,23 +34,68 @@ The project is organised in the following ROS2 packages:
 ### Prerequisites
 
 - Ubuntu 22.04
-- ROS2 Humble (`sudo apt install ros-humble-desktop`)
-- Gazebo Harmonic:
-  ```bash
-  sudo apt install gz-harmonic ros-humble-ros-gzharmonic
-  ```
-- Nav2 and SLAM:
-  ```bash
-  sudo apt install ros-humble-navigation2 ros-humble-nav2-bringup ros-humble-slam-toolbox
-  ```
-- Foxglove Bridge:
-  ```bash
-  sudo apt install ros-humble-foxglove-bridge
-  ```
-- Topic tools (for cmd_vel relay):
-  ```bash
-  sudo apt install ros-humble-topic-tools
-  ```
+- Install ROS2 Humble following the instructions at[ https://foxglove.dev/blog/installing-ros2-humble-on-ubuntu](https://foxglove.dev/blog/installing-ros2-humble-on-ubuntu)
+
+### Install Gazebo Classic and ROS2 Bridge
+
+```bash
+sudo apt install ros-humble-gazebo-ros-pkgs ros-humble-gazebo-ros
+```
+
+This installs Gazebo 11 (Classic) and the `gazebo_ros` bridge for ROS2.
+
+> **Note:** Gazebo Classic and Gazebo Harmonic (gz-tools2) cannot coexist on the same system. If you have Harmonic installed, remove it first: `sudo apt remove gz-harmonic gz-tools2 ros-humble-ros-gzharmonic*`
+
+### Install Navigation and SLAM Packages
+
+```bash
+sudo apt install ros-humble-navigation2 \
+                 ros-humble-nav2-bringup \
+                 ros-humble-slam-toolbox
+```
+
+### Install Foxglove Bridge
+
+```bash
+sudo apt install ros-humble-foxglove-bridge
+```
+
+### Install Additional ROS2 Tools
+
+```bash
+sudo apt install python3-colcon-common-extensions \
+                 ros-humble-teleop-twist-keyboard \
+                 ros-humble-topic-tools \
+                 ros-humble-tf2-ros
+```
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/vskarleas/ROB5-S10-SYS880
+cd ROB5-S10-SYS880/Code
+```
+
+### Install bcr_bot from Source
+
+The `bcr_bot` package must be present in the workspace `src/` folder. If it is not already there after cloning:
+
+```bash
+cd src
+git clone https://github.com/blackcoffeerobotics/bcr_bot.git
+cd ..
+```
+
+> **Note:** The `bcr_bot` supports multiple Gazebo versions. For this project we use its **Gazebo Classic** mode via `gazebo.launch.py`.
+
+### 9. Install Dependencies with rosdep
+
+```bash
+sudo apt install python3-rosdep
+sudo rosdep init   # skip if already initialised
+rosdep update
+rosdep install --from-paths src --ignore-src -r -y
+```
 
 ### Environment Setup
 
@@ -153,6 +198,7 @@ The warehouse map was generated using slam_toolbox. To recreate it or create a m
 | V3.2.0  | Created a custom warehouse for better navigation results and applied palnning                                                                                                   |
 | V4.0.0  | Chnaged to Gazebo classic from Gazebo Harmonic, installed and prpeared a jospital world with its map. The bcr robot was implemented into to that                                |
 | V4.0.1  | Added a new topic /goal_pose_foxglove in order to treat correctly the messages sent from the 3D map of foxglove. It works as a relay between foxglove and the robots cmd topics |
+| V4.1.0  | Added bcr_robot on the tree of the project, updated the README and tried a first version for spawning automaticly different cylinders that represent the people                 |
 
 ## TO-DO
 
