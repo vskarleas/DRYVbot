@@ -219,6 +219,7 @@ The warehouse map was generated using slam_toolbox. To recreate it or create a m
 | V4.0.1  | Added a new topic /goal_pose_foxglove in order to treat correctly the messages sent from the 3D map of foxglove. It works as a relay between foxglove and the robots cmd topics |
 | V4.1.0  | Added bcr_robot on the tree of the project, updated the README and tried a first version for spawning automaticly different cylinders that represent the people                 |
 | V4.1.1  | Updated the human spawner based on Dounia's logic and interpretation and fixed not-moving cylinders issue. The visualization package was removed as well for better clarity     |
+| V4.1.2  | Changed the sdf of cylinder to the Scrub model of a person                                                                                                                      |
 
 ## TO-DO
 

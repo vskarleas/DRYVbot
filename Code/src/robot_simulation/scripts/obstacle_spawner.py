@@ -2,13 +2,14 @@
 """
 Dynamic Obstacle Spawner for Gazebo Classic
 
-Spawns human-sized cylinders and moves them along paths using
-sinusoidal interpolation for smooth, realistic movement.
+Spawns walking people (Scrubs 3D model) and moves them along paths
+using sinusoidal interpolation for smooth, realistic movement.
 Nav2 detects them via lidar and avoids them in real-time.
 
 Uses gazebo_msgs services:
   /spawn_entity         (gazebo_msgs/srv/SpawnEntity)
   /set_entity_state     (gazebo_msgs/srv/SetEntityState)
+  /delete_entity        (gazebo_msgs/srv/DeleteEntity)
 
 Usage:
     ros2 run robot_simulation obstacle_spawner.py
@@ -16,7 +17,6 @@ Usage:
 """
 
 import math
-import os
 import signal
 import time
 import rclpy
@@ -26,87 +26,43 @@ from gazebo_msgs.msg import EntityState
 from geometry_msgs.msg import Pose, Point, Quaternion
 
 
-def load_sdf_template(package_name='robot_simulation'):
-    """
-    Load human_cylinder.sdf from the package's models directory.
-    Falls back to inline SDF if the file is not found.
-    """
-    try:
-        from ament_index_python.packages import get_package_share_directory
-        pkg_share = get_package_share_directory(package_name)
-        sdf_path = os.path.join(pkg_share, 'models', 'human_cylinder.sdf')
-        with open(sdf_path, 'r') as f:
-            content = f.read()
-            return content
-    except Exception:
-        return HUMAN_SDF_FALLBACK
-
-
-# Fallback inline SDF if the external file is not found
-HUMAN_SDF_FALLBACK = """<?xml version="1.0" ?>
+# SDF template using the Scrubs mesh model
+# - static=false so SetEntityState can move it
+# - gravity=false so it doesn't fall through the floor
+PERSON_SDF = """<?xml version="1.0" ?>
 <sdf version="1.6">
-  <model name="human_cylinder">
+  <model name="{name}">
     <static>false</static>
     <link name="body">
       <gravity>false</gravity>
-      <collision name="collision">
-        <pose>0 0 0.85 0 0 0</pose>
+      <pose>0 0 0 0 0 0</pose>
+      <visual name="visual">
         <geometry>
-          <cylinder>
-            <radius>0.28</radius>
-            <length>1.70</length>
-          </cylinder>
+          <mesh>
+            <uri>model://Scrubs/meshes/scrubs.obj</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://Scrubs/meshes/Scrubs_Col.obj</uri>
+          </mesh>
         </geometry>
       </collision>
-      <visual name="visual">
-        <pose>0 0 0.85 0 0 0</pose>
-        <geometry>
-          <cylinder>
-            <radius>0.28</radius>
-            <length>1.70</length>
-          </cylinder>
-        </geometry>
-        <material>
-          <ambient>0.1 0.1 0.9 1</ambient>
-          <diffuse>0.1 0.1 0.9 1</diffuse>
-        </material>
-      </visual>
     </link>
   </model>
 </sdf>"""
 
 
-def customize_sdf(sdf_template, name, color):
-    """
-    Take the base SDF template and customize it for a specific person:
-    - Replace the model name
-    - Inject the per-person color
-    """
-    sdf = sdf_template
-
-    # Replace model name
-    sdf = sdf.replace(
-        'name="human_cylinder"',
-        f'name="{name}"')
-
-    # Replace color (the base SDF uses 0.1 0.1 0.9 as default blue)
-    r, g, b = color
-    color_str = f'{r} {g} {b} 1'
-    sdf = sdf.replace('0.1 0.1 0.9 1', color_str)
-
-    return sdf
-
-
 class WalkingPerson:
     """A person moving smoothly between two points
     using sinusoidal interpolation."""
-    def __init__(self, name, point_a, point_b, duration=10.0,
-                 color=(0.1, 0.1, 0.9)):
+    def __init__(self, name, point_a, point_b, duration=10.0):
         self.name = name
         self.point_a = point_a
         self.point_b = point_b
         self.duration = duration
-        self.color = color
 
     def get_position(self, t):
         """Sinusoidal interpolation between point_a and point_b."""
@@ -115,29 +71,40 @@ class WalkingPerson:
         y = self.point_a[1] * (1.0 - phase) + self.point_b[1] * phase
         return x, y
 
+    def get_yaw(self, t):
+        """Calculate facing direction based on movement."""
+        dt = 0.01
+        x1, y1 = self.get_position(t)
+        x2, y2 = self.get_position(t + dt)
+        dx = x2 - x1
+        dy = y2 - y1
+        if abs(dx) < 1e-6 and abs(dy) < 1e-6:
+            return 0.0
+        return math.atan2(dy, dx)
+
 
 SCENARIOS = {
     'hospital': [
         WalkingPerson('human_1',
                       point_a=(-4.586, -9.685),
                       point_b=(-5.937, -9.431),
-                      duration=21.0, color=(0.1, 0.1, 0.9)),
+                      duration=21.0),
         WalkingPerson('human_2',
                       point_a=(1.2, 9.7), 
                       point_b=(-2.5, 14.0),
-                      duration=50.0, color=(0.9, 0.1, 0.1)),
+                      duration=52.0),
         WalkingPerson('human_3',
                       point_a=(4.0, 1.0), 
                       point_b=(5.0, 2.0),
-                      duration=22.0, color=(0.1, 0.9, 0.1)),
+                      duration=22.0),
     ],
     'corridors': [
         WalkingPerson('human_1',
                       point_a=(-3.0, 0.0), point_b=(3.0, 0.0),
-                      duration=12.0, color=(0.1, 0.1, 0.9)),
+                      duration=12.0),
         WalkingPerson('human_2',
                       point_a=(0.0, -2.0), point_b=(0.0, 2.0),
-                      duration=10.0, color=(0.9, 0.1, 0.1)),
+                      duration=10.0),
     ],
 }
 
@@ -145,9 +112,6 @@ SCENARIOS = {
 class ObstacleSpawner(Node):
     def __init__(self):
         super().__init__('obstacle_spawner')
-
-        # Load SDF template once
-        self.sdf_template = load_sdf_template()
 
         # Parameters
         self.declare_parameter('scenario', 'hospital')
@@ -191,17 +155,13 @@ class ObstacleSpawner(Node):
         self.get_logger().info('Movement started (10 Hz)')
 
     def spawn_people(self):
-        """Spawn all people as colored cylinders."""
+        """Spawn all people using the Scrubs model."""
         for person in self.people:
             x, y = person.get_position(0)
 
-            # Build per-person SDF from template
-            sdf_xml = customize_sdf(
-                self.sdf_template, person.name, person.color)
-
             req = SpawnEntity.Request()
             req.name = person.name
-            req.xml = sdf_xml
+            req.xml = PERSON_SDF.format(name=person.name)
             req.initial_pose = Pose(
                 position=Point(x=x, y=y, z=0.0),
                 orientation=Quaternion(w=1.0))
@@ -221,6 +181,7 @@ class ObstacleSpawner(Node):
 
         for person in self.people:
             x, y = person.get_position(t)
+            yaw = person.get_yaw(t)
 
             state = EntityState()
             state.name = person.name
@@ -228,12 +189,13 @@ class ObstacleSpawner(Node):
             state.pose.position.x = float(x)
             state.pose.position.y = float(y)
             state.pose.position.z = 0.0
-            state.pose.orientation.w = 1.0
+            # Convert yaw to quaternion (rotation around Z)
+            state.pose.orientation.z = math.sin(yaw / 2.0)
+            state.pose.orientation.w = math.cos(yaw / 2.0)
 
             req = SetEntityState.Request()
             req.state = state
 
-            # Use call_async but add a callback to catch errors
             future = self.set_state_client.call_async(req)
             future.add_done_callback(self._check_response)
 
