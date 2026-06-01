@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['name_35',['name',['../classobstacle__spawner_1_1WalkingPerson.html#a07a960a8d3fa3249ad21c32aa7888b2c',1,'obstacle_spawner.WalkingPerson.name()'],['../namespacesetup.html#ab3a7a0638d76a01367c5bc3cc699447f',1,'setup.name()']]],
-  ['nav2_5fparams_36',['nav2_params',['../namespacenav2__params.html',1,'']]],
-  ['nav2_5fparams_2eyaml_37',['nav2_params.yaml',['../nav2__params_8yaml.html',1,'']]]
+  ['main_31',['main',['../namespacedigital__twin_1_1goal__relay.html#aadb104b84adc7dc24cb8a4924f1223a7',1,'digital_twin.goal_relay.main()'],['../namespaceobstacle__spawner.html#a5933e2e42d9c4b13dc4897a5464f7f61',1,'obstacle_spawner.main()']]],
+  ['maintainer_32',['maintainer',['../namespacesetup.html#aa1a7cf9bbf76004bb72697dc00bbee9d',1,'setup']]],
+  ['maintainer_5femail_33',['maintainer_email',['../namespacesetup.html#a92a81adbfdd219564d5246ce8d77f869',1,'setup']]]
 ];

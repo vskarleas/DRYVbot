@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['visualization_85',['visualization',['../namespacevisualization.html',1,'']]]
+  ['setup_86',['setup',['../namespacesetup.html',1,'']]]
 ];

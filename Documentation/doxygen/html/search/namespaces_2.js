@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['hospital_79',['hospital',['../namespacehospital.html',1,'']]],
-  ['hospital_5fmap_80',['hospital_map',['../namespacehospital__map.html',1,'']]]
+  ['digital_5ftwin_79',['digital_twin',['../namespacedigital__twin.html',1,'']]],
+  ['goal_5frelay_80',['goal_relay',['../namespacedigital__twin_1_1goal__relay.html',1,'digital_twin']]]
 ];

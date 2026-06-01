@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['install_5frequires_123',['install_requires',['../namespacesetup.html#abead4f26b530856f858f0d44c7cf2588',1,'setup']]]
+  ['maintainer_127',['maintainer',['../namespacesetup.html#aa1a7cf9bbf76004bb72697dc00bbee9d',1,'setup']]],
+  ['maintainer_5femail_128',['maintainer_email',['../namespacesetup.html#a92a81adbfdd219564d5246ce8d77f869',1,'setup']]]
 ];

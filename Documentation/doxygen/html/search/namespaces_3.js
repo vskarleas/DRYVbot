@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['nav2_5fparams_81',['nav2_params',['../namespacenav2__params.html',1,'']]]
+  ['hospital_81',['hospital',['../namespacehospital.html',1,'']]],
+  ['hospital_5fmap_82',['hospital_map',['../namespacehospital__map.html',1,'']]]
 ];

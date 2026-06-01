@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['entry_5fpoints_121',['entry_points',['../namespacesetup.html#ada7058afc98897f073d3f3b8b9157059',1,'setup']]]
+  ['install_5frequires_125',['install_requires',['../namespacesetup.html#abead4f26b530856f858f0d44c7cf2588',1,'setup']]]
 ];

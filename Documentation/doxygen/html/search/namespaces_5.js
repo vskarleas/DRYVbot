@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['setup_83',['setup',['../namespacesetup.html',1,'']]]
+  ['obstacle_5fspawner_84',['obstacle_spawner',['../namespaceobstacle__spawner.html',1,'']]]
 ];

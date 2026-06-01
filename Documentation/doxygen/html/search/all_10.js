@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['version_68',['version',['../namespacesetup.html#a2aa722b36a933088812b50ea79b97a5c',1,'setup']]]
+  ['update_5fcb_68',['update_cb',['../classobstacle__spawner_1_1ObstacleSpawner.html#a3bb9352ad0ab0338c0a7f2f17d61edef',1,'obstacle_spawner::ObstacleSpawner']]]
 ];

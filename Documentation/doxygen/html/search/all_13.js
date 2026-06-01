@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['x_69',['x',['../classobstacle__spawner_1_1PersonPath.html#a84a74f38aa95a9afd9568214a6431e33',1,'obstacle_spawner::PersonPath']]]
+  ['zip_5fsafe_72',['zip_safe',['../namespacesetup.html#a13510753661cb74083a0c664db11dde9',1,'setup']]]
 ];

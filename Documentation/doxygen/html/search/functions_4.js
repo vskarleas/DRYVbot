@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['main_109',['main',['../namespacedigital__twin_1_1goal__relay.html#aadb104b84adc7dc24cb8a4924f1223a7',1,'digital_twin.goal_relay.main()'],['../namespaceobstacle__spawner.html#a5933e2e42d9c4b13dc4897a5464f7f61',1,'obstacle_spawner.main()']]]
+  ['spawn_5fpeople_114',['spawn_people',['../classobstacle__spawner_1_1ObstacleSpawner.html#a65a4e39af4c0cd6f4a87426178014bc1',1,'obstacle_spawner::ObstacleSpawner']]]
 ];

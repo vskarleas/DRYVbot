@@ -82,92 +82,32 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a1f768065a3ff621fca210cc1d53330e5"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceobstacle__spawner.html#a1f768065a3ff621fca210cc1d53330e5">customize_sdf</a> (sdf_template, name, color)</td></tr>
-<tr class="separator:a1f768065a3ff621fca210cc1d53330e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf819dda785760e9379514fa8e2d9c93"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceobstacle__spawner.html#acf819dda785760e9379514fa8e2d9c93">load_sdf_template</a> (package_name='robot_simulation')</td></tr>
-<tr class="separator:acf819dda785760e9379514fa8e2d9c93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5933e2e42d9c4b13dc4897a5464f7f61"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceobstacle__spawner.html#a5933e2e42d9c4b13dc4897a5464f7f61">main</a> (args=None)</td></tr>
 <tr class="separator:a5933e2e42d9c4b13dc4897a5464f7f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:aafa399d343307c0ae560954bcb03fdda"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceobstacle__spawner.html#aafa399d343307c0ae560954bcb03fdda">HUMAN_SDF_FALLBACK</a></td></tr>
-<tr class="separator:aafa399d343307c0ae560954bcb03fdda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd1a15d18591ea2042277ca743df5f1c"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceobstacle__spawner.html#afd1a15d18591ea2042277ca743df5f1c">PERSON_SDF</a></td></tr>
+<tr class="separator:afd1a15d18591ea2042277ca743df5f1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09c86d1b264c3be6226521264fe6a7f8"><td class="memItemLeft" align="right" valign="top">dictionary&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceobstacle__spawner.html#a09c86d1b264c3be6226521264fe6a7f8">SCENARIOS</a></td></tr>
 <tr class="separator:a09c86d1b264c3be6226521264fe6a7f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Dynamic Obstacle Spawner for Gazebo Classic
 
-Spawns human-sized cylinders and moves them along paths using
-sinusoidal interpolation for smooth, realistic movement.
+Spawns walking people (Scrubs 3D model) and moves them along paths
+using sinusoidal interpolation for smooth, realistic movement.
 Nav2 detects them via lidar and avoids them in real-time.
 
 Uses gazebo_msgs services:
   /spawn_entity         (gazebo_msgs/srv/SpawnEntity)
   /set_entity_state     (gazebo_msgs/srv/SetEntityState)
+  /delete_entity        (gazebo_msgs/srv/DeleteEntity)
 
 Usage:
     ros2 run robot_simulation obstacle_spawner.py
     ros2 run robot_simulation obstacle_spawner.py --ros-args -p scenario:=hospital
 </pre> </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a1f768065a3ff621fca210cc1d53330e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f768065a3ff621fca210cc1d53330e5">&#9670;&nbsp;</a></span>customize_sdf()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def obstacle_spawner.customize_sdf </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>sdf_template</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>color</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<pre class="fragment">Take the base SDF template and customize it for a specific person:
-- Replace the model name
-- Inject the per-person color
-</pre> 
-</div>
-</div>
-<a id="acf819dda785760e9379514fa8e2d9c93"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf819dda785760e9379514fa8e2d9c93">&#9670;&nbsp;</a></span>load_sdf_template()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def obstacle_spawner.load_sdf_template </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>package_name</em> = <code>'robot_simulation'</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<pre class="fragment">Load human_cylinder.sdf from the package's models directory.
-Falls back to inline SDF if the file is not found.
-</pre> 
-</div>
-</div>
 <a id="a5933e2e42d9c4b13dc4897a5464f7f61"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5933e2e42d9c4b13dc4897a5464f7f61">&#9670;&nbsp;</a></span>main()</h2>
 
@@ -187,18 +127,42 @@ Falls back to inline SDF if the file is not found.
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="aafa399d343307c0ae560954bcb03fdda"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aafa399d343307c0ae560954bcb03fdda">&#9670;&nbsp;</a></span>HUMAN_SDF_FALLBACK</h2>
+<a id="afd1a15d18591ea2042277ca743df5f1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd1a15d18591ea2042277ca743df5f1c">&#9670;&nbsp;</a></span>PERSON_SDF</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">string obstacle_spawner.HUMAN_SDF_FALLBACK</td>
+          <td class="memname">string obstacle_spawner.PERSON_SDF</td>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  <span class="stringliteral">&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; ?&gt;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="stringliteral">&lt;sdf version=&quot;1.6&quot;&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="stringliteral">  &lt;model name=&quot;{name}&quot;&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="stringliteral">    &lt;static&gt;false&lt;/static&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="stringliteral">    &lt;link name=&quot;body&quot;&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="stringliteral">      &lt;gravity&gt;false&lt;/gravity&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="stringliteral">      &lt;pose&gt;0 0 0 0 0 0&lt;/pose&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="stringliteral">      &lt;visual name=&quot;visual&quot;&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="stringliteral">        &lt;geometry&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="stringliteral">          &lt;mesh&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="stringliteral">            &lt;uri&gt;model://Scrubs/meshes/scrubs.obj&lt;/uri&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="stringliteral">          &lt;/mesh&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="stringliteral">        &lt;/geometry&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="stringliteral">      &lt;/visual&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="stringliteral">      &lt;collision name=&quot;collision&quot;&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="stringliteral">        &lt;geometry&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="stringliteral">          &lt;mesh&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="stringliteral">            &lt;uri&gt;model://Scrubs/meshes/Scrubs_Col.obj&lt;/uri&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="stringliteral">          &lt;/mesh&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="stringliteral">        &lt;/geometry&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="stringliteral">      &lt;/collision&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="stringliteral">    &lt;/link&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="stringliteral">  &lt;/model&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="stringliteral">&lt;/sdf&gt;&quot;&quot;&quot;</span></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a09c86d1b264c3be6226521264fe6a7f8"></a>
@@ -217,23 +181,23 @@ Falls back to inline SDF if the file is not found.
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;        WalkingPerson(<span class="stringliteral">&#39;human_1&#39;</span>,</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;                      point_a=(-4.586, -9.685),</div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;                      point_b=(-5.937, -9.431),</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;                      duration=21.0, color=(0.1, 0.1, 0.9)),</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;                      duration=21.0),</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;        WalkingPerson(<span class="stringliteral">&#39;human_2&#39;</span>,</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;                      point_a=(1.2, 9.7), </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;                      point_b=(-2.5, 14.0),</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;                      duration=50.0, color=(0.9, 0.1, 0.1)),</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;                      duration=52.0),</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        WalkingPerson(<span class="stringliteral">&#39;human_3&#39;</span>,</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;                      point_a=(4.0, 1.0), </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;                      point_b=(5.0, 2.0),</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;                      duration=22.0, color=(0.1, 0.9, 0.1)),</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;                      duration=22.0),</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    ],</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="stringliteral">&#39;corridors&#39;</span>: [</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        WalkingPerson(<span class="stringliteral">&#39;human_1&#39;</span>,</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;                      point_a=(-3.0, 0.0), point_b=(3.0, 0.0),</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;                      duration=12.0, color=(0.1, 0.1, 0.9)),</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;                      duration=12.0),</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        WalkingPerson(<span class="stringliteral">&#39;human_2&#39;</span>,</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                      point_a=(0.0, -2.0), point_b=(0.0, 2.0),</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                      duration=10.0, color=(0.9, 0.1, 0.1)),</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                      duration=10.0),</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    ],</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
 </div><!-- fragment -->
