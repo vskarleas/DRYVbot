@@ -133,7 +133,17 @@ ros2 topic pub --once /goal_pose geometry_msgs/PoseStamped \
   "{header: {frame_id: 'map'}, pose: {position: {x: 3.0, y: 0.0, z: 0.0}, orientation: {w: 1.0}}}"
 ```
 
-You can launch the obstacles spawner as follows (you can choose between hospital and corridor):
+You can launch the obstacles spawner as follows (you can choose between hospital and corridor[INFO] [1780274981.468246041] [obstacle_spawner]: Movement started (10 Hz)
+^C[INFO] [1780274992.367058639] [obstacle_spawner]: Cleaning up: deleting spawned obstacles...
+Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:389
+[WARN] [1780274992.368491895] [obstacle_spawner]:   Failed to delete human_1
+Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:389
+[WARN] [1780274992.369821851] [obstacle_spawner]:   Failed to delete human_2
+Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:389
+[WARN] [1780274992.371240288] [obstacle_spawner]:   Failed to delete human_3
+Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:389
+[INFO] [1780274992.372443156] [obstacle_spawner]: Cleanup complete.
+Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:389):
 
 ```bash
 ros2 run robot_simulation obstacle_spawner.py  --ros-args -p scenario:=hospital

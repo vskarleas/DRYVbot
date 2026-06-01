@@ -17,6 +17,7 @@ Usage:
 
 import math
 import os
+import signal
 import time
 import rclpy
 from rclpy.node import Node
@@ -113,7 +114,6 @@ class WalkingPerson:
         x = self.point_a[0] * (1.0 - phase) + self.point_b[0] * phase
         y = self.point_a[1] * (1.0 - phase) + self.point_b[1] * phase
         return x, y
-
 
 
 SCENARIOS = {
@@ -280,18 +280,29 @@ def main(args=None):
     rclpy.init(args=args)
     node = ObstacleSpawner()
 
+    # Catch SIGINT ourselves before ROS destroys the context
+    shutdown_requested = False
+
+    def signal_handler(sig, frame):
+        nonlocal shutdown_requested
+        if not shutdown_requested:
+            shutdown_requested = True
+            node.cleanup()
+            raise SystemExit(0)
+
+    signal.signal(signal.SIGINT, signal_handler)
+
     try:
         rclpy.spin(node)
-    except KeyboardInterrupt:
-        # Context is still alive here - clean up now
-        node.cleanup()
+    except SystemExit:
+        pass
 
     node.destroy_node()
 
     try:
         rclpy.shutdown()
     except Exception:
-        pass  # Already shut down
+        pass
 
 
 if __name__ == '__main__':
