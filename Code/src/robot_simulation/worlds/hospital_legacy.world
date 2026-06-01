@@ -12,10 +12,6 @@
       <background>0.4 0.4 0.4 1</background>
       <shadows>false</shadows>
     </scene>
-    <!-- ROS2 Gazebo plugins -->
-    <plugin name="gazebo_ros_factory" filename="libgazebo_ros_factory.so"/>
-    <plugin name="gazebo_ros_state" filename="libgazebo_ros_state.so"/>
-
     <include>
       <uri>model://sun</uri>
     </include>

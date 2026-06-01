@@ -3,7 +3,8 @@ from os.path import join
 from launch import LaunchDescription
 from launch.actions import (
     ExecuteProcess, TimerAction,
-    IncludeLaunchDescription, AppendEnvironmentVariable
+    IncludeLaunchDescription, AppendEnvironmentVariable,
+    SetEnvironmentVariable
 )
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
@@ -14,6 +15,7 @@ def generate_launch_description():
     digital_twin_dir = get_package_share_directory('digital_twin')
     nav2_bringup_dir = get_package_share_directory('nav2_bringup')
     bcr_bot_dir = get_package_share_directory('bcr_bot')
+    gazebo_ros_dir = get_package_share_directory('gazebo_ros')
 
     map_file = os.path.join(digital_twin_dir, 'maps', 'hospital_map.yaml')
     nav2_params = os.path.join(digital_twin_dir, 'config', 'nav2_params.yaml')
@@ -29,18 +31,32 @@ def generate_launch_description():
     env_bcr_models = AppendEnvironmentVariable(
         name='GAZEBO_MODEL_PATH',
         value=join(bcr_bot_dir, "models"))
+    env_gazebo_resources = SetEnvironmentVariable(
+        name='GAZEBO_RESOURCE_PATH',
+        value="/usr/share/gazebo-11:" + join(bcr_bot_dir, "worlds"))
 
-    # ===== 1. BCR_BOT in Gazebo Classic with hospital world =====
-    bcr_bot_launch = IncludeLaunchDescription(
+    # ===== 1a. Gazebo (with force_system DISABLED to prevent X4 drone) =====
+    gazebo_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            join(bcr_bot_dir, 'launch', 'gazebo.launch.py')
+            join(gazebo_ros_dir, 'launch', 'gazebo.launch.py')
+        ),
+        launch_arguments={
+            'world': hospital_world,
+            'force_system': 'false',
+        }.items(),
+    )
+
+    # ===== 1b. Spawn BCR_BOT into the running Gazebo =====
+    spawn_bcr_bot = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            join(bcr_bot_dir, 'launch', 'bcr_bot_gazebo_spawn.launch.py')
         ),
         launch_arguments={
             'two_d_lidar_enabled': 'True',
             'camera_enabled': 'True',
-            'world_file': hospital_world,
             'position_x': '0.0',
             'position_y': '2.0',
+            'use_sim_time': 'true',
         }.items(),
     )
 
@@ -50,6 +66,7 @@ def generate_launch_description():
         executable='static_transform_publisher',
         name='static_tf_map_odom',
         arguments=['0', '0', '0', '0', '0', '0', 'map', 'odom'],
+        parameters=[{'use_sim_time': True}],
         output='screen',
     )
 
@@ -117,7 +134,9 @@ def generate_launch_description():
     return LaunchDescription([
         env_models,
         env_bcr_models,
-        bcr_bot_launch,
+        env_gazebo_resources,
+        gazebo_launch,
+        spawn_bcr_bot,
         static_tf_map_odom,
         cmd_vel_relay,
         nav2_bringup,

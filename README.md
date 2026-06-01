@@ -16,7 +16,6 @@ The project is organised in the following ROS2 packages:
 
 - **`robot_simulation`** — Contains the world files, saved maps, and the obstacle spawner script. In a real deployement, this package would be replaced by the actual physical robot and its sensors.
 - **`digital_twin`** — This is the core of the project. It is the cloud-side intelligence that the robot cannot run onboard due to its limited CPU. It contains the Nav2 configuration, the warehouse map, and the main launch file (`full.launch.py`) that starts the entire system: Gazebo simulation, Nav2 navigation, cmd_vel relay, and Foxglove bridge. It receives real-time data (robot position, lidar scans, destination goal) and runs the Nav2 path planning to compute the optimal trajectory.
-- **`visualization`** — Reserved for future Foxglove custom panels and visualization tools. Currently, the Foxglove bridge is launched from the digital_twin launch file.
 - **`bcr_bot`** — The simulated robot. A differential drive robot with lidar, camera, and IMU that works natively with Gazebo Harmonic.
 
 ### Technologies
@@ -134,7 +133,7 @@ ros2 topic pub --once /goal_pose geometry_msgs/PoseStamped \
   "{header: {frame_id: 'map'}, pose: {position: {x: 3.0, y: 0.0, z: 0.0}, orientation: {w: 1.0}}}"
 ```
 
-You can launch the obstacles spawner as follows :
+You can launch the obstacles spawner as follows (you can choose between hospital and corridor):
 
 ```bash
 ros2 run robot_simulation obstacle_spawner.py  --ros-args -p scenario:=hospital
@@ -209,6 +208,7 @@ The warehouse map was generated using slam_toolbox. To recreate it or create a m
 | V4.0.0  | Chnaged to Gazebo classic from Gazebo Harmonic, installed and prpeared a jospital world with its map. The bcr robot was implemented into to that                                |
 | V4.0.1  | Added a new topic /goal_pose_foxglove in order to treat correctly the messages sent from the 3D map of foxglove. It works as a relay between foxglove and the robots cmd topics |
 | V4.1.0  | Added bcr_robot on the tree of the project, updated the README and tried a first version for spawning automaticly different cylinders that represent the people                 |
+| V4.1.1  | Updated the human spawner based on Dounia's logic and interpretation and fixed not-moving cylinders issue. The visualization package was removed as well for better clarity     |
 
 ## TO-DO
 
@@ -217,8 +217,8 @@ The warehouse map was generated using slam_toolbox. To recreate it or create a m
 * [X] Spawn robot in the world and verify sensors are working
 * [X] Implement teleop to manually drive the robot
 * [X] Run SLAM to generate a map of the environment
-* [ ] See if we can simulate people detection on gazebo using Fuel models (standing_person, walking_person)
-* [ ] Implement the obstacle spawner to inject dynamic people at known positions on the map
+* [X] See if we can simulate people detection on gazebo using Fuel models (standing_person, walking_person)
+* [X] Implement the obstacle spawner to inject dynamic people at known positions on the map
 * [ ] Maybe apply some computer vision to the system so that we do not give directly teh information that on a specific point of the map there are people moving. We could use OpenCV if applicable
 
 ### digital_twin
@@ -235,5 +235,5 @@ The warehouse map was generated using slam_toolbox. To recreate it or create a m
 * [X] Connect Foxglove to the system via websocket bridge
 * [X] Send navigation goals from Foxglove
 * [ ] On foxglove show an approve first_path when Nav2 proposes the path. This path however is free to be updated on real time when the robots runs and the digital twin control's its mouvement
-* [ ] If possible show on real time on foxglove the updated path that is provided from the digital twin to the robot, as well as the afluence of things, people from lidar data, and simulation info
-* [ ] Display robot's current coordinates, goal coordinates, and planning status on the interface
+* [X] If possible show on real time on foxglove the updated path that is provided from the digital twin to the robot, as well as the afluence of things, people from lidar data, and simulation info
+* [X] Display robot's current coordinates, goal coordinates, and planning status on the interface
