@@ -315,7 +315,7 @@ ros2 run robot_simulation obstacle_spawner.py  --ros-args -p scenario:=hospital
 
 ## Creating the map
 
-The warehouse map was generated using slam_toolbox. To recreate it or create a map for a different world:
+The hospital and corridor maspwas generated using slam_toolbox. To recreate them or create a map for a different world:
 
 1. Launch the robot in the world:
 
@@ -396,7 +396,7 @@ The warehouse map was generated using slam_toolbox. To recreate it or create a m
 * [X] Run SLAM to generate a map of the environment
 * [X] See if we can simulate people detection on gazebo using Fuel models (standing_person, walking_person)
 * [X] Implement the obstacle spawner to inject dynamic people at known positions on the map
-* [ ] Maybe apply some computer vision to the system so that we do not give directly teh information that on a specific point of the map there are people moving. We could use OpenCV if applicable
+* [ ] Maybe apply some computer vision to the system so that it understands that a speciifc section is an intersection
 
 ### digital_twin
 
@@ -404,13 +404,13 @@ The warehouse map was generated using slam_toolbox. To recreate it or create a m
 * [X] Integrate Nav2 for path planning on the saved map
 * [X] Navigation with obstacle avoidance via Nav2 costmaps
 * [ ] Add simulated 5G latency on the communication between robot and digital twin
-* [ ] Implement a local safety controller on the robot side for emergency braking (cannot depend on network)
+* [X] Implement a local safety controller on the robot side for emergency braking (cannot depend on network)
 * [X] Create demo scenarios: nominal navigation, dynamic obstacle avoidance, latency stress test
 
 ### visualization
 
 * [X] Connect Foxglove to the system via websocket bridge
 * [X] Send navigation goals from Foxglove
-* [ ] On foxglove show an approve first_path when Nav2 proposes the path. This path however is free to be updated on real time when the robots runs and the digital twin control's its mouvement
+* [ ] On foxglove include information like updated path based on affluence and crowd data. Include as well a text promp interface for commanding the robot to go to a specific room or department inside the world.
 * [X] If possible show on real time on foxglove the updated path that is provided from the digital twin to the robot, as well as the afluence of things, people from lidar data, and simulation info
 * [X] Display robot's current coordinates, goal coordinates, and planning status on the interface
