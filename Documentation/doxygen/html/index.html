@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Digital Twin - Cloud Robotics: ROB5-S10-SYS880</title>
+<title>Digital Twin - Cloud Robotics: CloudTwin : Digital Twin pour la navigation autonome et prédictive d&#39;un robot mobile</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -65,23 +65,22 @@ $(function() {
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">ROB5-S10-SYS880 </div>  </div>
+<div class="title">CloudTwin : Digital Twin pour la navigation autonome et prédictive d'un robot mobile </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a> </p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Description</h1>
-<p>This project is a proof-of-concept for a <b>Digital Twin</b> application applied to mobile robotics. The core idea is that we have budget robots with limited onboard processing power that cannot handle heavy computation tasks like trajectory planning and real-time obstacle avoidance on their own. Instead, these robots offload that computation to their digital twin running on a cloud server (in our case, our local computer).</p>
-<p>The digital twin receives real-time data from the robot (position, sensor data) and from the environment (people affluence, obstacle positions), processes all this information to compute the optimal path, and sends back motion commands to the robot. This creates a closed-loop system where the robot is essentially "remote-controlled" by its intelligent twin that has access to far more computational resources.</p>
-<p>Since we do not have a physical robot available, the project uses <b>Gazebo Harmonic</b> to simulate the robot navigating in a warehouse environment. The simulation represents what would be a real robot connected via a 5G local network to the cloud. The digital twin runs the <b>Nav2</b> navigation stack, which is too computationnaly heavy for a budget robot's onboard CPU.</p>
-<p>A <b>Foxglove</b> web interface (running on localhost) allows the user to visualise the robot in real-time on the map, select a destination, and monitor the planned path. When a destination is selected, the robot's real-time position and environment affluence data are sent to the digital twin, which continuously computes and updates the best path until the robot reaches its final position. All those info are also shown live on the web interface.</p>
+<p>This project is a proof-of-concept for a Digital Twin application applied to mobile robotics. The core idea is that we have budget robots with limited onboard processing power that cannot handle heavy computation tasks like trajectory planning and real-time obstacle avoidance on their own. Instead, these robots offload that computation to their digital twin running on a cloud server (in our case, our local computer).</p>
+<p>The digital twin receives real-time data from the robot (position, sensor data) and from the environment (people affluence, obstacle positions), processes all this information to compute the optimal path, and sends back motion commands to the robot. This creates a closed-loop system where the robot is essentially "remote-controlled" by its intelligent twin that has access to far more computational resources. Beyond reactive obstacle avoidance, the digital twin also implements predictive navigation: an AI model analyzes environmental data (traffic flow, intersection proximity, zone affluence) to anticipate risky situations and proactively adapt the robot's speed and trajectory — for example, slowing down when approaching an intersection even before detecting any obstacle.</p>
+<p>Since we do not have a physical robot available, the project uses Gazebo Classic to simulate the robot navigating in corridor and hospital environments. The simulation represents what would be a real robot connected via a 5G local network to the cloud. The digital twin runs the Nav2 navigation stack, which is too computationnaly heavy for a budget robot's onboard CPU.</p>
+<p>A Foxglove web interface (running on localhost) allows the user to visualise the robot in real-time on the map, select a destination, and monitor the planned path. When a destination is selected, the robot's real-time position and environment affluence data are sent to the digital twin, which continuously computes and updates the best path until the robot reaches its final position. The interface also shows predictive speed adjustments and replanned trajectories as the robot navigates through dynamic environments. All those info are also shown live on the web interface.</p>
 <h2><a class="anchor" id="autotoc_md2"></a>
 Architecture</h2>
 <p>The project is organised in the following ROS2 packages:</p>
 <ul>
 <li>**<code>robot_simulation</code>** — Contains the world files, saved maps, and the obstacle spawner script. In a real deployement, this package would be replaced by the actual physical robot and its sensors.</li>
 <li>**<code><a class="el" href="namespacedigital__twin.html">digital_twin</a></code>** — This is the core of the project. It is the cloud-side intelligence that the robot cannot run onboard due to its limited CPU. It contains the Nav2 configuration, the warehouse map, and the main launch file (<code>full.launch.py</code>) that starts the entire system: Gazebo simulation, Nav2 navigation, cmd_vel relay, and Foxglove bridge. It receives real-time data (robot position, lidar scans, destination goal) and runs the Nav2 path planning to compute the optimal trajectory.</li>
-<li>**<code>visualization</code>** — Reserved for future Foxglove custom panels and visualization tools. Currently, the Foxglove bridge is launched from the <a class="el" href="namespacedigital__twin.html">digital_twin</a> launch file.</li>
 <li>**<code>bcr_bot</code>** — The simulated robot. A differential drive robot with lidar, camera, and IMU that works natively with Gazebo Harmonic.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md3"></a>
@@ -163,7 +162,7 @@ Launch everything</h2>
 <p>You can also send a goal from the terminal:</p>
 <div class="fragment"><div class="line">ros2 topic pub --once /goal_pose geometry_msgs/PoseStamped \</div>
 <div class="line">  &quot;{header: {frame_id: &#39;map&#39;}, pose: {position: {x: 3.0, y: 0.0, z: 0.0}, orientation: {w: 1.0}}}&quot;</div>
-</div><!-- fragment --><p>You can launch the obstacles spawner as follows :</p>
+</div><!-- fragment --><p>You can launch the obstacles spawner as follows (you can choose between hospital and corridor):</p>
 <div class="fragment"><div class="line">ros2 run robot_simulation obstacle_spawner.py  --ros-args -p scenario:=hospital</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md17"></a>
 Creating the map</h1>
@@ -226,7 +225,7 @@ Versions</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">V2.2.1   </td><td class="markdownTableBodyNone">Created the <a class="el" href="namespacedigital__twin.html">digital_twin</a> package    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">V2.3.0   </td><td class="markdownTableBodyNone">Updated teh setup.py for the digital twin package    </td></tr>
+<td class="markdownTableBodyNone">V2.3.0   </td><td class="markdownTableBodyNone">Updated teh <a class="el" href="setup_8py.html">setup.py</a> for the digital twin package    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">V2.3.1   </td><td class="markdownTableBodyNone">Created the visualization package    </td></tr>
 <tr class="markdownTableRowEven">
@@ -244,7 +243,9 @@ Versions</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">V4.0.1   </td><td class="markdownTableBodyNone">Added a new topic /goal_pose_foxglove in order to treat correctly the messages sent from the 3D map of foxglove. It works as a relay between foxglove and the robots cmd topics    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">V4.1.0   </td><td class="markdownTableBodyNone">Added bcr_robot on the tree of the project, updated the README and tried a first version for spawning automaticly different cylinders that represent the people   </td></tr>
+<td class="markdownTableBodyNone">V4.1.0   </td><td class="markdownTableBodyNone">Added bcr_robot on the tree of the project, updated the README and tried a first version for spawning automaticly different cylinders that represent the people    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">V4.1.1   </td><td class="markdownTableBodyNone">Updated the human spawner based on Dounia's logic and interpretation and fixed not-moving cylinders issue. The visualization package was removed as well for better clarity   </td></tr>
 </table>
 <h1><a class="anchor" id="autotoc_md19"></a>
 TO-DO</h1>
@@ -254,8 +255,8 @@ robot_simulation</h2>
 <li>[X] Spawn robot in the world and verify sensors are working</li>
 <li>[X] Implement teleop to manually drive the robot</li>
 <li>[X] Run SLAM to generate a map of the environment</li>
-<li>[ ] See if we can simulate people detection on gazebo using Fuel models (standing_person, walking_person)</li>
-<li>[ ] Implement the obstacle spawner to inject dynamic people at known positions on the map</li>
+<li>[X] See if we can simulate people detection on gazebo using Fuel models (standing_person, walking_person)</li>
+<li>[X] Implement the obstacle spawner to inject dynamic people at known positions on the map</li>
 <li>[ ] Maybe apply some computer vision to the system so that we do not give directly teh information that on a specific point of the map there are people moving. We could use OpenCV if applicable</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md21"></a>
@@ -274,8 +275,8 @@ visualization</h2>
 <li>[X] Connect Foxglove to the system via websocket bridge</li>
 <li>[X] Send navigation goals from Foxglove</li>
 <li>[ ] On foxglove show an approve first_path when Nav2 proposes the path. This path however is free to be updated on real time when the robots runs and the digital twin control's its mouvement</li>
-<li>[ ] If possible show on real time on foxglove the updated path that is provided from the digital twin to the robot, as well as the afluence of things, people from lidar data, and simulation info</li>
-<li>[ ] Display robot's current coordinates, goal coordinates, and planning status on the interface </li>
+<li>[X] If possible show on real time on foxglove the updated path that is provided from the digital twin to the robot, as well as the afluence of things, people from lidar data, and simulation info</li>
+<li>[X] Display robot's current coordinates, goal coordinates, and planning status on the interface </li>
 </ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
