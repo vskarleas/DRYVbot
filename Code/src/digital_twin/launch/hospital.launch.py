@@ -16,13 +16,12 @@ def generate_launch_description():
     nav2_bringup_dir = get_package_share_directory('nav2_bringup')
     bcr_bot_dir = get_package_share_directory('bcr_bot')
     gazebo_ros_dir = get_package_share_directory('gazebo_ros')
+    robot_simulation_dir = get_package_share_directory('robot_simulation')
 
     map_file = os.path.join(digital_twin_dir, 'maps', 'hospital_map.yaml')
     nav2_params = os.path.join(digital_twin_dir, 'config', 'nav2_params.yaml')
-    hospital_world = os.path.expanduser(
-        '~/Documents/ROB5-S10-SYS880/Code/src/robot_simulation/worlds/hospital.world')
-    models_path = os.path.expanduser(
-        '~/Documents/ROB5-S10-SYS880/Code/src/robot_simulation/models')
+    hospital_world = join(robot_simulation_dir, 'worlds', 'hospital.world')
+    models_path = join(robot_simulation_dir, 'models')
 
     # ===== Environment: model paths for Gazebo Classic =====
     env_models = AppendEnvironmentVariable(
