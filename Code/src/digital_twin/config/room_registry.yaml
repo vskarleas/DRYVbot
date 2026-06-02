@@ -1,0 +1,11 @@
+rooms:
+  salle_101:
+    x: -8.1
+    y: -6.62
+    orientation_w: 0.5199
+    aliases: ["room 101", "salle 101", "chambre 101"]
+  salle_102:
+    x: -8.90481734101325
+    y: -15.881
+    orientation_w: 0.5199
+    aliases: ["room 102", "salle 102", "chambre 102"]

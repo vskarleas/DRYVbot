@@ -232,6 +232,7 @@ The hospital and corridor maspwas generated using slam_toolbox. To recreate them
 | V4.1.2  | Changed the sdf of cylinder to the Scrub model of a person                                                                                                                      |
 | V4.1.3  | Updated the nav2 paramas so that the robot can pass from the narrow doors. We can play more with these parameters                                                               |
 | V4.1.4  | Added publisher on obstacle spawner for the topic /people_positions                                                                                                             |
+| V5.0.0  | Included some .yaml files for saying where are the intersections or the different rooms for future usage of text or voice commands. Those files are not complete                |
 
 ## TO-DO
 
