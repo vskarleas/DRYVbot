@@ -170,7 +170,7 @@ ai_navigation_manager:
 
 In Foxglove, the operator sees three panels. The **3D panel** shows the robot, the lidar, the Nav2 path, plus the crowd density overlay and the semantic map overlay as additional layers.
 
-A **text command panel** will be integrated that will use Foxglove's built-in Publish panel configured to publish `std_msgs/String` on `/room_command`. The operator types for example "Go to room 204", the `room_interpreter` node parses it, looks up the coordinates, and publishes a `/goal_pose`. Then Nav2 picks it up and the robot starts moving. Path changes appear in real-time because Nav2 already publishes `/plan`. 
+A **text command panel** will be integrated that will use Foxglove's built-in Publish panel configured to publish `std_msgs/String` on `/room_command`. The operator types for example "Go to room 204", the `room_interpreter` node parses it, looks up the coordinates, and publishes a `/goal_pose`. Then Nav2 picks it up and the robot starts moving. Path changes appear in real-time because Nav2 already publishes `/plan`.
 
 The **statistics panel** uses Foxglove's Plot panel subscribing to `/ai_stats` to show live graphs: current zone type, crowd density along the planned path, number of intersection stops performed, average speed. Below you can find an example of the /ai_stats node. The `session` block is what feeds the Foxglove statistics plots over time, like the number of reroutes, time distribution across zone types, average speed. It accumulates over the entire navigation session and resets when a new goal is sent.
 
@@ -386,6 +386,7 @@ The hospital and corridor maspwas generated using slam_toolbox. To recreate them
 | V4.1.0  | Added bcr_robot on the tree of the project, updated the README and tried a first version for spawning automaticly different cylinders that represent the people                 |
 | V4.1.1  | Updated the human spawner based on Dounia's logic and interpretation and fixed not-moving cylinders issue. The visualization package was removed as well for better clarity     |
 | V4.1.2  | Changed the sdf of cylinder to the Scrub model of a person                                                                                                                      |
+| V4.1.3  | Updated the nav2 paramas so that the robot can pass from the narrow doors. We can play more with these parameters                                                               |
 
 ## TO-DO
 
