@@ -23,7 +23,7 @@ import rclpy
 from rclpy.node import Node
 from gazebo_msgs.srv import SpawnEntity, SetEntityState, DeleteEntity
 from gazebo_msgs.msg import EntityState
-from geometry_msgs.msg import Pose, Point, Quaternion
+from geometry_msgs.msg import Pose, Point, Quaternion, PoseArray
 
 
 # SDF template using the Scrubs mesh model
@@ -86,13 +86,13 @@ class WalkingPerson:
 SCENARIOS = {
     'hospital': [
         WalkingPerson('human_1',
-                      point_a=(-4.586, -9.685),
-                      point_b=(-5.937, -9.431),
+                      point_a=(-4.586, -14.697),
+                      point_b=(-5.937, -14.430),
                       duration=21.0),
         WalkingPerson('human_2',
-                      point_a=(1.2, 9.7), 
+                      point_a=(1.2, 13.7), 
                       point_b=(-2.5, 14.0),
-                      duration=52.0),
+                      duration=30.0),
         WalkingPerson('human_3',
                       point_a=(4.0, 1.0), 
                       point_b=(5.0, 2.0),
@@ -116,6 +116,9 @@ class ObstacleSpawner(Node):
         # Parameters
         self.declare_parameter('scenario', 'hospital')
         scenario_name = self.get_parameter('scenario').value
+
+        # Creating subscriber for people positions (for Crowd Monitor)
+        self.people_pub = self.create_publisher(PoseArray, '/people_positions', 10)
 
         if scenario_name not in SCENARIOS:
             self.get_logger().error(
@@ -198,6 +201,20 @@ class ObstacleSpawner(Node):
 
             future = self.set_state_client.call_async(req)
             future.add_done_callback(self._check_response)
+
+        # Publish people positions for AI intelligence layer
+        people_msg = PoseArray()
+        people_msg.header.stamp = self.get_clock().now().to_msg()
+        people_msg.header.frame_id = 'map'
+        for person in self.people:
+            pose = Pose()
+            x, y = person.get_position(t)
+            pose.position.x = float(x)
+            pose.position.y = float(y)
+            pose.position.z = 0.85
+            pose.orientation.w = 1.0
+            people_msg.poses.append(pose)
+        self.people_pub.publish(people_msg)
 
     def _check_response(self, future):
         """Log any errors from SetEntityState calls."""

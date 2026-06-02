@@ -231,6 +231,7 @@ The hospital and corridor maspwas generated using slam_toolbox. To recreate them
 | V4.1.1  | Updated the human spawner based on Dounia's logic and interpretation and fixed not-moving cylinders issue. The visualization package was removed as well for better clarity     |
 | V4.1.2  | Changed the sdf of cylinder to the Scrub model of a person                                                                                                                      |
 | V4.1.3  | Updated the nav2 paramas so that the robot can pass from the narrow doors. We can play more with these parameters                                                               |
+| V4.1.4  | Added publisher on obstacle spawner for the topic /people_positions                                                                                                             |
 
 ## TO-DO
 
