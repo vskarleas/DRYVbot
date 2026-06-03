@@ -22,6 +22,7 @@ setup(
         ('share/' + package_name + '/launch', [
             'launch/corridors.launch.py',
             'launch/hospital.launch.py',
+            'launch/hospital_telemetry.launch.py',
         ]),
     ],
     install_requires=['setuptools'],
@@ -33,6 +34,7 @@ setup(
     entry_points={
         'console_scripts': [
             'goal_relay = digital_twin.goal_relay:main',
+            'telemetry_exporter = digital_twin.telemetry_exporter:main',
         ],
     },
 )
