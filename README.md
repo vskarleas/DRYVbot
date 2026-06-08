@@ -29,7 +29,7 @@ Transfer complex path planning calculations on the digital twin of the robot all
 The project is organised in the following ROS2 packages:
 
 - **`robot_simulation`** — Contains the world files, saved maps, and the obstacle spawner script. In a real deployement, this package would be replaced by the actual physical robot and its sensors.
-- **`digital_twin`** — This is the core of the project. It is the cloud-side intelligence that the robot cannot run onboard due to its limited CPU. It contains the Nav2 configuration, the warehouse map, and the main launch file (`full.launch.py`) that starts the entire system: Gazebo simulation, Nav2 navigation, cmd_vel relay, and Foxglove bridge. It receives real-time data (robot position, lidar scans, destination goal) and runs the Nav2 path planning to compute the optimal trajectory.
+- **`digital_twin`** — This is the core of the project. It is the cloud-side intelligence that the robot cannot run onboard due to its limited CPU. It contains the Nav2 configuration, the warehouse map, and the main launch file (`hospital.launch.py`) that starts the entire system: Gazebo simulation, Nav2 navigation, cmd_vel relay, and Foxglove bridge. It receives real-time data (robot position, lidar scans, destination goal) and runs the Nav2 path planning to compute the optimal trajectory.
 - **`bcr_bot`** — The simulated robot. A differential drive robot with lidar, camera, and IMU that works natively with Gazebo Harmonic.
 
 ### Technologies
@@ -133,7 +133,7 @@ source install/setup.bash
 
 ### Launch everything
 
-The `full.launch.py` starts the entire system in one command: Gazebo with the warehouse world and the bcr_bot, Nav2 navigation stack, cmd_vel relay, initial pose publisher, and Foxglove bridge.
+The `hospital.launch.py` starts Gazebo with the hospital world and the bcr_bot, Nav2 navigation stack, cmd_vel relay, initial pose publisher, and Foxglove bridge.
 
 ```bash
 ros2 launch digital_twin hospital.launch.py
@@ -154,6 +154,11 @@ You can launch the obstacles spawner as follows (you can choose between hospital
 ros2 run robot_simulation obstacle_spawner.py  --ros-args -p scenario:=hospital
 ```
 
+We can launch the telemetry towards the AI system using :
+
+```bash
+ros2 launch digital_twin hospital_telemetry.launch.py
+```
 
 ---
 
