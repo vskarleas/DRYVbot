@@ -37,8 +37,8 @@ def generate_launch_description():
 
     declare_target_url = DeclareLaunchArgument(
         'target_url',
-        default_value='',
-        description='Target URL for telemetry export. If empty, JSON is printed in terminal.'
+        default_value='https://proj-sys880.calme2me.com/api/data',
+        description='Target URL for telemetry export.'
     )
     declare_enable_rviz = DeclareLaunchArgument(
         'enable_rviz',

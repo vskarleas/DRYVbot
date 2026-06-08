@@ -22,7 +22,7 @@ class TelemetryExporter(Node):
         # =========================
         # Parameters
         # =========================
-        self.declare_parameter('target_url', 'https://proj-sys880.calme2me.com')
+        self.declare_parameter('target_url', 'https://proj-sys880.calme2me.com/api/data')
         self.declare_parameter('send_frequency_hz', 1.0)
 
         self.declare_parameter('save_to_file', True)
@@ -449,8 +449,6 @@ class TelemetryExporter(Node):
 
         payload = {
             'datetime': self.get_datetime_utc(),
-            'simulation_time': float(self.get_simulation_time()),
-            'frame_id': self.frame_id,
 
             'bot': {
                 'position': robot_position,
@@ -491,7 +489,7 @@ class TelemetryExporter(Node):
                 },
             },
 
-            'obstacles': obstacles,
+            'persons': obstacles,
         }
 
         return payload
