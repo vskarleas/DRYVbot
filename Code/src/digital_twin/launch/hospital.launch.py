@@ -2,13 +2,18 @@ import os
 from os.path import join
 from launch import LaunchDescription
 from launch.actions import (
+    DeclareLaunchArgument,
     ExecuteProcess, TimerAction,
     IncludeLaunchDescription, AppendEnvironmentVariable,
     SetEnvironmentVariable
 )
+from launch.conditions import IfCondition
+from launch.substitutions import LaunchConfiguration
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
+
+
 
 
 def generate_launch_description():
@@ -33,6 +38,21 @@ def generate_launch_description():
     env_gazebo_resources = SetEnvironmentVariable(
         name='GAZEBO_RESOURCE_PATH',
         value="/usr/share/gazebo-11:" + join(bcr_bot_dir, "worlds"))
+    
+    # ===== Launch arguments for obstacles =====
+    enable_obstacles = LaunchConfiguration('enable_obstacles')
+    obstacle_scenario = LaunchConfiguration('obstacle_scenario')
+
+    declare_enable_obstacles = DeclareLaunchArgument(
+        'enable_obstacles',
+        default_value='true',
+        description='Enable dynamic obstacle spawning.'
+    )
+    declare_obstacle_scenario = DeclareLaunchArgument(
+        'obstacle_scenario',
+        default_value='hospital',
+        description='Obstacle scenario to use: hospital or corridors.'
+    )
 
     # ===== 1a. Gazebo (with force_system DISABLED to prevent X4 drone) =====
     gazebo_launch = IncludeLaunchDescription(
@@ -131,7 +151,31 @@ def generate_launch_description():
         output='screen',
     )
 
+    # ===== 7. Run obstacle spawner =====
+    obstacle_spawner = TimerAction(
+        period=20.0,
+        actions=[
+            ExecuteProcess(
+                cmd=[
+                    'python3',
+                    os.path.join(
+                        robot_simulation_dir,
+                        'scripts',
+                        'obstacle_spawner.py'
+                    ),
+                    '--ros-args',
+                    '-p',
+                    ['scenario:=', obstacle_scenario],
+                ],
+                condition=IfCondition(enable_obstacles),
+                output='screen',
+            )
+        ]
+    )
+
     return LaunchDescription([
+        declare_enable_obstacles,
+        declare_obstacle_scenario,
         env_models,
         env_bcr_models,
         env_gazebo_resources,
@@ -143,4 +187,5 @@ def generate_launch_description():
         set_initial_pose,
         foxglove_bridge,
         goal_relay,
+        obstacle_spawner,
     ])

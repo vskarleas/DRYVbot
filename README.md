@@ -247,7 +247,8 @@ The hospital and corridor maspwas generated using slam_toolbox. To recreate them
 | V6.0.1  | We have a smart version of the automatic renavigation of the robot based on the affluence data received for the moving people                                                   |
 | V6.0.2  | Foxglove layout V1 saved on the project                                                                                                                                         |
 | V6.1.0  | Created a custom panel for foxglove that allows voice recognition for rooms registry commands                                                                                   |
-| V6.1.1  | Released the version 1.0.0 for the foxglove panel                                                                                                                              |
+| V6.1.1  | Released the version 1.0.0 for the foxglove panel                                                                                                                               |
+| V6.2.1  | The hospital.launch.py was updated in order to include the obstacle_spawner in his actions                                                                                      |
 
 ## TO-DO
 
