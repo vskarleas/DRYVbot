@@ -1,0 +1,12 @@
+crowd_monitor:
+  ros__parameters:
+    publish_rate: 2.0             # Hz — how often /map_dynamic is republished
+    gaussian_sigma: 0.8           # metres — spread of the Gaussian around each person
+    density_scale: 100.0          # peak occupancy value at person centre (0-100)
+    lethal_threshold: 25          # density value above which cells become walls
+                                  #   lower → larger wall zone around each person
+                                  #   higher → tighter zone, only very close to person
+
+room_interpreter:
+  ros__parameters:
+    registry_path: "/home/vskarleas/Documents/ROB5-S10-SYS880/Code/src/digital_twin/config/room_registry.yaml"             # path to room_registry.yaml (resolved at launch)

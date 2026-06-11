@@ -1,4 +1,6 @@
 from setuptools import find_packages, setup
+from glob import glob
+import os
 
 package_name = 'digital_twin'
 
@@ -10,20 +12,9 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name + '/maps', [
-            'maps/corridors_map.pgm',
-            'maps/corridors_map.yaml',
-            'maps/hospital_map.pgm',
-            'maps/hospital_map.yaml',
-        ]),
-        ('share/' + package_name + '/config', [
-            'config/nav2_params.yaml',
-        ]),
-        ('share/' + package_name + '/launch', [
-            'launch/corridors.launch.py',
-            'launch/hospital.launch.py',
-            'launch/hospital_telemetry.launch.py',
-        ]),
+        ('share/' + package_name + '/maps', glob('maps/*')),
+        ('share/' + package_name + '/config', glob('config/*.yaml')),
+        ('share/' + package_name + '/launch', glob('launch/*.py')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -35,6 +26,8 @@ setup(
         'console_scripts': [
             'goal_relay = digital_twin.goal_relay:main',
             'telemetry_exporter = digital_twin.telemetry_exporter:main',
+            'crowd_monitor = digital_twin.crowd_monitor:main',
+            'room_interpreter = digital_twin.room_interpreter:main',
         ],
     },
 )

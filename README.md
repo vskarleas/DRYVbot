@@ -155,9 +155,14 @@ ros2 run robot_simulation obstacle_spawner.py  --ros-args -p scenario:=hospital
 ```
 
 We can launch the telemetry towards the AI system using :
-
 ```bash
 ros2 launch digital_twin hospital_telemetry.launch.py
+```
+
+We can launch the logic script for smart navigation of the robot with :
+
+```bash
+ros2 launch digital_twin logic.launch.py
 ```
 
 ---
@@ -238,6 +243,7 @@ The hospital and corridor maspwas generated using slam_toolbox. To recreate them
 | V4.1.3  | Updated the nav2 paramas so that the robot can pass from the narrow doors. We can play more with these parameters                                                               |
 | V4.1.4  | Added publisher on obstacle spawner for the topic /people_positions                                                                                                             |
 | V5.0.0  | Included some .yaml files for saying where are the intersections or the different rooms for future usage of text or voice commands. Those files are not complete                |
+| V6.0.1  | We have a smart version of the automatic renavigation of the robot based on the affluence data received for the moving people                                                   |
 
 ## TO-DO
 
