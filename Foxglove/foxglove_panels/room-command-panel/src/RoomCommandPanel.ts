@@ -46,16 +46,16 @@ export function initRoomCommandPanel(context: PanelExtensionContext): void {
         color: #e0e0e0;
         transition: border-color 0.2s;
       }
-      .rc-input:focus { border-color: #5b9bd5; }
+      .rc-input:focus { border-color: #d5a45b; }
       .rc-input::placeholder { color: #888; }
       .rc-btn {
         padding: 10px 20px;
         border: none;
-        border-radius: 8px;
+        border-radius: 2px;
         cursor: pointer;
         font-size: 14px;
         font-weight: 500;
-        background: #5b9bd5;
+        background: #d5a45b;
         color: white;
         transition: background 0.15s;
       }
@@ -75,7 +75,7 @@ export function initRoomCommandPanel(context: PanelExtensionContext): void {
         transition: all 0.2s;
         flex-shrink: 0;
       }
-      .rc-mic:hover { border-color: #5b9bd5; background: #333; }
+      .rc-mic:hover { border-color: #d5a45b; background: #333; }
       .rc-mic.listening {
         background: #c0392b;
         border-color: #e74c3c;
@@ -110,7 +110,7 @@ export function initRoomCommandPanel(context: PanelExtensionContext): void {
         border-radius: 8px;
         font-size: 13px;
         background: #1a2a3a;
-        border-left: 4px solid #5b9bd5;
+        border-left: 4px solid #d5a45b;
         white-space: pre-wrap;
         line-height: 1.4;
       }
@@ -135,7 +135,7 @@ export function initRoomCommandPanel(context: PanelExtensionContext): void {
     </style>
 
     <div class="rc-root">
-      <h3 class="rc-title">🏥 Room Navigator</h3>
+      <h3 class="rc-title">Room navigator</h3>
 
       <div class="rc-row">
         <input id="rc-cmd" class="rc-input" type="text"
@@ -146,8 +146,8 @@ export function initRoomCommandPanel(context: PanelExtensionContext): void {
       <div class="rc-row">
         <button id="rc-mic" class="rc-mic" title="Hold to speak">🎤</button>
         <select id="rc-lang" class="rc-lang">
-          <option value="fr-FR">🇫🇷 Français</option>
-          <option value="en-US">🇬🇧 English</option>
+          <option value="fr-FR">Français</option>
+          <option value="en-US">English</option>
         </select>
         <span id="rc-transcript" class="rc-transcript"></span>
       </div>

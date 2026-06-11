@@ -1,7 +1,7 @@
 crowd_monitor:
   ros__parameters:
     publish_rate: 2.0             # Hz — how often /map_dynamic is republished
-    gaussian_sigma: 1.05           # metres — spread of the Gaussian around each person
+    gaussian_sigma: 1.2           # metres — spread of the Gaussian around each person
     density_scale: 100.0          # peak occupancy value at person centre (0-100)
     lethal_threshold: 25          # density value above which cells become walls
                                   #   lower → larger wall zone around each person
