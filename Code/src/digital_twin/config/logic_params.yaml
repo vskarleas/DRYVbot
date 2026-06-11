@@ -10,3 +10,12 @@ crowd_monitor:
 room_interpreter:
   ros__parameters:
     registry_path: "/home/vskarleas/Documents/ROB5-S10-SYS880/Code/src/digital_twin/config/room_registry.yaml"             # path to room_registry.yaml (resolved at launch)
+
+speech_node:
+  ros__parameters:
+    model_size: "base"
+    default_language: "en"
+    sample_rate: 16000
+    max_duration: 8.0
+    silence_threshold: 0.01
+    silence_duration: 1.5

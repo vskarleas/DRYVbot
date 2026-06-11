@@ -6,7 +6,7 @@ from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
     digital_twin_dir = get_package_share_directory('digital_twin')
-    ai_params = os.path.join(digital_twin_dir, 'config', 'logic_params.yaml')
+    logic_params = os.path.join(digital_twin_dir, 'config', 'logic_params.yaml')
 
     # ── 1. Crowd Monitor ────────────────────────────────────────────────
     #   Subscribes to /map (map_server) + /gazebo/model_states
@@ -15,7 +15,7 @@ def generate_launch_description():
         package='digital_twin',
         executable='crowd_monitor',
         name='crowd_monitor',
-        parameters=[ai_params, {'use_sim_time': True}],
+        parameters=[logic_params, {'use_sim_time': True}],
         output='screen',
     )
 
@@ -26,11 +26,23 @@ def generate_launch_description():
         package='digital_twin',
         executable='room_interpreter',
         name='room_interpreter',
-        parameters=[ai_params, {'use_sim_time': True}],
+        parameters=[logic_params, {'use_sim_time': True}],
+        output='screen',
+    )
+
+    # ── 3. Speech Node ────────────────────────────────────────────────
+    #   Subscribes to /speech_trigger (std_msgs/String)
+    #   Publishes  /room_command (std_msgs/String) + /speech_status (std_msgs/String)
+    speech_node = Node(
+        package='digital_twin',
+        executable='speech_node',
+        name='speech_node',
+        parameters=[logic_params, {'use_sim_time': True}],
         output='screen',
     )
 
     return LaunchDescription([
         crowd_monitor,
         room_interpreter,
+        speech_node,
     ])

@@ -6,11 +6,9 @@ export function initRoomCommandPanel(context: PanelExtensionContext): void {
   // ── Styles & HTML ─────────────────────────────────────────────────────
   root.innerHTML = `
     <style>
-      :host, .rc-root {
+      .rc-root {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         color: #e0e0e0;
-      }
-      .rc-root {
         padding: 16px;
         display: flex;
         flex-direction: column;
@@ -51,7 +49,7 @@ export function initRoomCommandPanel(context: PanelExtensionContext): void {
       .rc-btn {
         padding: 10px 20px;
         border: none;
-        border-radius: 2px;
+        border-radius: 8px;
         cursor: pointer;
         font-size: 14px;
         font-weight: 500;
@@ -59,8 +57,8 @@ export function initRoomCommandPanel(context: PanelExtensionContext): void {
         color: white;
         transition: background 0.15s;
       }
-      .rc-btn:hover { background: #4a8ac4; }
-      .rc-btn:active { background: #3a7ab4; }
+      .rc-btn:hover { background: #c0914b; }
+      .rc-btn:active { background: #d5a45b; }
       .rc-mic {
         width: 44px;
         height: 44px;
@@ -76,14 +74,25 @@ export function initRoomCommandPanel(context: PanelExtensionContext): void {
         flex-shrink: 0;
       }
       .rc-mic:hover { border-color: #d5a45b; background: #333; }
-      .rc-mic.listening {
+      .rc-mic.recording {
         background: #c0392b;
         border-color: #e74c3c;
         animation: rc-pulse 1.2s ease-in-out infinite;
       }
+      .rc-mic.transcribing {
+        background: #2c3e50;
+        border-color: #f39c12;
+        animation: rc-spin 1.5s linear infinite;
+      }
       @keyframes rc-pulse {
         0%, 100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4); }
         50%      { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+      }
+      @keyframes rc-spin {
+        0%   { border-top-color: #f39c12; }
+        25%  { border-right-color: #f39c12; }
+        50%  { border-bottom-color: #f39c12; }
+        75%  { border-left-color: #f39c12; }
       }
       .rc-lang {
         padding: 8px 10px;
@@ -144,62 +153,97 @@ export function initRoomCommandPanel(context: PanelExtensionContext): void {
       </div>
 
       <div class="rc-row">
-        <button id="rc-mic" class="rc-mic" title="Hold to speak">🎤</button>
+        <button id="rc-mic" class="rc-mic" title="Record voice command (Ubuntu mic)">🎤</button>
         <select id="rc-lang" class="rc-lang">
-          <option value="fr-FR">Français</option>
-          <option value="en-US">English</option>
+          <option value="fr">Français</option>
+          <option value="en">English</option>
         </select>
-        <span id="rc-transcript" class="rc-transcript"></span>
+        <span id="rc-transcript" class="rc-transcript">Click 🎤 or type a command</span>
       </div>
 
       <div id="rc-feedback" class="rc-feedback" style="display:none;"></div>
 
       <div class="rc-divider"></div>
       <div class="rc-hint">
-        Type a room name or speak a command. Examples:<br/>
+        Type a room name or click 🎤 to speak into the Ubuntu microphone.<br/>
         • "Go to urgences" &nbsp; • "Salle 101" &nbsp; • "Navigate to room 204"
       </div>
     </div>
   `;
 
   // ── Element references ────────────────────────────────────────────────
-  const cmdInput    = root.querySelector("#rc-cmd")       as HTMLInputElement;
-  const sendBtn     = root.querySelector("#rc-send")      as HTMLButtonElement;
-  const micBtn      = root.querySelector("#rc-mic")       as HTMLButtonElement;
-  const langSelect  = root.querySelector("#rc-lang")      as HTMLSelectElement;
+  const cmdInput     = root.querySelector("#rc-cmd")        as HTMLInputElement;
+  const sendBtn      = root.querySelector("#rc-send")       as HTMLButtonElement;
+  const micBtn       = root.querySelector("#rc-mic")        as HTMLButtonElement;
+  const langSelect   = root.querySelector("#rc-lang")       as HTMLSelectElement;
   const transcriptEl = root.querySelector("#rc-transcript") as HTMLElement;
-  const feedbackEl  = root.querySelector("#rc-feedback")  as HTMLElement;
+  const feedbackEl   = root.querySelector("#rc-feedback")   as HTMLElement;
 
-  // ── Advertise /room_command for publishing ────────────────────────────
+  // ── Advertise topics for publishing ───────────────────────────────────
   try {
     context.advertise?.("/room_command", "std_msgs/msg/String", {
       datatypes: new Map([
-        [
-          "std_msgs/msg/String",
-          { definitions: [{ name: "data", type: "string", isComplex: false }] },
-        ],
+        ["std_msgs/msg/String", {
+          definitions: [{ name: "data", type: "string", isComplex: false }],
+        }],
       ]),
     });
-  } catch {
-    console.warn("Could not advertise /room_command — publishing may not work");
-  }
+  } catch { /* ignore if already advertised */ }
 
-  // ── Subscribe to /room_command_feedback ───────────────────────────────
-  context.subscribe([{ topic: "/room_command_feedback" }]);
+  try {
+    context.advertise?.("/speech_trigger", "std_msgs/msg/String", {
+      datatypes: new Map([
+        ["std_msgs/msg/String", {
+          definitions: [{ name: "data", type: "string", isComplex: false }],
+        }],
+      ]),
+    });
+  } catch { /* ignore */ }
+
+  // ── Subscribe to feedback + speech status ─────────────────────────────
+  context.subscribe([
+    { topic: "/room_command_feedback" },
+    { topic: "/speech_status" },
+  ]);
 
   context.onRender = (renderState, done) => {
     if (renderState.currentFrame) {
       for (const msg of renderState.currentFrame) {
+        // ── Room interpreter feedback ───────────────────────────────
         if (msg.topic === "/room_command_feedback") {
           const text = (msg.message as { data: string }).data;
           feedbackEl.textContent = text;
           feedbackEl.style.display = "block";
-
           const isError = text.toLowerCase().includes("not found");
           const isNav   = text.toLowerCase().includes("navigating");
-          feedbackEl.className = "rc-feedback"
-            + (isError ? " error" : "")
-            + (isNav   ? " success" : "");
+          feedbackEl.className =
+            "rc-feedback" + (isError ? " error" : "") + (isNav ? " success" : "");
+        }
+
+        // ── Speech node status ──────────────────────────────────────
+        if (msg.topic === "/speech_status") {
+          const status = (msg.message as { data: string }).data;
+
+          if (status === "recording") {
+            micBtn.className = "rc-mic recording";
+            transcriptEl.textContent = "🔴 Recording — speak now …";
+          } else if (status === "transcribing") {
+            micBtn.className = "rc-mic transcribing";
+            transcriptEl.textContent = "⏳ Transcribing …";
+          } else if (status.startsWith("heard:")) {
+            micBtn.className = "rc-mic";
+            const heard = status.slice(6);
+            transcriptEl.textContent = `"${heard}"`;
+          } else if (status === "no_speech") {
+            micBtn.className = "rc-mic";
+            transcriptEl.textContent = "No speech detected — try again";
+          } else if (status.startsWith("error:")) {
+            micBtn.className = "rc-mic";
+            transcriptEl.textContent = "⚠ " + status.slice(6);
+          } else if (status === "ready") {
+            micBtn.className = "rc-mic";
+            // Keep existing transcript text (don't overwrite "heard:…")
+          }
         }
       }
     }
@@ -207,11 +251,10 @@ export function initRoomCommandPanel(context: PanelExtensionContext): void {
   };
   context.watch("currentFrame");
 
-  // ── Send command ──────────────────────────────────────────────────────
+  // ── Send text command ─────────────────────────────────────────────────
   function sendCommand(text: string): void {
     text = text.trim();
     if (!text) return;
-
     try {
       context.publish?.("/room_command", { data: text });
       transcriptEl.textContent = `Sent: "${text}"`;
@@ -229,66 +272,14 @@ export function initRoomCommandPanel(context: PanelExtensionContext): void {
     }
   });
 
-  // ── Voice input (Web Speech API) ──────────────────────────────────────
-  let recognition: any = null;
-
+  // ── Microphone trigger (sends language to speech_node on Ubuntu) ──────
   micBtn.addEventListener("click", () => {
-    // If already listening, stop
-    if (recognition) {
-      recognition.stop();
-      return;
+    try {
+      const lang = langSelect.value;
+      context.publish?.("/speech_trigger", { data: lang });
+      transcriptEl.textContent = "Triggering speech node …";
+    } catch (err) {
+      transcriptEl.textContent = `Trigger error: ${err}`;
     }
-
-    const SR =
-      (window as any).SpeechRecognition ||
-      (window as any).webkitSpeechRecognition;
-
-    if (!SR) {
-      transcriptEl.textContent =
-        "⚠ Speech recognition not available — use text input instead";
-      return;
-    }
-
-    recognition = new SR();
-    recognition.lang = langSelect.value;
-    recognition.interimResults = true;
-    recognition.maxAlternatives = 1;
-    recognition.continuous = false;
-
-    recognition.onstart = () => {
-      micBtn.classList.add("listening");
-      transcriptEl.textContent = "🔴 Listening…";
-    };
-
-    recognition.onresult = (event: any) => {
-      const result = event.results[event.results.length - 1];
-      const text: string = result[0].transcript;
-
-      if (result.isFinal) {
-        transcriptEl.textContent = `"${text}"`;
-        sendCommand(text);
-      } else {
-        transcriptEl.textContent = `"${text}" …`;
-      }
-    };
-
-    recognition.onend = () => {
-      micBtn.classList.remove("listening");
-      recognition = null;
-    };
-
-    recognition.onerror = (event: any) => {
-      const msg =
-        event.error === "not-allowed"
-          ? "Microphone access denied — check browser permissions"
-          : event.error === "no-speech"
-            ? "No speech detected — try again"
-            : `Speech error: ${event.error}`;
-      transcriptEl.textContent = `⚠ ${msg}`;
-      micBtn.classList.remove("listening");
-      recognition = null;
-    };
-
-    recognition.start();
   });
 }
