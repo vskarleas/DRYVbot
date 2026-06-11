@@ -154,7 +154,8 @@ You can launch the obstacles spawner as follows (you can choose between hospital
 ros2 run robot_simulation obstacle_spawner.py  --ros-args -p scenario:=hospital
 ```
 
-We can launch the telemetry towards the AI system using :
+We can launch the telemetry towards the AI system using Including obstacle spawner and gazebo) :
+
 ```bash
 ros2 launch digital_twin hospital_telemetry.launch.py
 ```
