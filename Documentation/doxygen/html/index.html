@@ -92,7 +92,7 @@ Architecture</h2>
 <p>The project is organised in the following ROS2 packages:</p>
 <ul>
 <li>**<code>robot_simulation</code>** — Contains the world files, saved maps, and the obstacle spawner script. In a real deployement, this package would be replaced by the actual physical robot and its sensors.</li>
-<li>**<code><a class="el" href="namespacedigital__twin.html">digital_twin</a></code>** — This is the core of the project. It is the cloud-side intelligence that the robot cannot run onboard due to its limited CPU. It contains the Nav2 configuration, the warehouse map, and the main launch file (<code>full.launch.py</code>) that starts the entire system: Gazebo simulation, Nav2 navigation, cmd_vel relay, and Foxglove bridge. It receives real-time data (robot position, lidar scans, destination goal) and runs the Nav2 path planning to compute the optimal trajectory.</li>
+<li>**<code><a class="el" href="namespacedigital__twin.html">digital_twin</a></code>** — This is the core of the project. It is the cloud-side intelligence that the robot cannot run onboard due to its limited CPU. It contains the Nav2 configuration, the warehouse map, and the main launch file (<code><a class="el" href="hospital_8launch_8py.html">hospital.launch.py</a></code>) that starts the entire system: Gazebo simulation, Nav2 navigation, cmd_vel relay, and Foxglove bridge. It receives real-time data (robot position, lidar scans, destination goal) and runs the Nav2 path planning to compute the optimal trajectory.</li>
 <li>**<code>bcr_bot</code>** — The simulated robot. A differential drive robot with lidar, camera, and IMU that works natively with Gazebo Harmonic.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md9"></a>
@@ -105,158 +105,41 @@ Technologies</h2>
 <li><b>slam_toolbox</b> — SLAM for map generation</li>
 <li><b>Foxglove</b> — Web-based visualisation and user interface platform</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md10"></a>
-AI navigation manager</h2>
-<p>It works like a state machine that receives real time and static data and based on that information it decides when to slow down (intersection behavior) and when to reroute due to increased mouvement on a couloir. The data that it receives includes but are not limited to :</p>
-<ul>
-<li>/semantic_map* : static map of the environment that was scanned using a lidar (,yamls and .pmg files using the SAML Toolbox tools - more information at creating the map section below)</li>
-<li>/odom : real time odometry data of the robot meaning position data</li>
-<li>/goal_pose : pose data meaning his final destination coordinates</li>
-<li>/crowd_density : data related to dynamic traffic on the static map for dynamic real time decision taking</li>
-<li>/plan : robot's plan to reach a pose for analysis based on the crowd density and the semantic map</li>
-</ul>
-<p><b>Nota bene :</b> The semantic map takes the static map of the scanned environnement and adds a layer of extra info including locations identification, the zones like intersection, colloir, dead end, stairs, etc., as well as predefined places identification (map coordinates for instance saying that at x=1,y=4 is the Radiology department). An example of the <code><a class="el" href="room__registry_8yaml.html">room_registry.yaml</a></code> map coordinates can be found below :</p>
-<div class="fragment"><div class="line">rooms:</div>
-<div class="line">  salle_101:</div>
-<div class="line">    x: -5.0</div>
-<div class="line">    y: 3.0</div>
-<div class="line">    orientation_w: 1.0</div>
-<div class="line">    aliases: [<span class="stringliteral">&quot;room 101&quot;</span>, <span class="stringliteral">&quot;salle 101&quot;</span>, <span class="stringliteral">&quot;chambre 101&quot;</span>]</div>
-<div class="line">  urgences:</div>
-<div class="line">    x: 2.0</div>
-<div class="line">    y: -4.0</div>
-<div class="line">    orientation_w: 0.707</div>
-<div class="line">    aliases: [<span class="stringliteral">&quot;emergency&quot;</span>, <span class="stringliteral">&quot;urgences&quot;</span>, <span class="stringliteral">&quot;salle urgences&quot;</span>]</div>
-<div class="line">  radiologie:</div>
-<div class="line">    x: 8.0</div>
-<div class="line">    y: 1.0</div>
-<div class="line">    orientation_w: 1.0</div>
-<div class="line">    aliases: [<span class="stringliteral">&quot;radiology&quot;</span>, <span class="stringliteral">&quot;radio&quot;</span>, <span class="stringliteral">&quot;imagerie&quot;</span>]</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md11"></a>
-How it works ?</h3>
-<p>There is a path analyser that is doing some cross ref of the inital plan and the semantic_map's zones in order to take action on the robots speed (<b>intersection logic</b> below). Moreover, we have a crowd path scorer that based on the crowd density and to the initial plan it creates a temporary costmap that will force the robot to take a new path and prevent it from passing from the densed crowded area (<b>crowd logic</b> below)).</p>
-<p><b>Nota bene :</b> A costmap is a collsion probability map that can be interpreted from the robot's navigation engine (nav2)</p>
-<h4><a class="anchor" id="autotoc_md12"></a>
-Creating the /semantic_map</h4>
-<p>Using a CNN network to build the semantic map of the environment, meaning for instance : this patch is a corridor, this is an intersection, this is a room entrance, this is a dead-end. That semantic map becomes the backbone for everything else like the velocity zones and the room registry from above.</p>
-<p>The CNN runs <b>once at startup</b>. It takes the static occupancy grid (the existing <code>.pgm</code> map), slides a window (32×32 cells) across every free-space region, and classifies each patch into one of five categories:</p>
-<ol type="1">
-<li>intersection,</li>
-<li>corridor,</li>
-<li>room entry,</li>
-<li>dead-end, or</li>
-<li>open area.</li>
-</ol>
-<p>The output is a semantic grid with the same dimensions as the occupancy map, but each cell has a class label instead of an occupancy value. As for the training data, they are generated from our own maps: like the static .pgm map and the teh <a class="el" href="namespaceroom__registry.html">room_registry</a> file. We can also generated artificial data by rotating or even flipping the static map and then provide all of those info to a tiny 4-layer CNN in PyTorch. We can also generate synthetic training maps programmatically (random corridor layouts) to boost the dataset.</p>
-<h4><a class="anchor" id="autotoc_md13"></a>
-Creating the /crowd_density</h4>
-<p>... I HAVE TO SEE HOW TO CREATE THE CROWD DENSITY GRID</p>
-<h4><a class="anchor" id="autotoc_md14"></a>
-Intersection logic</h4>
-<h5>Approaching intersection -&gt; ramping down speed</h5>
-<p>The semantic map flagged an intersection zone within 2.0m of the robot's current position along the path. The node starts ramping down the speed limit linearly: from 0.22 m/s at 2.0m away, to 0.05 m/s at 0.5m away. Crowd monitoring continues in parallel and if rerouting is triggered then the speed ramp is overridden.</p>
-<h5>At intersection -&gt; brief safety pause before crossing</h5>
-<p>The robot is at the intersection center. The node publishes max_vel = 0.0 for a configurable duration (default 1.5 seconds). During this pause, the node checks crowd density specifically around the intersection zone. If people are detected nearby, the pause extends until density drops below 0.3. This simulates a 'look both ways' behavior scenarion.</p>
-<h5>Crossing intersection -&gt; moving through at reduced speed</h5>
-<p>The robot crosses the intersection at a reduced speed (default 0.08 m/s, ~36% of normal). This can optionally be configured to accelerate (up to 0.30 m/s) instead, to minimize the time spent exposed in the intersection which is useful in high-traffic zones. The node continues monitoring the semantic map to detect when the robot exits the intersection zone.</p>
-<h4><a class="anchor" id="autotoc_md15"></a>
-Crowd logic</h4>
-<h5>Rerouting due to high crowd density -&gt; forcing path change</h5>
-<p>The crowd density along a planned path segment exceeds the threshold (0.6). The node inflates that zone in /crowd_costmap with lethal cost (254) in a radius of ~2.0m around each dense point. Nav2's global costmap picks up the new layer, and the planner automatically computes an alternative path avoiding the congested area. The node watches /plan for the new path. Here is an example below.</p>
-<p><img src="/home/vskarleas/Documents/ROB5-S10-SYS880/Documentation/reroute_example.jpg" alt="rerouting example" class="inline"/></p>
-<h5>Normal navigation -&gt; following predefined Nav2 path</h5>
-<p>This is the main main monitoring loop. Every 100ms (10 Hz), the node reads the robot pose, the current Nav2 plan, and the latest crowd density grid. It performs two analyses: (1) scan the planned path for upcoming intersections by cross-referencing waypoints against the semantic map, (2) compute the maximum crowd density along the planned path segments.</p>
-<h4><a class="anchor" id="autotoc_md16"></a>
-To sum up...</h4>
-<p>All of those actions are then interpreted and combined from a <b>decision engine</b> that sends the real actions to the robot like speed change and new plan for the robot to follow. Moreover this decision engine sends all the decisions that were made and the data that are collected on the web user interface for real time feedback (check the section Foxglove end-user flow below).</p>
-<p><img src="/home/vskarleas/Documents/ROB5-S10-SYS880/Documentation/ai_nav_manager_internal_pipeline.svg" alt="ai navigation engine explained" style="pointer-events: none;" class="inline"/></p>
-<h5><b>Path analyzer</b></h5>
-<p>It runs on every cycle. It takes the latest Nav2 <code>/plan</code> (a sequence of <code>PoseStamped</code> waypoints) and cross-references each waypoint against the semantic map grid. For every waypoint, it looks up the CNN classification of that cell: corridor, intersection, room entry, etc. The output is an annotated path — a list like <code>[(waypoint_0, "corridor"), (waypoint_1, "corridor"), (waypoint_2, "intersection"), (waypoint_3, "corridor"), ...]</code>. From this, it extracts the next upcoming intersection along the path and computes the distance from the robot's current position to that intersection center. This is what drives the approach/stop/cross state transitions.</p>
-<h5><b>Crowd path scorer</b></h5>
-<p>It runs in parallel with the path analyser. It takes the <code>/crowd_density</code> grid (from the <code>crowd_monitor</code> node) and samples density values along the planned path. For each path segment between consecutive waypoints, it samples 3-5 points and takes the maximum. If any segment's maximum density exceeds the threshold (default 0.6), that segment is flagged. The flagged segments feed into the costmap generator, which inflates those zones with lethal costs. The key insight: we don't just check "is there a crowd somewhere" — we check "is there a crowd  *on our planned path* ", which avoids unnecessary rerouting when crowds are elsewhere in the hospital.</p>
-<h5><b>Decision engine</b></h5>
-<p>It receives the annotated path and the crowd scores, evaluates the transition conditions, and dispatches commands to the three output modules. The state machine runs at 10 Hz but some outputs (like <code>/ai_stats</code>) are throttled to 1 Hz to avoid flooding the network with too much information.</p>
-<h5>AI navigation parameters</h5>
-<p>It's simply a file that includes the different thresholds that are used from our decision engine. Here is an example of the <code><a class="el" href="ai__nav__params_8yaml.html">ai_nav_params.yaml</a></code> :</p>
-<div class="fragment"><div class="line">ai_navigation_manager:</div>
-<div class="line">  ros__parameters:</div>
-<div class="line">    <span class="comment"># Crowd rerouting</span></div>
-<div class="line">    crowd_density_threshold: 0.6    <span class="comment"># trigger reroute above this</span></div>
-<div class="line">    crowd_clear_threshold: 0.3      <span class="comment"># resume original path below this</span></div>
-<div class="line">    costmap_inflation_radius: 2.0   <span class="comment"># meters around dense points</span></div>
-<div class="line">    costmap_lethal_value: 254       <span class="comment"># cost value (254 = lethal)</span></div>
-<div class="line">  </div>
-<div class="line">    <span class="comment"># Intersection behavior</span></div>
-<div class="line">    approach_distance: 2.0          <span class="comment"># start slowing at this distance</span></div>
-<div class="line">    stop_distance: 0.5              <span class="comment"># full stop at this distance</span></div>
-<div class="line">    stop_duration: 1.5              <span class="comment"># seconds to wait</span></div>
-<div class="line">    crossing_speed: 0.08            <span class="comment"># m/s through intersection</span></div>
-<div class="line">    crossing_mode: <span class="stringliteral">&quot;slow&quot;</span>           <span class="comment"># &quot;slow&quot; or &quot;fast&quot; (accelerate)</span></div>
-<div class="line">  </div>
-<div class="line">    <span class="comment"># General</span></div>
-<div class="line">    normal_speed: 0.22              <span class="comment"># m/s cruising speed</span></div>
-<div class="line">    processing_rate: 10.0           <span class="comment"># Hz main loop</span></div>
-<div class="line">    stats_rate: 1.0                 <span class="comment"># Hz for /ai_stats</span></div>
-</div><!-- fragment --><h5>Foxglove end-user flow</h5>
-<p>In Foxglove, the operator sees three panels. The <b>3D panel</b> shows the robot, the lidar, the Nav2 path, plus the crowd density overlay and the semantic map overlay as additional layers.</p>
-<p>A <b>text command panel</b> will be integrated that will use Foxglove's built-in Publish panel configured to publish <code>std_msgs/String</code> on <code>/room_command</code>. The operator types for example "Go to room 204", the <code>room_interpreter</code> node parses it, looks up the coordinates, and publishes a <code>/goal_pose</code>. Then Nav2 picks it up and the robot starts moving. Path changes appear in real-time because Nav2 already publishes <code>/plan</code>.</p>
-<p>The <b>statistics panel</b> uses Foxglove's Plot panel subscribing to <code>/ai_stats</code> to show live graphs: current zone type, crowd density along the planned path, number of intersection stops performed, average speed. Below you can find an example of the /ai_stats node. The <code>session</code> block is what feeds the Foxglove statistics plots over time, like the number of reroutes, time distribution across zone types, average speed. It accumulates over the entire navigation session and resets when a new goal is sent.</p>
-<div class="fragment"><div class="line">{</div>
-<div class="line">  &quot;timestamp&quot;: 1717200000.0,</div>
-<div class="line">  &quot;state&quot;: &quot;APPROACHING_INTERSECTION&quot;,</div>
-<div class="line">  &quot;robot_pose&quot;: {&quot;x&quot;: -3.2, &quot;y&quot;: 4.1, &quot;theta&quot;: 1.57},</div>
-<div class="line">  &quot;current_zone&quot;: &quot;corridor&quot;,</div>
-<div class="line">  &quot;next_intersection&quot;: {&quot;id&quot;: 3, &quot;distance&quot;: 1.4},</div>
-<div class="line">  &quot;speed&quot;: {&quot;current&quot;: 0.15, &quot;limit&quot;: 0.18, &quot;normal&quot;: 0.22},</div>
-<div class="line">  &quot;crowd&quot;: {</div>
-<div class="line">    &quot;max_on_path&quot;: 0.42,</div>
-<div class="line">    &quot;reroute_active&quot;: false,</div>
-<div class="line">    &quot;blocked_zones&quot;: []</div>
-<div class="line">  },</div>
-<div class="line">  &quot;session&quot;: {</div>
-<div class="line">    &quot;distance_traveled&quot;: 12.7,</div>
-<div class="line">    &quot;intersections_crossed&quot;: 2,</div>
-<div class="line">    &quot;reroutes_triggered&quot;: 1,</div>
-<div class="line">    &quot;time_in_corridors_pct&quot;: 68,</div>
-<div class="line">    &quot;time_in_intersections_pct&quot;: 12,</div>
-<div class="line">    &quot;time_stopped_pct&quot;: 20</div>
-<div class="line">  }</div>
-<div class="line">}</div>
-</div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md18"></a>
+<hr  />
+<h1><a class="anchor" id="autotoc_md11"></a>
 Installation</h1>
-<h2><a class="anchor" id="autotoc_md19"></a>
+<h2><a class="anchor" id="autotoc_md12"></a>
 Prerequisites</h2>
 <ul>
 <li>Ubuntu 22.04</li>
 <li>Install ROS2 Humble following the instructions at<a href="https://foxglove.dev/blog/installing-ros2-humble-on-ubuntu">https://foxglove.dev/blog/installing-ros2-humble-on-ubuntu</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md20"></a>
+<h2><a class="anchor" id="autotoc_md13"></a>
 Install Gazebo Classic and ROS2 Bridge</h2>
 <div class="fragment"><div class="line">sudo apt install ros-humble-gazebo-ros-pkgs ros-humble-gazebo-ros</div>
 </div><!-- fragment --><p>This installs Gazebo 11 (Classic) and the <code>gazebo_ros</code> bridge for ROS2.</p>
 <blockquote class="doxtable">
 <p><b>Note:</b> Gazebo Classic and Gazebo Harmonic (gz-tools2) cannot coexist on the same system. If you have Harmonic installed, remove it first: <code>sudo apt remove gz-harmonic gz-tools2 ros-humble-ros-gzharmonic*</code> </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md21"></a>
+<h2><a class="anchor" id="autotoc_md14"></a>
 Install Navigation and SLAM Packages</h2>
 <div class="fragment"><div class="line">sudo apt install ros-humble-navigation2 \</div>
 <div class="line">                 ros-humble-nav2-bringup \</div>
 <div class="line">                 ros-humble-slam-toolbox</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md22"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md15"></a>
 Install Foxglove Bridge</h2>
 <div class="fragment"><div class="line">sudo apt install ros-humble-foxglove-bridge</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md23"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md16"></a>
 Install Additional ROS2 Tools</h2>
 <div class="fragment"><div class="line">sudo apt install python3-colcon-common-extensions \</div>
 <div class="line">                 ros-humble-teleop-twist-keyboard \</div>
 <div class="line">                 ros-humble-topic-tools \</div>
 <div class="line">                 ros-humble-tf2-ros</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md24"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md17"></a>
 Clone the Repository</h2>
 <div class="fragment"><div class="line">git clone https://github.com/vskarleas/ROB5-S10-SYS880</div>
 <div class="line">cd ROB5-S10-SYS880/Code</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md25"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md18"></a>
 Install bcr_bot from Source</h2>
 <p>The <code>bcr_bot</code> package must be present in the workspace <code>src/</code> folder. If it is not already there after cloning:</p>
 <div class="fragment"><div class="line">cd src</div>
@@ -265,27 +148,27 @@ Install bcr_bot from Source</h2>
 </div><!-- fragment --><blockquote class="doxtable">
 <p><b>Note:</b> The <code>bcr_bot</code> supports multiple Gazebo versions. For this project we use its <b>Gazebo Classic</b> mode via <code>gazebo.launch.py</code>. </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md26"></a>
+<h2><a class="anchor" id="autotoc_md19"></a>
 Install Dependencies with rosdep</h2>
 <div class="fragment"><div class="line">sudo apt install python3-rosdep</div>
 <div class="line">sudo rosdep init   # skip if already initialised</div>
 <div class="line">rosdep update</div>
 <div class="line">rosdep install --from-paths src --ignore-src -r -y</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md27"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md20"></a>
 Install xarco</h2>
 <p>Xarco needs to be installed for this repo. Check the installation process depending on your system</p>
-<h2><a class="anchor" id="autotoc_md28"></a>
+<h2><a class="anchor" id="autotoc_md21"></a>
 Environment Setup</h2>
 <p>Add the following to your <code>~/.bashrc</code> if not already there:</p>
 <div class="fragment"><div class="line">source /opt/ros/humble/setup.bash</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md29"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md22"></a>
 Build</h2>
 <div class="fragment"><div class="line">cd ~/Documents/ROB5-S10-SYS880/Code</div>
 <div class="line">colcon build</div>
 <div class="line">source install/setup.bash</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md30"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md23"></a>
 Launch everything</h2>
-<p>The <code>full.launch.py</code> starts the entire system in one command: Gazebo with the warehouse world and the bcr_bot, Nav2 navigation stack, cmd_vel relay, initial pose publisher, and Foxglove bridge.</p>
+<p>The <code><a class="el" href="hospital_8launch_8py.html">hospital.launch.py</a></code> starts Gazebo with the hospital world and the bcr_bot, Nav2 navigation stack, cmd_vel relay, initial pose publisher, and Foxglove bridge.</p>
 <div class="fragment"><div class="line">ros2 launch digital_twin hospital.launch.py</div>
 </div><!-- fragment --><p>Wait approximately 30 seconds for everything to start. Then open Foxglove at <code><a href="https://app.foxglove.dev">https://app.foxglove.dev</a></code>, connect to <code>ws://localhost:8765</code>, and send a navigation goal.</p>
 <p>You can also send a goal from the terminal:</p>
@@ -293,8 +176,12 @@ Launch everything</h2>
 <div class="line">  &quot;{header: {frame_id: &#39;map&#39;}, pose: {position: {x: 3.0, y: 0.0, z: 0.0}, orientation: {w: 1.0}}}&quot;</div>
 </div><!-- fragment --><p>You can launch the obstacles spawner as follows (you can choose between hospital and corridor) :</p>
 <div class="fragment"><div class="line">ros2 run robot_simulation obstacle_spawner.py  --ros-args -p scenario:=hospital</div>
+</div><!-- fragment --><p>We can launch the telemetry towards the AI system using Including obstacle spawner and gazebo) :</p>
+<div class="fragment"><div class="line">ros2 launch digital_twin hospital_telemetry.launch.py</div>
+</div><!-- fragment --><p>We can launch the logic script for smart navigation of the robot with :</p>
+<div class="fragment"><div class="line">ros2 launch digital_twin logic.launch.py</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md32"></a>
+<h1><a class="anchor" id="autotoc_md25"></a>
 Creating the map</h1>
 <p>The hospital and corridor maspwas generated using slam_toolbox. To recreate them or create a map for a different world:</p>
 <ol type="1">
@@ -336,7 +223,7 @@ Creating the map</h1>
 <div class="fragment"><div class="line">cd ~/path_to_save_SAML_map</div>
 <div class="line">ros2 run nav2_map_server map_saver_cli -f hospital_map</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md34"></a>
+<h1><a class="anchor" id="autotoc_md27"></a>
 Versions</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -378,11 +265,19 @@ Versions</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">V4.1.1   </td><td class="markdownTableBodyNone">Updated the human spawner based on Dounia's logic and interpretation and fixed not-moving cylinders issue. The visualization package was removed as well for better clarity    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">V4.1.2   </td><td class="markdownTableBodyNone">Changed the sdf of cylinder to the Scrub model of a person   </td></tr>
+<td class="markdownTableBodyNone">V4.1.2   </td><td class="markdownTableBodyNone">Changed the sdf of cylinder to the Scrub model of a person    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">V4.1.3   </td><td class="markdownTableBodyNone">Updated the nav2 paramas so that the robot can pass from the narrow doors. We can play more with these parameters    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">V4.1.4   </td><td class="markdownTableBodyNone">Added publisher on obstacle spawner for the topic /people_positions    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">V5.0.0   </td><td class="markdownTableBodyNone">Included some .yaml files for saying where are the intersections or the different rooms for future usage of text or voice commands. Those files are not complete    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">V6.0.1   </td><td class="markdownTableBodyNone">We have a smart version of the automatic renavigation of the robot based on the affluence data received for the moving people   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md35"></a>
+<h1><a class="anchor" id="autotoc_md28"></a>
 TO-DO</h1>
-<h2><a class="anchor" id="autotoc_md36"></a>
+<h2><a class="anchor" id="autotoc_md29"></a>
 robot_simulation</h2>
 <ul>
 <li>[X] Spawn robot in the world and verify sensors are working</li>
@@ -392,7 +287,7 @@ robot_simulation</h2>
 <li>[X] Implement the obstacle spawner to inject dynamic people at known positions on the map</li>
 <li>[ ] Maybe apply some computer vision to the system so that it understands that a speciifc section is an intersection</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md37"></a>
+<h2><a class="anchor" id="autotoc_md30"></a>
 digital_twin</h2>
 <ul>
 <li>[X] Create the digital twin package</li>
@@ -402,7 +297,7 @@ digital_twin</h2>
 <li>[X] Implement a local safety controller on the robot side for emergency braking (cannot depend on network)</li>
 <li>[X] Create demo scenarios: nominal navigation, dynamic obstacle avoidance, latency stress test</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md38"></a>
+<h2><a class="anchor" id="autotoc_md31"></a>
 visualization</h2>
 <ul>
 <li>[X] Connect Foxglove to the system via websocket bridge</li>

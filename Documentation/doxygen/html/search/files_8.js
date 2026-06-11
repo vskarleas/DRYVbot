@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['readme_2emd_100',['README.md',['../README_8md.html',1,'']]],
-  ['room_5fregistry_2eyaml_101',['room_registry.yaml',['../room__registry_8yaml.html',1,'']]]
+  ['package_2exml_204',['package.xml',['../digital__twin_2package_8xml.html',1,'(Global Namespace)'],['../robot__simulation_2package_8xml.html',1,'(Global Namespace)']]]
 ];

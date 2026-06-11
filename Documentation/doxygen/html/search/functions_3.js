@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['main_113',['main',['../namespacedigital__twin_1_1goal__relay.html#aadb104b84adc7dc24cb8a4924f1223a7',1,'digital_twin.goal_relay.main()'],['../namespaceobstacle__spawner.html#a5933e2e42d9c4b13dc4897a5464f7f61',1,'obstacle_spawner.main()']]]
+  ['distance_5fbetween_5fxy_233',['distance_between_xy',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#aa721451f943f9486b1e62aac9d1920ce',1,'digital_twin::telemetry_exporter::TelemetryExporter']]]
 ];

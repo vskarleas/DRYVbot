@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['digital_5ftwin_79',['digital_twin',['../namespacedigital__twin.html',1,'']]],
-  ['goal_5frelay_80',['goal_relay',['../namespacedigital__twin_1_1goal__relay.html',1,'digital_twin']]]
+  ['hospital_178',['hospital',['../namespacehospital.html',1,'']]],
+  ['hospital_5fmap_179',['hospital_map',['../namespacehospital__map.html',1,'']]],
+  ['hospital_5ftelemetry_180',['hospital_telemetry',['../namespacehospital__telemetry.html',1,'']]]
 ];

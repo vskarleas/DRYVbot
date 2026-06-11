@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['setup_86',['setup',['../namespacesetup.html',1,'']]]
+  ['room_5fregistry_186',['room_registry',['../namespaceroom__registry.html',1,'']]]
 ];

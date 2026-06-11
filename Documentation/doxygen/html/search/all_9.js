@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['main_31',['main',['../namespacedigital__twin_1_1goal__relay.html#aadb104b84adc7dc24cb8a4924f1223a7',1,'digital_twin.goal_relay.main()'],['../namespaceobstacle__spawner.html#a5933e2e42d9c4b13dc4897a5464f7f61',1,'obstacle_spawner.main()']]],
-  ['maintainer_32',['maintainer',['../namespacesetup.html#aa1a7cf9bbf76004bb72697dc00bbee9d',1,'setup']]],
-  ['maintainer_5femail_33',['maintainer_email',['../namespacesetup.html#a92a81adbfdd219564d5246ce8d77f869',1,'setup']]]
+  ['install_5frequires_73',['install_requires',['../namespacesetup.html#abead4f26b530856f858f0d44c7cf2588',1,'setup']]],
+  ['intersection_5fregistry_74',['intersection_registry',['../namespaceintersection__registry.html',1,'']]],
+  ['intersection_5fregistry_2eyaml_75',['intersection_registry.yaml',['../intersection__registry_8yaml.html',1,'']]]
 ];

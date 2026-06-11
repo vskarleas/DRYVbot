@@ -1,10 +1,25 @@
 var searchData=
 [
-  ['data_12',['data',['../digital__twin_2package_8xml.html#a67a47c1728f9275f7e63e2e45e66bc9b',1,'package.xml']]],
-  ['data_5ffiles_13',['data_files',['../namespacesetup.html#ad027a8e9452da003dca32bf7467bd16e',1,'setup']]],
-  ['delete_5fclient_14',['delete_client',['../classobstacle__spawner_1_1ObstacleSpawner.html#a5f9da9cb768ce117b5200e240a60a9e8',1,'obstacle_spawner::ObstacleSpawner']]],
-  ['description_15',['description',['../namespacesetup.html#aedf461ec52a946bda975938ba0b93ec0',1,'setup']]],
-  ['digital_5ftwin_16',['digital_twin',['../namespacedigital__twin.html',1,'']]],
-  ['duration_17',['duration',['../classobstacle__spawner_1_1WalkingPerson.html#a3dbd356fc57257797640d29db7dfd450',1,'obstacle_spawner::WalkingPerson']]],
-  ['goal_5frelay_18',['goal_relay',['../namespacedigital__twin_1_1goal__relay.html',1,'digital_twin']]]
+  ['callback_14',['callback',['../classdigital__twin_1_1goal__relay_1_1GoalRelay.html#a46ccf5b52cd02d30466e36c8f2988e1d',1,'digital_twin::goal_relay::GoalRelay']]],
+  ['cleanup_15',['cleanup',['../classobstacle__spawner_1_1ObstacleSpawner.html#acdb534a6d6a7efc4a66a7bdb30a2b7d8',1,'obstacle_spawner::ObstacleSpawner']]],
+  ['clock_5fcallback_16',['clock_callback',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#af151da63e56737fa60775c4a1d1f2538',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
+  ['clock_5ftopic_17',['clock_topic',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#ab762fd22ea55f5aed83a9340cb7daa37',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
+  ['cloudtwin_20_3a_20digital_20twin_20pour_20la_20navigation_20autonome_20et_20prédictive_20d_27un_20robot_20mobile_18',['CloudTwin : Digital Twin pour la navigation autonome et prédictive d&apos;un robot mobile',['../index.html',1,'']]],
+  ['cmd_5fvel_5fcallback_19',['cmd_vel_callback',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a6a92e00455e44a39f3a7ae38e91c5b87',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
+  ['cmd_5fvel_5ftopic_20',['cmd_vel_topic',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a3ed044e25ad28e6c48b5749e98c98c78',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
+  ['compute_5fdistance_5fto_5fgoal_21',['compute_distance_to_goal',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#af27f6dee6dc3dadf8183467613ea189c',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
+  ['compute_5fnavigation_5fcost_22',['compute_navigation_cost',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a5335727a70ad40e2b76faf500110c6ce',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
+  ['compute_5fpath_5flength_23',['compute_path_length',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a9ae711b618e8e6a189059319722222bc',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
+  ['compute_5fpath_5fweight_24',['compute_path_weight',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a8783afc789c0c879d43d22b0ecf2c743',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
+  ['corridors_25',['corridors',['../namespacecorridors.html',1,'']]],
+  ['corridors_2elaunch_2epy_26',['corridors.launch.py',['../corridors_8launch_8py.html',1,'']]],
+  ['corridors_5fmap_27',['corridors_map',['../namespacecorridors__map.html',1,'']]],
+  ['corridors_5fmap_2eyaml_28',['corridors_map.yaml',['../digital__twin_2maps_2corridors__map_8yaml.html',1,'(Global Namespace)'],['../robot__simulation_2maps_2corridors__map_8yaml.html',1,'(Global Namespace)']]],
+  ['count_5fobstacles_5fon_5fpath_29',['count_obstacles_on_path',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#ae5dff7263af5fcf803e68cd45df0e2af',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
+  ['crowd_5fmonitor_2epy_30',['crowd_monitor.py',['../crowd__monitor_8py.html',1,'']]],
+  ['crowdmonitor_31',['CrowdMonitor',['../classdigital__twin_1_1crowd__monitor_1_1CrowdMonitor.html',1,'digital_twin::crowd_monitor']]],
+  ['current_5fangular_5facceleration_32',['current_angular_acceleration',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a124dfd4b34a34b9105fd1584099f2bac',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
+  ['current_5flinear_5facceleration_33',['current_linear_acceleration',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a4aa4ad1cfb47345196ba24fb61fb7241',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
+  ['current_5ftrajectory_5flength_34',['current_trajectory_length',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#ab289ef21df074193532e89896d670a85',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
+  ['current_5ftrajectory_5fpoints_35',['current_trajectory_points',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a6a85c4f3c16d2a26d048934df3294916',1,'digital_twin::telemetry_exporter::TelemetryExporter']]]
 ];

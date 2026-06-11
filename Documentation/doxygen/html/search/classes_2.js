@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['walkingperson_75',['WalkingPerson',['../classobstacle__spawner_1_1WalkingPerson.html',1,'obstacle_spawner']]]
+  ['obstaclespawner_167',['ObstacleSpawner',['../classobstacle__spawner_1_1ObstacleSpawner.html',1,'obstacle_spawner']]]
 ];

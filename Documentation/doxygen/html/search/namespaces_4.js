@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['nav2_5fparams_83',['nav2_params',['../namespacenav2__params.html',1,'']]]
+  ['logic_182',['logic',['../namespacelogic.html',1,'']]],
+  ['logic_5fparams_183',['logic_params',['../namespacelogic__params.html',1,'']]]
 ];

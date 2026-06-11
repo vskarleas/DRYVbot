@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['entry_5fpoints_124',['entry_points',['../namespacesetup.html#ada7058afc98897f073d3f3b8b9157059',1,'setup']]]
+  ['base_5fpath_5fweight_261',['base_path_weight',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#ac34448a36f173e85ccfab53e5db690ef',1,'digital_twin::telemetry_exporter::TelemetryExporter']]]
 ];

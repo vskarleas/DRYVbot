@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['nav2_5fparams_2eyaml_97',['nav2_params.yaml',['../nav2__params_8yaml.html',1,'']]]
+  ['logic_2elaunch_2epy_200',['logic.launch.py',['../logic_8launch_8py.html',1,'']]],
+  ['logic_5fparams_2eyaml_201',['logic_params.yaml',['../logic__params_8yaml.html',1,'']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['zip_5fsafe_72',['zip_safe',['../namespacesetup.html#a13510753661cb74083a0c664db11dde9',1,'setup']]]
+  ['update_5facceleration_159',['update_acceleration',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a2e37375616c78657ce26b0846ee69451',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
+  ['update_5fcb_160',['update_cb',['../classobstacle__spawner_1_1ObstacleSpawner.html#a3bb9352ad0ab0338c0a7f2f17d61edef',1,'obstacle_spawner::ObstacleSpawner']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['ai_5fnav_5fparams_3',['ai_nav_params',['../namespaceai__nav__params.html',1,'']]],
-  ['ai_5fnav_5fparams_2eyaml_4',['ai_nav_params.yaml',['../ai__nav__params_8yaml.html',1,'']]]
+  ['alias_5findex_11',['alias_index',['../classdigital__twin_1_1room__interpreter_1_1RoomInterpreterNode.html#a96f3206ce4b3ff5c61003f7d63d260df',1,'digital_twin::room_interpreter::RoomInterpreterNode']]]
 ];

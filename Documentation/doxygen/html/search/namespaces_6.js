@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['room_5fregistry_85',['room_registry',['../namespaceroom__registry.html',1,'']]]
+  ['obstacle_5fspawner_185',['obstacle_spawner',['../namespaceobstacle__spawner.html',1,'']]]
 ];
