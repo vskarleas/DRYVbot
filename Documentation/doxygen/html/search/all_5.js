@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['3_2e1_2e0_20_2f_202017_2d09_2d26_13',['3.1.0 / 2017-09-26',['../md_Foxglove_foxglove_panels_room_command_panel_node_modules_eslint_import_resolver_node_node_modules_debug_CHANGELOG.html',1,'(Global Namespace)'],['../md_Foxglove_foxglove_panels_room_command_panel_node_modules_eslint_module_utils_node_modules_debug_CHANGELOG.html',1,'(Global Namespace)'],['../md_Foxglove_foxglove_panels_room_command_panel_node_modules_eslint_plugin_import_node_modules_debug_CHANGELOG.html',1,'(Global Namespace)']]],
-  ['3_2e21_2e0_14',['3.21.0',['../md_Foxglove_foxglove_panels_room_command_panel_node_modules_tsutils_CHANGELOG.html',1,'']]],
-  ['3_2e3_2e0_15',['3.3.0',['../md_Foxglove_foxglove_panels_room_command_panel_node_modules_events_History.html',1,'']]]
+  ['entry_5fpoints_59',['entry_points',['../namespacesetup.html#ada7058afc98897f073d3f3b8b9157059',1,'setup']]],
+  ['extract_5fobstacles_60',['extract_obstacles',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a13f3c6c54563fb0b247735b89b90d76f',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
+  ['extract_5fplan_5fpoints_61',['extract_plan_points',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a476efdea623f7c67420dc6337c0cfa78',1,'digital_twin::telemetry_exporter::TelemetryExporter']]]
 ];

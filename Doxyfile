@@ -970,7 +970,6 @@ INPUT                  = README.md \
                        Code/src/robot_simulation \
                        Code/src/visualization \
                        Foxglove/foxglove_layout \
-                       Foxglove/foxglove_panels \
                        Documentation/pages
 
 # This tag can be used to specify the character encoding of the source files

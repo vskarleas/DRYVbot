@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['ai_5flayer_2emd_575',['ai_layer.md',['../ai__layer_8md.html',1,'']]],
-  ['architecture_2emd_576',['architecture.md',['../architecture_8md.html',1,'']]]
+  ['foxglove_2emd_222',['foxglove.md',['../foxglove_8md.html',1,'']]]
 ];
