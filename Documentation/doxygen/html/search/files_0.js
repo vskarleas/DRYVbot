@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_5f_5finit_5f_5f_2epy_191',['__init__.py',['../____init_____8py.html',1,'']]]
+  ['_2eprettierrc_2eyaml_572',['.prettierrc.yaml',['../_8prettierrc_8yaml.html',1,'(Global Namespace)'],['../node__modules_2create-foxglove-extension_2template_2_8prettierrc_8yaml.html',1,'(Global Namespace)']]]
 ];

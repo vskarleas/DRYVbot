@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['setup_2epy_208',['setup.py',['../setup_8py.html',1,'']]]
+  ['imports_2dfirst_2emd_606',['imports-first.md',['../imports-first_8md.html',1,'']]]
 ];

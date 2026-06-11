@@ -1,6 +1,10 @@
 var searchData=
 [
-  ['install_5frequires_73',['install_requires',['../namespacesetup.html#abead4f26b530856f858f0d44c7cf2588',1,'setup']]],
-  ['intersection_5fregistry_74',['intersection_registry',['../namespaceintersection__registry.html',1,'']]],
-  ['intersection_5fregistry_2eyaml_75',['intersection_registry.yaml',['../intersection__registry_8yaml.html',1,'']]]
+  ['ai_20intelligence_20layer_45',['AI intelligence layer',['../md_Documentation_pages_ai_layer.html',1,'']]],
+  ['ai_5flayer_2emd_46',['ai_layer.md',['../ai__layer_8md.html',1,'']]],
+  ['alias_5findex_47',['alias_index',['../classdigital__twin_1_1room__interpreter_1_1RoomInterpreterNode.html#a96f3206ce4b3ff5c61003f7d63d260df',1,'digital_twin::room_interpreter::RoomInterpreterNode']]],
+  ['ansi_2dstyles_20_3ca_20href_3d_22https_3a_2f_2ftravis_2dci_2eorg_2fchalk_2fansi_2dstyles_22_3e_3cimg_20src_3d_22https_3a_2f_2ftravis_2dci_2eorg_2fchalk_2fansi_2dstyles_2esvg_3fbranch_3dmaster_22_20alt_3d_22build_20status_22_2f_3e_3c_2fa_3e_48',['ansi-styles &lt;a href=&quot;https://travis-ci.org/chalk/ansi-styles&quot;&gt;&lt;img src=&quot;https://travis-ci.org/chalk/ansi-styles.svg?branch=master&quot; alt=&quot;Build Status&quot;/&gt;&lt;/a&gt;',['../md_Foxglove_foxglove_panels_room_command_panel_node_modules_ansi_styles_readme.html',1,'']]],
+  ['architecture_2emd_49',['architecture.md',['../architecture_8md.html',1,'']]],
+  ['array_2dunion_20_3ca_20href_3d_22https_3a_2f_2ftravis_2dci_2eorg_2fsindresorhus_2farray_2dunion_22_3e_3cimg_20src_3d_22https_3a_2f_2ftravis_2dci_2eorg_2fsindresorhus_2farray_2dunion_2esvg_3fbranch_3dmaster_22_20alt_3d_22build_20status_22_2f_3e_3c_2fa_3e_50',['array-union &lt;a href=&quot;https://travis-ci.org/sindresorhus/array-union&quot;&gt;&lt;img src=&quot;https://travis-ci.org/sindresorhus/array-union.svg?branch=master&quot; alt=&quot;Build Status&quot;/&gt;&lt;/a&gt;',['../md_Foxglove_foxglove_panels_room_command_panel_node_modules_array_union_readme.html',1,'']]],
+  ['array_2duniq_20_3ca_20href_3d_22https_3a_2f_2ftravis_2dci_2eorg_2fsindresorhus_2farray_2duniq_22_3e_3cimg_20src_3d_22https_3a_2f_2ftravis_2dci_2eorg_2fsindresorhus_2farray_2duniq_2esvg_3fbranch_3dmaster_22_20alt_3d_22build_20status_22_2f_3e_3c_2fa_3e_51',['array-uniq &lt;a href=&quot;https://travis-ci.org/sindresorhus/array-uniq&quot;&gt;&lt;img src=&quot;https://travis-ci.org/sindresorhus/array-uniq.svg?branch=master&quot; alt=&quot;Build Status&quot;/&gt;&lt;/a&gt;',['../md_Foxglove_foxglove_panels_room_command_panel_node_modules_array_uniq_readme.html',1,'']]]
 ];
