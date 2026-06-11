@@ -126,6 +126,7 @@ def generate_launch_description():
             'address': '0.0.0.0',
             'send_buffer_limit': 10000000,
             'use_sim_time': True,
+            'asset_uri_allowlist': ['package://bcr_bot/**'],
         }],
         output='screen',
     )
