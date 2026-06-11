@@ -1,6 +1,6 @@
 {
   "configById": {
-    "TransformTree!47cwe1m": {},
+    "room-command-panel.Room Command!256g2l2": {},
     "Plot!2e1en6e": {
       "paths": [
         {
@@ -97,19 +97,161 @@
       "showLegend": false,
       "foxglovePanelTitle": "/bcr_bot/imu"
     },
-    "DiagnosticSummary!1d27hme": {
-      "topicToRender": "/diagnostics",
+    "Publish!2bthsk1": {
+      "topicName": "/goal_pose_foxglove",
+      "datatype": "geometry_msgs/msg/PoseStamped",
+      "value": "{\n  \"header\": {\n    \"stamp\": {\n      \"sec\": 0,\n      \"nanosec\": 0\n    },\n    \"frame_id\": \"\"\n  },\n  \"pose\": {\n    \"position\": {\n      \"x\": -8.1,\n      \"y\": -6,\n      \"z\": 0\n    },\n    \"orientation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0,\n      \"w\": 0\n    }\n  }\n}",
+      "buttonText": "Send position",
+      "buttonColor": "#d5a45b"
+    },
+    "DiagnosticSummary!gctkau": {
       "minLevel": 0,
       "pinnedIds": [],
       "hardwareIdFilter": "",
+      "topicToRender": "/diagnostics",
       "sortByLevel": true,
       "secondsUntilStale": 5
     },
-    "Publish!48uok0k": {
-      "topicName": "/goal_pose",
-      "datatype": "geometry_msgs/msg/PoseStamped",
-      "value": "{\n  \"header\": {\n    \"stamp\": {\n      \"sec\": 0,\n      \"nanosec\": 0\n    },\n    \"frame_id\": \"map\"\n  },\n  \"pose\": {\n    \"position\": {\n      \"x\": 0,\n      \"y\": 3,\n      \"z\": 0\n    },\n    \"orientation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0,\n      \"w\": 1\n    }\n  }\n}"
+    "RosOut!5ulrjy": {
+      "minLogLevel": 1,
+      "preload": true,
+      "searchTerms": [],
+      "nameFilter": {},
+      "fontSize": 12,
+      "showLevel": true,
+      "showDate": true,
+      "showTime": true,
+      "showTimezone": true,
+      "showName": true,
+      "showSourceLocation": false
     },
+    "RawMessages!46lr2iy": {
+      "defaultExpanded": false,
+      "topicPath": "/goal_pose_foxglove"
+    },
+    "Markdown!3pmh7hf": {
+      "fontSize": 12,
+      "renderMode": "static",
+      "markdown": "The `hospital.launch.py` starts Gazebo with the hospital world and the bcr_bot, Nav2 navigation stack, cmd_vel relay, initial pose publisher, and Foxglove bridge.\n\n```bash\nros2 launch digital_twin hospital.launch.py\n```\n\nWait approximately 30 seconds for everything to start. Then open Foxglove at `https://app.foxglove.dev`, connect to `ws://localhost:8765`, and send a navigation goal.\n\nYou can also send a goal from the terminal:\n\n```bash\nros2 topic pub --once /goal_pose geometry_msgs/PoseStamped \\\n  \"{header: {frame_id: 'map'}, pose: {position: {x: 3.0, y: 0.0, z: 0.0}, orientation: {w: 1.0}}}\"\n```\n\nYou can launch the obstacles spawner as follows (you can choose between hospital and corridor) :\n\n```bash\nros2 run robot_simulation obstacle_spawner.py  --ros-args -p scenario:=hospital\n```\n\nWe can launch the telemetry towards the AI system using Including obstacle spawner and gazebo) :\n\n```bash\nros2 launch digital_twin hospital_telemetry.launch.py\n```\n\nWe can launch the logic script for smart navigation of the robot with :\n\n```bash\nros2 launch digital_twin logic.launch.py\n```"
+    },
+    "Image!4z6ae6": {
+      "cameraState": {
+        "distance": 20,
+        "perspective": true,
+        "phi": 60,
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "targetOffset": [
+          0,
+          0,
+          0
+        ],
+        "targetOrientation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "thetaOffset": 60,
+        "fovy": 45,
+        "near": 0.5,
+        "far": 5000
+      },
+      "followMode": "follow-pose",
+      "scene": {},
+      "transforms": {},
+      "topics": {},
+      "layers": {},
+      "publish": {
+        "type": "point",
+        "poseTopic": "/move_base_simple/goal",
+        "pointTopic": "/clicked_point",
+        "poseEstimateTopic": "/initialpose",
+        "poseEstimateXDeviation": 0.5,
+        "poseEstimateYDeviation": 0.5,
+        "poseEstimateThetaDeviation": 0.26179939
+      },
+      "synchronize": false,
+      "imageMode": {
+        "imageTopic": "/bcr_bot/kinect_camera/depth/image_raw",
+        "calibrationTopic": "/bcr_bot/kinect_camera/depth/camera_info"
+      }
+    },
+    "Teleop!3203sx3": {
+      "topic": "/bcr_bot/cmd_vel",
+      "publishRate": 1,
+      "autoSendStopOnRelease": false,
+      "upButton": {
+        "field": "linear-x",
+        "value": 1
+      },
+      "downButton": {
+        "field": "linear-x",
+        "value": -1
+      },
+      "leftButton": {
+        "field": "angular-z",
+        "value": 1
+      },
+      "rightButton": {
+        "field": "angular-z",
+        "value": -1
+      },
+      "stopButton": {
+        "field": "linear-x",
+        "value": 0
+      }
+    },
+    "Image!26sptju": {
+      "cameraState": {
+        "distance": 20,
+        "perspective": true,
+        "phi": 60,
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "targetOffset": [
+          0,
+          0,
+          0
+        ],
+        "targetOrientation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "thetaOffset": 60,
+        "fovy": 45,
+        "near": 0.5,
+        "far": 5000
+      },
+      "followMode": "follow-pose",
+      "scene": {},
+      "transforms": {},
+      "topics": {},
+      "layers": {},
+      "publish": {
+        "type": "point",
+        "poseTopic": "/move_base_simple/goal",
+        "pointTopic": "/clicked_point",
+        "poseEstimateTopic": "/initialpose",
+        "poseEstimateXDeviation": 0.5,
+        "poseEstimateYDeviation": 0.5,
+        "poseEstimateThetaDeviation": 0.26179939
+      },
+      "synchronize": false,
+      "imageMode": {
+        "imageTopic": "/bcr_bot/kinect_camera/image_raw",
+        "calibrationTopic": "/bcr_bot/kinect_camera/camera_info"
+      }
+    },
+    "TransformTree!3zetfxi": {},
     "3D!2dx85ue": {
       "topics": {
         "/local_costmap/costmap_updates": {
@@ -177,6 +319,41 @@
         },
         "/bcr_bot/kinect_camera/camera_info": {
           "visible": false
+        },
+        "/bcr_bot/kinect_camera/image_raw": {
+          "visible": false,
+          "frameLocked": true,
+          "cameraInfoTopic": "/bcr_bot/kinect_camera/camera_info",
+          "distance": 1,
+          "planarProjectionFactor": 0,
+          "renderMode": "default",
+          "color": "#ffffff",
+          "rectifyImage": true,
+          "pointSize": 1.5,
+          "syncModeEnabled": false
+        },
+        "/initialpose": {
+          "visible": true
+        },
+        "/people_positions": {
+          "visible": true
+        },
+        "/intersection_zones": {
+          "visible": true,
+          "type": "arrow"
+        },
+        "/crowd_density": {
+          "visible": true,
+          "minColor": "#ebd74600",
+          "maxColor": "#00cdcbff",
+          "drawBehind": false,
+          "frameLocked": false
+        },
+        "/crowd_costmap": {
+          "visible": false
+        },
+        "/map_dynamic": {
+          "visible": false
         }
       },
       "layers": {
@@ -188,13 +365,13 @@
       },
       "cameraState": {
         "perspective": true,
-        "distance": 24.554753263056533,
-        "phi": 66.79134560705185,
-        "thetaOffset": 54.90812997157673,
+        "distance": 11.974738784688856,
+        "phi": 56.933229829581514,
+        "thetaOffset": 42.89035897283989,
         "targetOffset": [
-          1.9918043853298721,
-          -13.54265420654609,
-          -1.3173088190090756e-16
+          4.865080930014549,
+          -21.45983863337345,
+          7.778313764362097e-16
         ],
         "target": [
           0,
@@ -214,8 +391,61 @@
       "followMode": "follow-pose",
       "followTf": "map",
       "fixedFrame": "map",
-      "scene": {},
-      "transforms": {},
+      "scene": {
+        "transforms": {
+          "visible": true
+        }
+      },
+      "transforms": {
+        "frame:odom": {
+          "visible": false
+        },
+        "frame:map": {
+          "visible": true
+        },
+        "frame:base_footprint": {
+          "visible": true
+        },
+        "frame:base_link": {
+          "visible": false
+        },
+        "frame:back_left_wheel": {
+          "visible": false
+        },
+        "frame:back_right_wheel": {
+          "visible": false
+        },
+        "frame:chassis_link": {
+          "visible": false
+        },
+        "frame:roof_link": {
+          "visible": false
+        },
+        "frame:front_left_wheel": {
+          "visible": false
+        },
+        "frame:front_right_wheel": {
+          "visible": false
+        },
+        "frame:imu_frame": {
+          "visible": false
+        },
+        "frame:kinect_camera": {
+          "visible": false
+        },
+        "frame:kinect_camera_optical": {
+          "visible": false
+        },
+        "frame:two_d_lidar": {
+          "visible": false
+        },
+        "frame:middle_left_wheel": {
+          "visible": false
+        },
+        "frame:middle_right_wheel": {
+          "visible": false
+        }
+      },
       "publish": {
         "type": "pose",
         "poseTopic": "/goal_pose_foxglove",
@@ -232,37 +462,64 @@
       "activeTabIdx": 0,
       "tabs": [
         {
-          "title": "Overview",
+          "title": "Navigation",
           "layout": {
             "direction": "column",
-            "first": "TransformTree!47cwe1m",
+            "first": "room-command-panel.Room Command!256g2l2",
             "second": {
               "direction": "column",
-              "first": {
+              "first": "Plot!2e1en6e",
+              "second": {
                 "direction": "column",
-                "first": "Plot!2e1en6e",
+                "first": "Plot!33fvyxr",
                 "second": {
                   "direction": "column",
-                  "first": "Plot!33fvyxr",
-                  "second": {
-                    "direction": "column",
-                    "first": "Plot!13fktq4",
-                    "second": "Plot!33pj0ub",
-                    "splitPercentage": 50
-                  },
-                  "splitPercentage": 33.333333333333336
+                  "first": "Plot!13fktq4",
+                  "second": "Plot!33pj0ub",
+                  "splitPercentage": 50
                 },
-                "splitPercentage": 25
+                "splitPercentage": 33.333333333333336
               },
-              "second": {
-                "direction": "row",
-                "first": "DiagnosticSummary!1d27hme",
-                "second": "Publish!48uok0k",
-                "splitPercentage": 50
-              },
-              "splitPercentage": 57.14285714285714
+              "splitPercentage": 25
             },
-            "splitPercentage": 28.57142857142857
+            "splitPercentage": 38.033587138195415
+          }
+        },
+        {
+          "title": "Debug",
+          "layout": {
+            "first": {
+              "first": {
+                "first": "Publish!2bthsk1",
+                "second": "DiagnosticSummary!gctkau",
+                "direction": "row"
+              },
+              "second": "RosOut!5ulrjy",
+              "direction": "column"
+            },
+            "second": {
+              "first": "RawMessages!46lr2iy",
+              "second": "Markdown!3pmh7hf",
+              "direction": "row"
+            },
+            "direction": "column",
+            "splitPercentage": 58.52191830490189
+          }
+        },
+        {
+          "title": "Teleop",
+          "layout": {
+            "first": {
+              "first": "Image!4z6ae6",
+              "second": "Teleop!3203sx3",
+              "direction": "row"
+            },
+            "second": {
+              "first": "Image!26sptju",
+              "second": "TransformTree!3zetfxi",
+              "direction": "row"
+            },
+            "direction": "column"
           }
         }
       ]
@@ -271,7 +528,8 @@
   "layout": {
     "first": "3D!2dx85ue",
     "second": "Tab!39y3fx4",
-    "direction": "row"
+    "direction": "row",
+    "splitPercentage": 50.701647345942646
   },
   "globalVariables": {},
   "playbackConfig": {

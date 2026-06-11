@@ -37,13 +37,15 @@ class SpeechNode(Node):
         self.declare_parameter('max_duration', 8.0)         # seconds
         self.declare_parameter('silence_threshold', 0.01)   # RMS below = silence
         self.declare_parameter('silence_duration', 1.5)     # seconds of silence to stop
-
-        self.model_size   = self.get_parameter('model_size').value
+        self.declare_parameter('device_index', -1)  # -1 = system default
+        
+        self.device_idx = self.get_parameter('device_index').value
+        self.model_size = self.get_parameter('model_size').value
         self.default_lang = self.get_parameter('default_language').value
-        self.sample_rate  = self.get_parameter('sample_rate').value
-        self.max_dur      = self.get_parameter('max_duration').value
-        self.sil_thr      = self.get_parameter('silence_threshold').value
-        self.sil_dur      = self.get_parameter('silence_duration').value
+        self.sample_rate = self.get_parameter('sample_rate').value
+        self.max_dur = self.get_parameter('max_duration').value
+        self.sil_thr = self.get_parameter('silence_threshold').value
+        self.sil_dur = self.get_parameter('silence_duration').value
 
         self.recording = False
 
@@ -152,8 +154,11 @@ class SpeechNode(Node):
         audio_chunks = []
         silent_count = 0
 
+        device = self.device_idx if self.device_idx >= 0 else None
+
         with sd.InputStream(samplerate=self.sample_rate,
-                            channels=1, dtype='float32') as stream:
+                            channels=1, dtype='float32',
+                            device=device) as stream:
             for i in range(max_chunks):
                 chunk, _ = stream.read(chunk_size)
                 audio_chunks.append(chunk.copy())
