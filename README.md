@@ -245,6 +245,7 @@ The hospital and corridor maspwas generated using slam_toolbox. To recreate them
 | V4.1.4  | Added publisher on obstacle spawner for the topic /people_positions                                                                                                             |
 | V5.0.0  | Included some .yaml files for saying where are the intersections or the different rooms for future usage of text or voice commands. Those files are not complete                |
 | V6.0.1  | We have a smart version of the automatic renavigation of the robot based on the affluence data received for the moving people                                                   |
+| V6.0.2  | Foxglove layout V1 saved on the project                                                                                                                                         |
 
 ## TO-DO
 

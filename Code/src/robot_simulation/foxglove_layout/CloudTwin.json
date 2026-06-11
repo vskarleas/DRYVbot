@@ -1,0 +1,281 @@
+{
+  "configById": {
+    "TransformTree!47cwe1m": {},
+    "Plot!2e1en6e": {
+      "paths": [
+        {
+          "value": "/bcr_bot/cmd_vel.linear.x",
+          "enabled": true,
+          "color": "#4e98e2",
+          "id": "1903d3bb-c1bd-444b-979e-b2480865ebfe"
+        },
+        {
+          "value": "/bcr_bot/cmd_vel.linear.y",
+          "enabled": true,
+          "color": "#f5774d",
+          "id": "3afb8371-f325-49b1-af9e-fde55dec3dfe"
+        },
+        {
+          "value": "/bcr_bot/cmd_vel.linear.z",
+          "enabled": true,
+          "color": "#f7df71",
+          "id": "662a08c5-1055-4d80-8ece-cb417dca3548"
+        }
+      ],
+      "showLegend": false,
+      "foxglovePanelTitle": "/bcr_bot/cmd_vel"
+    },
+    "Plot!33fvyxr": {
+      "paths": [
+        {
+          "value": "/bcr_bot/cmd_vel.angular.x",
+          "enabled": true,
+          "color": "#5cd6a9",
+          "id": "f32169b7-3887-4219-9ddb-9a7f80e16bed"
+        },
+        {
+          "value": "/bcr_bot/cmd_vel.angular.y",
+          "enabled": true,
+          "color": "#61cbff",
+          "id": "446368ae-018f-4b80-bdd2-247dc22295e8"
+        },
+        {
+          "value": "/bcr_bot/cmd_vel.angular.z",
+          "enabled": true,
+          "color": "#a395e2",
+          "id": "d0d3b2fb-f634-41f5-9e9e-ae9da14e64a9"
+        }
+      ],
+      "showLegend": false,
+      "foxglovePanelTitle": "/bcr_bot/cmd_vel"
+    },
+    "Plot!13fktq4": {
+      "paths": [
+        {
+          "value": "/bcr_bot/imu.angular_velocity.x",
+          "enabled": true,
+          "color": "#cad660",
+          "id": "5f65b9e3-d3e3-47e3-ab77-f79f46de1f07"
+        },
+        {
+          "value": "/bcr_bot/imu.angular_velocity.y",
+          "enabled": true,
+          "color": "#4e98e2",
+          "id": "2e43cd94-6526-43b2-ba3e-586120254d6d"
+        },
+        {
+          "value": "/bcr_bot/imu.angular_velocity.z",
+          "enabled": true,
+          "color": "#f5774d",
+          "id": "ea354d61-5fb6-4f0d-9e67-08b45e45ebd9"
+        }
+      ],
+      "showLegend": false,
+      "foxglovePanelTitle": "/bcr_bot/imu"
+    },
+    "Plot!33pj0ub": {
+      "paths": [
+        {
+          "value": "/bcr_bot/imu.linear_acceleration.x",
+          "enabled": true,
+          "color": "#f7df71",
+          "id": "6ba4199a-dd12-4751-b73b-28928ad00ebb"
+        },
+        {
+          "value": "/bcr_bot/imu.linear_acceleration.y",
+          "enabled": true,
+          "color": "#5cd6a9",
+          "id": "a8fe7aed-6c87-4c39-8d71-27cddd722cd7"
+        },
+        {
+          "value": "/bcr_bot/imu.linear_acceleration.z",
+          "enabled": true,
+          "color": "#61cbff",
+          "id": "fccab783-0d61-4ce5-8ae0-0bbe4ec1fec6"
+        }
+      ],
+      "showLegend": false,
+      "foxglovePanelTitle": "/bcr_bot/imu"
+    },
+    "DiagnosticSummary!1d27hme": {
+      "topicToRender": "/diagnostics",
+      "minLevel": 0,
+      "pinnedIds": [],
+      "hardwareIdFilter": "",
+      "sortByLevel": true,
+      "secondsUntilStale": 5
+    },
+    "Publish!48uok0k": {
+      "topicName": "/goal_pose",
+      "datatype": "geometry_msgs/msg/PoseStamped",
+      "value": "{\n  \"header\": {\n    \"stamp\": {\n      \"sec\": 0,\n      \"nanosec\": 0\n    },\n    \"frame_id\": \"map\"\n  },\n  \"pose\": {\n    \"position\": {\n      \"x\": 0,\n      \"y\": 3,\n      \"z\": 0\n    },\n    \"orientation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0,\n      \"w\": 1\n    }\n  }\n}"
+    },
+    "3D!2dx85ue": {
+      "topics": {
+        "/local_costmap/costmap_updates": {
+          "visible": true
+        },
+        "/received_global_plan": {
+          "visible": true
+        },
+        "/plan": {
+          "visible": true
+        },
+        "/local_costmap/costmap": {
+          "visible": false
+        },
+        "/global_costmap/costmap_updates": {
+          "visible": true
+        },
+        "/global_costmap/costmap": {
+          "visible": false
+        },
+        "/cost_cloud": {
+          "visible": true
+        },
+        "/local_plan": {
+          "visible": true
+        },
+        "/bcr_bot/scan": {
+          "visible": false,
+          "colorField": "intensity",
+          "colorMode": "colormap",
+          "colorMap": "turbo"
+        },
+        "/plan_smoothed": {
+          "visible": true
+        },
+        "/bcr_bot/kinect_camera/points": {
+          "visible": false,
+          "colorField": "rgb",
+          "colorMode": "rgb",
+          "colorMap": "turbo"
+        },
+        "/map": {
+          "visible": true,
+          "minColor": "#010343ff",
+          "maxColor": "#ff0000ff"
+        },
+        "/robot_description": {
+          "visible": true
+        },
+        "/bcr_bot/kinect_camera/depth/camera_info": {
+          "visible": false
+        },
+        "/bcr_bot/kinect_camera/depth/image_raw": {
+          "visible": false,
+          "frameLocked": true,
+          "cameraInfoTopic": "/bcr_bot/kinect_camera/depth/camera_info",
+          "distance": 1,
+          "planarProjectionFactor": 0,
+          "renderMode": "default",
+          "projectionFrameId": "odom",
+          "color": "#ffffff",
+          "rectifyImage": true,
+          "pointSize": 1.5,
+          "syncModeEnabled": false
+        },
+        "/bcr_bot/kinect_camera/camera_info": {
+          "visible": false
+        }
+      },
+      "layers": {
+        "523210ae-2904-4db6-ad48-3d3025839686": {
+          "layerId": "foxglove.Grid",
+          "instanceId": "523210ae-2904-4db6-ad48-3d3025839686",
+          "visible": false
+        }
+      },
+      "cameraState": {
+        "perspective": true,
+        "distance": 24.554753263056533,
+        "phi": 66.79134560705185,
+        "thetaOffset": 54.90812997157673,
+        "targetOffset": [
+          1.9918043853298721,
+          -13.54265420654609,
+          -1.3173088190090756e-16
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "targetOrientation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "fovy": 45,
+        "near": 0.5,
+        "far": 5000
+      },
+      "followMode": "follow-pose",
+      "followTf": "map",
+      "fixedFrame": "map",
+      "scene": {},
+      "transforms": {},
+      "publish": {
+        "type": "pose",
+        "poseTopic": "/goal_pose_foxglove",
+        "pointTopic": "/clicked_point",
+        "poseEstimateTopic": "/initialpose",
+        "poseEstimateXDeviation": 0.5,
+        "poseEstimateYDeviation": 0.5,
+        "poseEstimateThetaDeviation": 0.26179939
+      },
+      "synchronize": false,
+      "imageMode": {}
+    },
+    "Tab!39y3fx4": {
+      "activeTabIdx": 0,
+      "tabs": [
+        {
+          "title": "Overview",
+          "layout": {
+            "direction": "column",
+            "first": "TransformTree!47cwe1m",
+            "second": {
+              "direction": "column",
+              "first": {
+                "direction": "column",
+                "first": "Plot!2e1en6e",
+                "second": {
+                  "direction": "column",
+                  "first": "Plot!33fvyxr",
+                  "second": {
+                    "direction": "column",
+                    "first": "Plot!13fktq4",
+                    "second": "Plot!33pj0ub",
+                    "splitPercentage": 50
+                  },
+                  "splitPercentage": 33.333333333333336
+                },
+                "splitPercentage": 25
+              },
+              "second": {
+                "direction": "row",
+                "first": "DiagnosticSummary!1d27hme",
+                "second": "Publish!48uok0k",
+                "splitPercentage": 50
+              },
+              "splitPercentage": 57.14285714285714
+            },
+            "splitPercentage": 28.57142857142857
+          }
+        }
+      ]
+    }
+  },
+  "layout": {
+    "first": "3D!2dx85ue",
+    "second": "Tab!39y3fx4",
+    "direction": "row"
+  },
+  "globalVariables": {},
+  "playbackConfig": {
+    "speed": 1
+  },
+  "userNodes": {}
+}
