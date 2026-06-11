@@ -1,4 +1,4 @@
-# Troubleshooting — Known issues and solutions
+# Troubleshooting
 
 This page documents the significant issues encountered during the development of CloudTwin and how they were resolved. These are listed in order of severity and frequency.
 
