@@ -453,11 +453,11 @@ if __name__ == '__main__':
     asyncio.run(main(args.host, args.port))
 ```
 
+To run it, type a room name to navigate, `rooms` to list destinations, `status` to poll, `quit` to disconnect. The client prints all status updates as they arrive, so you know when the robot has reached its destination before sending the next command.
+
 ```bash
 python3 ws_robot_client.py --host 192.168.1.42 --port 9090
 ```
-
-Type a room name to navigate, `rooms` to list destinations, `status` to poll, `quit` to disconnect. The client prints all status updates as they arrive, so you know when the robot has reached its destination before sending the next command.
 
 ---
 
