@@ -70,7 +70,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><p>The AI intelligence layer adds smart navigation capabilities on top of Nav2. It consists of three ROS2 nodes and a Foxglove extension panel, all launched together via <code><a class="el" href="logic_8launch_8py.html">logic.launch.py</a></code>.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md27"></a>
+<h1><a class="anchor" id="autotoc_md30"></a>
 Overview</h1>
 <div class="fragment"><div class="line">┌───────────────────────────────────────────────────────────────────┐</div>
 <div class="line">│                    AI Intelligence Layer                          │</div>
@@ -90,12 +90,12 @@ Overview</h1>
 <div class="line">│  └────────────────┘  └──────────────────┘  └──────────────────┘   │</div>
 <div class="line">└───────────────────────────────────────────────────────────────────┘</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md29"></a>
+<h1><a class="anchor" id="autotoc_md32"></a>
 crowd_monitor.py : Dynamic obstacle avoidance</h1>
-<h2><a class="anchor" id="autotoc_md30"></a>
+<h2><a class="anchor" id="autotoc_md33"></a>
 Purpose</h2>
 <p>Makes Nav2 replan around corridors blocked by moving humans. Without this node, Nav2 only sees the static hospital map and obstacles in the lidar's direct line of sight. The crowd monitor gives Nav2 a "bird's eye view" of all human positions across the entire map.</p>
-<h2><a class="anchor" id="autotoc_md31"></a>
+<h2><a class="anchor" id="autotoc_md34"></a>
 How it works</h2>
 <div class="fragment"><div class="line">/map (static, from map_server)</div>
 <div class="line">  +</div>
@@ -120,13 +120,13 @@ How it works</h2>
 <div class="line">│  /map_dynamic  → Nav2 replanning     │</div>
 <div class="line">│  /crowd_density → Foxglove display   │</div>
 <div class="line">└──────────────────────────────────────┘</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md32"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md35"></a>
 Gaussian density field</h2>
 <p>For each human at position (x, y), the node computes a 2D Gaussian:</p>
 <div class="fragment"><div class="line">density(r, c) = exp( -((r - row)² + (c - col)²) / (2 × σ_px²) )</div>
 </div><!-- fragment --><p>where <code>σ_px = gaussian_sigma / map_resolution</code>. With <code>sigma = 1.35m</code> and <code>resolution = 0.05m/px</code>, the Gaussian extends approximately 81 pixels (1.35m) from each person's centre.</p>
 <p>Cells where the scaled density exceeds <code>lethal_threshold</code> are marked as <b>occupied (value 100)</b> in the OccupancyGrid, identical to a wall. Nav2's costmap treats them as impassable, forcing a global replan through an alternative corridor.</p>
-<h2><a class="anchor" id="autotoc_md33"></a>
+<h2><a class="anchor" id="autotoc_md36"></a>
 Tuning the wall size</h2>
 <p>The <code>lethal_threshold</code> parameter controls how far from each person the virtual wall extends:</p>
 <table class="markdownTable">
@@ -140,7 +140,7 @@ Tuning the wall size</h2>
 <td class="markdownTableBodyNone">10   </td><td class="markdownTableBodyNone">~2.8 m   </td></tr>
 </table>
 <p>A lower threshold creates larger exclusion zones, making Nav2 more conservative.</p>
-<h2><a class="anchor" id="autotoc_md34"></a>
+<h2><a class="anchor" id="autotoc_md37"></a>
 Parameters (in logic_params.yaml)</h2>
 <div class="fragment"><div class="line">crowd_monitor:</div>
 <div class="line">  ros__parameters:</div>
@@ -148,7 +148,7 @@ Parameters (in logic_params.yaml)</h2>
 <div class="line">    gaussian_sigma: 1.35        <span class="comment"># metres</span></div>
 <div class="line">    density_scale: 100.0        <span class="comment"># peak value at person centre</span></div>
 <div class="line">    lethal_threshold: 25        <span class="comment"># cells above this → wall</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md35"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md38"></a>
 Topics</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -163,12 +163,12 @@ Topics</h2>
 <td class="markdownTableBodyNone">/crowd_density   </td><td class="markdownTableBodyNone">OccupancyGrid   </td><td class="markdownTableBodyNone">Publish   </td><td class="markdownTableBodyNone">Density-only overlay (→ Foxglove)   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md37"></a>
+<h1><a class="anchor" id="autotoc_md40"></a>
 room_interpreter.py : Natural language destination commands</h1>
-<h2><a class="anchor" id="autotoc_md38"></a>
+<h2><a class="anchor" id="autotoc_md41"></a>
 Purpose</h2>
 <p>Translates human-readable room names into Nav2 navigation goals. Instead of manually clicking a goal on the map, the user can type "go to urgences" or "salle 101" and the robot navigates there.</p>
-<h2><a class="anchor" id="autotoc_md39"></a>
+<h2><a class="anchor" id="autotoc_md42"></a>
 How it works</h2>
 <div class="fragment"><div class="line">/room_command (&quot;Go to urgences&quot;)</div>
 <div class="line">  │</div>
@@ -188,7 +188,7 @@ How it works</h2>
 <div class="line">│                                          │</div>
 <div class="line">│  Feedback → /room_command_feedback       │</div>
 <div class="line">└──────────────────────────────────────────┘</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md40"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md43"></a>
 Room registry format (room_registry.yaml)</h2>
 <div class="fragment"><div class="line">rooms:</div>
 <div class="line">  urgences:</div>
@@ -213,7 +213,7 @@ Room registry format (room_registry.yaml)</h2>
 <div class="line">      - <span class="stringliteral">&quot;salle 101&quot;</span></div>
 <div class="line">      - <span class="stringliteral">&quot;room 101&quot;</span></div>
 <div class="line">      - <span class="stringliteral">&quot;101&quot;</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md41"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md44"></a>
 Supported command patterns</h2>
 <p>The parser handles both English and French commands:</p>
 <ul>
@@ -223,7 +223,7 @@ Supported command patterns</h2>
 <li>"Va à urgences"</li>
 <li>"urgences" (just the room name)</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md42"></a>
+<h2><a class="anchor" id="autotoc_md45"></a>
 Topics</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -236,12 +236,12 @@ Topics</h2>
 <td class="markdownTableBodyNone">/room_command_feedback   </td><td class="markdownTableBodyNone">String   </td><td class="markdownTableBodyNone">Publish   </td><td class="markdownTableBodyNone">Status text for Foxglove panel   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md44"></a>
+<h1><a class="anchor" id="autotoc_md47"></a>
 speech_node.py : Voice command processing</h1>
-<h2><a class="anchor" id="autotoc_md45"></a>
+<h2><a class="anchor" id="autotoc_md48"></a>
 Purpose</h2>
 <p>Enables voice control of the robot. Since the Foxglove extension panel runs in a sandboxed environment that blocks microphone access, the speech processing happens on the Ubuntu machine where the microphone is physically connected.</p>
-<h2><a class="anchor" id="autotoc_md46"></a>
+<h2><a class="anchor" id="autotoc_md49"></a>
 How it works</h2>
 <div class="fragment"><div class="line">Foxglove panel                         Digital twin computer</div>
 <div class="line">┌────────────┐                        ┌────────────────────────┐</div>
@@ -260,7 +260,7 @@ How it works</h2>
 <div class="line">│            │                        │  4. Publish text       │</div>
 <div class="line">│            │                        │     → /room_command    │</div>
 <div class="line">└────────────┘                        └────────────────────────┘</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md47"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md50"></a>
 Recording strategy</h2>
 <ul>
 <li>Records in 100 ms chunks from the specified audio input device</li>
@@ -268,7 +268,7 @@ Recording strategy</h2>
 <li>Stops recording after <code>silence_duration</code> seconds of consecutive silence (RMS below <code>silence_threshold</code>), but only if some speech was detected first</li>
 <li>Maximum recording length: <code>max_duration</code> seconds</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md48"></a>
+<h2><a class="anchor" id="autotoc_md51"></a>
 Audio device selection</h2>
 <p>The Ubuntu machine may have multiple audio inputs. Use this to identify the correct one:</p>
 <div class="fragment"><div class="line">python3 -c &quot;import sounddevice; print(sounddevice.query_devices())&quot;</div>
@@ -282,7 +282,7 @@ Audio device selection</h2>
 <div class="line">print(f&#39;RMS: {np.sqrt(np.mean(audio**2)):.6f}&#39;)</div>
 <div class="line">&quot;</div>
 </div><!-- fragment --><p>Set <code>device_index</code> in <code><a class="el" href="logic__params_8yaml.html">logic_params.yaml</a></code> to the device that shows non-zero RMS when you speak.</p>
-<h2><a class="anchor" id="autotoc_md49"></a>
+<h2><a class="anchor" id="autotoc_md52"></a>
 Parameters</h2>
 <div class="fragment"><div class="line">speech_node:</div>
 <div class="line">  ros__parameters:</div>
@@ -293,7 +293,7 @@ Parameters</h2>
 <div class="line">    silence_threshold: 0.005       <span class="comment"># RMS below this = silence</span></div>
 <div class="line">    silence_duration: 1.5          <span class="comment"># Seconds of silence to stop recording</span></div>
 <div class="line">    device_index: 5                <span class="comment"># Audio input device (-1 = system default)</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md50"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md53"></a>
 Topics</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -306,12 +306,12 @@ Topics</h2>
 <td class="markdownTableBodyNone">/speech_status   </td><td class="markdownTableBodyNone">String   </td><td class="markdownTableBodyNone">Publish   </td><td class="markdownTableBodyNone">UI state: "ready", "recording", "transcribing", "heard:...", "no_speech", "error:..."   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md52"></a>
+<h1><a class="anchor" id="autotoc_md55"></a>
 Foxglove Room command panel</h1>
-<h2><a class="anchor" id="autotoc_md53"></a>
+<h2><a class="anchor" id="autotoc_md56"></a>
 Purpose</h2>
 <p>A custom Foxglove extension panel that provides a user interface for sending room commands. It connects the Foxglove browser UI to the ROS2 nodes running on the digital twin's computer.</p>
-<h2><a class="anchor" id="autotoc_md54"></a>
+<h2><a class="anchor" id="autotoc_md57"></a>
 Features</h2>
 <ul>
 <li><b>Text input</b> : type a room command and press Enter or click Send</li>
@@ -319,14 +319,14 @@ Features</h2>
 <li><b>Language toggle</b> : switch between French and English for speech recognition</li>
 <li><b>Feedback display</b> : shows navigation status (green) or errors (red) from room_interpreter</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md55"></a>
+<h2><a class="anchor" id="autotoc_md58"></a>
 Building the extension</h2>
 <div class="fragment"><div class="line">cd ~/Documents/CloudTwin/Foxglove/foxglove_panels/room-command-panel</div>
 <div class="line">npm install</div>
 <div class="line">npm install --save-dev @foxglove/extension</div>
 <div class="line">npm run package</div>
 </div><!-- fragment --><p>This produces a <code>.foxe</code> file. Transfer it to the computer running Foxglove and install via Foxglove → Extensions → Install local extension.</p>
-<h2><a class="anchor" id="autotoc_md56"></a>
+<h2><a class="anchor" id="autotoc_md59"></a>
 Panel communication</h2>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────────────────┐</div>
 <div class="line">│              Foxglove panel (browser)               │</div>

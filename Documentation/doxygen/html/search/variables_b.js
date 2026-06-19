@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['name_333',['name',['../classobstacle__spawner_1_1WalkingPerson.html#a07a960a8d3fa3249ad21c32aa7888b2c',1,'obstacle_spawner.WalkingPerson.name()'],['../namespacesetup.html#ab3a7a0638d76a01367c5bc3cc699447f',1,'setup.name()']]]
+  ['odom_5ftopic_304',['odom_topic',['../classdigital__twin_1_1simulation__logger_1_1SimulationLogger.html#af6e8ddc85ae3be1a6e65f37230d0c7ba',1,'digital_twin.simulation_logger.SimulationLogger.odom_topic()'],['../classdigital__twin_1_1ws__command__bridge_1_1WsCommandBridge.html#a272a5ec8b17434b353d1ee6e88469db3',1,'digital_twin.ws_command_bridge.WsCommandBridge.odom_topic()']]]
 ];

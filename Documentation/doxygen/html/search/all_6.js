@@ -1,7 +1,10 @@
 var searchData=
 [
-  ['feedback_5fpub_62',['feedback_pub',['../classdigital__twin_1_1room__interpreter_1_1RoomInterpreterNode.html#a4f968d59748c70b18bac86e91b9799f9',1,'digital_twin::room_interpreter::RoomInterpreterNode']]],
-  ['foxglove_20user_20interface_63',['Foxglove user interface',['../md_Documentation_pages_foxglove.html',1,'']]],
-  ['foxglove_2emd_64',['foxglove.md',['../foxglove_8md.html',1,'']]],
-  ['frame_5fid_65',['frame_id',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a81a8a77880e9fa9ffdf852748b630e82',1,'digital_twin::telemetry_exporter::TelemetryExporter']]]
+  ['generate_5flaunch_5fdescription_68',['generate_launch_description',['../namespacecorridors.html#ac8a0527b22965cbdd5a812f83ec57b91',1,'corridors.generate_launch_description()'],['../namespacehospital.html#a86460f757c0bc49ba5ae445e050ba167',1,'hospital.generate_launch_description()'],['../namespacehospital__telemetry.html#a04b22f6c5d66313ab91aaa95c64069aa',1,'hospital_telemetry.generate_launch_description()'],['../namespacelogic.html#a2c9d31c612116e31ec2beee9f365a3b6',1,'logic.generate_launch_description()']]],
+  ['get_5fposition_69',['get_position',['../classobstacle__spawner_1_1WalkingPerson.html#acd6296ce74e4ce276e7d907a826548c8',1,'obstacle_spawner::WalkingPerson']]],
+  ['get_5fyaw_70',['get_yaw',['../classobstacle__spawner_1_1WalkingPerson.html#a67c91ef736f91ceda8d117bc51fee72c',1,'obstacle_spawner::WalkingPerson']]],
+  ['goal_5fpub_71',['goal_pub',['../classdigital__twin_1_1room__interpreter_1_1RoomInterpreterNode.html#ad2f1b715bb5b7425958d0dbe2e68f853',1,'digital_twin::room_interpreter::RoomInterpreterNode']]],
+  ['goal_5freached_5fdistance_72',['goal_reached_distance',['../classdigital__twin_1_1simulation__logger_1_1SimulationLogger.html#ab16d2c0208a66a48f81f2b1c3442e2b8',1,'digital_twin::simulation_logger::SimulationLogger']]],
+  ['goal_5frelay_2epy_73',['goal_relay.py',['../goal__relay_8py.html',1,'']]],
+  ['goalrelay_74',['GoalRelay',['../classdigital__twin_1_1goal__relay_1_1GoalRelay.html',1,'digital_twin::goal_relay']]]
 ];

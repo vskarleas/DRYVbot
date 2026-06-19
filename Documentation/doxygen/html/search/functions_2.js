@@ -1,12 +1,6 @@
 var searchData=
 [
-  ['callback_257',['callback',['../classdigital__twin_1_1goal__relay_1_1GoalRelay.html#a46ccf5b52cd02d30466e36c8f2988e1d',1,'digital_twin::goal_relay::GoalRelay']]],
-  ['cleanup_258',['cleanup',['../classobstacle__spawner_1_1ObstacleSpawner.html#acdb534a6d6a7efc4a66a7bdb30a2b7d8',1,'obstacle_spawner::ObstacleSpawner']]],
-  ['clock_5fcallback_259',['clock_callback',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#af151da63e56737fa60775c4a1d1f2538',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['cmd_5fvel_5fcallback_260',['cmd_vel_callback',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a6a92e00455e44a39f3a7ae38e91c5b87',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['compute_5fdistance_5fto_5fgoal_261',['compute_distance_to_goal',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#af27f6dee6dc3dadf8183467613ea189c',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['compute_5fnavigation_5fcost_262',['compute_navigation_cost',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a5335727a70ad40e2b76faf500110c6ce',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['compute_5fpath_5flength_263',['compute_path_length',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a9ae711b618e8e6a189059319722222bc',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['compute_5fpath_5fweight_264',['compute_path_weight',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a8783afc789c0c879d43d22b0ecf2c743',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['count_5fobstacles_5fon_5fpath_265',['count_obstacles_on_path',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#ae5dff7263af5fcf803e68cd45df0e2af',1,'digital_twin::telemetry_exporter::TelemetryExporter']]]
+  ['generate_5flaunch_5fdescription_260',['generate_launch_description',['../namespacecorridors.html#ac8a0527b22965cbdd5a812f83ec57b91',1,'corridors.generate_launch_description()'],['../namespacehospital.html#a86460f757c0bc49ba5ae445e050ba167',1,'hospital.generate_launch_description()'],['../namespacehospital__telemetry.html#a04b22f6c5d66313ab91aaa95c64069aa',1,'hospital_telemetry.generate_launch_description()'],['../namespacelogic.html#a2c9d31c612116e31ec2beee9f365a3b6',1,'logic.generate_launch_description()']]],
+  ['get_5fposition_261',['get_position',['../classobstacle__spawner_1_1WalkingPerson.html#acd6296ce74e4ce276e7d907a826548c8',1,'obstacle_spawner::WalkingPerson']]],
+  ['get_5fyaw_262',['get_yaw',['../classobstacle__spawner_1_1WalkingPerson.html#a67c91ef736f91ceda8d117bc51fee72c',1,'obstacle_spawner::WalkingPerson']]]
 ];

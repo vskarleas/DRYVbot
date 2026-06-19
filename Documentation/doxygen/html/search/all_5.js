@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['entry_5fpoints_59',['entry_points',['../namespacesetup.html#ada7058afc98897f073d3f3b8b9157059',1,'setup']]],
-  ['extract_5fobstacles_60',['extract_obstacles',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a13f3c6c54563fb0b247735b89b90d76f',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['extract_5fplan_5fpoints_61',['extract_plan_points',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a476efdea623f7c67420dc6337c0cfa78',1,'digital_twin::telemetry_exporter::TelemetryExporter']]]
+  ['feedback_5fpub_64',['feedback_pub',['../classdigital__twin_1_1room__interpreter_1_1RoomInterpreterNode.html#a4f968d59748c70b18bac86e91b9799f9',1,'digital_twin::room_interpreter::RoomInterpreterNode']]],
+  ['file_65',['file',['../namespacedigital__twin_1_1ws__command__bridge.html#afe61fa309335fa8b160ecb7224605345',1,'digital_twin::ws_command_bridge']]],
+  ['foxglove_20user_20interface_66',['Foxglove user interface',['../md_Documentation_pages_foxglove.html',1,'']]],
+  ['foxglove_2emd_67',['foxglove.md',['../foxglove_8md.html',1,'']]]
 ];

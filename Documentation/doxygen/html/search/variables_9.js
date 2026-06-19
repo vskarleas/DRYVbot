@@ -1,12 +1,9 @@
 var searchData=
 [
-  ['last_5fclock_317',['last_clock',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#aa0d5114bcf0e2efd8db6fd8faa1c3f59',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['last_5fcmd_5fvel_318',['last_cmd_vel',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a48b01c67a8a764d666d6ec20b8e16fa6',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['last_5fgoal_319',['last_goal',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#ae2a3699fa727cbd7d9d99207e7bac490',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['last_5fobstacles_320',['last_obstacles',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a2f2c2bf293700ca919ff0e905f96ebf4',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['last_5fodom_321',['last_odom',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#ab02810c4a3d6e8590d147c69586ce706',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['last_5fplan_322',['last_plan',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a07a4806b03bb2802c723894c83849c85',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['lethal_5fthr_323',['lethal_thr',['../classdigital__twin_1_1crowd__monitor_1_1CrowdMonitor.html#ad284d30e7eb2684bc2e69a4a83622972',1,'digital_twin::crowd_monitor::CrowdMonitor']]],
-  ['license_324',['license',['../namespacesetup.html#a8ed6f50a28bd6a8794f8e1153baa6de9',1,'setup']]],
-  ['log_5ffile_5fpath_325',['log_file_path',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a0d5a3b96afd69066c1c2c5152ba413e8',1,'digital_twin::telemetry_exporter::TelemetryExporter']]]
+  ['maintainer_295',['maintainer',['../namespacesetup.html#aa1a7cf9bbf76004bb72697dc00bbee9d',1,'setup']]],
+  ['maintainer_5femail_296',['maintainer_email',['../namespacesetup.html#a92a81adbfdd219564d5246ce8d77f869',1,'setup']]],
+  ['map_5fpub_297',['map_pub',['../classdigital__twin_1_1crowd__monitor_1_1CrowdMonitor.html#a188b2340367a3470e3b741d52a5a35ea',1,'digital_twin::crowd_monitor::CrowdMonitor']]],
+  ['max_5fdur_298',['max_dur',['../classdigital__twin_1_1speech__node_1_1SpeechNode.html#a5c1d223fe10bf7270a39f953b159fb83',1,'digital_twin::speech_node::SpeechNode']]],
+  ['model_299',['model',['../classdigital__twin_1_1speech__node_1_1SpeechNode.html#a2116b913d58fc498f0dfe2f4072631c0',1,'digital_twin::speech_node::SpeechNode']]],
+  ['model_5fsize_300',['model_size',['../classdigital__twin_1_1speech__node_1_1SpeechNode.html#ab034f0fd97a7f15d6fb37064069709d8',1,'digital_twin::speech_node::SpeechNode']]]
 ];

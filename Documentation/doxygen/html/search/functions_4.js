@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['extract_5fobstacles_267',['extract_obstacles',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a13f3c6c54563fb0b247735b89b90d76f',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['extract_5fplan_5fpoints_268',['extract_plan_points',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a476efdea623f7c67420dc6337c0cfa78',1,'digital_twin::telemetry_exporter::TelemetryExporter']]]
+  ['spawn_5fpeople_264',['spawn_people',['../classobstacle__spawner_1_1ObstacleSpawner.html#a65a4e39af4c0cd6f4a87426178014bc1',1,'obstacle_spawner::ObstacleSpawner']]]
 ];

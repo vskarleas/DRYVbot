@@ -1,16 +1,10 @@
 var searchData=
 [
-  ['last_5fclock_87',['last_clock',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#aa0d5114bcf0e2efd8db6fd8faa1c3f59',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['last_5fcmd_5fvel_88',['last_cmd_vel',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a48b01c67a8a764d666d6ec20b8e16fa6',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['last_5fgoal_89',['last_goal',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#ae2a3699fa727cbd7d9d99207e7bac490',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['last_5fobstacles_90',['last_obstacles',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a2f2c2bf293700ca919ff0e905f96ebf4',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['last_5fodom_91',['last_odom',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#ab02810c4a3d6e8590d147c69586ce706',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['last_5fplan_92',['last_plan',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a07a4806b03bb2802c723894c83849c85',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['lethal_5fthr_93',['lethal_thr',['../classdigital__twin_1_1crowd__monitor_1_1CrowdMonitor.html#ad284d30e7eb2684bc2e69a4a83622972',1,'digital_twin::crowd_monitor::CrowdMonitor']]],
-  ['license_94',['license',['../namespacesetup.html#a8ed6f50a28bd6a8794f8e1153baa6de9',1,'setup']]],
-  ['log_5ffile_5fpath_95',['log_file_path',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a0d5a3b96afd69066c1c2c5152ba413e8',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['logic_96',['logic',['../namespacelogic.html',1,'']]],
-  ['logic_2elaunch_2epy_97',['logic.launch.py',['../logic_8launch_8py.html',1,'']]],
-  ['logic_5fparams_98',['logic_params',['../namespacelogic__params.html',1,'']]],
-  ['logic_5fparams_2eyaml_99',['logic_params.yaml',['../logic__params_8yaml.html',1,'']]]
+  ['main_92',['main',['../namespacedigital__twin_1_1crowd__monitor.html#ac42990a5caa66c1a50f9dfb4789925ce',1,'digital_twin.crowd_monitor.main()'],['../namespacedigital__twin_1_1goal__relay.html#aadb104b84adc7dc24cb8a4924f1223a7',1,'digital_twin.goal_relay.main()'],['../namespacedigital__twin_1_1room__interpreter.html#acbcb3c4798bd78b8caed5e25e6c7eade',1,'digital_twin.room_interpreter.main()'],['../namespacedigital__twin_1_1simulation__logger.html#a0631f217c90367982458889d2f85e741',1,'digital_twin.simulation_logger.main()'],['../namespacedigital__twin_1_1speech__node.html#a366f366cd7d27219b58fd16f185787cc',1,'digital_twin.speech_node.main()'],['../namespacedigital__twin_1_1ws__command__bridge.html#aa41ba8242f9e7134d7a7f7c7055aa887',1,'digital_twin.ws_command_bridge.main()'],['../namespaceobstacle__spawner.html#a5933e2e42d9c4b13dc4897a5464f7f61',1,'obstacle_spawner.main()']]],
+  ['maintainer_93',['maintainer',['../namespacesetup.html#aa1a7cf9bbf76004bb72697dc00bbee9d',1,'setup']]],
+  ['maintainer_5femail_94',['maintainer_email',['../namespacesetup.html#a92a81adbfdd219564d5246ce8d77f869',1,'setup']]],
+  ['map_5fpub_95',['map_pub',['../classdigital__twin_1_1crowd__monitor_1_1CrowdMonitor.html#a188b2340367a3470e3b741d52a5a35ea',1,'digital_twin::crowd_monitor::CrowdMonitor']]],
+  ['max_5fdur_96',['max_dur',['../classdigital__twin_1_1speech__node_1_1SpeechNode.html#a5c1d223fe10bf7270a39f953b159fb83',1,'digital_twin::speech_node::SpeechNode']]],
+  ['model_97',['model',['../classdigital__twin_1_1speech__node_1_1SpeechNode.html#a2116b913d58fc498f0dfe2f4072631c0',1,'digital_twin::speech_node::SpeechNode']]],
+  ['model_5fsize_98',['model_size',['../classdigital__twin_1_1speech__node_1_1SpeechNode.html#ab034f0fd97a7f15d6fb37064069709d8',1,'digital_twin::speech_node::SpeechNode']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['distance_5fbetween_5fxy_266',['distance_between_xy',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#aa721451f943f9486b1e62aac9d1920ce',1,'digital_twin::telemetry_exporter::TelemetryExporter']]]
+  ['main_263',['main',['../namespacedigital__twin_1_1crowd__monitor.html#ac42990a5caa66c1a50f9dfb4789925ce',1,'digital_twin.crowd_monitor.main()'],['../namespacedigital__twin_1_1goal__relay.html#aadb104b84adc7dc24cb8a4924f1223a7',1,'digital_twin.goal_relay.main()'],['../namespacedigital__twin_1_1room__interpreter.html#acbcb3c4798bd78b8caed5e25e6c7eade',1,'digital_twin.room_interpreter.main()'],['../namespacedigital__twin_1_1simulation__logger.html#a0631f217c90367982458889d2f85e741',1,'digital_twin.simulation_logger.main()'],['../namespacedigital__twin_1_1speech__node.html#a366f366cd7d27219b58fd16f185787cc',1,'digital_twin.speech_node.main()'],['../namespacedigital__twin_1_1ws__command__bridge.html#aa41ba8242f9e7134d7a7f7c7055aa887',1,'digital_twin.ws_command_bridge.main()'],['../namespaceobstacle__spawner.html#a5933e2e42d9c4b13dc4897a5464f7f61',1,'obstacle_spawner.main()']]]
 ];

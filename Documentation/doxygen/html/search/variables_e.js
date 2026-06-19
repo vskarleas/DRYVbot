@@ -1,6 +1,20 @@
 var searchData=
 [
-  ['rate_351',['rate',['../classdigital__twin_1_1crowd__monitor_1_1CrowdMonitor.html#a88bcaf523ea74e26fd91c1a6503c5b6d',1,'digital_twin::crowd_monitor::CrowdMonitor']]],
-  ['recording_352',['recording',['../classdigital__twin_1_1speech__node_1_1SpeechNode.html#afb95b0271078311ade8243ef54e43c29',1,'digital_twin::speech_node::SpeechNode']]],
-  ['rooms_353',['rooms',['../classdigital__twin_1_1room__interpreter_1_1RoomInterpreterNode.html#a314a64f620930ec77436d38f9346e3b0',1,'digital_twin::room_interpreter::RoomInterpreterNode']]]
+  ['sample_5frate_318',['sample_rate',['../classdigital__twin_1_1speech__node_1_1SpeechNode.html#a17a22593bb0436ce6a64014620f7dca8',1,'digital_twin::speech_node::SpeechNode']]],
+  ['scale_319',['scale',['../classdigital__twin_1_1crowd__monitor_1_1CrowdMonitor.html#a92397c732b9ed3db030b130b4a9639f1',1,'digital_twin::crowd_monitor::CrowdMonitor']]],
+  ['scenarios_320',['SCENARIOS',['../namespaceobstacle__spawner.html#a09c86d1b264c3be6226521264fe6a7f8',1,'obstacle_spawner']]],
+  ['set_5fstate_5fclient_321',['set_state_client',['../classobstacle__spawner_1_1ObstacleSpawner.html#a24dc0a26f518d97187ea51b6d19dae29',1,'obstacle_spawner::ObstacleSpawner']]],
+  ['sigma_322',['sigma',['../classdigital__twin_1_1crowd__monitor_1_1CrowdMonitor.html#a191ec715d07aa57421dfa03de2bd8a4b',1,'digital_twin::crowd_monitor::CrowdMonitor']]],
+  ['sil_5fdur_323',['sil_dur',['../classdigital__twin_1_1speech__node_1_1SpeechNode.html#a919499b8b2c4c28cb75e6f729a90e6b0',1,'digital_twin::speech_node::SpeechNode']]],
+  ['sil_5fthr_324',['sil_thr',['../classdigital__twin_1_1speech__node_1_1SpeechNode.html#a90c87438377be77e022ffbe08bfd5284',1,'digital_twin::speech_node::SpeechNode']]],
+  ['simulation_5fdata_325',['simulation_data',['../classdigital__twin_1_1simulation__logger_1_1SimulationLogger.html#ab9a77007e3852819aebebe39ddbe9576',1,'digital_twin::simulation_logger::SimulationLogger']]],
+  ['spawn_5fclient_326',['spawn_client',['../classobstacle__spawner_1_1ObstacleSpawner.html#a4be0ace6a50c1591a84984aafbf4f7ea',1,'obstacle_spawner::ObstacleSpawner']]],
+  ['start_5ftime_327',['start_time',['../classobstacle__spawner_1_1ObstacleSpawner.html#aa59e9a27be6581137c7bcdcdce102b39',1,'obstacle_spawner::ObstacleSpawner']]],
+  ['static_5fgrid_328',['static_grid',['../classdigital__twin_1_1crowd__monitor_1_1CrowdMonitor.html#a35c8db34c68ef6663ec96b1202959ba3',1,'digital_twin::crowd_monitor::CrowdMonitor']]],
+  ['static_5fmap_5fmsg_329',['static_map_msg',['../classdigital__twin_1_1crowd__monitor_1_1CrowdMonitor.html#a54bec8e2de18321cfafb5a4bfa799b30',1,'digital_twin::crowd_monitor::CrowdMonitor']]],
+  ['status_5faborted_330',['STATUS_ABORTED',['../namespacedigital__twin_1_1simulation__logger.html#aed763bb0347be7a679e0123ede2dd847',1,'digital_twin.simulation_logger.STATUS_ABORTED()'],['../namespacedigital__twin_1_1ws__command__bridge.html#a5025113e40d58f240f9b09e3edfcaaab',1,'digital_twin.ws_command_bridge.STATUS_ABORTED()']]],
+  ['status_5fcanceled_331',['STATUS_CANCELED',['../namespacedigital__twin_1_1simulation__logger.html#a4661d868d87a30b7b328be5e61baf7f8',1,'digital_twin.simulation_logger.STATUS_CANCELED()'],['../namespacedigital__twin_1_1ws__command__bridge.html#ac1f240ed300b40db3aa60903b0a2a9c0',1,'digital_twin.ws_command_bridge.STATUS_CANCELED()']]],
+  ['status_5fpub_332',['status_pub',['../classdigital__twin_1_1speech__node_1_1SpeechNode.html#ac41e7a4f049c01280540c577053d8a63',1,'digital_twin::speech_node::SpeechNode']]],
+  ['status_5fsucceeded_333',['STATUS_SUCCEEDED',['../namespacedigital__twin_1_1simulation__logger.html#a9b94ba43014e259c5f94f9d0e57588b1',1,'digital_twin.simulation_logger.STATUS_SUCCEEDED()'],['../namespacedigital__twin_1_1ws__command__bridge.html#a18bbeccd9b1cd919f2d7444bcd1b389d',1,'digital_twin.ws_command_bridge.STATUS_SUCCEEDED()']]],
+  ['sub_334',['sub',['../classdigital__twin_1_1goal__relay_1_1GoalRelay.html#ae73e716053dc4609ed20af7009d02c51',1,'digital_twin::goal_relay::GoalRelay']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['goal_5fpub_313',['goal_pub',['../classdigital__twin_1_1room__interpreter_1_1RoomInterpreterNode.html#ad2f1b715bb5b7425958d0dbe2e68f853',1,'digital_twin::room_interpreter::RoomInterpreterNode']]],
-  ['goal_5ftopic_314',['goal_topic',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a7b2cb1272c1e3e5f23f746c13103f55d',1,'digital_twin::telemetry_exporter::TelemetryExporter']]]
+  ['human_5fpositions_288',['human_positions',['../classdigital__twin_1_1crowd__monitor_1_1CrowdMonitor.html#a1a6403d9864555a3285465177f5b08b1',1,'digital_twin::crowd_monitor::CrowdMonitor']]]
 ];

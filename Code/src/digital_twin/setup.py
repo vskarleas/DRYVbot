@@ -25,10 +25,11 @@ setup(
     entry_points={
         'console_scripts': [
             'goal_relay = digital_twin.goal_relay:main',
-            'telemetry_exporter = digital_twin.telemetry_exporter:main',
             'crowd_monitor = digital_twin.crowd_monitor:main',
             'room_interpreter = digital_twin.room_interpreter:main',
-            'speech_node = digital_twin.speech_node:main'
+            'speech_node = digital_twin.speech_node:main',
+            'simulation_logger = digital_twin.simulation_logger:main',
+            'ws_command_bridge = digital_twin.ws_command_bridge:main',
         ],
     },
 )

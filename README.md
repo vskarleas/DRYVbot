@@ -77,14 +77,15 @@ sudo apt install libportaudio2 portaudio19-dev
 ### Python dependencies
 
 ```bash
-pip install faster-whisper sounddevice numpy pyyaml --break-system-packages
+pip install faster-whisper sounddevice numpy pyyaml websockets --break-system-packages
+
 ```
 
 ### Clone and build
 
 ```bash
-git clone https://github.com/vskarleas/ROB5-S10-SYS880
-cd ROB5-S10-SYS880/Code
+git clone https://github.com/vskarleas/CloudTwin
+cd CloudTwin/Code
 ```
 
 If `bcr_bot` is not already in `src/`:
@@ -146,6 +147,69 @@ source install/setup.bash
 ros2 launch digital_twin logic.launch.py
 ```
 
+To enable the simulation logger (records departure/arrival data per room command to `simulation_logs/`):
+
+```bash
+ros2 launch digital_twin logic.launch.py enable_sim_logger:=true
+```
+
+##### Simulation log format
+
+Each simulation run produces a JSON file in `simulation_logs/` named `simulation_<YYYY-MM-DD_HH-MM-SS>.json`. The file contains one record per room command:
+
+```json
+{
+"simulation_id":"2026-06-18_14-32-10",
+"started_at":"2026-06-18T14:32:10.123Z",
+"records":[
+{
+"record_id":1,
+"raw_command":"Go to room 101",
+"room_id":"salle_101",
+"room_display_name":"salle 101",
+"target_position":{
+"x":-8.1,
+"y":-6.62
+},
+"departure":{
+"wall_time":"2026-06-18T14:32:15.456Z",
+"sim_time_s":120.345,
+"robot_position":{"x":0.0,"y":1.95,"z":0.0}
+},
+"arrival":{
+"wall_time":"2026-06-18T14:32:38.789Z",
+"sim_time_s":143.678,
+"robot_position":{"x":-8.09,"y":-6.60,"z":0.0}
+},
+"duration_s":23.333,
+"position_error_m":0.0224,
+"status":"succeeded",
+"feedback":"Navigating to salle 101 (x=-8.1, y=-6.62)"
+}
+]
+}
+```
+
+Field descriptions:
+
+* **`target_position`** — theoretical coordinates from `room_registry.yaml`
+* **`departure.robot_position`** — where the robot was when the command was received
+* **`arrival.robot_position`** — where the robot actually stopped
+* **`duration_s`** — simulation time elapsed between departure and arrival
+* **`position_error_m`** — Euclidean distance between `target_position` and `arrival.robot_position`, representing the navigation accuracy error
+* **`status`** — outcome of the navigation: `succeeded`, `aborted`, `canceled`, `interrupted` (new command received before arrival), or `shutdown` (node stopped mid-navigation)
+
+---
+
+To disable the WebSocket bridge or change its port:
+
+```bash
+ros2 launch digital_twin logic.launch.py enable_ws_bridge:=false
+ros2 launch digital_twin logic.launch.py ws_port:=8080
+```
+
+##### Remote control via WebSocket
+
 ### Foxglove (remote panel)
 
 1. Open [https://app.foxglove.dev](https://app.foxglove.dev) in a browser
@@ -169,12 +233,12 @@ The hospital map was generated using slam_toolbox. To recreate it or create a ma
 1. Launch the robot in the world:
 
    ```bash
-   export GAZEBO_MODEL_PATH=$HOME/Documents/ROB5-S10-SYS880/Code/src/robot_simulation/models:$GAZEBO_MODEL_PATH
+   export GAZEBO_MODEL_PATH=$HOME/Documents/CloudTwin/Code/src/robot_simulation/models:$GAZEBO_MODEL_PATH
 
    ros2 launch bcr_bot gazebo.launch.py \
      two_d_lidar_enabled:=True \
      camera_enabled:=True \
-     world_file:=$HOME/Documents/ROB5-S10-SYS880/Code/src/robot_simulation/worlds/hospital.world \
+     world_file:=$HOME/Documents/CloudTwin/Code/src/robot_simulation/worlds/hospital.world \
      position_x:=0.0 \
      position_y:=5.0
    ```
@@ -206,36 +270,37 @@ The hospital map was generated using slam_toolbox. To recreate it or create a ma
 
 ## Versions
 
-| Version | Details                                                                                                             |
-| ------- | ------------------------------------------------------------------------------------------------------------------- |
-| V0.1.0  | Repo initialisation with Doxygen configuration                                                                      |
-| V0.1.1  | Tested Doxygen                                                                                                      |
-| V1.0.1  | Created test Gazebo world and launch script                                                                         |
-| V1.1.0  | Started building the robot_simulation package                                                                       |
-| V2.1.1  | Created kick_off package for centralised launch                                                                     |
-| V2.1.2  | Renamed kick_off to launch_project                                                                                  |
-| V2.2.1  | Created the digital_twin package                                                                                    |
-| V2.3.0  | Updated setup.py for the digital_twin package                                                                       |
-| V2.3.1  | Created the visualisation package                                                                                   |
-| V2.3.2  | Modified Gazebo world for sun/lighting. Updated launch file for Gazebo server                                       |
-| V2.3.3  | Created map using SLAM toolbox                                                                                      |
-| V3.0.0  | Migration to Gazebo Harmonic + bcr_bot + small_warehouse. Nav2 integration. Foxglove bridge. Removed launch_project |
-| V3.1.0  | Removed AMCL startup, increased acceleration and speed                                                              |
-| V3.2.0  | Custom warehouse for better navigation, applied planning                                                            |
-| V4.0.0  | Changed to Gazebo Classic from Gazebo Harmonic, hospital world with bcr_bot                                         |
-| V4.0.1  | Added goal_pose relay for Foxglove timestamp fix                                                                    |
-| V4.1.0  | Added bcr_bot to project tree, first version of people spawner                                                      |
-| V4.1.1  | Updated human spawner logic, fixed non-moving cylinders                                                             |
-| V4.1.2  | Changed cylinder SDF to Scrub person model                                                                          |
-| V4.1.3  | Updated Nav2 params for narrow doors                                                                                |
-| V4.1.4  | Added /people_positions publisher to obstacle spawner                                                               |
-| V5.0.0  | YAML registry files for intersections and rooms                                                                     |
-| V6.0.1  | Smart automatic re-navigation based on crowd affluence data                                                         |
-| V6.0.2  | Foxglove layout V1 saved                                                                                            |
-| V6.1.0  | Custom Foxglove panel for voice/text room commands                                                                  |
-| V6.1.1  | Released version 1.0.0 of Foxglove panel                                                                            |
-| V6.2.1  | hospital.launch.py updated to include obstacle_spawner                                                              |
-| V6.2.2  | Speech node for voice commands, integrated into logic.launch.py and Foxglove panel                                  |
+| Version | Details                                                                                                                                  |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| V0.1.0  | Repo initialisation with Doxygen configuration                                                                                           |
+| V0.1.1  | Tested Doxygen                                                                                                                           |
+| V1.0.1  | Created test Gazebo world and launch script                                                                                              |
+| V1.1.0  | Started building the robot_simulation package                                                                                            |
+| V2.1.1  | Created kick_off package for centralised launch                                                                                          |
+| V2.1.2  | Renamed kick_off to launch_project                                                                                                       |
+| V2.2.1  | Created the digital_twin package                                                                                                         |
+| V2.3.0  | Updated setup.py for the digital_twin package                                                                                            |
+| V2.3.1  | Created the visualisation package                                                                                                        |
+| V2.3.2  | Modified Gazebo world for sun/lighting. Updated launch file for Gazebo server                                                            |
+| V2.3.3  | Created map using SLAM toolbox                                                                                                           |
+| V3.0.0  | Migration to Gazebo Harmonic + bcr_bot + small_warehouse. Nav2 integration. Foxglove bridge. Removed launch_project                      |
+| V3.1.0  | Removed AMCL startup, increased acceleration and speed                                                                                   |
+| V3.2.0  | Custom warehouse for better navigation, applied planning                                                                                 |
+| V4.0.0  | Changed to Gazebo Classic from Gazebo Harmonic, hospital world with bcr_bot                                                              |
+| V4.0.1  | Added goal_pose relay for Foxglove timestamp fix                                                                                         |
+| V4.1.0  | Added bcr_bot to project tree, first version of people spawner                                                                           |
+| V4.1.1  | Updated human spawner logic, fixed non-moving cylinders                                                                                  |
+| V4.1.2  | Changed cylinder SDF to Scrub person model                                                                                               |
+| V4.1.3  | Updated Nav2 params for narrow doors                                                                                                     |
+| V4.1.4  | Added /people_positions publisher to obstacle spawner                                                                                    |
+| V5.0.0  | YAML registry files for intersections and rooms                                                                                          |
+| V6.0.1  | Smart automatic re-navigation based on crowd affluence data                                                                              |
+| V6.0.2  | Foxglove layout V1 saved                                                                                                                 |
+| V6.1.0  | Custom Foxglove panel for voice/text room commands                                                                                       |
+| V6.1.1  | Released version 1.0.0 of Foxglove panel                                                                                                 |
+| V6.2.1  | hospital.launch.py updated to include obstacle_spawner                                                                                   |
+| V6.2.2  | Speech node for voice commands, integrated into logic.launch.py and Foxglove panel                                                       |
+| V6.3.0  | Created websocket to receive command from a no ROS system (do not like the idea) and added support to save a simulation in a JSON format |
 
 ---
 

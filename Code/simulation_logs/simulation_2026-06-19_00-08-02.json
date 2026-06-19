@@ -1,0 +1,550 @@
+{
+  "simulation_id": "2026-06-19_00-08-02",
+  "started_at": "2026-06-19T04:08:02.536Z",
+  "records": [
+    {
+      "record_id": 1,
+      "raw_command": "go to room 101",
+      "room_id": "salle_101",
+      "room_display_name": "salle 101",
+      "target_position": {
+        "x": -8.1,
+        "y": -6.62
+      },
+      "departure": {
+        "wall_time": "2026-06-19T04:08:18.850Z",
+        "sim_time_s": 233.2,
+        "robot_position": {
+          "x": -0.0085,
+          "y": 1.9896,
+          "z": 0.022
+        }
+      },
+      "arrival": {
+        "wall_time": "2026-06-19T04:09:13.499Z",
+        "sim_time_s": 281.6,
+        "robot_position": {
+          "x": -7.9904,
+          "y": -6.6069,
+          "z": 0.022
+        }
+      },
+      "duration_s": 48.4,
+      "position_error_m": 0.1104,
+      "status": "interrupted",
+      "feedback": "Navigating to room 101 (x=-8.1, y=-6.62)"
+    },
+    {
+      "record_id": 2,
+      "raw_command": "go to room 202",
+      "room_id": "salle_202",
+      "room_display_name": "salle 202",
+      "target_position": {
+        "x": 8.912,
+        "y": -20.42
+      },
+      "departure": {
+        "wall_time": "2026-06-19T04:09:13.500Z",
+        "sim_time_s": 281.6,
+        "robot_position": {
+          "x": -7.9904,
+          "y": -6.6069,
+          "z": 0.022
+        }
+      },
+      "arrival": {
+        "wall_time": "2026-06-19T04:09:14.223Z",
+        "sim_time_s": 282.2,
+        "robot_position": {
+          "x": -7.9906,
+          "y": -6.607,
+          "z": 0.022
+        }
+      },
+      "duration_s": 0.6,
+      "position_error_m": 21.8288,
+      "status": "succeeded",
+      "feedback": "Navigating to room 202 (x=8.912, y=-20.42)"
+    },
+    {
+      "record_id": 3,
+      "raw_command": "go to room 102",
+      "room_id": "salle_102",
+      "room_display_name": "salle 102",
+      "target_position": {
+        "x": -8.90481734101325,
+        "y": -15.881
+      },
+      "departure": {
+        "wall_time": "2026-06-19T04:09:41.847Z",
+        "sim_time_s": 307.1,
+        "robot_position": {
+          "x": -7.9916,
+          "y": -6.6082,
+          "z": 0.022
+        }
+      },
+      "arrival": {
+        "wall_time": "2026-06-19T04:11:36.520Z",
+        "sim_time_s": 410.1,
+        "robot_position": {
+          "x": -8.7286,
+          "y": -16.1802,
+          "z": 0.022
+        }
+      },
+      "duration_s": 103.0,
+      "position_error_m": 0.3472,
+      "status": "interrupted",
+      "feedback": "Navigating to room 102 (x=-8.90481734101325, y=-15.881)"
+    },
+    {
+      "record_id": 4,
+      "raw_command": "go to room 201",
+      "room_id": "salle_201",
+      "room_display_name": "salle 201",
+      "target_position": {
+        "x": 7.91,
+        "y": -6.77
+      },
+      "departure": {
+        "wall_time": "2026-06-19T04:11:36.521Z",
+        "sim_time_s": 410.1,
+        "robot_position": {
+          "x": -8.7286,
+          "y": -16.1802,
+          "z": 0.022
+        }
+      },
+      "arrival": {
+        "wall_time": "2026-06-19T04:14:43.133Z",
+        "sim_time_s": 579.2,
+        "robot_position": {
+          "x": 7.9726,
+          "y": -6.7269,
+          "z": 0.022
+        }
+      },
+      "duration_s": 169.1,
+      "position_error_m": 0.076,
+      "status": "succeeded",
+      "feedback": "Navigating to room 201 (x=7.91, y=-6.77)"
+    },
+    {
+      "record_id": 5,
+      "raw_command": "go to the reception",
+      "room_id": "salle_reception",
+      "room_display_name": "salle reception",
+      "target_position": {
+        "x": 2.55,
+        "y": 7.49
+      },
+      "departure": {
+        "wall_time": "2026-06-19T04:14:51.012Z",
+        "sim_time_s": 586.4,
+        "robot_position": {
+          "x": 7.9725,
+          "y": -6.7272,
+          "z": 0.022
+        }
+      },
+      "arrival": {
+        "wall_time": "2026-06-19T04:15:00.012Z",
+        "sim_time_s": 594.5,
+        "robot_position": {
+          "x": 8.114,
+          "y": -3.3136,
+          "z": 0.022
+        }
+      },
+      "duration_s": 8.1,
+      "position_error_m": 12.1522,
+      "status": "interrupted",
+      "feedback": "Navigating to reception (x=2.55, y=7.49)"
+    },
+    {
+      "record_id": 6,
+      "raw_command": "go to the room 202",
+      "room_id": "salle_202",
+      "room_display_name": "salle 202",
+      "target_position": {
+        "x": 8.912,
+        "y": -20.42
+      },
+      "departure": {
+        "wall_time": "2026-06-19T04:15:00.014Z",
+        "sim_time_s": 594.5,
+        "robot_position": {
+          "x": 8.114,
+          "y": -3.3136,
+          "z": 0.022
+        }
+      },
+      "arrival": {
+        "wall_time": "2026-06-19T04:16:07.887Z",
+        "sim_time_s": 656.8,
+        "robot_position": {
+          "x": 8.951,
+          "y": -20.3725,
+          "z": 0.022
+        }
+      },
+      "duration_s": 62.3,
+      "position_error_m": 0.0615,
+      "status": "succeeded",
+      "feedback": "Navigating to room 202 (x=8.912, y=-20.42)"
+    },
+    {
+      "record_id": 7,
+      "raw_command": "go to the office",
+      "room_id": "salle_bureau",
+      "room_display_name": "salle bureau",
+      "target_position": {
+        "x": -1.46,
+        "y": -3.1
+      },
+      "departure": {
+        "wall_time": "2026-06-19T04:16:12.248Z",
+        "sim_time_s": 660.9,
+        "robot_position": {
+          "x": 8.9508,
+          "y": -20.3727,
+          "z": 0.022
+        }
+      },
+      "arrival": {
+        "wall_time": "2026-06-19T04:18:44.285Z",
+        "sim_time_s": 797.2,
+        "robot_position": {
+          "x": -4.2008,
+          "y": -0.1086,
+          "z": 0.022
+        }
+      },
+      "duration_s": 136.3,
+      "position_error_m": 4.0571,
+      "status": "interrupted",
+      "feedback": "Navigating to office (x=-1.46, y=-3.1)"
+    },
+    {
+      "record_id": 8,
+      "raw_command": "go to the reception",
+      "room_id": "salle_reception",
+      "room_display_name": "salle reception",
+      "target_position": {
+        "x": 2.55,
+        "y": 7.49
+      },
+      "departure": {
+        "wall_time": "2026-06-19T04:18:44.287Z",
+        "sim_time_s": 797.2,
+        "robot_position": {
+          "x": -4.2008,
+          "y": -0.1086,
+          "z": 0.022
+        }
+      },
+      "arrival": {
+        "wall_time": "2026-06-19T04:19:35.453Z",
+        "sim_time_s": 843.3,
+        "robot_position": {
+          "x": 2.6213,
+          "y": 7.7721,
+          "z": 0.022
+        }
+      },
+      "duration_s": 46.1,
+      "position_error_m": 0.291,
+      "status": "succeeded",
+      "feedback": "Navigating to reception (x=2.55, y=7.49)"
+    },
+    {
+      "record_id": 9,
+      "raw_command": "go to the kitchen",
+      "room_id": "salle_cuisine",
+      "room_display_name": "salle cuisine",
+      "target_position": {
+        "x": -8.66,
+        "y": -27.77
+      },
+      "departure": {
+        "wall_time": "2026-06-19T04:19:39.568Z",
+        "sim_time_s": 847.0,
+        "robot_position": {
+          "x": 2.6214,
+          "y": 7.7719,
+          "z": 0.022
+        }
+      },
+      "arrival": {
+        "wall_time": "2026-06-19T04:22:12.261Z",
+        "sim_time_s": 981.1,
+        "robot_position": {
+          "x": -8.4947,
+          "y": -27.7138,
+          "z": 0.022
+        }
+      },
+      "duration_s": 134.1,
+      "position_error_m": 0.1746,
+      "status": "succeeded",
+      "feedback": "Navigating to kitchen (x=-8.66, y=-27.77)"
+    },
+    {
+      "record_id": 10,
+      "raw_command": "go to the pharmacy",
+      "room_id": "salle_pharmacie",
+      "room_display_name": "salle pharmacie",
+      "target_position": {
+        "x": -7.96,
+        "y": 14.61
+      },
+      "departure": {
+        "wall_time": "2026-06-19T04:22:13.848Z",
+        "sim_time_s": 982.5,
+        "robot_position": {
+          "x": -8.4947,
+          "y": -27.7138,
+          "z": 0.022
+        }
+      },
+      "arrival": {
+        "wall_time": "2026-06-19T04:25:05.946Z",
+        "sim_time_s": 1132.2,
+        "robot_position": {
+          "x": -7.9133,
+          "y": 14.555,
+          "z": 0.022
+        }
+      },
+      "duration_s": 149.7,
+      "position_error_m": 0.0722,
+      "status": "succeeded",
+      "feedback": "Navigating to pharmacy (x=-7.96, y=14.61)"
+    },
+    {
+      "record_id": 11,
+      "raw_command": "go to room 201",
+      "room_id": "salle_201",
+      "room_display_name": "salle 201",
+      "target_position": {
+        "x": 7.91,
+        "y": -6.77
+      },
+      "departure": {
+        "wall_time": "2026-06-19T04:25:11.773Z",
+        "sim_time_s": 1137.5,
+        "robot_position": {
+          "x": -7.9135,
+          "y": 14.5548,
+          "z": 0.022
+        }
+      },
+      "arrival": {
+        "wall_time": "2026-06-19T04:26:52.947Z",
+        "sim_time_s": 1224.5,
+        "robot_position": {
+          "x": 7.9445,
+          "y": -6.7016,
+          "z": 0.022
+        }
+      },
+      "duration_s": 87.0,
+      "position_error_m": 0.0766,
+      "status": "succeeded",
+      "feedback": "Navigating to room 201 (x=7.91, y=-6.77)"
+    },
+    {
+      "record_id": 12,
+      "raw_command": "go to the kitchen",
+      "room_id": "salle_cuisine",
+      "room_display_name": "salle cuisine",
+      "target_position": {
+        "x": -8.66,
+        "y": -27.77
+      },
+      "departure": {
+        "wall_time": "2026-06-19T04:26:57.977Z",
+        "sim_time_s": 1228.5,
+        "robot_position": {
+          "x": 7.9448,
+          "y": -6.7017,
+          "z": 0.022
+        }
+      },
+      "arrival": {
+        "wall_time": "2026-06-19T04:28:26.051Z",
+        "sim_time_s": 1306.0,
+        "robot_position": {
+          "x": -8.5052,
+          "y": -27.7775,
+          "z": 0.022
+        }
+      },
+      "duration_s": 77.5,
+      "position_error_m": 0.155,
+      "status": "succeeded",
+      "feedback": "Navigating to kitchen (x=-8.66, y=-27.77)"
+    },
+    {
+      "record_id": 13,
+      "raw_command": "go to room 202",
+      "room_id": "salle_202",
+      "room_display_name": "salle 202",
+      "target_position": {
+        "x": 8.912,
+        "y": -20.42
+      },
+      "departure": {
+        "wall_time": "2026-06-19T04:28:33.228Z",
+        "sim_time_s": 1312.6,
+        "robot_position": {
+          "x": -8.5054,
+          "y": -27.7777,
+          "z": 0.022
+        }
+      },
+      "arrival": {
+        "wall_time": "2026-06-19T04:29:25.327Z",
+        "sim_time_s": 1359.8,
+        "robot_position": {
+          "x": 8.9416,
+          "y": -20.3745,
+          "z": 0.022
+        }
+      },
+      "duration_s": 47.2,
+      "position_error_m": 0.0543,
+      "status": "interrupted",
+      "feedback": "Navigating to room 202 (x=8.912, y=-20.42)"
+    },
+    {
+      "record_id": 14,
+      "raw_command": "go to charging station",
+      "room_id": "charging_station",
+      "room_display_name": "charging station",
+      "target_position": {
+        "x": 0.0,
+        "y": 1.95
+      },
+      "departure": {
+        "wall_time": "2026-06-19T04:29:25.329Z",
+        "sim_time_s": 1359.8,
+        "robot_position": {
+          "x": 8.9416,
+          "y": -20.3745,
+          "z": 0.022
+        }
+      },
+      "arrival": {
+        "wall_time": "2026-06-19T04:31:18.064Z",
+        "sim_time_s": 1458.3,
+        "robot_position": {
+          "x": -0.068,
+          "y": 2.0367,
+          "z": 0.022
+        }
+      },
+      "duration_s": 98.5,
+      "position_error_m": 0.1102,
+      "status": "succeeded",
+      "feedback": "Navigating to charging station (x=0.0, y=1.95)"
+    },
+    {
+      "record_id": 15,
+      "raw_command": "go to room 101",
+      "room_id": "salle_101",
+      "room_display_name": "salle 101",
+      "target_position": {
+        "x": -8.1,
+        "y": -6.62
+      },
+      "departure": {
+        "wall_time": "2026-06-19T04:31:25.357Z",
+        "sim_time_s": 1464.7,
+        "robot_position": {
+          "x": -0.0683,
+          "y": 2.0364,
+          "z": 0.022
+        }
+      },
+      "arrival": {
+        "wall_time": "2026-06-19T04:32:34.945Z",
+        "sim_time_s": 1524.7,
+        "robot_position": {
+          "x": -7.959,
+          "y": -6.5351,
+          "z": 0.022
+        }
+      },
+      "duration_s": 60.0,
+      "position_error_m": 0.1646,
+      "status": "succeeded",
+      "feedback": "Navigating to room 101 (x=-8.1, y=-6.62)"
+    },
+    {
+      "record_id": 16,
+      "raw_command": "go to the pharmacy",
+      "room_id": "salle_pharmacie",
+      "room_display_name": "salle pharmacie",
+      "target_position": {
+        "x": -7.96,
+        "y": 14.61
+      },
+      "departure": {
+        "wall_time": "2026-06-19T04:32:37.507Z",
+        "sim_time_s": 1526.9,
+        "robot_position": {
+          "x": -7.9589,
+          "y": -6.5352,
+          "z": 0.022
+        }
+      },
+      "arrival": {
+        "wall_time": "2026-06-19T04:34:24.158Z",
+        "sim_time_s": 1619.2,
+        "robot_position": {
+          "x": -7.0747,
+          "y": -8.6463,
+          "z": 0.022
+        }
+      },
+      "duration_s": 92.3,
+      "position_error_m": 23.2731,
+      "status": "interrupted",
+      "feedback": "Navigating to pharmacy (x=-7.96, y=14.61)"
+    },
+    {
+      "record_id": 17,
+      "raw_command": "go to the pharmacy",
+      "room_id": "salle_pharmacie",
+      "room_display_name": "salle pharmacie",
+      "target_position": {
+        "x": -7.96,
+        "y": 14.61
+      },
+      "departure": {
+        "wall_time": "2026-06-19T04:34:24.160Z",
+        "sim_time_s": 1619.2,
+        "robot_position": {
+          "x": -7.0747,
+          "y": -8.6463,
+          "z": 0.022
+        }
+      },
+      "arrival": {
+        "wall_time": "2026-06-19T04:36:24.451Z",
+        "sim_time_s": 1724.4,
+        "robot_position": {
+          "x": -1.8872,
+          "y": 13.2054,
+          "z": 0.022
+        }
+      },
+      "duration_s": 105.2,
+      "position_error_m": 6.2331,
+      "status": "aborted",
+      "feedback": "Navigating to pharmacy (x=-7.96, y=14.61)"
+    }
+  ]
+}
