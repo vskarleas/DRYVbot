@@ -231,12 +231,210 @@ Simulation log format</h4>
 <li>**<code>status</code>** — outcome of the navigation: <code>succeeded</code>, <code>aborted</code>, <code>canceled</code>, <code>interrupted</code> (new command received before arrival), or <code>shutdown</code> (node stopped mid-navigation)</li>
 </ul>
 <hr  />
-<p>To disable the WebSocket bridge or change its port:</p>
+<h2><a class="anchor" id="autotoc_md17"></a>
+Websocket for communication to the system via a computer that do not run ROS</h2>
+<p>The <code>ws_command_bridge</code> node runs a WebSocket server on port 9090 (configurable via <code>ws_port</code> launch argument). Any computer on the network can connect without ROS being installed. To disable the WebSocket bridge or change its port on the server side:</p>
 <div class="fragment"><div class="line">ros2 launch digital_twin logic.launch.py enable_ws_bridge:=false</div>
 <div class="line">ros2 launch digital_twin logic.launch.py ws_port:=8080</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md17"></a>
-Remote control via WebSocket</h4>
-<h2><a class="anchor" id="autotoc_md18"></a>
+</div><!-- fragment --><p><b>Connection:</b> </p><div class="fragment"><div class="line">ws://&lt;ROS_MACHINE_IP&gt;:9090</div>
+</div><!-- fragment --><p>On connect, the server immediately sends the current navigation state.</p>
+<h3><a class="anchor" id="autotoc_md18"></a>
+Client → Server messages</h3>
+<p><b>Send the robot to a room:</b> </p><div class="fragment"><div class="line">{&quot;type&quot;: &quot;room_command&quot;, &quot;room&quot;: &quot;salle 101&quot;}</div>
+</div><!-- fragment --><p> The <code>room</code> field accepts any name or alias from <code><a class="el" href="room__registry_8yaml.html">room_registry.yaml</a></code> (e.g. <code>"room 101"</code>, <code>"cuisine"</code>, <code>"pharmacy"</code>, <code>"charging station"</code>). The command is validated against the registry before being forwarded to the robot — invalid rooms return an error.</p>
+<p><b>List available rooms:</b> </p><div class="fragment"><div class="line">{&quot;type&quot;: &quot;list_rooms&quot;}</div>
+</div><!-- fragment --><p><b>Query current navigation state:</b> </p><div class="fragment"><div class="line">{&quot;type&quot;: &quot;get_status&quot;}</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md19"></a>
+Server → Client messages</h3>
+<p><b>Acknowledgement</b> (sent to the requesting client after a valid room command): </p><div class="fragment"><div class="line">{</div>
+<div class="line">  &quot;type&quot;: &quot;ack&quot;,</div>
+<div class="line">  &quot;command&quot;: &quot;room_command&quot;,</div>
+<div class="line">  &quot;room&quot;: &quot;salle 101&quot;,</div>
+<div class="line">  &quot;resolved_room_id&quot;: &quot;salle_101&quot;,</div>
+<div class="line">  &quot;target_position&quot;: {&quot;x&quot;: -8.1, &quot;y&quot;: -6.62}</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><b>Navigation status</b> (broadcast to all connected clients on state changes): </p><div class="fragment"><div class="line">{&quot;type&quot;: &quot;status&quot;, &quot;state&quot;: &quot;navigating&quot;, &quot;target&quot;: &quot;salle_101&quot;,</div>
+<div class="line"> &quot;target_position&quot;: {&quot;x&quot;: -8.1, &quot;y&quot;: -6.62}}</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">{&quot;type&quot;: &quot;status&quot;, &quot;state&quot;: &quot;arrived&quot;, &quot;target&quot;: &quot;salle_101&quot;,</div>
+<div class="line"> &quot;robot_position&quot;: {&quot;x&quot;: -8.09, &quot;y&quot;: -6.60, &quot;z&quot;: 0.0},</div>
+<div class="line"> &quot;position_error_m&quot;: 0.0224, &quot;duration_s&quot;: 23.333}</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">{&quot;type&quot;: &quot;status&quot;, &quot;state&quot;: &quot;aborted&quot;, &quot;target&quot;: &quot;salle_101&quot;}</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">{&quot;type&quot;: &quot;status&quot;, &quot;state&quot;: &quot;idle&quot;, &quot;target&quot;: null}</div>
+</div><!-- fragment --><p>Possible <code>state</code> values: <code>idle</code>, <code>navigating</code>, <code>arrived</code>, <code>aborted</code>, <code>canceled</code>.</p>
+<p><b>Feedback</b> (forwarded from the room interpreter): </p><div class="fragment"><div class="line">{&quot;type&quot;: &quot;feedback&quot;, &quot;text&quot;: &quot;Navigating to salle 101 (x=-8.1, y=-6.62)&quot;}</div>
+</div><!-- fragment --><p><b>Room list</b> (response to <code>list_rooms</code>): </p><div class="fragment"><div class="line">{</div>
+<div class="line">  &quot;type&quot;: &quot;rooms&quot;,</div>
+<div class="line">  &quot;rooms&quot;: {</div>
+<div class="line">    &quot;salle_101&quot;: {&quot;x&quot;: -8.1, &quot;y&quot;: -6.62, &quot;aliases&quot;: [&quot;room 101&quot;, &quot;salle 101&quot;, &quot;chambre 101&quot;]},</div>
+<div class="line">    &quot;salle_cuisine&quot;: {&quot;x&quot;: -8.66, &quot;y&quot;: -27.77, &quot;aliases&quot;: [&quot;cuisine&quot;, &quot;salle cuisine&quot;, &quot;kitchen&quot;]}</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><b>Error</b> (invalid room, malformed message, etc.): </p><div class="fragment"><div class="line">{&quot;type&quot;: &quot;error&quot;, &quot;message&quot;: &quot;Room not found: \&quot;xyz\&quot;. Available: [\&quot;salle_101\&quot;, ...]&quot;}</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md20"></a>
+Standalone client</h3>
+<p>Here is an example of a ready to run client:</p>
+<div class="fragment"><div class="line">import argparse</div>
+<div class="line">import asyncio</div>
+<div class="line">import json</div>
+<div class="line">import sys</div>
+<div class="line"> </div>
+<div class="line">try:</div>
+<div class="line">    import websockets</div>
+<div class="line">except ImportError:</div>
+<div class="line">    print(&#39;Install websockets: pip install websockets&#39;)</div>
+<div class="line">    sys.exit(1)</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">async def main(host: str, port: int):</div>
+<div class="line">    uri = f&#39;ws://{host}:{port}&#39;</div>
+<div class="line">    print(f&#39;Connecting to {uri} ...&#39;)</div>
+<div class="line"> </div>
+<div class="line">    try:</div>
+<div class="line">        async with websockets.connect(uri) as ws:</div>
+<div class="line">            print(f&#39;Connected to {uri}&#39;)</div>
+<div class="line">            print()</div>
+<div class="line">            print(&#39;Commands:&#39;)</div>
+<div class="line">            print(&#39;  Type a room name or command to send the robot&#39;)</div>
+<div class="line">            print(&#39;  &quot;rooms&quot;   — list available rooms&#39;)</div>
+<div class="line">            print(&#39;  &quot;status&quot;  — query current navigation state&#39;)</div>
+<div class="line">            print(&#39;  &quot;quit&quot;    — disconnect&#39;)</div>
+<div class="line">            print()</div>
+<div class="line"> </div>
+<div class="line">            # Task to receive and print server messages</div>
+<div class="line">            async def receiver():</div>
+<div class="line">                try:</div>
+<div class="line">                    async for raw in ws:</div>
+<div class="line">                        data = json.loads(raw)</div>
+<div class="line">                        msg_type = data.get(&#39;type&#39;, &#39;&#39;)</div>
+<div class="line"> </div>
+<div class="line">                        if msg_type == &#39;status&#39;:</div>
+<div class="line">                            state = data.get(&#39;state&#39;, &#39;?&#39;)</div>
+<div class="line">                            target = data.get(&#39;target&#39;, &#39;&#39;)</div>
+<div class="line">                            print(f&#39;\n  [STATUS] {state}&#39;, end=&#39;&#39;)</div>
+<div class="line">                            if target:</div>
+<div class="line">                                print(f&#39;  target={target}&#39;, end=&#39;&#39;)</div>
+<div class="line">                            if data.get(&#39;robot_position&#39;):</div>
+<div class="line">                                pos = data[&#39;robot_position&#39;]</div>
+<div class="line">                                print(</div>
+<div class="line">                                    f&#39;  robot=({pos[&quot;x&quot;]}, {pos[&quot;y&quot;]})&#39;,</div>
+<div class="line">                                    end=&#39;&#39;,</div>
+<div class="line">                                )</div>
+<div class="line">                            if data.get(&#39;position_error_m&#39;) is not None:</div>
+<div class="line">                                print(</div>
+<div class="line">                                    f&#39;  error={data[&quot;position_error_m&quot;]}m&#39;,</div>
+<div class="line">                                    end=&#39;&#39;,</div>
+<div class="line">                                )</div>
+<div class="line">                            if data.get(&#39;duration_s&#39;) is not None:</div>
+<div class="line">                                print(</div>
+<div class="line">                                    f&#39;  duration={data[&quot;duration_s&quot;]}s&#39;,</div>
+<div class="line">                                    end=&#39;&#39;,</div>
+<div class="line">                                )</div>
+<div class="line">                            print()</div>
+<div class="line"> </div>
+<div class="line">                        elif msg_type == &#39;feedback&#39;:</div>
+<div class="line">                            print(f&#39;  [FEEDBACK] {data.get(&quot;text&quot;, &quot;&quot;)}&#39;)</div>
+<div class="line"> </div>
+<div class="line">                        elif msg_type == &#39;ack&#39;:</div>
+<div class="line">                            room = data.get(&#39;room&#39;, &#39;&#39;)</div>
+<div class="line">                            resolved = data.get(&#39;resolved_room_id&#39;, &#39;&#39;)</div>
+<div class="line">                            pos = data.get(&#39;target_position&#39;, {})</div>
+<div class="line">                            print(</div>
+<div class="line">                                f&#39;  [ACK] &quot;{room}&quot; → {resolved} &#39;</div>
+<div class="line">                                f&#39;(x={pos.get(&quot;x&quot;)}, y={pos.get(&quot;y&quot;)})&#39;</div>
+<div class="line">                            )</div>
+<div class="line"> </div>
+<div class="line">                        elif msg_type == &#39;rooms&#39;:</div>
+<div class="line">                            print(&#39;\n  Available rooms:&#39;)</div>
+<div class="line">                            for rid, info in data.get(&#39;rooms&#39;, {}).items():</div>
+<div class="line">                                aliases = &#39;, &#39;.join(info.get(&#39;aliases&#39;, []))</div>
+<div class="line">                                print(</div>
+<div class="line">                                    f&#39;    {rid:20s}  &#39;</div>
+<div class="line">                                    f&#39;x={info[&quot;x&quot;]:8.2f}  &#39;</div>
+<div class="line">                                    f&#39;y={info[&quot;y&quot;]:8.2f}  &#39;</div>
+<div class="line">                                    f&#39;aliases: {aliases}&#39;</div>
+<div class="line">                                )</div>
+<div class="line">                            print()</div>
+<div class="line"> </div>
+<div class="line">                        elif msg_type == &#39;error&#39;:</div>
+<div class="line">                            print(</div>
+<div class="line">                                f&#39;  [ERROR] {data.get(&quot;message&quot;, &quot;unknown&quot;)}&#39;</div>
+<div class="line">                            )</div>
+<div class="line"> </div>
+<div class="line">                        else:</div>
+<div class="line">                            print(f&#39;  [MSG] {json.dumps(data)}&#39;)</div>
+<div class="line"> </div>
+<div class="line">                        # Re-show prompt</div>
+<div class="line">                        print(&#39;&gt; &#39;, end=&#39;&#39;, flush=True)</div>
+<div class="line"> </div>
+<div class="line">                except websockets.exceptions.ConnectionClosed:</div>
+<div class="line">                    print(&#39;\nConnection closed by server.&#39;)</div>
+<div class="line"> </div>
+<div class="line">            recv_task = asyncio.create_task(receiver())</div>
+<div class="line"> </div>
+<div class="line">            # Input loop (run in executor so it doesn&#39;t block)</div>
+<div class="line">            loop = asyncio.get_event_loop()</div>
+<div class="line">            try:</div>
+<div class="line">                while True:</div>
+<div class="line">                    print(&#39;&gt; &#39;, end=&#39;&#39;, flush=True)</div>
+<div class="line">                    line = await loop.run_in_executor(</div>
+<div class="line">                        None, sys.stdin.readline</div>
+<div class="line">                    )</div>
+<div class="line">                    line = line.strip()</div>
+<div class="line"> </div>
+<div class="line">                    if not line:</div>
+<div class="line">                        continue</div>
+<div class="line"> </div>
+<div class="line">                    if line.lower() == &#39;quit&#39;:</div>
+<div class="line">                        break</div>
+<div class="line"> </div>
+<div class="line">                    elif line.lower() == &#39;rooms&#39;:</div>
+<div class="line">                        await ws.send(json.dumps({</div>
+<div class="line">                            &#39;type&#39;: &#39;list_rooms&#39;,</div>
+<div class="line">                        }))</div>
+<div class="line"> </div>
+<div class="line">                    elif line.lower() == &#39;status&#39;:</div>
+<div class="line">                        await ws.send(json.dumps({</div>
+<div class="line">                            &#39;type&#39;: &#39;get_status&#39;,</div>
+<div class="line">                        }))</div>
+<div class="line"> </div>
+<div class="line">                    else:</div>
+<div class="line">                        await ws.send(json.dumps({</div>
+<div class="line">                            &#39;type&#39;: &#39;room_command&#39;,</div>
+<div class="line">                            &#39;room&#39;: line,</div>
+<div class="line">                        }))</div>
+<div class="line"> </div>
+<div class="line">            except (KeyboardInterrupt, EOFError):</div>
+<div class="line">                pass</div>
+<div class="line">            finally:</div>
+<div class="line">                recv_task.cancel()</div>
+<div class="line"> </div>
+<div class="line">    except ConnectionRefusedError:</div>
+<div class="line">        print(f&#39;Could not connect to {uri} — is ws_command_bridge running?&#39;)</div>
+<div class="line">        sys.exit(1)</div>
+<div class="line">    except Exception as e:</div>
+<div class="line">        print(f&#39;Connection error: {e}&#39;)</div>
+<div class="line">        sys.exit(1)</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">if __name__ == &#39;__main__&#39;:</div>
+<div class="line">    parser = argparse.ArgumentParser(</div>
+<div class="line">        description=&#39;WebSocket client for CloudTwin robot commands&#39;,</div>
+<div class="line">    )</div>
+<div class="line">    parser.add_argument(</div>
+<div class="line">        &#39;--host&#39;, default=&#39;localhost&#39;,</div>
+<div class="line">        help=&#39;IP or hostname of the ROS machine (default: localhost)&#39;,</div>
+<div class="line">    )</div>
+<div class="line">    parser.add_argument(</div>
+<div class="line">        &#39;--port&#39;, type=int, default=9090,</div>
+<div class="line">        help=&#39;WebSocket port (default: 9090)&#39;,</div>
+<div class="line">    )</div>
+<div class="line">    args = parser.parse_args()</div>
+<div class="line"> </div>
+<div class="line">    asyncio.run(main(args.host, args.port))</div>
+</div><!-- fragment --><p>To run it, type a room name to navigate, <code>rooms</code> to list destinations, <code>status</code> to poll, <code>quit</code> to disconnect. The client prints all status updates as they arrive, so you know when the robot has reached its destination before sending the next command.</p>
+<div class="fragment"><div class="line">python3 ws_robot_client.py --host 192.168.1.42 --port 9090</div>
+</div><!-- fragment --><hr  />
+<h2><a class="anchor" id="autotoc_md22"></a>
 Foxglove (remote panel)</h2>
 <ol type="1">
 <li>Open <a href="https://app.foxglove.dev">https://app.foxglove.dev</a> in a browser</li>
@@ -248,7 +446,7 @@ Foxglove (remote panel)</h2>
 <div class="fragment"><div class="line">ros2 topic pub --once /goal_pose geometry_msgs/PoseStamped \</div>
 <div class="line">  &quot;{header: {frame_id: &#39;map&#39;}, pose: {position: {x: 3.0, y: 0.0, z: 0.0}, orientation: {w: 1.0}}}&quot;</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md20"></a>
+<h1><a class="anchor" id="autotoc_md24"></a>
 Creating the map</h1>
 <p>The hospital map was generated using slam_toolbox. To recreate it or create a map for a different world:</p>
 <ol type="1">
@@ -283,7 +481,7 @@ Creating the map</h1>
 <div class="fragment"><div class="line">cd ~/path_to_save_map</div>
 <div class="line">ros2 run nav2_map_server map_saver_cli -f hospital_map</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md22"></a>
+<h1><a class="anchor" id="autotoc_md26"></a>
 Versions</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -348,9 +546,9 @@ Versions</h1>
 <td class="markdownTableBodyNone">V6.3.0   </td><td class="markdownTableBodyNone">Created websocket to receive command from a no ROS system (do not like the idea) and added support to save a simulation in a JSON format   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md24"></a>
+<h1><a class="anchor" id="autotoc_md28"></a>
 TO-DO</h1>
-<h2><a class="anchor" id="autotoc_md25"></a>
+<h2><a class="anchor" id="autotoc_md29"></a>
 robot_simulation</h2>
 <ul>
 <li>[X] Spawn robot and verify sensors</li>
@@ -359,7 +557,7 @@ robot_simulation</h2>
 <li>[X] Simulate people detection using Gazebo Fuel models</li>
 <li>[X] Obstacle spawner for dynamic people at known positions</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md26"></a>
+<h2><a class="anchor" id="autotoc_md30"></a>
 digital_twin</h2>
 <ul>
 <li>[X] Create the <a class="el" href="namespacedigital__twin.html">digital_twin</a> package</li>
@@ -372,7 +570,7 @@ digital_twin</h2>
 <li>[X] Local safety controller for emergency braking</li>
 <li>[X] Demo scenarios: nominal navigation, dynamic obstacle avoidance</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md27"></a>
+<h2><a class="anchor" id="autotoc_md31"></a>
 visualisation</h2>
 <ul>
 <li>[X] Connect Foxglove via websocket bridge</li>

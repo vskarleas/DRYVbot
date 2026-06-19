@@ -68,7 +68,7 @@ $(function() {
 <div class="title">System architecture </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md61"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md65"></a>
 The digital twin concept</h1>
 <p>In a traditional mobile robot deployment, path planning and obstacle avoidance run onboard. For budget robots with limited CPUs, this is not feasible since Nav2 alone requires significant processing power. The solution is to offload computation to a <b>digital twin</b> running on a cloud server.</p>
 <p>The digital twin is a cloud-side replica of the robot's navigation intelligence. It receives sensor data from the physical robot, processes it using Nav2 and the AI intelligence layer, and sends back velocity commands. The robot itself becomes a thin client: it only runs sensors, motor drivers, and a lightweight safety controller.</p>
@@ -100,10 +100,10 @@ The digital twin concept</h1>
 <div class="line">└──────────────────────────────────────────────────────────┘</div>
 </div><!-- fragment --><p>In our proof-of-concept, Gazebo Classic replaces the physical robot and 5G network. The <code>robot_simulation</code> package provides the simulated environment, while <code><a class="el" href="namespacedigital__twin.html">digital_twin</a></code> provides the cloud intelligence.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md63"></a>
+<h1><a class="anchor" id="autotoc_md67"></a>
 The feedback loop (Boucle de Rétroaction)</h1>
 <p>The system operates as a continuous closed-loop control system. The digital twin does not simply plan once — it continuously replans as the environment changes.</p>
-<h2><a class="anchor" id="autotoc_md64"></a>
+<h2><a class="anchor" id="autotoc_md68"></a>
 Loop steps</h2>
 <div class="fragment"><div class="line">1. SENSE    Robot sensors produce /odom, /scan, /people_positions</div>
 <div class="line">      │</div>
@@ -126,7 +126,7 @@ Loop steps</h2>
 <div class="line">6. FEEDBACK Robot&#39;s new position changes /odom</div>
 <div class="line">            Humans continue to move → new /people_positions</div>
 <div class="line">            → Loop restarts at step 1</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md65"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md69"></a>
 What makes this "Predictive"</h2>
 <p>Traditional obstacle avoidance is reactive: the robot detects an obstacle in its lidar scan and stops or swerves. Our approach is <b>predictive</b> because:</p>
 <ul>
@@ -136,7 +136,7 @@ What makes this "Predictive"</h2>
 </ul>
 <p>The result: the robot chooses an alternative corridor <b>before</b> it would have encountered the crowd, rather than stopping in front of people and waiting.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md67"></a>
+<h1><a class="anchor" id="autotoc_md71"></a>
 ROS2 topic flow</h1>
 <p>The following diagram shows all topics and how they connect the nodes:</p>
 <div class="fragment"><div class="line">                    ┌──────────────────────┐</div>
@@ -188,9 +188,9 @@ ROS2 topic flow</h1>
 <div class="line">                            │  map_server  │</div>
 <div class="line">                            └──────────────┘</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md69"></a>
+<h1><a class="anchor" id="autotoc_md73"></a>
 Package structure</h1>
-<h2><a class="anchor" id="autotoc_md70"></a>
+<h2><a class="anchor" id="autotoc_md74"></a>
 robot_simulation</h2>
 <p>Represents the physical world. In a real deployment, this is replaced by the actual robot and environment.</p>
 <div class="fragment"><div class="line">robot_simulation/</div>
@@ -206,7 +206,7 @@ robot_simulation</h2>
 <div class="line">    └── obstacle_spawner.py     # Spawns/moves human models in Gazebo</div>
 </div><!-- fragment --><p><b>Key executable:</b></p>
 <div class="fragment"><div class="line">ros2 run robot_simulation obstacle_spawner.py --ros-args -p scenario:=hospital</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md71"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md75"></a>
 digital_twin</h2>
 <p>The cloud-side intelligence includes everything the robot cannot run onboard</p>
 <div class="fragment"><div class="line">digital_twin/</div>
@@ -230,10 +230,10 @@ digital_twin</h2>
 <div class="fragment"><div class="line">ros2 launch digital_twin hospital.launch.py     # Base stack</div>
 <div class="line">ros2 launch digital_twin logic.launch.py         # AI layer</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md73"></a>
+<h1><a class="anchor" id="autotoc_md77"></a>
 Nav2 integration</h1>
 <p>Nav2 is the robot's navigation engine. It runs entirely on the digital twin (cloud side) because it is too computationally heavy for a budget robot.</p>
-<h2><a class="anchor" id="autotoc_md74"></a>
+<h2><a class="anchor" id="autotoc_md78"></a>
 Costmap architecture</h2>
 <p>Nav2 uses a layered costmap to decide where the robot can go:</p>
 <div class="fragment"><div class="line">┌─────────────────────────────────────┐</div>
@@ -262,11 +262,11 @@ Costmap architecture</h2>
 <div class="line">        plugin: <span class="stringliteral">&quot;nav2_costmap_2d::StaticLayer&quot;</span></div>
 <div class="line">        map_subscribe_transient_local: <span class="keyword">True</span></div>
 <div class="line">        map_topic: <span class="stringliteral">&quot;/map_dynamic&quot;</span></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md75"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md79"></a>
 cmd_vel relay</h2>
 <p>bcr_bot uses namespaced topics (<code>/bcr_bot/cmd_vel</code>), but Nav2 publishes to <code>/cmd_vel</code>. A relay bridges them:</p>
 <div class="fragment"><div class="line">Nav2 → /cmd_vel → [relay node] → /bcr_bot/cmd_vel → robot motors</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md76"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md80"></a>
 Goal relay</h2>
 <p>Foxglove publishes goal poses with wall-clock timestamps, but Nav2 expects sim-time stamps. The <code>goal_relay</code> node resets the timestamp to zero so Nav2 accepts the goal:</p>
 <div class="fragment"><div class="line">Foxglove → /goal_pose_foxglove → [goal_relay] → /goal_pose → Nav2</div>
