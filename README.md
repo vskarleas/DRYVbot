@@ -201,14 +201,265 @@ Field descriptions:
 
 ---
 
-To disable the WebSocket bridge or change its port:
+### Websocket for communication to the system via a computer that do not run ROS
+
+The `ws_command_bridge` node runs a WebSocket server on port 9090 (configurable via `ws_port` launch argument). Any computer on the network can connect without ROS being installed. To disable the WebSocket bridge or change its port on the server side:
 
 ```bash
 ros2 launch digital_twin logic.launch.py enable_ws_bridge:=false
 ros2 launch digital_twin logic.launch.py ws_port:=8080
 ```
 
-##### Remote control via WebSocket
+**Connection:**
+```
+ws://<ROS_MACHINE_IP>:9090
+```
+
+On connect, the server immediately sends the current navigation state.
+
+#### Client → Server messages
+
+**Send the robot to a room:**
+```json
+{"type": "room_command", "room": "salle 101"}
+```
+The `room` field accepts any name or alias from `room_registry.yaml` (e.g. `"room 101"`, `"cuisine"`, `"pharmacy"`, `"charging station"`). The command is validated against the registry before being forwarded to the robot — invalid rooms return an error.
+
+**List available rooms:**
+```json
+{"type": "list_rooms"}
+```
+
+**Query current navigation state:**
+```json
+{"type": "get_status"}
+```
+
+#### Server → Client messages
+
+**Acknowledgement** (sent to the requesting client after a valid room command):
+```json
+{
+  "type": "ack",
+  "command": "room_command",
+  "room": "salle 101",
+  "resolved_room_id": "salle_101",
+  "target_position": {"x": -8.1, "y": -6.62}
+}
+```
+
+**Navigation status** (broadcast to all connected clients on state changes):
+```json
+{"type": "status", "state": "navigating", "target": "salle_101",
+ "target_position": {"x": -8.1, "y": -6.62}}
+```
+```json
+{"type": "status", "state": "arrived", "target": "salle_101",
+ "robot_position": {"x": -8.09, "y": -6.60, "z": 0.0},
+ "position_error_m": 0.0224, "duration_s": 23.333}
+```
+```json
+{"type": "status", "state": "aborted", "target": "salle_101"}
+```
+```json
+{"type": "status", "state": "idle", "target": null}
+```
+
+Possible `state` values: `idle`, `navigating`, `arrived`, `aborted`, `canceled`.
+
+**Feedback** (forwarded from the room interpreter):
+```json
+{"type": "feedback", "text": "Navigating to salle 101 (x=-8.1, y=-6.62)"}
+```
+
+**Room list** (response to `list_rooms`):
+```json
+{
+  "type": "rooms",
+  "rooms": {
+    "salle_101": {"x": -8.1, "y": -6.62, "aliases": ["room 101", "salle 101", "chambre 101"]},
+    "salle_cuisine": {"x": -8.66, "y": -27.77, "aliases": ["cuisine", "salle cuisine", "kitchen"]}
+  }
+}
+```
+
+**Error** (invalid room, malformed message, etc.):
+```json
+{"type": "error", "message": "Room not found: \"xyz\". Available: [\"salle_101\", ...]"}
+```
+
+#### Standalone client
+
+Here is an example of a ready to run client:
+
+```python
+import argparse
+import asyncio
+import json
+import sys
+ 
+try:
+    import websockets
+except ImportError:
+    print('Install websockets: pip install websockets')
+    sys.exit(1)
+ 
+ 
+async def main(host: str, port: int):
+    uri = f'ws://{host}:{port}'
+    print(f'Connecting to {uri} ...')
+ 
+    try:
+        async with websockets.connect(uri) as ws:
+            print(f'Connected to {uri}')
+            print()
+            print('Commands:')
+            print('  Type a room name or command to send the robot')
+            print('  "rooms"   — list available rooms')
+            print('  "status"  — query current navigation state')
+            print('  "quit"    — disconnect')
+            print()
+ 
+            # Task to receive and print server messages
+            async def receiver():
+                try:
+                    async for raw in ws:
+                        data = json.loads(raw)
+                        msg_type = data.get('type', '')
+ 
+                        if msg_type == 'status':
+                            state = data.get('state', '?')
+                            target = data.get('target', '')
+                            print(f'\n  [STATUS] {state}', end='')
+                            if target:
+                                print(f'  target={target}', end='')
+                            if data.get('robot_position'):
+                                pos = data['robot_position']
+                                print(
+                                    f'  robot=({pos["x"]}, {pos["y"]})',
+                                    end='',
+                                )
+                            if data.get('position_error_m') is not None:
+                                print(
+                                    f'  error={data["position_error_m"]}m',
+                                    end='',
+                                )
+                            if data.get('duration_s') is not None:
+                                print(
+                                    f'  duration={data["duration_s"]}s',
+                                    end='',
+                                )
+                            print()
+ 
+                        elif msg_type == 'feedback':
+                            print(f'  [FEEDBACK] {data.get("text", "")}')
+ 
+                        elif msg_type == 'ack':
+                            room = data.get('room', '')
+                            resolved = data.get('resolved_room_id', '')
+                            pos = data.get('target_position', {})
+                            print(
+                                f'  [ACK] "{room}" → {resolved} '
+                                f'(x={pos.get("x")}, y={pos.get("y")})'
+                            )
+ 
+                        elif msg_type == 'rooms':
+                            print('\n  Available rooms:')
+                            for rid, info in data.get('rooms', {}).items():
+                                aliases = ', '.join(info.get('aliases', []))
+                                print(
+                                    f'    {rid:20s}  '
+                                    f'x={info["x"]:8.2f}  '
+                                    f'y={info["y"]:8.2f}  '
+                                    f'aliases: {aliases}'
+                                )
+                            print()
+ 
+                        elif msg_type == 'error':
+                            print(
+                                f'  [ERROR] {data.get("message", "unknown")}'
+                            )
+ 
+                        else:
+                            print(f'  [MSG] {json.dumps(data)}')
+ 
+                        # Re-show prompt
+                        print('> ', end='', flush=True)
+ 
+                except websockets.exceptions.ConnectionClosed:
+                    print('\nConnection closed by server.')
+ 
+            recv_task = asyncio.create_task(receiver())
+ 
+            # Input loop (run in executor so it doesn't block)
+            loop = asyncio.get_event_loop()
+            try:
+                while True:
+                    print('> ', end='', flush=True)
+                    line = await loop.run_in_executor(
+                        None, sys.stdin.readline
+                    )
+                    line = line.strip()
+ 
+                    if not line:
+                        continue
+ 
+                    if line.lower() == 'quit':
+                        break
+ 
+                    elif line.lower() == 'rooms':
+                        await ws.send(json.dumps({
+                            'type': 'list_rooms',
+                        }))
+ 
+                    elif line.lower() == 'status':
+                        await ws.send(json.dumps({
+                            'type': 'get_status',
+                        }))
+ 
+                    else:
+                        await ws.send(json.dumps({
+                            'type': 'room_command',
+                            'room': line,
+                        }))
+ 
+            except (KeyboardInterrupt, EOFError):
+                pass
+            finally:
+                recv_task.cancel()
+ 
+    except ConnectionRefusedError:
+        print(f'Could not connect to {uri} — is ws_command_bridge running?')
+        sys.exit(1)
+    except Exception as e:
+        print(f'Connection error: {e}')
+        sys.exit(1)
+ 
+ 
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description='WebSocket client for CloudTwin robot commands',
+    )
+    parser.add_argument(
+        '--host', default='localhost',
+        help='IP or hostname of the ROS machine (default: localhost)',
+    )
+    parser.add_argument(
+        '--port', type=int, default=9090,
+        help='WebSocket port (default: 9090)',
+    )
+    args = parser.parse_args()
+ 
+    asyncio.run(main(args.host, args.port))
+```
+
+```bash
+python3 ws_robot_client.py --host 192.168.1.42 --port 9090
+```
+
+Type a room name to navigate, `rooms` to list destinations, `status` to poll, `quit` to disconnect. The client prints all status updates as they arrive, so you know when the robot has reached its destination before sending the next command.
+
+---
 
 ### Foxglove (remote panel)
 
