@@ -125,7 +125,7 @@ source /opt/ros/humble/setup.bash
 
 ## Launching the system automaticly
 
-Simplyopen a terminal on your Ubuntu computer and navigate to rge repo of the project. Then you only need to launch the simulation.launch.py file as shown below :
+Simply open a terminal on your Ubuntu computer and navigate to rge repo of the project. Then you only need to launch the simulation.launch.py file as shown below :
 
 ```bash
 cd ~/Documents/CloudTwin/Code
