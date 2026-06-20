@@ -123,7 +123,17 @@ source /opt/ros/humble/setup.bash
 
 ---
 
-## Launching the system
+## Launching the system automaticly
+
+Simplyopen a terminal on your Ubuntu computer and navigate to rge repo of the project. Then you only need to launch the simulation.launch.py file as shown below :
+
+```bash
+cd ~/Documents/CloudTwin/Code
+source install/setup.bash
+ros2 launch digital_twin simulation.launch.py
+```
+
+## Launching the system individually
 
 ### Terminal 1 - Base stack
 
