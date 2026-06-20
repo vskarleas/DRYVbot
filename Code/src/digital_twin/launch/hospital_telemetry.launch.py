@@ -18,11 +18,8 @@ from ament_index_python.packages import get_package_share_directory
 def generate_launch_description():
     digital_twin_dir = get_package_share_directory('digital_twin')
     nav2_bringup_dir = get_package_share_directory('nav2_bringup')
-    robot_simulation_dir = get_package_share_directory('robot_simulation')
 
     # ===== Launch arguments =====
-    target_url = LaunchConfiguration('target_url')
-    send_frequency_hz = LaunchConfiguration('send_frequency_hz')
     enable_rviz = LaunchConfiguration('enable_rviz')
     enable_obstacles = LaunchConfiguration('enable_obstacles')
     obstacle_scenario = LaunchConfiguration('obstacle_scenario')
@@ -35,20 +32,10 @@ def generate_launch_description():
     goal_z = LaunchConfiguration('goal_z')
     goal_delay_sec = LaunchConfiguration('goal_delay_sec')
 
-    declare_target_url = DeclareLaunchArgument(
-        'target_url',
-        default_value='https://proj-sys880.calme2me.com/api/data',
-        description='Target URL for telemetry export.'
-    )
     declare_enable_rviz = DeclareLaunchArgument(
         'enable_rviz',
         default_value='true',
         description='Enable RViz2 for Nav2 visualization.'
-    )
-    declare_send_frequency_hz = DeclareLaunchArgument(
-        'send_frequency_hz',
-        default_value='1.0',
-        description='Telemetry sending frequency in Hz.'
     )
 
     declare_enable_obstacles = DeclareLaunchArgument(
@@ -66,7 +53,7 @@ def generate_launch_description():
     declare_enable_telemetry = DeclareLaunchArgument(
         'enable_telemetry',
         default_value='true',
-        description='Enable telemetry exporter.'
+        description='Enable simulation logger.'
     )
 
     declare_enable_test_goal = DeclareLaunchArgument(
@@ -103,63 +90,25 @@ def generate_launch_description():
     hospital_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(digital_twin_dir, 'launch', 'hospital.launch.py')
-        )
+        ),
+        launch_arguments={
+            'enable_obstacles': enable_obstacles,
+            'obstacle_scenario': obstacle_scenario,
+        }.items(),
     )
 
-    
-    # ===== 2. Dynamic obstacles =====
-    obstacle_spawner = TimerAction(
-        period=20.0,
-        actions=[
-            ExecuteProcess(
-                cmd=[
-                    'python3',
-                    os.path.join(
-                        robot_simulation_dir,
-                        'scripts',
-                        'obstacle_spawner.py'
-                    ),
-                    '--ros-args',
-                    '-p',
-                    ['scenario:=', obstacle_scenario],
-                ],
-                condition=IfCondition(enable_obstacles),
-                output='screen',
-            )
-        ]
+    # ===== 2. Digital twin logic =====
+    logic_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(digital_twin_dir, 'launch', 'logic.launch.py')
+        ),
+        launch_arguments={
+            'enable_sim_logger': enable_telemetry,
+            'enable_ws_bridge': 'true',
+        }.items(),
     )
 
-    # ===== 3. Telemetry exporter =====
-    telemetry_exporter = TimerAction(
-        period=12.0,
-        actions=[
-            Node(
-                package='digital_twin',
-                executable='telemetry_exporter',
-                name='telemetry_exporter',
-                parameters=[{
-                    'target_url': target_url,
-                    'send_frequency_hz': send_frequency_hz,
-                    'frame_id': 'map',
-                    'odom_topic': '/bcr_bot/odom',
-                    'cmd_vel_topic': '/cmd_vel',
-                    'plan_topic': '/plan',
-                    'goal_topic': '/goal_pose',
-                    'obstacles_topic': '/people_positions',
-                    'clock_topic': '/clock',
-                    'trajectory_history_size': 100,
-                    'max_plan_points': 150,
-                    'obstacle_on_path_threshold_m': 0.75,
-                    'base_path_weight': 1.0,
-                    'obstacle_weight_increment': 0.25,
-                }],
-                condition=IfCondition(enable_telemetry),
-                output='screen',
-            )
-        ]
-    )
-
-    # ===== 4. Optional automatic test goal =====
+    # ===== 3. Optional automatic test goal =====
     test_goal = TimerAction(
         period=goal_delay_sec,
         actions=[
@@ -186,7 +135,7 @@ def generate_launch_description():
             )
         ]
     )
-        # ===== 5. RViz2 for Nav2 =====
+    # ===== 4. RViz2 for Nav2 =====
     rviz_config_file = os.path.join(
         nav2_bringup_dir,
         'rviz',
@@ -212,9 +161,6 @@ def generate_launch_description():
 
 
     return LaunchDescription([
-        declare_target_url,
-        declare_send_frequency_hz,
-
         declare_enable_obstacles,
         declare_obstacle_scenario,
 
@@ -228,8 +174,7 @@ def generate_launch_description():
         declare_goal_delay_sec,
 
         hospital_launch,
-        obstacle_spawner,
-        telemetry_exporter,
+        logic_launch,
         rviz2,
         test_goal,
     ])
