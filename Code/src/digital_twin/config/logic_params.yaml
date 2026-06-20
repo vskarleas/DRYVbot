@@ -9,7 +9,7 @@ crowd_monitor:
 
 room_interpreter:
   ros__parameters:
-    registry_path: "/home/vskarleas/Documents/CloudTwin/Code/src/digital_twin/config/room_registry.yaml"             # path to room_registry.yaml (resolved at launch)
+    registry_path: ""
 
 speech_node:
   ros__parameters:
