@@ -172,15 +172,21 @@ Clone and build</h2>
 <div class="fragment"><div class="line">source /opt/ros/humble/setup.bash</div>
 </div><!-- fragment --><hr  />
 <h1><a class="anchor" id="autotoc_md12"></a>
-Launching the system</h1>
-<h2><a class="anchor" id="autotoc_md13"></a>
+Launching the system automaticly</h1>
+<p>Simply open a terminal on your Ubuntu computer and navigate to rge repo of the project. Then you only need to launch the <a class="el" href="simulation_8launch_8py.html">simulation.launch.py</a> file as shown below :</p>
+<div class="fragment"><div class="line">cd ~/Documents/CloudTwin/Code</div>
+<div class="line">source install/setup.bash</div>
+<div class="line">ros2 launch digital_twin simulation.launch.py</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md13"></a>
+Launching the system individually</h1>
+<h2><a class="anchor" id="autotoc_md14"></a>
 Terminal 1 - Base stack</h2>
 <p>Starts Gazebo with the hospital world, bcr_bot, Nav2 navigation, obstacle spawner, cmd_vel relay, initial pose publisher, and Foxglove bridge:</p>
 <div class="fragment"><div class="line">cd ~/Documents/CloudTwin/Code</div>
 <div class="line">source install/setup.bash</div>
 <div class="line">ros2 launch digital_twin hospital.launch.py</div>
 </div><!-- fragment --><p>Wait approximately 30 seconds for everything to initialise.</p>
-<h2><a class="anchor" id="autotoc_md14"></a>
+<h2><a class="anchor" id="autotoc_md15"></a>
 Terminal 2 - AI intelligence layer</h2>
 <p>Starts the crowd monitor (dynamic map overlay), room interpreter (text commands), and speech node (voice commands):</p>
 <div class="fragment"><div class="line">cd ~/Documents/CloudTwin/Code</div>
@@ -188,7 +194,7 @@ Terminal 2 - AI intelligence layer</h2>
 <div class="line">ros2 launch digital_twin logic.launch.py</div>
 </div><!-- fragment --><p>To enable the simulation logger (records departure/arrival data per room command to <code>simulation_logs/</code>):</p>
 <div class="fragment"><div class="line">ros2 launch digital_twin logic.launch.py enable_sim_logger:=true</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md15"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md16"></a>
 Simulation log format</h4>
 <p>Each simulation run produces a JSON file in <code>simulation_logs/</code> named <code>simulation_&lt;YYYY-MM-DD_HH-MM-SS&gt;.json</code>. The file contains one record per room command:</p>
 <div class="fragment"><div class="line">{</div>
@@ -231,20 +237,20 @@ Simulation log format</h4>
 <li>**<code>status</code>** — outcome of the navigation: <code>succeeded</code>, <code>aborted</code>, <code>canceled</code>, <code>interrupted</code> (new command received before arrival), or <code>shutdown</code> (node stopped mid-navigation)</li>
 </ul>
 <hr  />
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md18"></a>
 Websocket for communication to the system via a computer that do not run ROS</h2>
 <p>The <code>ws_command_bridge</code> node runs a WebSocket server on port 9090 (configurable via <code>ws_port</code> launch argument). Any computer on the network can connect without ROS being installed. To disable the WebSocket bridge or change its port on the server side:</p>
 <div class="fragment"><div class="line">ros2 launch digital_twin logic.launch.py enable_ws_bridge:=false</div>
 <div class="line">ros2 launch digital_twin logic.launch.py ws_port:=8080</div>
 </div><!-- fragment --><p><b>Connection:</b> </p><div class="fragment"><div class="line">ws://&lt;ROS_MACHINE_IP&gt;:9090</div>
 </div><!-- fragment --><p>On connect, the server immediately sends the current navigation state.</p>
-<h3><a class="anchor" id="autotoc_md18"></a>
+<h3><a class="anchor" id="autotoc_md19"></a>
 Client → Server messages</h3>
 <p><b>Send the robot to a room:</b> </p><div class="fragment"><div class="line">{&quot;type&quot;: &quot;room_command&quot;, &quot;room&quot;: &quot;salle 101&quot;}</div>
 </div><!-- fragment --><p> The <code>room</code> field accepts any name or alias from <code><a class="el" href="room__registry_8yaml.html">room_registry.yaml</a></code> (e.g. <code>"room 101"</code>, <code>"cuisine"</code>, <code>"pharmacy"</code>, <code>"charging station"</code>). The command is validated against the registry before being forwarded to the robot — invalid rooms return an error.</p>
 <p><b>List available rooms:</b> </p><div class="fragment"><div class="line">{&quot;type&quot;: &quot;list_rooms&quot;}</div>
 </div><!-- fragment --><p><b>Query current navigation state:</b> </p><div class="fragment"><div class="line">{&quot;type&quot;: &quot;get_status&quot;}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md19"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md20"></a>
 Server → Client messages</h3>
 <p><b>Acknowledgement</b> (sent to the requesting client after a valid room command): </p><div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;type&quot;: &quot;ack&quot;,</div>
@@ -270,7 +276,7 @@ Server → Client messages</h3>
 <div class="line">  }</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><b>Error</b> (invalid room, malformed message, etc.): </p><div class="fragment"><div class="line">{&quot;type&quot;: &quot;error&quot;, &quot;message&quot;: &quot;Room not found: \&quot;xyz\&quot;. Available: [\&quot;salle_101\&quot;, ...]&quot;}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md20"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md21"></a>
 Standalone client</h3>
 <p>Here is an example of a ready to run client:</p>
 <div class="fragment"><div class="line">import argparse</div>
@@ -434,7 +440,7 @@ Standalone client</h3>
 </div><!-- fragment --><p>To run it, type a room name to navigate, <code>rooms</code> to list destinations, <code>status</code> to poll, <code>quit</code> to disconnect. The client prints all status updates as they arrive, so you know when the robot has reached its destination before sending the next command.</p>
 <div class="fragment"><div class="line">python3 ws_robot_client.py --host 192.168.1.42 --port 9090</div>
 </div><!-- fragment --><hr  />
-<h2><a class="anchor" id="autotoc_md22"></a>
+<h2><a class="anchor" id="autotoc_md23"></a>
 Foxglove (remote panel)</h2>
 <ol type="1">
 <li>Open <a href="https://app.foxglove.dev">https://app.foxglove.dev</a> in a browser</li>
@@ -446,7 +452,7 @@ Foxglove (remote panel)</h2>
 <div class="fragment"><div class="line">ros2 topic pub --once /goal_pose geometry_msgs/PoseStamped \</div>
 <div class="line">  &quot;{header: {frame_id: &#39;map&#39;}, pose: {position: {x: 3.0, y: 0.0, z: 0.0}, orientation: {w: 1.0}}}&quot;</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md24"></a>
+<h1><a class="anchor" id="autotoc_md25"></a>
 Creating the map</h1>
 <p>The hospital map was generated using slam_toolbox. To recreate it or create a map for a different world:</p>
 <ol type="1">
@@ -481,7 +487,7 @@ Creating the map</h1>
 <div class="fragment"><div class="line">cd ~/path_to_save_map</div>
 <div class="line">ros2 run nav2_map_server map_saver_cli -f hospital_map</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md26"></a>
+<h1><a class="anchor" id="autotoc_md27"></a>
 Versions</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -546,9 +552,9 @@ Versions</h1>
 <td class="markdownTableBodyNone">V6.3.0   </td><td class="markdownTableBodyNone">Created websocket to receive command from a no ROS system (do not like the idea) and added support to save a simulation in a JSON format   </td></tr>
 </table>
 <hr  />
-<h1><a class="anchor" id="autotoc_md28"></a>
+<h1><a class="anchor" id="autotoc_md29"></a>
 TO-DO</h1>
-<h2><a class="anchor" id="autotoc_md29"></a>
+<h2><a class="anchor" id="autotoc_md30"></a>
 robot_simulation</h2>
 <ul>
 <li>[X] Spawn robot and verify sensors</li>
@@ -557,7 +563,7 @@ robot_simulation</h2>
 <li>[X] Simulate people detection using Gazebo Fuel models</li>
 <li>[X] Obstacle spawner for dynamic people at known positions</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md30"></a>
+<h2><a class="anchor" id="autotoc_md31"></a>
 digital_twin</h2>
 <ul>
 <li>[X] Create the <a class="el" href="namespacedigital__twin.html">digital_twin</a> package</li>
@@ -570,7 +576,7 @@ digital_twin</h2>
 <li>[X] Local safety controller for emergency braking</li>
 <li>[X] Demo scenarios: nominal navigation, dynamic obstacle avoidance</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md31"></a>
+<h2><a class="anchor" id="autotoc_md32"></a>
 visualisation</h2>
 <ul>
 <li>[X] Connect Foxglove via websocket bridge</li>

@@ -99,48 +99,7 @@ Variables</h2></td></tr>
 <tr class="separator:a18bbeccd9b1cd919f2d7444bcd1b389d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">ws_command_bridge.py — WebSocket bridge for remote room commands.
-
-Allows a non-ROS computer on the network to:
-  1. Send room commands  →  published to /room_command
-  2. Receive navigation status updates (idle, navigating, arrived, error)
-  3. Query available rooms from the registry
-
-Protocol (JSON over WebSocket):
-
-  Client → Server:
-    {"type": "room_command", "room": "salle 101"}
-    {"type": "list_rooms"}
-
-  Server → Client:
-    {"type": "status", "state": "idle"}
-    {"type": "status", "state": "navigating", "target": "salle_101",
-     "target_position": {"x": -8.1, "y": -6.62}}
-    {"type": "status", "state": "arrived", "target": "salle_101",
-     "robot_position": {"x": -8.09, "y": -6.60},
-     "position_error_m": 0.023, "duration_s": 14.2}
-    {"type": "status", "state": "aborted", "target": "salle_101"}
-    {"type": "rooms", "rooms": {...}}
-    {"type": "feedback", "text": "Navigating to salle 101 (x=-8.1, y=-6.62)"}
-    {"type": "error", "message": "Room not found: xyz"}
-    {"type": "ack", "command": "room_command", "room": "salle 101"}
-
-WebSocket server listens on 0.0.0.0:&lt;port&gt; (default 9090).
-
-Subscribes:
-    /room_command_feedback              (std_msgs/String)
-    /navigate_to_pose/_action/status    (action_msgs/GoalStatusArray)
-    /bcr_bot/odom                       (nav_msgs/Odometry)
-    /clock                              (rosgraph_msgs/Clock)
-
-Publishes:
-    /room_command                       (std_msgs/String)
-
-Parameters:
-    ws_port         (int)    — WebSocket server port (default 9090)
-    room_registry   (str)    — path to room_registry.yaml
-    odom_topic      (str)    — odometry topic
-</pre> </div><h2 class="groupheader">Function Documentation</h2>
+<div class="textblock"><pre class="fragment">WebSocket bridge for remote room commands.</pre> </div><h2 class="groupheader">Function Documentation</h2>
 <a id="aa41ba8242f9e7134d7a7f7c7055aa887"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa41ba8242f9e7134d7a7f7c7055aa887">&#9670;&nbsp;</a></span>main()</h2>
 
