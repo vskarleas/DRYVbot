@@ -48,7 +48,7 @@ Makes Nav2 replan around corridors blocked by moving humans. Without this node, 
 │  1. Cache the static map (501×1127)  │
 │  2. For each human position:         │
 │     - Compute a 2D Gaussian blob     │
-│       (sigma = 1.35m, 3σ radius)     │
+│       (sigma = 0.80m, 3σ radius)     │
 │     - Peak value = density_scale     │
 │  3. Sum all Gaussians → density grid │
 │  4. Scale to 0-100                   │
@@ -70,7 +70,7 @@ For each human at position (x, y), the node computes a 2D Gaussian:
 density(r, c) = exp( -((r - row)² + (c - col)²) / (2 × σ_px²) )
 ```
 
-where `σ_px = gaussian_sigma / map_resolution`. With `sigma = 1.35m` and `resolution = 0.05m/px`, the Gaussian extends approximately 81 pixels (1.35m) from each person's centre.
+where `σ_px = gaussian_sigma / map_resolution`. With `sigma = 0.80m` and `resolution = 0.05m/px`, the 3σ influence radius extends approximately 48 pixels (2.4m) from each person's centre.
 
 Cells where the scaled density exceeds `lethal_threshold` are marked as **occupied (value 100)** in the OccupancyGrid, identical to a wall. Nav2's costmap treats them as impassable, forcing a global replan through an alternative corridor.
 
@@ -78,11 +78,13 @@ Cells where the scaled density exceeds `lethal_threshold` are marked as **occupi
 
 The `lethal_threshold` parameter controls how far from each person the virtual wall extends:
 
+Approximate wall radius with the current `gaussian_sigma: 0.80` and `density_scale: 30.0`:
+
 | lethal_threshold | Approximate wall radius |
 | ---------------- | ----------------------- |
-| 50               | ~1.2 m                  |
-| 25               | ~2.0 m                  |
-| 10               | ~2.8 m                  |
+| 25               | ~0.5 m                  |
+| 15               | ~0.9 m                  |
+| 10               | ~1.2 m                  |
 
 A lower threshold creates larger exclusion zones, making Nav2 more conservative.
 
@@ -92,8 +94,8 @@ A lower threshold creates larger exclusion zones, making Nav2 more conservative.
 crowd_monitor:
   ros__parameters:
     publish_rate: 2.0           # Hz
-    gaussian_sigma: 1.35        # metres
-    density_scale: 100.0        # peak value at person centre
+    gaussian_sigma: 0.80        # metres
+    density_scale: 30.0         # peak value at person centre
     lethal_threshold: 25        # cells above this → wall
 ```
 

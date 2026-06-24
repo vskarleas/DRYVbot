@@ -22,7 +22,10 @@ def generate_launch_description():
     # ===== Launch arguments =====
     enable_rviz = LaunchConfiguration('enable_rviz')
     enable_obstacles = LaunchConfiguration('enable_obstacles')
+    obstacle_mode = LaunchConfiguration('obstacle_mode')
     obstacle_scenario = LaunchConfiguration('obstacle_scenario')
+    random_obstacle_scenario = LaunchConfiguration(
+        'random_obstacle_scenario')
 
     enable_telemetry = LaunchConfiguration('enable_telemetry')
 
@@ -48,6 +51,22 @@ def generate_launch_description():
         'obstacle_scenario',
         default_value='hospital',
         description='Obstacle scenario to use: hospital or corridors.'
+    )
+
+    declare_obstacle_mode = DeclareLaunchArgument(
+        'obstacle_mode',
+        default_value='fixed',
+        choices=['fixed', 'random', 'disabled'],
+        description=(
+            'Obstacle implementation: fixed legacy, controlled moving humans, or disabled.')
+    )
+
+    declare_random_obstacle_scenario = DeclareLaunchArgument(
+        'random_obstacle_scenario',
+        default_value='normal',
+        choices=[
+            'normal', 'crowd', 'emergency'],
+        description='Controlled moving-human scenario: normal, crowd, or emergency.'
     )
 
     declare_enable_telemetry = DeclareLaunchArgument(
@@ -93,7 +112,9 @@ def generate_launch_description():
         ),
         launch_arguments={
             'enable_obstacles': enable_obstacles,
+            'obstacle_mode': obstacle_mode,
             'obstacle_scenario': obstacle_scenario,
+            'random_obstacle_scenario': random_obstacle_scenario,
         }.items(),
     )
 
@@ -153,6 +174,9 @@ def generate_launch_description():
                 parameters=[{
                     'use_sim_time': True,
                 }],
+                remappings=[
+                    ('/waypoints', '/people_markers'),
+                ],
                 condition=IfCondition(enable_rviz),
                 output='screen',
             )
@@ -162,7 +186,9 @@ def generate_launch_description():
 
     return LaunchDescription([
         declare_enable_obstacles,
+        declare_obstacle_mode,
         declare_obstacle_scenario,
+        declare_random_obstacle_scenario,
 
         declare_enable_telemetry,
         declare_enable_rviz,

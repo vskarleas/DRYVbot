@@ -1,0 +1,32 @@
+random_obstacle_spawner:
+  ros__parameters:
+    scenario: "normal"
+
+    # Empty means: use maps/hospital_map.yaml from the installed package.
+    map_yaml: ""
+    map_frame: "map"
+    robot_frame: "base_link"
+    fallback_robot_position: [0.0, 2.0]
+    robot_tf_timeout: 5.0
+    gazebo_service_timeout: 30.0
+    spawn_response_timeout: 30.0
+
+    human_radius: 0.28
+    min_wall_distance: 0.50
+    min_robot_distance: 2.0
+    min_people_distance: 0.60
+    moving_people_distance: 0.60
+    arrival_tolerance: 0.08
+
+    update_rate: 10.0
+    gazebo_state_update_rate: 5.0
+    gazebo_state_timeout: 1.0
+
+    # emergency is deterministic: 8 fixed humans follow fixed routes.
+    emergency_start_time: 30.0
+    emergency_duration: 80.0
+    controlled_emergency_speed: 1.0
+
+    emergency_loop: true
+    # Delay after complete dispersal before the next gathering starts.
+    emergency_repeat_interval: 120.0

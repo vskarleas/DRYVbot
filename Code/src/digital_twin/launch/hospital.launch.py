@@ -8,7 +8,7 @@ from launch.actions import (
     SetEnvironmentVariable
 )
 from launch.conditions import IfCondition
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, PythonExpression
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
@@ -27,6 +27,10 @@ def generate_launch_description():
     nav2_params = os.path.join(digital_twin_dir, 'config', 'nav2_params.yaml')
     hospital_world = join(robot_simulation_dir, 'worlds', 'hospital.world')
     models_path = join(robot_simulation_dir, 'models')
+    random_obstacle_params = join(
+        robot_simulation_dir, 'config', 'random_obstacles_params.yaml')
+    random_obstacle_map = join(
+        robot_simulation_dir, 'maps', 'hospital_map.yaml')
 
     # ===== Environment: model paths for Gazebo Classic =====
     env_models = AppendEnvironmentVariable(
@@ -41,7 +45,10 @@ def generate_launch_description():
     
     # ===== Launch arguments for obstacles =====
     enable_obstacles = LaunchConfiguration('enable_obstacles')
+    obstacle_mode = LaunchConfiguration('obstacle_mode')
     obstacle_scenario = LaunchConfiguration('obstacle_scenario')
+    random_obstacle_scenario = LaunchConfiguration(
+        'random_obstacle_scenario')
 
     declare_enable_obstacles = DeclareLaunchArgument(
         'enable_obstacles',
@@ -53,6 +60,31 @@ def generate_launch_description():
         default_value='hospital',
         description='Obstacle scenario to use: hospital or corridors.'
     )
+    declare_obstacle_mode = DeclareLaunchArgument(
+        'obstacle_mode',
+        default_value='fixed',
+        choices=['fixed', 'random', 'disabled'],
+        description=(
+            'Obstacle implementation: fixed legacy, controlled moving humans, or disabled.')
+    )
+    declare_random_obstacle_scenario = DeclareLaunchArgument(
+        'random_obstacle_scenario',
+        default_value='normal',
+        choices=[
+            'normal', 'crowd', 'emergency'],
+        description='Controlled moving-human scenario: normal, crowd, or emergency.'
+    )
+
+    fixed_obstacles_enabled = IfCondition(PythonExpression([
+        "'", enable_obstacles,
+        "'.lower() in ('true', '1', 'yes') and '", obstacle_mode,
+        "'.lower() == 'fixed'",
+    ]))
+    random_obstacles_enabled = IfCondition(PythonExpression([
+        "'", enable_obstacles,
+        "'.lower() in ('true', '1', 'yes') and '", obstacle_mode,
+        "'.lower() == 'random'",
+    ]))
 
     # ===== 1a. Gazebo (with force_system DISABLED to prevent X4 drone) =====
     gazebo_launch = IncludeLaunchDescription(
@@ -167,15 +199,32 @@ def generate_launch_description():
                     '-p',
                     ['scenario:=', obstacle_scenario],
                 ],
-                condition=IfCondition(enable_obstacles),
+                condition=fixed_obstacles_enabled,
                 output='screen',
-            )
+            ),
+            Node(
+                package='robot_simulation',
+                executable='random_obstacle_spawner.py',
+                name='random_obstacle_spawner',
+                parameters=[
+                    random_obstacle_params,
+                    {
+                        'scenario': random_obstacle_scenario,
+                        'map_yaml': random_obstacle_map,
+                        'use_sim_time': True,
+                    },
+                ],
+                condition=random_obstacles_enabled,
+                output='screen',
+            ),
         ]
     )
 
     return LaunchDescription([
         declare_enable_obstacles,
+        declare_obstacle_mode,
         declare_obstacle_scenario,
+        declare_random_obstacle_scenario,
         env_models,
         env_bcr_models,
         env_gazebo_resources,

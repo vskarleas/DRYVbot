@@ -1,6 +1,7 @@
 Code/build/
 Code/install/
 Code/log/
+Code/simulation_logs/
 .vscode/
 __pycache__/
 *.pyc

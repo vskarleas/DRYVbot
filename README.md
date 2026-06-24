@@ -135,9 +135,85 @@ ros2 launch digital_twin simulation.launch.py
 
 ## Launching the system individually
 
-### Terminal 1 - Base stack
+### Full simulation
 
-Starts Gazebo with the hospital world, bcr_bot, Nav2 navigation, obstacle spawner, cmd_vel relay, initial pose publisher, and Foxglove bridge:
+Starts Gazebo with the hospital world, bcr_bot, Nav2 navigation, obstacle
+spawner, digital twin logic, RViz, cmd_vel relay, initial pose publisher, and
+Foxglove bridge:
+
+```bash
+cd ~/Documents/CloudTwin/Code
+source install/setup.bash
+ros2 launch digital_twin simulation.launch.py \
+  obstacle_mode:=random \
+  random_obstacle_scenario:=normal
+```
+
+Wait approximately 30 seconds for everything to initialise.
+
+The launch argument is still named `random_obstacle_scenario` for compatibility,
+but the current human scenarios are deterministic and controlled.
+
+### Obstacle modes
+
+The default obstacle mode remains `fixed` for backward compatibility.
+
+- `obstacle_mode:=fixed` launches the original `obstacle_spawner.py`.
+- `obstacle_mode:=random` launches the controlled moving-human spawner.
+- `obstacle_mode:=disabled` launches the simulation without obstacles.
+- `enable_obstacles:=false` also disables obstacle spawning.
+
+For controlled moving humans, use:
+
+```bash
+ros2 launch digital_twin simulation.launch.py \
+  obstacle_mode:=random \
+  random_obstacle_scenario:=normal
+```
+
+```bash
+ros2 launch digital_twin simulation.launch.py \
+  obstacle_mode:=random \
+  random_obstacle_scenario:=crowd
+```
+
+```bash
+ros2 launch digital_twin simulation.launch.py \
+  obstacle_mode:=random \
+  random_obstacle_scenario:=emergency
+```
+
+Available controlled scenarios are:
+
+- `normal`: 10 humans follow predefined patrol loops through the hospital.
+- `crowd`: 18 humans follow predefined patrol loops with wider coverage.
+- `emergency`: 8 humans follow fixed emergency routes. After
+  `emergency_start_time` seconds, they move to a separated gathering area. The
+  return phase begins after `emergency_duration` seconds, and a new emergency
+  can start after complete dispersal when `emergency_loop` is enabled.
+
+The controlled spawner parameters are in
+`robot_simulation/config/random_obstacles_params.yaml`. This file configures the
+map, wall/robot/person safety distances, Gazebo update rate, spawn timeout, and
+emergency timing. It no longer generates random trajectories.
+
+The spawner publishes `/people_positions` for the crowd monitor and
+`/people_markers` for RViz. The full simulation remaps the enabled Nav2
+`MarkerArray` display to `/people_markers`, showing each person as a small
+coloured circle.
+
+The standalone spawner command, with Gazebo already running, is:
+
+```bash
+ros2 run robot_simulation random_obstacle_spawner.py --ros-args \
+  --params-file $(ros2 pkg prefix robot_simulation)/share/robot_simulation/config/random_obstacles_params.yaml \
+  -p scenario:=normal
+```
+
+### Separate base stack
+
+If you only want Gazebo, bcr_bot, Nav2, the obstacle mode selected in
+`hospital.launch.py`, and Foxglove bridge, launch:
 
 ```bash
 cd ~/Documents/CloudTwin/Code
@@ -145,9 +221,10 @@ source install/setup.bash
 ros2 launch digital_twin hospital.launch.py
 ```
 
-Wait approximately 30 seconds for everything to initialise.
+### Separate AI intelligence layer
 
-### Terminal 2 - AI intelligence layer
+`simulation.launch.py` already includes this layer. Launch it separately only
+when using `hospital.launch.py` directly.
 
 Starts the crowd monitor (dynamic map overlay), room interpreter (text commands), and speech node (voice commands):
 
