@@ -23,10 +23,10 @@ random_obstacle_spawner:
     gazebo_state_timeout: 1.0
 
     # emergency is deterministic: 8 fixed humans follow fixed routes.
-    emergency_start_time: 30.0
-    emergency_duration: 80.0
+    emergency_start_time: 10.0
+    emergency_duration: 60.0
     controlled_emergency_speed: 1.0
 
     emergency_loop: true
     # Delay after complete dispersal before the next gathering starts.
-    emergency_repeat_interval: 120.0
+    emergency_repeat_interval: 80.0
