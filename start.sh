@@ -8,4 +8,4 @@ cd Code
 rm -rf build/ install/ log/
 colcon build
 source install/setup.bash
-ros2 launch digital_twin simulation.launch.py
+ros2 launch digital_twin simulation.launch.py obstacle_mode:=random random_obstacle_scenario:=emergency
