@@ -19,11 +19,11 @@ rooms:
     y: -6.77
     orientation_w: 0.5199
     aliases: ["room 201", "salle 201", "chambre 201"]
-  salle_cuisine:
+  salle_pharmacie:
     x: -8.66
     y: -27.77
     orientation_w: 0.5199
-    aliases: ["cuisine", "salle cuisine", "kitchen"]
+    aliases: ["pharmacie", "salle pharmacie", "pharmacy"]
   salle_reception:
     x: 2.55
     y: 7.49
@@ -34,8 +34,8 @@ rooms:
     y: 1.95
     orientation_w: 1.0
     aliases: ["charging station", "station de charge", "charge station"]
-  salle_pharmacie:
-    x: -7.96
-    y: 14.61
+  salle_103:
+    x: 2.90
+    y: -27.86
     orientation_w: 0.5199
-    aliases: ["pharmacie", "salle pharmacie", "pharmacy"]
+    aliases: ["room 103", "salle 103", "chambre 103"]
