@@ -175,6 +175,20 @@ def sample_route_points(start, waypoints):
     return samples
 
 
+def dense_segment_is_valid(grid, start, end):
+    distance = math.dist(start, end)
+    steps = max(1, int(math.ceil(distance / 0.01)))
+    for step in range(steps + 1):
+        ratio = step / steps
+        point = (
+            start[0] + ratio * (end[0] - start[0]),
+            start[1] + ratio * (end[1] - start[1]),
+        )
+        if not grid.is_valid_world(point):
+            return False
+    return True
+
+
 def sampled_routes_min_distance(routes):
     sampled = [
         sample_route_points(route.start, route.waypoints)
@@ -483,11 +497,13 @@ def test_controlled_emergency_routes_are_valid_on_hospital_map():
         current = route.start
         for waypoint in route.to_emergency:
             assert grid.line_is_valid(current, waypoint)
+            assert dense_segment_is_valid(grid, current, waypoint)
             current = waypoint
 
         current = route.gathering_point
         for waypoint in route.from_emergency:
             assert grid.line_is_valid(current, waypoint)
+            assert dense_segment_is_valid(grid, current, waypoint)
             current = waypoint
 
 
