@@ -60,7 +60,7 @@ Add this to `~/.bashrc` to make it persistent.
 
 ## Map mismatch between nodes
 
-**Problem:** The AI intelligence nodes were loading `corridors_map.yaml` (278×237 pixels, ~14×12m) while Nav2 was using `hospital_map.yaml` (501×1127 pixels, ~25×56m). The crowd monitor was computing density positions relative to the wrong map, so the Gaussian blobs appeared in completely wrong locations. This caused no visible errors — just silently wrong behaviour.
+**Problem:** The navigation logic nodes were loading `corridors_map.yaml` (278×237 pixels, ~14×12m) while Nav2 was using `hospital_map.yaml` (501×1127 pixels, ~25×56m). The crowd monitor was computing density positions relative to the wrong map, so the Gaussian blobs appeared in completely wrong locations. This caused no visible errors — just silently wrong behaviour.
 
 **Solution:** All nodes that load or reference a map must use the **exact same map file**. In `logic_params.yaml`, the `map_yaml_path` parameter was corrected to point to `hospital_map.yaml`. For the current architecture, `crowd_monitor` subscribes to `/map` from map_server (avoiding this issue entirely) instead of loading the map file directly.
 

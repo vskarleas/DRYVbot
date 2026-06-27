@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 96" fill="none">
+  <defs>
+    <linearGradient id="dryv-mark" x1="16" y1="10" x2="80" y2="86" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+
+  <g>
+    <rect x="16" y="24" width="52" height="40" rx="12" fill="url(#dryv-mark)"/>
+    <circle cx="34" cy="44" r="5" fill="#ffffff"/>
+    <circle cx="50" cy="44" r="5" fill="#ffffff"/>
+    <rect x="26" y="54" width="32" height="4" rx="2" fill="#ffffff" fill-opacity="0.9"/>
+    <rect x="26" y="10" width="32" height="12" rx="6" fill="url(#dryv-mark)"/>
+    <path d="M16 32H7" stroke="url(#dryv-mark)" stroke-width="5" stroke-linecap="round"/>
+    <path d="M77 32H68" stroke="url(#dryv-mark)" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="23" cy="76" r="7" fill="url(#dryv-mark)"/>
+    <circle cx="61" cy="76" r="7" fill="url(#dryv-mark)"/>
+  </g>
+
+  <text x="102" y="59" fill="#0f172a" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="38" font-weight="700" letter-spacing="2">DRYV BOT</text>
+</svg>

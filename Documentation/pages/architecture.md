@@ -4,14 +4,14 @@
 
 In a traditional mobile robot deployment, path planning and obstacle avoidance run onboard. For budget robots with limited CPUs, this is not feasible since Nav2 alone requires significant processing power. The solution is to offload computation to a **digital twin** running on a cloud server.
 
-The digital twin is a cloud-side replica of the robot's navigation intelligence. It receives sensor data from the physical robot, processes it using Nav2 and the AI intelligence layer, and sends back velocity commands. The robot itself becomes a thin client: it only runs sensors, motor drivers, and a lightweight safety controller.
+The digital twin is a cloud-side replica of the robot's navigation intelligence. It receives sensor data from the physical robot, processes it using Nav2 and the navigation logic layer, and sends back velocity commands. The robot itself becomes a thin client: it only runs sensors, motor drivers, and a lightweight safety controller.
 
 ```
 ┌──────────────────────────────────────────────────────────┐
 │                     CLOUD SERVER                         │
 │                                                          │
 │  ┌─────────────┐   ┌──────────┐   ┌───────────────────┐  │
-│  │  Nav2 Stack │   │ Costmap  │   │  AI Intelligence  │  │
+│  │  Nav2 Stack │   │ Costmap  │   │  Navigation Logic │  │
 │  │  (Planner + │◄──┤ (static  │◄──┤  Layer            │  │
 │  │   DWB)      │   │  + crowd)│   │  (crowd_monitor)  │  │
 │  └──────┬──────┘   └──────────┘   └───────────────────┘  │
@@ -172,14 +172,14 @@ The cloud-side intelligence includes everything the robot cannot run onboard
 digital_twin/
 ├── config/
 │   ├── nav2_params.yaml        # Nav2 planner/controller/costmap configuration
-│   ├── logic_params.yaml      # AI layer parameters (crowd, speech, rooms)
+│   ├── logic_params.yaml      # Navigation logic layer parameters (crowd, speech, rooms)
 │   └── room_registry.yaml      # Room name → map coordinate mapping
 ├── maps/
 │   ├── hospital_map.yaml       # Static map loaded by map_server
 │   └── hospital_map.pgm
 ├── launch/
 │   ├── hospital.launch.py      # Base stack: Gazebo + Nav2 + Foxglove + obstacle spawner
-│   └── logic.launch.py         # AI layer: crowd_monitor + room_interpreter + speech_node
+│   └── logic.launch.py         # Navigation logic layer: crowd_monitor + room_interpreter + speech_node
 ├── digital_twin/
 │   ├── crowd_monitor.py        # Dynamic map overlay for Nav2 replanning
 │   ├── room_interpreter.py     # Text command → Nav2 goal pose
@@ -192,7 +192,7 @@ digital_twin/
 
 ```bash
 ros2 launch digital_twin hospital.launch.py     # Base stack
-ros2 launch digital_twin logic.launch.py         # AI layer
+ros2 launch digital_twin logic.launch.py         # Navigation logic layer
 ```
 
 ---

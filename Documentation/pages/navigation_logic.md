@@ -1,6 +1,8 @@
-# AI intelligence layer
+# Navigation logic layer
 
-The AI intelligence layer adds smart navigation capabilities on top of Nav2. It consists of three ROS2 nodes and a Foxglove extension panel, all launched together via `logic.launch.py`.
+The navigation logic layer adds smart navigation capabilities on top of Nav2. It consists of three ROS2 nodes and a Foxglove extension panel, all launched together via `logic.launch.py` (hence the name).
+
+> **A note on naming.** Two of these nodes are **deterministic algorithms**, not machine learning: `crowd_monitor` is plain Gaussian/costmap math, and `room_interpreter` is string normalisation plus a YAML lookup. The only genuine ML here is `speech_node`, which runs the **Whisper** speech-to-text model. (The other learned model in CloudTwin is the LightGBM delivery-time predictor — see [delivery_optimization.md](delivery_optimization.md).) The layer is named for what it does — navigation *logic* — rather than being labelled "AI".
 
 ---
 
@@ -8,7 +10,7 @@ The AI intelligence layer adds smart navigation capabilities on top of Nav2. It 
 
 ```
 ┌───────────────────────────────────────────────────────────────────┐
-│                    AI Intelligence Layer                          │
+│                    Navigation Logic Layer                         │
 │                                                                   │
 │  ┌────────────────┐  ┌──────────────────┐  ┌──────────────────┐   │
 │  │ crowd_monitor  │  │ room_interpreter │  │   speech_node    │   │

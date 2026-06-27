@@ -1,0 +1,3 @@
+# This is a Laravel + React web application, not a ROS 2 package.
+# COLCON_IGNORE tells `colcon build` to skip this directory entirely so it
+# does not waste time scanning vendor/ and node_modules/ for packages.

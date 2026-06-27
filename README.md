@@ -10,7 +10,9 @@ Since we do not have a physical robot, Gazebo Classic 11 simulates the robot nav
 
 > For the full system architecture, feedback loop, and data flow diagrams, see **[Documentation/pages/architecture.md](Documentation/pages/architecture.md)**
 >
-> For the AI intelligence layer (crowd avoidance, room commands, voice control), see **[Documentation/pages/ai_layer.md](Documentation/pages/ai_layer.md)**
+> For the navigation logic layer (crowd avoidance, room commands, voice control), see **[Documentation/pages/navigation_logic.md](Documentation/pages/navigation_logic.md)**
+>
+> For the delivery optimizer logic and ML travel-time model, see **[Documentation/pages/delivery_optimization.md](Documentation/pages/delivery_optimization.md)**
 >
 > For the Foxglove user interface (layout, panels, topic visualisation), see **[Documentation/pages/foxglove.md](Documentation/pages/foxglove.md)**
 >
@@ -23,7 +25,7 @@ Since we do not have a physical robot, Gazebo Classic 11 simulates the robot nav
 The project is organised in the following ROS2 packages:
 
 - **`robot_simulation`** : World files (.world), saved maps, and the obstacle spawner that injects dynamic human models into the simulation. In a real deployment, this package would be replaced by the physical robot and its sensors.
-- **`digital_twin`** : The core of the project. Cloud-side intelligence that the robot cannot run onboard. Contains Nav2 configuration, hospital map, launch files, and the AI intelligence layer (crowd monitor, room interpreter, speech node).
+- **`digital_twin`** : The core of the project. Cloud-side intelligence that the robot cannot run onboard. Contains Nav2 configuration, hospital map, launch files, and the navigation logic layer (crowd monitor, room interpreter, speech node).
 - **`bcr_bot`** : The simulated robot. A differential drive robot with 2D lidar, camera, and IMU. Used in Gazebo Classic mode.
 
 ## Technologies
@@ -37,7 +39,6 @@ The project is organised in the following ROS2 packages:
 | Mapping       | slam_toolbox             | SLAM for map generation                  |
 | Visualisation | Foxglove (web)           | Real-time monitoring and user interface  |
 | Speech        | faster-whisper           | Local speech-to-text for voice commands  |
-| Perception    | OpenCV                   | Crowd density computation                |
 
 ---
 
@@ -78,7 +79,6 @@ sudo apt install libportaudio2 portaudio19-dev
 
 ```bash
 pip install faster-whisper sounddevice numpy pyyaml websockets --break-system-packages
-
 ```
 
 ### Clone and build
@@ -221,7 +221,7 @@ source install/setup.bash
 ros2 launch digital_twin hospital.launch.py
 ```
 
-### Separate AI intelligence layer
+### Separate navigation logic layer
 
 `simulation.launch.py` already includes this layer. Launch it separately only
 when using `hospital.launch.py` directly.
@@ -298,6 +298,7 @@ ros2 launch digital_twin logic.launch.py ws_port:=8080
 ```
 
 **Connection:**
+
 ```
 ws://<ROS_MACHINE_IP>:9090
 ```
@@ -307,17 +308,21 @@ On connect, the server immediately sends the current navigation state.
 #### Client → Server messages
 
 **Send the robot to a room:**
+
 ```json
 {"type": "room_command", "room": "salle 101"}
 ```
+
 The `room` field accepts any name or alias from `room_registry.yaml` (e.g. `"room 101"`, `"cuisine"`, `"pharmacy"`, `"charging station"`). The command is validated against the registry before being forwarded to the robot — invalid rooms return an error.
 
 **List available rooms:**
+
 ```json
 {"type": "list_rooms"}
 ```
 
 **Query current navigation state:**
+
 ```json
 {"type": "get_status"}
 ```
@@ -325,6 +330,7 @@ The `room` field accepts any name or alias from `room_registry.yaml` (e.g. `"roo
 #### Server → Client messages
 
 **Acknowledgement** (sent to the requesting client after a valid room command):
+
 ```json
 {
   "type": "ack",
@@ -336,18 +342,22 @@ The `room` field accepts any name or alias from `room_registry.yaml` (e.g. `"roo
 ```
 
 **Navigation status** (broadcast to all connected clients on state changes):
+
 ```json
 {"type": "status", "state": "navigating", "target": "salle_101",
  "target_position": {"x": -8.1, "y": -6.62}}
 ```
+
 ```json
 {"type": "status", "state": "arrived", "target": "salle_101",
  "robot_position": {"x": -8.09, "y": -6.60, "z": 0.0},
  "position_error_m": 0.0224, "duration_s": 23.333}
 ```
+
 ```json
 {"type": "status", "state": "aborted", "target": "salle_101"}
 ```
+
 ```json
 {"type": "status", "state": "idle", "target": null}
 ```
@@ -355,11 +365,13 @@ The `room` field accepts any name or alias from `room_registry.yaml` (e.g. `"roo
 Possible `state` values: `idle`, `navigating`, `arrived`, `aborted`, `canceled`.
 
 **Feedback** (forwarded from the room interpreter):
+
 ```json
 {"type": "feedback", "text": "Navigating to salle 101 (x=-8.1, y=-6.62)"}
 ```
 
 **Room list** (response to `list_rooms`):
+
 ```json
 {
   "type": "rooms",
@@ -371,6 +383,7 @@ Possible `state` values: `idle`, `navigating`, `arrived`, `aborted`, `canceled`.
 ```
 
 **Error** (invalid room, malformed message, etc.):
+
 ```json
 {"type": "error", "message": "Room not found: \"xyz\". Available: [\"salle_101\", ...]"}
 ```
@@ -639,6 +652,7 @@ The hospital map was generated using slam_toolbox. To recreate it or create a ma
 | V6.2.1  | hospital.launch.py updated to include obstacle_spawner                                                                                   |
 | V6.2.2  | Speech node for voice commands, integrated into logic.launch.py and Foxglove panel                                                       |
 | V6.3.0  | Created websocket to receive command from a no ROS system (do not like the idea) and added support to save a simulation in a JSON format |
+| V7.0.0  | Included the LGBM AI model and Laravel UI on the project                                                                                 |
 
 ---
 
@@ -671,3 +685,66 @@ The hospital map was generated using slam_toolbox. To recreate it or create a ma
 - [X] Real-time display of updated path, crowd density, and robot status
 - [X] Custom Foxglove panel for room commands (text + voice)
 - [X] Display robot coordinates, goal, and planning status
+
+---
+
+## Delivery optimization (web dashboard)
+
+`Code/src/delivery_optimization` is a **web application**, not a ROS 2 package.
+It is the [Laravel React Starter Kit](https://github.com/laravel/react-starter-kit), more precisely a Laravel 13 back end with a React 19 + Inertia front end, used as a management / supervision dashboard for the delivery robot. It connects to the running digital twin through the `DT_SOCKET_*` settings in its `.env` (the ROS side exposes a WebSocket bridge on port 9090, see the WebSocket section above).
+
+> A `COLCON_IGNORE` file is placed in this folder so `colcon build` skips i
+
+### Dependencies
+
+| Component      | Requirement                         | Notes                                                |
+| -------------- | ----------------------------------- | ---------------------------------------------------- |
+| PHP            | 8.4+ (required by`composer.lock`) | with`mbstring xml curl zip gd sqlite3 bcmath intl` |
+| Composer       | latest                              | PHP package manager                                  |
+| Node.js / npm  | Node 20+, npm 10+                   | front-end build (Vite)                               |
+| Database       | SQLite (default)                    | file at`database/database.sqlite`                  |
+| Laravel Reverb | bundled                             | WebSocket server for real-time UI updates            |
+
+Notable PHP packages: `inertiajs/inertia-laravel` (v3), `laravel/fortify`,
+`laravel/reverb`, `laravel/wayfinder`, `maatwebsite/excel` (Excel import/export),
+`smalot/pdfparser` (PDF parsing). Front-end: React 19, Inertia, TailwindCSS 4,
+Radix UI, Recharts, `laravel-echo` + `pusher-js` (Reverb client).
+
+### Required PHP extensions
+
+```text
+mbstring  xml  curl  zip  gd  sqlite3  bcmath  intl
+```
+
+---
+
+## Automated installation and launch
+
+Two helper scripts at the repository root automate everything described above.
+
+### `installation.sh` for one-time dependency setup
+
+Installs (and skips anything already present):
+
+- ROS 2 Humble system packages (Gazebo, Nav2, SLAM, Foxglove bridge, tools)
+- Python AI-layer packages (`faster-whisper`, `sounddevice`, `numpy`, `pyyaml`, `websockets`)
+- `rosdep` dependencies and the `bcr_bot` package (cloned into `Code/src/`)
+- PHP 8.4 + extensions (via `ppa:ondrej/php`) and Composer
+- The web app's Composer/npm dependencies, `.env`, SQLite database, and migrations
+
+```bash
+./installation.sh
+```
+
+> It does **not** install ROS 2 Humble itself. If ROS 2 is missing, follow the [installation guide](https://foxglove.dev/blog/installing-ros2-humble-on-ubuntu) first
+
+### `start.sh` that builds and launches everything
+
+Prompts for the obstacle scenario, starts the web app in the background (logs to `logs/web.log`, stopped automatically on Ctrl+C), then builds the ROS 2
+workspace and launches the simulation.
+
+```bash
+./start.sh                 # interactive scenario menu (emergency / normal / crowd)
+./start.sh emergency       # pick the scenario directly: emergency | normal | crowd
+NO_WEB=1 ./start.sh        # ROS simulation only, skip the web app
+```
