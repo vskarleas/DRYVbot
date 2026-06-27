@@ -1,7 +1,11 @@
 var searchData=
 [
-  ['test_5fcopyright_287',['test_copyright',['../namespacetest__copyright.html#a156f4f961887d49bfb4cc9f6e7f6af0a',1,'test_copyright']]],
-  ['test_5fflake8_288',['test_flake8',['../namespacetest__flake8.html#a19bfcf597a661a366225b7d0cedd123c',1,'test_flake8']]],
-  ['test_5fpep257_289',['test_pep257',['../namespacetest__pep257.html#ac69de1fd6a28f245460be3110acc273f',1,'test_pep257']]],
-  ['timer_5fcallback_290',['timer_callback',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a636b0b14fe9e299d6d9832c2e83d1050',1,'digital_twin::telemetry_exporter::TelemetryExporter']]]
+  ['main_1093',['main',['../namespacedigital__twin_1_1crowd__monitor.html#ac42990a5caa66c1a50f9dfb4789925ce',1,'digital_twin.crowd_monitor.main()'],['../namespacedigital__twin_1_1goal__relay.html#aadb104b84adc7dc24cb8a4924f1223a7',1,'digital_twin.goal_relay.main()'],['../namespacedigital__twin_1_1room__interpreter.html#acbcb3c4798bd78b8caed5e25e6c7eade',1,'digital_twin.room_interpreter.main()'],['../namespacedigital__twin_1_1simulation__logger.html#a0631f217c90367982458889d2f85e741',1,'digital_twin.simulation_logger.main()'],['../namespacedigital__twin_1_1speech__node.html#a366f366cd7d27219b58fd16f185787cc',1,'digital_twin.speech_node.main()'],['../namespacedigital__twin_1_1ws__command__bridge.html#aa41ba8242f9e7134d7a7f7c7055aa887',1,'digital_twin.ws_command_bridge.main()'],['../namespaceobstacle__spawner.html#a5933e2e42d9c4b13dc4897a5464f7f61',1,'obstacle_spawner.main()'],['../namespacerandom__obstacle__spawner.html#a133696e29f10906f236027ebce918d1a',1,'random_obstacle_spawner.main()']]],
+  ['managerdashboard_1094',['managerDashboard',['../classApp_1_1Http_1_1Controllers_1_1DashboardController.html#a03a00244d6bf536f13b98068525974c1',1,'App::Http::Controllers::DashboardController']]],
+  ['markorderdelivered_1095',['markOrderDelivered',['../classApp_1_1Services_1_1DtStatusService.html#aca6ea3f86dc4d5007982f9706b256a4e',1,'App::Services::DtStatusService']]],
+  ['markorderintransit_1096',['markOrderInTransit',['../classApp_1_1Services_1_1DtStatusService.html#a65d327b69bdc77918ae210a1e56ec1b2',1,'App::Services::DtStatusService']]],
+  ['markorderpending_1097',['markOrderPending',['../classApp_1_1Services_1_1DtStatusService.html#ad86aec8c9a78f5efcd95ede1352537f2',1,'App::Services::DtStatusService']]],
+  ['markroomascompleted_1098',['markRoomAsCompleted',['../classApp_1_1Services_1_1DtTaskQueueService.html#afcb250481c5d2f56fdb4ba4513c61120',1,'App::Services::DtTaskQueueService']]],
+  ['minimum_5femergency_5fdistance_1099',['minimum_emergency_distance',['../namespacetest__random__obstacle__spawner.html#a8f96a77585ef375f8926ee06fb4a9c68',1,'test_random_obstacle_spawner']]],
+  ['model_1100',['model',['../classApp_1_1Imports_1_1OrderImport.html#a2d78d58a8ef7be5a9ace5bcf03f8d29f',1,'App::Imports::OrderImport']]]
 ];

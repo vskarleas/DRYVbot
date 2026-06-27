@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['readme_2emd_218',['README.md',['../README_8md.html',1,'']]],
-  ['room_5finterpreter_2epy_219',['room_interpreter.py',['../room__interpreter_8py.html',1,'']]],
-  ['room_5fregistry_2eyaml_220',['room_registry.yaml',['../room__registry_8yaml.html',1,'']]]
+  ['logic_2elaunch_2epy_858',['logic.launch.py',['../logic_8launch_8py.html',1,'']]],
+  ['logic_5fparams_2eyaml_859',['logic_params.yaml',['../logic__params_8yaml.html',1,'']]]
 ];

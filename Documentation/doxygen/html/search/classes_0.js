@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['crowdmonitor_174',['CrowdMonitor',['../classdigital__twin_1_1crowd__monitor_1_1CrowdMonitor.html',1,'digital_twin::crowd_monitor']]]
+  ['appserviceprovider_692',['AppServiceProvider',['../classApp_1_1Providers_1_1AppServiceProvider.html',1,'App::Providers']]],
+  ['appsetting_693',['AppSetting',['../classApp_1_1Models_1_1AppSetting.html',1,'App::Models']]]
 ];

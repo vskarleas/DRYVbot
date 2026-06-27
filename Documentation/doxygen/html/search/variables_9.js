@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['maintainer_297',['maintainer',['../namespacesetup.html#aa1a7cf9bbf76004bb72697dc00bbee9d',1,'setup']]],
-  ['maintainer_5femail_298',['maintainer_email',['../namespacesetup.html#a92a81adbfdd219564d5246ce8d77f869',1,'setup']]],
-  ['map_5fpub_299',['map_pub',['../classdigital__twin_1_1crowd__monitor_1_1CrowdMonitor.html#a188b2340367a3470e3b741d52a5a35ea',1,'digital_twin::crowd_monitor::CrowdMonitor']]],
-  ['max_5fdur_300',['max_dur',['../classdigital__twin_1_1speech__node_1_1SpeechNode.html#a5c1d223fe10bf7270a39f953b159fb83',1,'digital_twin::speech_node::SpeechNode']]],
-  ['model_301',['model',['../classdigital__twin_1_1speech__node_1_1SpeechNode.html#a2116b913d58fc498f0dfe2f4072631c0',1,'digital_twin::speech_node::SpeechNode']]],
-  ['model_5fsize_302',['model_size',['../classdigital__twin_1_1speech__node_1_1SpeechNode.html#ab034f0fd97a7f15d6fb37064069709d8',1,'digital_twin::speech_node::SpeechNode']]]
+  ['import_1246',['import',['../use-clipboard_8ts.html#a59be084da8908b7d77ff34b25cd84488',1,'import():&#160;use-clipboard.ts'],['../use-current-url_8ts.html#a59be084da8908b7d77ff34b25cd84488',1,'import():&#160;use-current-url.ts'],['../use-echo_8ts.html#a59be084da8908b7d77ff34b25cd84488',1,'import():&#160;use-echo.ts'],['../use-flash-toast_8ts.html#a59be084da8908b7d77ff34b25cd84488',1,'import():&#160;use-flash-toast.ts'],['../use-mobile-navigation_8ts.html#a59be084da8908b7d77ff34b25cd84488',1,'import():&#160;use-mobile-navigation.ts'],['../use-order-notifications_8ts.html#a59be084da8908b7d77ff34b25cd84488',1,'import():&#160;use-order-notifications.ts'],['../use-two-factor-auth_8ts.html#a59be084da8908b7d77ff34b25cd84488',1,'import():&#160;use-two-factor-auth.ts'],['../dt-remote-socket_8ts.html#a59be084da8908b7d77ff34b25cd84488',1,'import():&#160;dt-remote-socket.ts'],['../utils_8ts.html#a59be084da8908b7d77ff34b25cd84488',1,'import():&#160;utils.ts']]],
+  ['install_5frequires_1247',['install_requires',['../namespacesetup.html#abead4f26b530856f858f0d44c7cf2588',1,'setup']]],
+  ['int_1248',['int',['../classrandom__obstacle__spawner_1_1RandomHuman.html#a7f0c7d077cfef05e4c432adc01fca4e8',1,'random_obstacle_spawner::RandomHuman']]],
+  ['iscurrentorparenturlfn_1249',['IsCurrentOrParentUrlFn',['../use-current-url_8ts.html#aade577133ed971bcbc8fd54df801f0be',1,'use-current-url.ts']]],
+  ['iscurrenturlfn_1250',['IsCurrentUrlFn',['../use-current-url_8ts.html#a06e3d5e028f612269f152f977ae1fdf3',1,'use-current-url.ts']]]
 ];

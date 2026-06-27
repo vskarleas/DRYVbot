@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['unambiguous_2emd_729',['unambiguous.md',['../unambiguous_8md.html',1,'']]],
-  ['unbound_2dmethod_2emd_730',['unbound-method.md',['../unbound-method_8md.html',1,'']]]
+  ['verifyemailcontroller_2ets_930',['VerifyEmailController.ts',['../VerifyEmailController_8ts.html',1,'']]],
+  ['vite_2denv_2ed_2ets_931',['vite-env.d.ts',['../vite-env_8d_8ts.html',1,'']]]
 ];

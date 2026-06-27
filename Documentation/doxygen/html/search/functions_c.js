@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['update_5facceleration_291',['update_acceleration',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a2e37375616c78657ce26b0846ee69451',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['update_5fcb_292',['update_cb',['../classobstacle__spawner_1_1ObstacleSpawner.html#a3bb9352ad0ab0338c0a7f2f17d61edef',1,'obstacle_spawner::ObstacleSpawner']]]
+  ['normalizeroomcode_1101',['normalizeRoomCode',['../classApp_1_1Services_1_1DtStatusService.html#aeb78e7328bb42bb7b0679733ba7f1069',1,'App\Services\DtStatusService\normalizeRoomCode()'],['../classApp_1_1Services_1_1DtTaskQueueService.html#ae2288958fba2c3b91d4a58cf2cf2a9a9',1,'App\Services\DtTaskQueueService\normalizeRoomCode()']]]
 ];

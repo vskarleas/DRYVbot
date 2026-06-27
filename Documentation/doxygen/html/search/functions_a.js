@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['sample_5fpoints_283',['sample_points',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a50b6bdaeb203d9f844579a800033cb3f',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['save_5fpayload_5fto_5ffile_284',['save_payload_to_file',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a9ceaf6c49218a660e555b88e6bba7c13',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['send_5fpayload_285',['send_payload',['../classdigital__twin_1_1telemetry__exporter_1_1TelemetryExporter.html#a27b1cb9b123c29461836d47a1f8f3de0',1,'digital_twin::telemetry_exporter::TelemetryExporter']]],
-  ['spawn_5fpeople_286',['spawn_people',['../classobstacle__spawner_1_1ObstacleSpawner.html#a65a4e39af4c0cd6f4a87426178014bc1',1,'obstacle_spawner::ObstacleSpawner']]]
+  ['line_5fis_5fvalid_1090',['line_is_valid',['../classrandom__obstacle__core_1_1OccupancyMap.html#a4388a992713f3611dbac99067665d01d',1,'random_obstacle_core.OccupancyMap.line_is_valid()'],['../classtest__random__obstacle__spawner_1_1OpenMap.html#a71733287ada1cc8da736f205cb7a9bc6',1,'test_random_obstacle_spawner.OpenMap.line_is_valid()']]],
+  ['load_1091',['load',['../classrandom__obstacle__core_1_1OccupancyMap.html#a4319801780b461c40016f81b967813e6',1,'random_obstacle_core::OccupancyMap']]],
+  ['logremotewebsocketpayload_1092',['logRemoteWebSocketPayload',['../classApp_1_1Console_1_1Commands_1_1DispatchDtSocketCommand.html#a33fb89d275685808a0f2cedda0ad3ef2',1,'App::Console::Commands::DispatchDtSocketCommand']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['update_5fcb_163',['update_cb',['../classobstacle__spawner_1_1ObstacleSpawner.html#a3bb9352ad0ab0338c0a7f2f17d61edef',1,'obstacle_spawner::ObstacleSpawner']]]
+  ['queryparams_490',['queryParams',['../wayfinder_2index_8ts.html#a41d6ad6a18060442581176feea43062c',1,'index.ts']]],
+  ['queryparams_491',['QueryParams',['../wayfinder_2index_8ts.html#ab349f2318df1def64a0a44c212593fdb',1,'index.ts']]]
 ];

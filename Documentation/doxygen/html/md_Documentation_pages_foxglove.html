@@ -68,7 +68,7 @@ $(function() {
 <div class="title">Foxglove user interface </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md83"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md85"></a>
 Edge / fog computing architecture</h1>
 <p>The system is designed around an edge/fog computing model. The simulation (or in a real deployment, the physical robot and its sensors) runs <b>on-site</b> as the edge layer. The digital twin processes navigation intelligence locally or on a nearby fog server. Foxglove acts as a <b>remote supervision panel (RP2)</b> that can be accessed from any computer, either on the same machine, on the local network, or remotely over the cloud via an API.</p>
 <p>This architecture means that:</p>
@@ -97,7 +97,7 @@ Edge / fog computing architecture</h1>
 <div class="line">│  ws://&lt;ip&gt;:8765              │</div>
 <div class="line">└──────────────────────────────┘</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md85"></a>
+<h1><a class="anchor" id="autotoc_md87"></a>
 Connection setup</h1>
 <ol type="1">
 <li>Open <a href="https://app.foxglove.dev">https://app.foxglove.dev</a> in a browser (Chrome recommended)</li>
@@ -106,13 +106,13 @@ Connection setup</h1>
 <li>The Foxglove bridge runs on port 8765, started automatically by <code><a class="el" href="hospital_8launch_8py.html">hospital.launch.py</a></code></li>
 </ol>
 <hr  />
-<h1><a class="anchor" id="autotoc_md87"></a>
+<h1><a class="anchor" id="autotoc_md89"></a>
 Installing the layout</h1>
 <p>A pre-configured layout is saved in the project repository:</p>
 <div class="fragment"><div class="line">Foxglove/foxglove_layout/CloudTwin.json</div>
 </div><!-- fragment --><p>To load it: in Foxglove, click <b>Layout</b> (top-left) → <b>Import layout</b> → select <code>CloudTwin.json</code>.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md89"></a>
+<h1><a class="anchor" id="autotoc_md91"></a>
 Installing the room command panel</h1>
 <p>The custom Foxglove extension for voice/text room commands is in:</p>
 <div class="fragment"><div class="line">Foxglove/foxglove_panels/room-command-panel/</div>
@@ -131,7 +131,7 @@ Installing the room command panel</h1>
 <div class="line">npm install --save-dev @foxglove/extension</div>
 <div class="line">npm run package</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md91"></a>
+<h1><a class="anchor" id="autotoc_md93"></a>
 Layout structure</h1>
 <p>The layout is split into two main areas: a <b>3D map panel</b> on the left (50% width), and a <b>tabbed panel</b> on the right with three tabs.</p>
 <div class="fragment"><div class="line">┌──────────────────────┬──────────────────────┐</div>
@@ -147,10 +147,10 @@ Layout structure</h1>
 <div class="line">│                      │                      │</div>
 <div class="line">└──────────────────────┴──────────────────────┘</div>
 </div><!-- fragment --><hr  />
-<h1><a class="anchor" id="autotoc_md93"></a>
+<h1><a class="anchor" id="autotoc_md95"></a>
 3D map panel (left side)</h1>
 <p>The main visualisation panel. Fixed frame is <code>map</code>, follow mode is <code>follow-pose</code>.</p>
-<h2><a class="anchor" id="autotoc_md94"></a>
+<h2><a class="anchor" id="autotoc_md96"></a>
 Visible topics</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -180,7 +180,7 @@ Visible topics</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>/initialpose</code>   </td><td class="markdownTableBodyNone">PoseWithCovarianceStamped   </td><td class="markdownTableBodyNone">Initial pose estimate   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md95"></a>
+<h2><a class="anchor" id="autotoc_md97"></a>
 Hidden topics (available for debug)</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -196,12 +196,12 @@ Hidden topics (available for debug)</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code>/bcr_bot/kinect_camera/*</code>   </td><td class="markdownTableBodyNone">Camera feeds shown in the Teleop tab instead   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md96"></a>
+<h2><a class="anchor" id="autotoc_md98"></a>
 Publishing goals</h2>
 <p>The 3D panel is configured to publish <b>pose goals</b> on <code>/goal_pose_foxglove</code> when you click on the map. The <code>goal_relay</code> node forwards these to Nav2's <code>/goal_pose</code> with corrected timestamps.</p>
 <p>To send a goal: select the <b>Publish pose</b> tool in the 3D panel toolbar, then click and drag on the map to set position and orientation.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md98"></a>
+<h1><a class="anchor" id="autotoc_md100"></a>
 Navigation tab</h1>
 <p>The primary operational tab. Contains the room command panel and real-time telemetry plots.</p>
 <div class="fragment"><div class="line">┌──────────────────────────────────┐</div>
@@ -217,7 +217,7 @@ Navigation tab</h1>
 <div class="line">├──────────────────────────────────┤</div>
 <div class="line">│  /bcr_bot/imu linear accel.      │  ← IMU linear acceleration</div>
 <div class="line">└──────────────────────────────────┘</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md99"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md101"></a>
 Room command panel</h2>
 <p>The custom extension that allows sending navigation commands:</p>
 <ul>
@@ -226,7 +226,7 @@ Room command panel</h2>
 <li><b>Language toggle</b> switches between French (default) and English for speech recognition</li>
 <li><b>Feedback area</b> shows green for "Navigating to..." or red for "Room not found"</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md100"></a>
+<h2><a class="anchor" id="autotoc_md102"></a>
 Telemetry plots</h2>
 <p>Four real-time plots showing:</p>
 <ul>
@@ -237,7 +237,7 @@ Telemetry plots</h2>
 </ul>
 <p>Comparing cmd_vel (commanded) vs IMU (measured) helps verify the robot is executing commands correctly.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md102"></a>
+<h1><a class="anchor" id="autotoc_md104"></a>
 Debug tab</h1>
 <p>For troubleshooting and manual testing.</p>
 <div class="fragment"><div class="line">┌──────────────────┬──────────────────┐</div>
@@ -259,7 +259,7 @@ Debug tab</h1>
 <li><b>Markdown</b> — quick-reference launch instructions</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md104"></a>
+<h1><a class="anchor" id="autotoc_md106"></a>
 Teleop tab</h1>
 <p>For manual robot control and camera monitoring.</p>
 <div class="fragment"><div class="line">┌──────────────────┬──────────────────┐</div>
@@ -280,7 +280,7 @@ Teleop tab</h1>
 <li><b>Transform tree</b> — visual hierarchy of all TF frames (map → odom → base_footprint → wheels, sensors, etc.)</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md106"></a>
+<h1><a class="anchor" id="autotoc_md108"></a>
 Project file structure</h1>
 <div class="fragment"><div class="line">Foxglove/</div>
 <div class="line">├── foxglove_layout/</div>

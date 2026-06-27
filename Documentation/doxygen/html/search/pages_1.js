@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['cloudtwin_20_3a_20digital_20twin_20pour_20la_20navigation_20autonome_20et_20prédictive_20d_27un_20robot_20mobile_347',['CloudTwin : Digital Twin pour la navigation autonome et prédictive d&apos;un robot mobile',['../index.html',1,'']]]
+  ['delivery_20optimization_20_28_3d_3dlogic_3d_3d_20_26_20ml_20model_29_1392',['Delivery optimization (==logic== &amp; ML model)',['../md_Documentation_pages_delivery_optimization.html',1,'']]]
 ];

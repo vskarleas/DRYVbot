@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['walkingperson_550',['WalkingPerson',['../classobstacle__spawner_1_1WalkingPerson.html',1,'obstacle_spawner']]]
+  ['importorderrequest_725',['ImportOrderRequest',['../classApp_1_1Http_1_1Requests_1_1ImportOrderRequest.html',1,'App::Http::Requests']]]
 ];
