@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['handleappearance_723',['HandleAppearance',['../classApp_1_1Http_1_1Middleware_1_1HandleAppearance.html',1,'App::Http::Middleware']]],
-  ['handleinertiarequests_724',['HandleInertiaRequests',['../classApp_1_1Http_1_1Middleware_1_1HandleInertiaRequests.html',1,'App::Http::Middleware']]]
+  ['handleappearance_713',['HandleAppearance',['../classApp_1_1Http_1_1Middleware_1_1HandleAppearance.html',1,'App::Http::Middleware']]],
+  ['handleinertiarequests_714',['HandleInertiaRequests',['../classApp_1_1Http_1_1Middleware_1_1HandleInertiaRequests.html',1,'App::Http::Middleware']]]
 ];

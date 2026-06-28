@@ -600,7 +600,9 @@ Versions</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">V6.3.0   </td><td class="markdownTableBodyNone">Created websocket to receive command from a no ROS system (do not like the idea) and added support to save a simulation in a JSON format    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">V7.0.0   </td><td class="markdownTableBodyNone">Included the LGBM AI model and Laravel UI on the project   </td></tr>
+<td class="markdownTableBodyNone">V7.0.0   </td><td class="markdownTableBodyNone">Included the LGBM AI model and Laravel UI on the project    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">V7.0.1   </td><td class="markdownTableBodyNone">Changed minor issues on the Web App laravel side   </td></tr>
 </table>
 <hr  />
 <h1><a class="anchor" id="autotoc_md31"></a>
@@ -683,7 +685,7 @@ Automated installation and launch</h1>
 </blockquote>
 <h2><a class="anchor" id="autotoc_md42"></a>
 &lt;tt&gt;start.sh&lt;/tt&gt; that builds and launches everything</h2>
-<p>Prompts for the obstacle scenario, starts the web app in the background (logs to <code>logs/web.log</code>, stopped automatically on Ctrl+C), then builds the ROS 2 workspace and launches the simulation.</p>
+<p>Prompts for the obstacle scenario, starts the web app in the background with its proccesses (logs to <code>logs/web.log</code>, stopped automatically on Ctrl+C), then builds the ROS 2 workspace and launches the simulation.</p>
 <div class="fragment"><div class="line">./start.sh                 # interactive scenario menu (emergency / normal / crowd)</div>
 <div class="line">./start.sh emergency       # pick the scenario directly: emergency | normal | crowd</div>
 <div class="line">NO_WEB=1 ./start.sh        # ROS simulation only, skip the web app</div>
