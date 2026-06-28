@@ -78,6 +78,23 @@ fi
 # ---------------------------------------------------------------------------
 # 3. Build and launch the ROS 2 simulation (foreground)
 # ---------------------------------------------------------------------------
+# VS Code installed through Snap exports GTK/GIO paths from its Core20 runtime.
+# Native ROS/Qt applications such as RViz must use the host Ubuntu libraries.
+if [ "${SNAP_NAME:-}" = "code" ]; then
+    echo "==> Cleaning VS Code Snap environment for ROS/RViz"
+
+    if [ -n "${XDG_DATA_DIRS_VSCODE_SNAP_ORIG:-}" ]; then
+        export XDG_DATA_DIRS="$XDG_DATA_DIRS_VSCODE_SNAP_ORIG"
+    else
+        export XDG_DATA_DIRS="/usr/share/ubuntu:/usr/local/share:/usr/share:/var/lib/snapd/desktop"
+    fi
+
+    unset GIO_MODULE_DIR
+    unset GTK_PATH GTK_EXE_PREFIX GTK_IM_MODULE_FILE
+    unset GDK_PIXBUF_MODULEDIR GDK_PIXBUF_MODULE_FILE
+    unset GSETTINGS_SCHEMA_DIR LOCPATH XDG_DATA_HOME
+fi
+
 # shellcheck disable=SC1091
 source /opt/ros/humble/setup.bash
 
