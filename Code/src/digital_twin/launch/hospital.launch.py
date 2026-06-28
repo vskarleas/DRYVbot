@@ -193,11 +193,24 @@ def generate_launch_description():
                     os.path.join(
                         robot_simulation_dir,
                         'scripts',
+                        'obstacles_fixes.py'
+                    ),
+                ],
+                output='screen',
+            ),
+            ExecuteProcess(
+                cmd=[
+                    'python3',
+                    os.path.join(
+                        robot_simulation_dir,
+                        'scripts',
                         'obstacle_spawner.py'
                     ),
                     '--ros-args',
                     '-p',
                     ['scenario:=', obstacle_scenario],
+                    '-r',
+                    '/people_positions:=/scenario_people_positions',
                 ],
                 condition=fixed_obstacles_enabled,
                 output='screen',
@@ -213,6 +226,9 @@ def generate_launch_description():
                         'map_yaml': random_obstacle_map,
                         'use_sim_time': True,
                     },
+                ],
+                remappings=[
+                    ('/people_positions', '/scenario_people_positions'),
                 ],
                 condition=random_obstacles_enabled,
                 output='screen',
