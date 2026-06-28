@@ -203,10 +203,21 @@ fi
 # ---------------------------------------------------------------------------
 section "Node.js / npm"
 if command -v node >/dev/null 2>&1 && command -v npm >/dev/null 2>&1; then
-    ok "Node $(node -v) and npm $(npm -v) detected"
+    NODE_VER="$(node -v 2>/dev/null | sed 's/^v//')"
+    if printf '%s
+' "$NODE_VER" | grep -Eq '^[0-9]+(\.[0-9]+){0,2}$' && [ "$(printf '%s
+' "$NODE_VER" | awk -F. '{printf "%d%02d%02d", $1,$2,$3}')" -ge 20000 ]; then
+        ok "Node $(node -v) and npm $(npm -v) detected"
+    else
+        warn "Node.js $(node -v 2>/dev/null || echo unknown) is older than required; installing Node 20+"
+        info "Installing Node.js 20.x via NodeSource"
+        curl -fsSL https://deb.nodesource.com/setup_20.x | $SUDO -E bash -
+        apt_install_missing nodejs
+    fi
 else
-    warn "Node.js / npm not found. Install Node 20+ (e.g. via nvm or nodesource)."
-    warn "  https://github.com/nodesource/distributions"
+    info "Installing Node.js 20.x via NodeSource"
+    curl -fsSL https://deb.nodesource.com/setup_20.x | $SUDO -E bash -
+    apt_install_missing nodejs
 fi
 
 # ---------------------------------------------------------------------------
