@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Services\DtConnectionSettings;
 use App\Services\DtOutboundQueueService;
 use App\Services\DtStatusService;
 use Illuminate\Console\Command;
@@ -14,39 +13,24 @@ class DispatchDtSocketCommand extends Command
 
     protected $description = 'Dispatch queued delivery room commands to remote DT socket';
 
-    public function handle(
-        DtOutboundQueueService $outboundQueue,
-        DtStatusService $statusService,
-        DtConnectionSettings $connectionSettings
-    ): int {
+    public function handle(DtOutboundQueueService $outboundQueue, DtStatusService $statusService): int
+    {
+        $address = (string) config('dt.socket.address', '');
+
+        if ($address === '') {
+            $this->error('DT_REMOTE_SOCKET_ADDRESS is not configured.');
+
+            return self::FAILURE;
+        }
+
         $connectTimeout = (float) config('dt.socket.connect_timeout', 5);
         $readTimeout = (int) config('dt.socket.read_timeout', 60);
         $reconnectDelayMs = (int) config('dt.socket.reconnect_delay_ms', 1000);
         $idlePollDelayMs = (int) config('dt.socket.idle_poll_delay_ms', 300);
 
-        $announcedAddress = null;
+        $this->info("Connecting to remote DT dispatch socket at {$address}...");
 
         while (true) {
-            // Re-read the address every cycle so a change made in the settings
-            // UI is picked up on the next (re)connection without a restart.
-            $address = $connectionSettings->address();
-
-            if ($address === '') {
-                if ($announcedAddress !== '') {
-                    $this->warn('DT socket address is not configured. Set it in Settings → Connection. Waiting...');
-                    $announcedAddress = '';
-                }
-
-                usleep($reconnectDelayMs * 1000);
-
-                continue;
-            }
-
-            if ($address !== $announcedAddress) {
-                $this->info("Connecting to remote DT dispatch socket at {$address}...");
-                $announcedAddress = $address;
-            }
-
             [$socket, $transport] = $this->connectToRemoteSocket($address, $connectTimeout, $readTimeout);
 
             if (! is_resource($socket)) {
@@ -61,13 +45,6 @@ class DispatchDtSocketCommand extends Command
             }
 
             while (! feof($socket)) {
-                // Drop the connection if the configured address changed, so we
-                // reconnect to the new ROS machine on the next loop iteration.
-                if ($connectionSettings->address() !== $address) {
-                    $this->info('DT socket address changed; reconnecting to the new target...');
-                    break;
-                }
-
                 if ($transport === 'websocket' && ! $this->drainWebSocketMessages($socket, $statusService, $outboundQueue)) {
                     break;
                 }
