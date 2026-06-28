@@ -270,6 +270,9 @@ else
 
         info "Running database migrations"
         php artisan migrate --force --graceful || warn "migrate reported issues"
+
+        info "Seeding default database data"
+        php artisan db:seed --class=DatabaseSeeder --force || warn "db:seed reported issues"
     elif [ ! -f vendor/autoload.php ]; then
         warn "Skipping artisan setup: Composer dependencies (vendor/) are missing."
     fi
