@@ -653,6 +653,7 @@ The hospital map was generated using slam_toolbox. To recreate it or create a ma
 | V6.2.2  | Speech node for voice commands, integrated into logic.launch.py and Foxglove panel                                                       |
 | V6.3.0  | Created websocket to receive command from a no ROS system (do not like the idea) and added support to save a simulation in a JSON format |
 | V7.0.0  | Included the LGBM AI model and Laravel UI on the project                                                                                 |
+| V7.0.1  | Changed minor issues on the Web App laravel side                                                                                         |
 
 ---
 
@@ -740,7 +741,7 @@ Installs (and skips anything already present):
 
 ### `start.sh` that builds and launches everything
 
-Prompts for the obstacle scenario, starts the web app in the background (logs to `logs/web.log`, stopped automatically on Ctrl+C), then builds the ROS 2
+Prompts for the obstacle scenario, starts the web app in the background with its proccesses (logs to `logs/web.log`, stopped automatically on Ctrl+C), then builds the ROS 2
 workspace and launches the simulation.
 
 ```bash
