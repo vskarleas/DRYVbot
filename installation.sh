@@ -249,6 +249,11 @@ else
         ok ".env already present"
     fi
 
+    if [ -f .env ]; then
+        sed -i 's|^REVERB_HOST=.*|REVERB_HOST=127.0.0.1|' .env
+        sed -i 's|^REVERB_PORT=.*|REVERB_PORT=8080|' .env
+    fi
+
     # The artisan-based steps need Composer dependencies to be installed.
     if [ -f .env ] && [ -f vendor/autoload.php ]; then
         if ! grep -qE '^APP_KEY=base64:' .env; then

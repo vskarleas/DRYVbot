@@ -65,6 +65,10 @@ if [ "${NO_WEB:-0}" = "1" ]; then
 elif command -v php >/dev/null 2>&1 && command -v composer >/dev/null 2>&1 && [ -d "$WEB_DIR/vendor" ]; then
     mkdir -p "$LOG_DIR"
     WEB_LOG="$LOG_DIR/web.log"
+    export REVERB_HOST="${REVERB_HOST:-127.0.0.1}"
+    export REVERB_PORT="${REVERB_PORT:-8080}"
+    export VITE_REVERB_HOST="${VITE_REVERB_HOST:-$REVERB_HOST}"
+    export VITE_REVERB_PORT="${VITE_REVERB_PORT:-$REVERB_PORT}"
     echo "==> Starting delivery_optimization web app (logs: $WEB_LOG)"
     ( cd "$WEB_DIR" && composer run dev ) > "$WEB_LOG" 2>&1 &
     WEB_PID=$!
