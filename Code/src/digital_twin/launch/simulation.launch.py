@@ -163,6 +163,36 @@ def generate_launch_description():
         'nav2_default_view.rviz'
     )
 
+    # A terminal opened by VS Code Snap can leak Core20 GTK/GIO libraries
+    # into native Qt applications. Give RViz an isolated host environment so
+    # it does not load an incompatible /snap/core20/libpthread.so.0.
+    rviz_environment = os.environ.copy()
+    snap_graphics_variables = (
+        'GIO_MODULE_DIR',
+        'GIO_EXTRA_MODULES',
+        'GTK_PATH',
+        'GTK_EXE_PREFIX',
+        'GTK_IM_MODULE_FILE',
+        'GDK_PIXBUF_MODULEDIR',
+        'GDK_PIXBUF_MODULE_FILE',
+        'GSETTINGS_SCHEMA_DIR',
+        'LOCPATH',
+        'XDG_DATA_HOME',
+    )
+    for variable in snap_graphics_variables:
+        if '/snap/' in rviz_environment.get(variable, ''):
+            rviz_environment.pop(variable, None)
+
+    original_xdg_data_dirs = os.environ.get(
+        'XDG_DATA_DIRS_VSCODE_SNAP_ORIG')
+    if original_xdg_data_dirs:
+        rviz_environment['XDG_DATA_DIRS'] = original_xdg_data_dirs
+    elif '/snap/' in rviz_environment.get('XDG_DATA_DIRS', ''):
+        rviz_environment['XDG_DATA_DIRS'] = (
+            '/usr/share/ubuntu:/usr/local/share:/usr/share:'
+            '/var/lib/snapd/desktop'
+        )
+
     rviz2 = TimerAction(
         period=18.0,
         actions=[
@@ -174,6 +204,7 @@ def generate_launch_description():
                 parameters=[{
                     'use_sim_time': True,
                 }],
+                env=rviz_environment,
                 remappings=[
                     ('/waypoints', '/people_markers'),
                 ],
