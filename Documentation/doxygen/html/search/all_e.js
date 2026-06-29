@@ -10,11 +10,13 @@ var searchData=
   ['navigation_2ets_408',['navigation.ts',['../navigation_8ts.html',1,'']]],
   ['navigation_5flogic_2emd_409',['navigation_logic.md',['../navigation__logic_8md.html',1,'']]],
   ['navitem_410',['NavItem',['../navigation_8ts.html#a3eb4c88eb5772d8ce289249ae1cc7562',1,'navigation.ts']]],
-  ['newpasswordcontroller_2ets_411',['NewPasswordController.ts',['../NewPasswordController_8ts.html',1,'']]],
-  ['next_5femergency_5ftime_412',['next_emergency_time',['../classtest__random__obstacle__spawner_1_1FakeCycleSpawner.html#ab1f7e4bd1a2579ba318817ae8c61d792',1,'test_random_obstacle_spawner.FakeCycleSpawner.next_emergency_time()'],['../namespacetest__random__obstacle__spawner.html#a83821052845851f04abad92a17f10d8e',1,'test_random_obstacle_spawner.next_emergency_time()'],['../classrandom__obstacle__spawner_1_1RandomObstacleSpawner.html#a61c28d337e351aa61c18f76ffe41fc36',1,'random_obstacle_spawner.RandomObstacleSpawner.next_emergency_time()']]],
-  ['next_5fgazebo_5fstate_5fupdate_413',['next_gazebo_state_update',['../classrandom__obstacle__spawner_1_1RandomObstacleSpawner.html#a9798bc95d2dc59d831e7aebaa9641f80',1,'random_obstacle_spawner::RandomObstacleSpawner']]],
-  ['next_5forder_5fdispatch_5fdelay_5fmicroseconds_414',['NEXT_ORDER_DISPATCH_DELAY_MICROSECONDS',['../classApp_1_1Services_1_1DtStatusService.html#a72f7a87f097953ca0995a935f4db12dd',1,'App::Services::DtStatusService']]],
-  ['next_5fspawn_5findex_415',['next_spawn_index',['../classrandom__obstacle__spawner_1_1RandomObstacleSpawner.html#ac6d76e36979aae3ff847d5bc983383df',1,'random_obstacle_spawner::RandomObstacleSpawner']]],
-  ['normalizeroomcode_416',['normalizeRoomCode',['../classApp_1_1Services_1_1DtStatusService.html#aeb78e7328bb42bb7b0679733ba7f1069',1,'App\Services\DtStatusService\normalizeRoomCode()'],['../classApp_1_1Services_1_1DtTaskQueueService.html#ae2288958fba2c3b91d4a58cf2cf2a9a9',1,'App\Services\DtTaskQueueService\normalizeRoomCode()']]],
-  ['notificationaudio_417',['notificationAudio',['../dt-remote-socket_8ts.html#aa6706e1c73ee940386b739a0af1fb6c5',1,'dt-remote-socket.ts']]]
+  ['network_20connections_20_28ip_20_26_20ports_29_411',['Network connections (IP &amp; ports)',['../md_Documentation_pages_network_connections.html',1,'']]],
+  ['network_5fconnections_2emd_412',['network_connections.md',['../network__connections_8md.html',1,'']]],
+  ['newpasswordcontroller_2ets_413',['NewPasswordController.ts',['../NewPasswordController_8ts.html',1,'']]],
+  ['next_5femergency_5ftime_414',['next_emergency_time',['../namespacetest__random__obstacle__spawner.html#a83821052845851f04abad92a17f10d8e',1,'test_random_obstacle_spawner.next_emergency_time()'],['../classtest__random__obstacle__spawner_1_1FakeCycleSpawner.html#ab1f7e4bd1a2579ba318817ae8c61d792',1,'test_random_obstacle_spawner.FakeCycleSpawner.next_emergency_time()'],['../classrandom__obstacle__spawner_1_1RandomObstacleSpawner.html#a61c28d337e351aa61c18f76ffe41fc36',1,'random_obstacle_spawner.RandomObstacleSpawner.next_emergency_time()']]],
+  ['next_5fgazebo_5fstate_5fupdate_415',['next_gazebo_state_update',['../classrandom__obstacle__spawner_1_1RandomObstacleSpawner.html#a9798bc95d2dc59d831e7aebaa9641f80',1,'random_obstacle_spawner::RandomObstacleSpawner']]],
+  ['next_5forder_5fdispatch_5fdelay_5fmicroseconds_416',['NEXT_ORDER_DISPATCH_DELAY_MICROSECONDS',['../classApp_1_1Services_1_1DtStatusService.html#a72f7a87f097953ca0995a935f4db12dd',1,'App::Services::DtStatusService']]],
+  ['next_5fspawn_5findex_417',['next_spawn_index',['../classrandom__obstacle__spawner_1_1RandomObstacleSpawner.html#ac6d76e36979aae3ff847d5bc983383df',1,'random_obstacle_spawner::RandomObstacleSpawner']]],
+  ['normalizeroomcode_418',['normalizeRoomCode',['../classApp_1_1Services_1_1DtStatusService.html#aeb78e7328bb42bb7b0679733ba7f1069',1,'App\Services\DtStatusService\normalizeRoomCode()'],['../classApp_1_1Services_1_1DtTaskQueueService.html#ae2288958fba2c3b91d4a58cf2cf2a9a9',1,'App\Services\DtTaskQueueService\normalizeRoomCode()']]],
+  ['notificationaudio_419',['notificationAudio',['../dt-remote-socket_8ts.html#aa6706e1c73ee940386b739a0af1fb6c5',1,'dt-remote-socket.ts']]]
 ];

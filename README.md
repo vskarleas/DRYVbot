@@ -14,7 +14,9 @@ Since we do not have a physical robot, Gazebo Classic 11 simulates the robot nav
 >
 > For the delivery optimizer logic and ML travel-time model, see **[Documentation/pages/delivery_optimization.md](Documentation/pages/delivery_optimization.md)**
 >
-> For the Foxglove user interface (layout, panels, topic visualisation), see **[Documentation/pages/foxglove.md](Documentation/pages/foxglove.md)**
+> For the ==Foxglo==ve user interface (layout, panels, topic visualisation), see **[Documentation/pages/==foxglo==ve.md](Documentation/pages/foxglove.md)**
+>
+> For the network map (which IP/port each system opens and connects to), see **[Documentation/pages/network_connections.md](Documentation/pages/network_connections.md)**
 >
 > For known issues and their solutions, see **[Documentation/pages/troubleshooting.md](Documentation/pages/troubleshooting.md)**
 
@@ -37,7 +39,7 @@ The project is organised in the following ROS2 packages:
 | Robot         | bcr_bot                  | Differential drive with lidar and camera |
 | Navigation    | Nav2 (DWB local planner) | Path planning and obstacle avoidance     |
 | Mapping       | slam_toolbox             | SLAM for map generation                  |
-| Visualisation | Foxglove (web)           | Real-time monitoring and user interface  |
+| Visualisation | ==Foxglo==ve (web)       | Real-time monitoring and user interface  |
 | Speech        | faster-whisper           | Local speech-to-text for voice commands  |
 
 ---
@@ -84,8 +86,8 @@ pip install faster-whisper sounddevice numpy pyyaml websockets --break-system-pa
 ### Clone and build
 
 ```bash
-git clone https://github.com/vskarleas/CloudTwin
-cd CloudTwin/Code
+git clone https://github.com/vskarleas/DRYVbot
+cd DRYVbot/Code
 ```
 
 If `bcr_bot` is not already in `src/`:
@@ -110,7 +112,7 @@ rosdep install --from-paths src --ignore-src -r -y
 Build:
 
 ```bash
-cd ~/Documents/CloudTwin/Code
+cd ~/Documents/DRYVbot/Code
 colcon build
 source install/setup.bash
 ```
@@ -128,7 +130,7 @@ source /opt/ros/humble/setup.bash
 Simply open a terminal on your Ubuntu computer and navigate to rge repo of the project. Then you only need to launch the simulation.launch.py file as shown below :
 
 ```bash
-cd ~/Documents/CloudTwin/Code
+cd ~/Documents/DRYVbot/Code
 source install/setup.bash
 ros2 launch digital_twin simulation.launch.py
 ```
@@ -137,12 +139,10 @@ ros2 launch digital_twin simulation.launch.py
 
 ### Full simulation
 
-Starts Gazebo with the hospital world, bcr_bot, Nav2 navigation, obstacle
-spawner, digital twin logic, RViz, cmd_vel relay, initial pose publisher, and
-Foxglove bridge:
+Starts Gazebo with the hospital world, bcr_bot, Nav2 navigation, obstacle spawner, digital twin logic, RViz, cmd_vel relay, initial pose publisher, and ==Foxglo==ve bridge:
 
 ```bash
-cd ~/Documents/CloudTwin/Code
+cd ~/Documents/DRYVbot/Code
 source install/setup.bash
 ros2 launch digital_twin simulation.launch.py \
   obstacle_mode:=random \
@@ -212,24 +212,22 @@ ros2 run robot_simulation random_obstacle_spawner.py --ros-args \
 
 ### Separate base stack
 
-If you only want Gazebo, bcr_bot, Nav2, the obstacle mode selected in
-`hospital.launch.py`, and Foxglove bridge, launch:
+If you only want Gazebo, bcr_bot, Nav2, the obstacle mode selected in`hospital.launch.py`, and ==Foxglo==ve bridge, launch:
 
 ```bash
-cd ~/Documents/CloudTwin/Code
+cd ~/Documents/DRYVbot/Code
 source install/setup.bash
 ros2 launch digital_twin hospital.launch.py
 ```
 
 ### Separate navigation logic layer
 
-`simulation.launch.py` already includes this layer. Launch it separately only
-when using `hospital.launch.py` directly.
+`simulation.launch.py` already includes this layer. Launch it separately only when using `hospital.launch.py` directly.
 
 Starts the crowd monitor (dynamic map overlay), room interpreter (text commands), and speech node (voice commands):
 
 ```bash
-cd ~/Documents/CloudTwin/Code
+cd ~/Documents/DRYVbot/Code
 source install/setup.bash
 ros2 launch digital_twin logic.launch.py
 ```
@@ -538,7 +536,7 @@ async def main(host: str, port: int):
  
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        description='WebSocket client for CloudTwin robot commands',
+        description='WebSocket client for DRYVbot robot commands',
     )
     parser.add_argument(
         '--host', default='localhost',
@@ -561,9 +559,9 @@ python3 ws_robot_client.py --host 192.168.1.42 --port 9090
 
 ---
 
-### Foxglove (remote panel)
+### ==Foxglo==ve (remote panel)
 
-1. Open [https://app.foxglove.dev](https://app.foxglove.dev) in a browser
+1. Open [https://app.==foxglo==ve.dev](https://app.foxglove.dev) in a browser
 2. Connect to `ws://<ip>:8765` (use `localhost` if on the same machine, or the digital twin's IP if remote)
 3. Install the Room Command panel extension (`.foxe` file) for voice/text destination commands
 4. Send a navigation goal from the 3D panel or the Room Command panel
@@ -584,12 +582,12 @@ The hospital map was generated using slam_toolbox. To recreate it or create a ma
 1. Launch the robot in the world:
 
    ```bash
-   export GAZEBO_MODEL_PATH=$HOME/Documents/CloudTwin/Code/src/robot_simulation/models:$GAZEBO_MODEL_PATH
+   export GAZEBO_MODEL_PATH=$HOME/Documents/DRYVbot/Code/src/robot_simulation/models:$GAZEBO_MODEL_PATH
 
    ros2 launch bcr_bot gazebo.launch.py \
      two_d_lidar_enabled:=True \
      camera_enabled:=True \
-     world_file:=$HOME/Documents/CloudTwin/Code/src/robot_simulation/worlds/hospital.world \
+     world_file:=$HOME/Documents/DRYVbot/Code/src/robot_simulation/worlds/hospital.world \
      position_x:=0.0 \
      position_y:=5.0
    ```
@@ -634,11 +632,11 @@ The hospital map was generated using slam_toolbox. To recreate it or create a ma
 | V2.3.1  | Created the visualisation package                                                                                                        |
 | V2.3.2  | Modified Gazebo world for sun/lighting. Updated launch file for Gazebo server                                                            |
 | V2.3.3  | Created map using SLAM toolbox                                                                                                           |
-| V3.0.0  | Migration to Gazebo Harmonic + bcr_bot + small_warehouse. Nav2 integration. Foxglove bridge. Removed launch_project                      |
+| V3.0.0  | Migration to Gazebo Harmonic + bcr_bot + small_warehouse. Nav2 integration. ==Foxglo==ve bridge. Removed launch_project                  |
 | V3.1.0  | Removed AMCL startup, increased acceleration and speed                                                                                   |
 | V3.2.0  | Custom warehouse for better navigation, applied planning                                                                                 |
 | V4.0.0  | Changed to Gazebo Classic from Gazebo Harmonic, hospital world with bcr_bot                                                              |
-| V4.0.1  | Added goal_pose relay for Foxglove timestamp fix                                                                                         |
+| V4.0.1  | Added goal_pose relay for ==Foxglo==ve timestamp fix                                                                                     |
 | V4.1.0  | Added bcr_bot to project tree, first version of people spawner                                                                           |
 | V4.1.1  | Updated human spawner logic, fixed non-moving cylinders                                                                                  |
 | V4.1.2  | Changed cylinder SDF to Scrub person model                                                                                               |
@@ -646,11 +644,11 @@ The hospital map was generated using slam_toolbox. To recreate it or create a ma
 | V4.1.4  | Added /people_positions publisher to obstacle spawner                                                                                    |
 | V5.0.0  | YAML registry files for intersections and rooms                                                                                          |
 | V6.0.1  | Smart automatic re-navigation based on crowd affluence data                                                                              |
-| V6.0.2  | Foxglove layout V1 saved                                                                                                                 |
-| V6.1.0  | Custom Foxglove panel for voice/text room commands                                                                                       |
-| V6.1.1  | Released version 1.0.0 of Foxglove panel                                                                                                 |
+| V6.0.2  | ==Foxglo==ve layout V1 saved                                                                                                             |
+| V6.1.0  | Custom ==Foxglo==ve panel for voice/text room commands                                                                                   |
+| V6.1.1  | Released version 1.0.0 of ==Foxglo==ve panel                                                                                             |
 | V6.2.1  | hospital.launch.py updated to include obstacle_spawner                                                                                   |
-| V6.2.2  | Speech node for voice commands, integrated into logic.launch.py and Foxglove panel                                                       |
+| V6.2.2  | Speech node for voice commands, integrated into logic.launch.py and ==Foxglo==ve panel                                                   |
 | V6.3.0  | Created websocket to receive command from a no ROS system (do not like the idea) and added support to save a simulation in a JSON format |
 | V7.0.0  | Included the LGBM AI model and Laravel UI on the project                                                                                 |
 | V7.0.1  | Changed minor issues on the Web App laravel side                                                                                         |
@@ -681,10 +679,10 @@ The hospital map was generated using slam_toolbox. To recreate it or create a ma
 
 ### visualisation
 
-- [X] Connect Foxglove via websocket bridge
-- [X] Send navigation goals from Foxglove
+- [X] Connect ==Foxglo==ve via websocket bridge
+- [X] Send navigation goals from ==Foxglo==ve
 - [X] Real-time display of updated path, crowd density, and robot status
-- [X] Custom Foxglove panel for room commands (text + voice)
+- [X] Custom ==Foxglo==ve panel for room commands (text + voice)
 - [X] Display robot coordinates, goal, and planning status
 
 ---
@@ -694,7 +692,7 @@ The hospital map was generated using slam_toolbox. To recreate it or create a ma
 `Code/src/delivery_optimization` is a **web application**, not a ROS 2 package.
 It is the [Laravel React Starter Kit](https://github.com/laravel/react-starter-kit), more precisely a Laravel 13 back end with a React 19 + Inertia front end, used as a management / supervision dashboard for the delivery robot. It connects to the running digital twin through the `DT_SOCKET_*` settings in its `.env` (the ROS side exposes a WebSocket bridge on port 9090, see the WebSocket section above).
 
-> A `COLCON_IGNORE` file is placed in this folder so `colcon build` skips i
+> A `COLCON_IGNORE` file is placed in this folder so `colcon build` skips it
 
 ### Dependencies
 
@@ -718,6 +716,8 @@ You can connect on the different accounts using the test credential below by ope
    * Username : manager@dryvbot.com
    * Password : password
 
+Please note that the Web app communictes with the digital twin via a WebSocket that is opened from ROS2 in order to receive the different comands of delivery in ther order that was decided from the delivery optimizer using the LGBM. The websocket is open by default on the port 9090 of then the IP of the machine running ROS2. If everything is running on the same machine, in that case is localhost.
+
 ### Required PHP extensions
 
 ```text
@@ -734,7 +734,7 @@ Two helper scripts at the repository root automate everything described above.
 
 Installs (and skips anything already present):
 
-- ROS 2 Humble system packages (Gazebo, Nav2, SLAM, Foxglove bridge, tools)
+- ROS 2 Humble system packages (Gazebo, Nav2, SLAM, ==Foxglo==ve bridge, tools)
 - Python AI-layer packages (`faster-whisper`, `sounddevice`, `numpy`, `pyyaml`, `websockets`)
 - `rosdep` dependencies and the `bcr_bot` package (cloned into `Code/src/`)
 - PHP 8.4 + extensions (via `ppa:ondrej/php`) and Composer

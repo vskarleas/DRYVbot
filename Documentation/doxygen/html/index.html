@@ -78,7 +78,8 @@ Description</h1>
 <p>For the full system architecture, feedback loop, and data flow diagrams, see <b><a class="el" href="md_Documentation_pages_architecture.html">Documentation/pages/architecture.md</a></b></p>
 <p>For the navigation logic layer (crowd avoidance, room commands, voice control), see <b><a class="el" href="md_Documentation_pages_navigation_logic.html">Documentation/pages/navigation_logic.md</a></b></p>
 <p>For the delivery optimizer logic and ML travel-time model, see <b><a class="el" href="md_Documentation_pages_delivery_optimization.html">Documentation/pages/delivery_optimization.md</a></b></p>
-<p>For the Foxglove user interface (layout, panels, topic visualisation), see <b><a class="el" href="md_Documentation_pages_foxglove.html">Documentation/pages/foxglove.md</a></b></p>
+<p>For the ==Foxglo==ve user interface (layout, panels, topic visualisation), see <b><a class="el" href="md_Documentation_pages_foxglove.html">Documentation/pages/==foxglo==ve.md</a></b></p>
+<p>For the network map (which IP/port each system opens and connects to), see <b><a class="el" href="md_Documentation_pages_network_connections.html">Documentation/pages/network_connections.md</a></b></p>
 <p>For known issues and their solutions, see <b><a class="el" href="md_Documentation_pages_troubleshooting.html">Documentation/pages/troubleshooting.md</a></b> </p>
 </blockquote>
 <h1><a class="anchor" id="autotoc_md2"></a>
@@ -107,7 +108,7 @@ Technologies</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Mapping   </td><td class="markdownTableBodyNone">slam_toolbox   </td><td class="markdownTableBodyNone">SLAM for map generation    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Visualisation   </td><td class="markdownTableBodyNone">Foxglove (web)   </td><td class="markdownTableBodyNone">Real-time monitoring and user interface    </td></tr>
+<td class="markdownTableBodyNone">Visualisation   </td><td class="markdownTableBodyNone">==Foxglo==ve (web)   </td><td class="markdownTableBodyNone">Real-time monitoring and user interface    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Speech   </td><td class="markdownTableBodyNone">faster-whisper   </td><td class="markdownTableBodyNone">Local speech-to-text for voice commands   </td></tr>
 </table>
@@ -149,8 +150,8 @@ Python dependencies</h2>
 <div class="fragment"><div class="line">pip install faster-whisper sounddevice numpy pyyaml websockets --break-system-packages</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md10"></a>
 Clone and build</h2>
-<div class="fragment"><div class="line">git clone https://github.com/vskarleas/CloudTwin</div>
-<div class="line">cd CloudTwin/Code</div>
+<div class="fragment"><div class="line">git clone https://github.com/vskarleas/DRYVbot</div>
+<div class="line">cd DRYVbot/Code</div>
 </div><!-- fragment --><p>If <code>bcr_bot</code> is not already in <code>src/</code>:</p>
 <div class="fragment"><div class="line">cd src</div>
 <div class="line">git clone https://github.com/blackcoffeerobotics/bcr_bot.git</div>
@@ -164,7 +165,7 @@ Clone and build</h2>
 <p>Xacro needs to be installed for this repo. Check the installation process depending on your system. </p>
 </blockquote>
 <p>Build:</p>
-<div class="fragment"><div class="line">cd ~/Documents/CloudTwin/Code</div>
+<div class="fragment"><div class="line">cd ~/Documents/DRYVbot/Code</div>
 <div class="line">colcon build</div>
 <div class="line">source install/setup.bash</div>
 </div><!-- fragment --><p>Add to <code>~/.bashrc</code> if not already there:</p>
@@ -173,15 +174,15 @@ Clone and build</h2>
 <h1><a class="anchor" id="autotoc_md12"></a>
 Launching the system automaticly</h1>
 <p>Simply open a terminal on your Ubuntu computer and navigate to rge repo of the project. Then you only need to launch the <a class="el" href="simulation_8launch_8py.html">simulation.launch.py</a> file as shown below :</p>
-<div class="fragment"><div class="line">cd ~/Documents/CloudTwin/Code</div>
+<div class="fragment"><div class="line">cd ~/Documents/DRYVbot/Code</div>
 <div class="line">source install/setup.bash</div>
 <div class="line">ros2 launch digital_twin simulation.launch.py</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md13"></a>
 Launching the system individually</h1>
 <h2><a class="anchor" id="autotoc_md14"></a>
 Full simulation</h2>
-<p>Starts Gazebo with the hospital world, bcr_bot, Nav2 navigation, obstacle spawner, digital twin logic, RViz, cmd_vel relay, initial pose publisher, and Foxglove bridge:</p>
-<div class="fragment"><div class="line">cd ~/Documents/CloudTwin/Code</div>
+<p>Starts Gazebo with the hospital world, bcr_bot, Nav2 navigation, obstacle spawner, digital twin logic, RViz, cmd_vel relay, initial pose publisher, and ==Foxglo==ve bridge:</p>
+<div class="fragment"><div class="line">cd ~/Documents/DRYVbot/Code</div>
 <div class="line">source install/setup.bash</div>
 <div class="line">ros2 launch digital_twin simulation.launch.py \</div>
 <div class="line">  obstacle_mode:=random \</div>
@@ -221,15 +222,15 @@ Obstacle modes</h2>
 <div class="line">  -p scenario:=normal</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md16"></a>
 Separate base stack</h2>
-<p>If you only want Gazebo, bcr_bot, Nav2, the obstacle mode selected in <code><a class="el" href="hospital_8launch_8py.html">hospital.launch.py</a></code>, and Foxglove bridge, launch:</p>
-<div class="fragment"><div class="line">cd ~/Documents/CloudTwin/Code</div>
+<p>If you only want Gazebo, bcr_bot, Nav2, the obstacle mode selected in<code><a class="el" href="hospital_8launch_8py.html">hospital.launch.py</a></code>, and ==Foxglo==ve bridge, launch:</p>
+<div class="fragment"><div class="line">cd ~/Documents/DRYVbot/Code</div>
 <div class="line">source install/setup.bash</div>
 <div class="line">ros2 launch digital_twin hospital.launch.py</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md17"></a>
 Separate navigation logic layer</h2>
 <p><code><a class="el" href="simulation_8launch_8py.html">simulation.launch.py</a></code> already includes this layer. Launch it separately only when using <code><a class="el" href="hospital_8launch_8py.html">hospital.launch.py</a></code> directly.</p>
 <p>Starts the crowd monitor (dynamic map overlay), room interpreter (text commands), and speech node (voice commands):</p>
-<div class="fragment"><div class="line">cd ~/Documents/CloudTwin/Code</div>
+<div class="fragment"><div class="line">cd ~/Documents/DRYVbot/Code</div>
 <div class="line">source install/setup.bash</div>
 <div class="line">ros2 launch digital_twin logic.launch.py</div>
 </div><!-- fragment --><p>To enable the simulation logger (records departure/arrival data per room command to <code>simulation_logs/</code>):</p>
@@ -473,7 +474,7 @@ Standalone client</h3>
 <div class="line"> </div>
 <div class="line">if __name__ == &#39;__main__&#39;:</div>
 <div class="line">    parser = argparse.ArgumentParser(</div>
-<div class="line">        description=&#39;WebSocket client for CloudTwin robot commands&#39;,</div>
+<div class="line">        description=&#39;WebSocket client for DRYVbot robot commands&#39;,</div>
 <div class="line">    )</div>
 <div class="line">    parser.add_argument(</div>
 <div class="line">        &#39;--host&#39;, default=&#39;localhost&#39;,</div>
@@ -490,9 +491,9 @@ Standalone client</h3>
 <div class="fragment"><div class="line">python3 ws_robot_client.py --host 192.168.1.42 --port 9090</div>
 </div><!-- fragment --><hr  />
 <h2><a class="anchor" id="autotoc_md25"></a>
-Foxglove (remote panel)</h2>
+==Foxglo==ve (remote panel)</h2>
 <ol type="1">
-<li>Open <a href="https://app.foxglove.dev">https://app.foxglove.dev</a> in a browser</li>
+<li>Open <a href="https://app.foxglove.dev">https://app.==foxglo==ve.dev</a> in a browser</li>
 <li>Connect to <code>ws://&lt;ip&gt;:8765</code> (use <code>localhost</code> if on the same machine, or the digital twin's IP if remote)</li>
 <li>Install the Room Command panel extension (<code>.foxe</code> file) for voice/text destination commands</li>
 <li>Send a navigation goal from the 3D panel or the Room Command panel</li>
@@ -507,12 +508,12 @@ Creating the map</h1>
 <ol type="1">
 <li>Launch the robot in the world:</li>
 </ol>
-<div class="fragment"><div class="line">export GAZEBO_MODEL_PATH=$HOME/Documents/CloudTwin/Code/src/robot_simulation/models:$GAZEBO_MODEL_PATH</div>
+<div class="fragment"><div class="line">export GAZEBO_MODEL_PATH=$HOME/Documents/DRYVbot/Code/src/robot_simulation/models:$GAZEBO_MODEL_PATH</div>
 <div class="line"> </div>
 <div class="line">ros2 launch bcr_bot gazebo.launch.py \</div>
 <div class="line">  two_d_lidar_enabled:=True \</div>
 <div class="line">  camera_enabled:=True \</div>
-<div class="line">  world_file:=$HOME/Documents/CloudTwin/Code/src/robot_simulation/worlds/hospital.world \</div>
+<div class="line">  world_file:=$HOME/Documents/DRYVbot/Code/src/robot_simulation/worlds/hospital.world \</div>
 <div class="line">  position_x:=0.0 \</div>
 <div class="line">  position_y:=5.0</div>
 </div><!-- fragment --><ol type="1">
@@ -564,7 +565,7 @@ Versions</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">V2.3.3   </td><td class="markdownTableBodyNone">Created map using SLAM toolbox    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">V3.0.0   </td><td class="markdownTableBodyNone">Migration to Gazebo Harmonic + bcr_bot + small_warehouse. Nav2 integration. Foxglove bridge. Removed launch_project    </td></tr>
+<td class="markdownTableBodyNone">V3.0.0   </td><td class="markdownTableBodyNone">Migration to Gazebo Harmonic + bcr_bot + small_warehouse. Nav2 integration. ==Foxglo==ve bridge. Removed launch_project    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">V3.1.0   </td><td class="markdownTableBodyNone">Removed AMCL startup, increased acceleration and speed    </td></tr>
 <tr class="markdownTableRowEven">
@@ -572,7 +573,7 @@ Versions</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">V4.0.0   </td><td class="markdownTableBodyNone">Changed to Gazebo Classic from Gazebo Harmonic, hospital world with bcr_bot    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">V4.0.1   </td><td class="markdownTableBodyNone">Added goal_pose relay for Foxglove timestamp fix    </td></tr>
+<td class="markdownTableBodyNone">V4.0.1   </td><td class="markdownTableBodyNone">Added goal_pose relay for ==Foxglo==ve timestamp fix    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">V4.1.0   </td><td class="markdownTableBodyNone">Added bcr_bot to project tree, first version of people spawner    </td></tr>
 <tr class="markdownTableRowEven">
@@ -588,15 +589,15 @@ Versions</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">V6.0.1   </td><td class="markdownTableBodyNone">Smart automatic re-navigation based on crowd affluence data    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">V6.0.2   </td><td class="markdownTableBodyNone">Foxglove layout V1 saved    </td></tr>
+<td class="markdownTableBodyNone">V6.0.2   </td><td class="markdownTableBodyNone">==Foxglo==ve layout V1 saved    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">V6.1.0   </td><td class="markdownTableBodyNone">Custom Foxglove panel for voice/text room commands    </td></tr>
+<td class="markdownTableBodyNone">V6.1.0   </td><td class="markdownTableBodyNone">Custom ==Foxglo==ve panel for voice/text room commands    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">V6.1.1   </td><td class="markdownTableBodyNone">Released version 1.0.0 of Foxglove panel    </td></tr>
+<td class="markdownTableBodyNone">V6.1.1   </td><td class="markdownTableBodyNone">Released version 1.0.0 of ==Foxglo==ve panel    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">V6.2.1   </td><td class="markdownTableBodyNone"><a class="el" href="hospital_8launch_8py.html">hospital.launch.py</a> updated to include <a class="el" href="namespaceobstacle__spawner.html">obstacle_spawner</a>    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">V6.2.2   </td><td class="markdownTableBodyNone">Speech node for voice commands, integrated into <a class="el" href="logic_8launch_8py.html">logic.launch.py</a> and Foxglove panel    </td></tr>
+<td class="markdownTableBodyNone">V6.2.2   </td><td class="markdownTableBodyNone">Speech node for voice commands, integrated into <a class="el" href="logic_8launch_8py.html">logic.launch.py</a> and ==Foxglo==ve panel    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">V6.3.0   </td><td class="markdownTableBodyNone">Created websocket to receive command from a no ROS system (do not like the idea) and added support to save a simulation in a JSON format    </td></tr>
 <tr class="markdownTableRowEven">
@@ -632,10 +633,10 @@ digital_twin</h2>
 <h2><a class="anchor" id="autotoc_md34"></a>
 visualisation</h2>
 <ul>
-<li>[X] Connect Foxglove via websocket bridge</li>
-<li>[X] Send navigation goals from Foxglove</li>
+<li>[X] Connect ==Foxglo==ve via websocket bridge</li>
+<li>[X] Send navigation goals from ==Foxglo==ve</li>
 <li>[X] Real-time display of updated path, crowd density, and robot status</li>
-<li>[X] Custom Foxglove panel for room commands (text + voice)</li>
+<li>[X] Custom ==Foxglo==ve panel for room commands (text + voice)</li>
 <li>[X] Display robot coordinates, goal, and planning status</li>
 </ul>
 <hr  />
@@ -643,7 +644,7 @@ visualisation</h2>
 Delivery optimization (web dashboard)</h1>
 <p><code>Code/src/delivery_optimization</code> is a <b>web application</b>, not a ROS 2 package. It is the <a href="https://github.com/laravel/react-starter-kit">Laravel React Starter Kit</a>, more precisely a Laravel 13 back end with a React 19 + Inertia front end, used as a management / supervision dashboard for the delivery robot. It connects to the running digital twin through the <code>DT_SOCKET_*</code> settings in its <code>.env</code> (the ROS side exposes a WebSocket bridge on port 9090, see the WebSocket section above).</p>
 <blockquote class="doxtable">
-<p>A <code>COLCON_IGNORE</code> file is placed in this folder so <code>colcon build</code> skips i </p>
+<p>A <code>COLCON_IGNORE</code> file is placed in this folder so <code>colcon build</code> skips it </p>
 </blockquote>
 <h2><a class="anchor" id="autotoc_md37"></a>
 Dependencies</h2>
@@ -675,6 +676,7 @@ Dependencies</h2>
 </ul>
 </li>
 </ol>
+<p>Please note that the Web app communictes with the digital twin via a WebSocket that is opened from ROS2 in order to receive the different comands of delivery in ther order that was decided from the delivery optimizer using the LGBM. The websocket is open by default on the port 9090 of then the IP of the machine running ROS2. If everything is running on the same machine, in that case is localhost.</p>
 <h2><a class="anchor" id="autotoc_md38"></a>
 Required PHP extensions</h2>
 <div class="fragment"><div class="line">mbstring  xml  curl  zip  gd  sqlite3  bcmath  intl</div>
@@ -686,7 +688,7 @@ Automated installation and launch</h1>
 &lt;tt&gt;installation.sh&lt;/tt&gt; for one-time dependency setup</h2>
 <p>Installs (and skips anything already present):</p>
 <ul>
-<li>ROS 2 Humble system packages (Gazebo, Nav2, SLAM, Foxglove bridge, tools)</li>
+<li>ROS 2 Humble system packages (Gazebo, Nav2, SLAM, ==Foxglo==ve bridge, tools)</li>
 <li>Python AI-layer packages (<code>faster-whisper</code>, <code>sounddevice</code>, <code>numpy</code>, <code>pyyaml</code>, <code>websockets</code>)</li>
 <li><code>rosdep</code> dependencies and the <code>bcr_bot</code> package (cloned into <code>Code/src/</code>)</li>
 <li>PHP 8.4 + extensions (via <code>ppa:ondrej/php</code>) and Composer</li>

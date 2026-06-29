@@ -18,9 +18,9 @@ def generate_launch_description():
     map_file = os.path.join(digital_twin_dir, 'maps', 'corridors_map.yaml')
     nav2_params = os.path.join(digital_twin_dir, 'config', 'nav2_params.yaml')
     corridors_world = os.path.expanduser(
-        '~/Documents/CloudTwin/Code/src/robot_simulation/worlds/corridors.world')
+        '~/Documents/DRYVbot/Code/src/robot_simulation/worlds/corridors.world')
     models_path = os.path.expanduser(
-        '~/Documents/CloudTwin/Code/src/robot_simulation/models')
+        '~/Documents/DRYVbot/Code/src/robot_simulation/models')
 
     # ===== Environment: model paths for Gazebo Classic =====
     env_models = AppendEnvironmentVariable(
