@@ -89,6 +89,20 @@ elif command -v php >/dev/null 2>&1 && command -v composer >/dev/null 2>&1 && [ 
             || echo "==> WARNING: database reset/seed failed (continuing)."
     else
         echo "==> Keeping the existing database (no reset/seed)."
+        # Make sure the schema exists, then seed the default users/rooms only
+        # when the database is empty (no users). The seeder is idempotent
+        # (firstOrCreate/updateOrCreate), so this never wipes existing orders,
+        # and skipping it on a populated DB preserves any room edits.
+        ( cd "$WEB_DIR" && php artisan migrate --force --graceful ) \
+            || echo "==> WARNING: database migrate failed (continuing)."
+        user_count="$(cd "$WEB_DIR" && php artisan tinker --execute="echo \App\Models\User::count();" 2>/dev/null | tail -1 | tr -dc '0-9')"
+        if [ -z "$user_count" ] || [ "$user_count" = "0" ]; then
+            echo "==> Database has no users; seeding default users and rooms ..."
+            ( cd "$WEB_DIR" && php artisan db:seed --class=DatabaseSeeder --force ) \
+                || echo "==> WARNING: database seed failed (continuing)."
+        else
+            echo "==> Database already has $user_count user(s); skipping seed."
+        fi
     fi
 
     echo "==> Starting delivery_optimization web app (logs: $WEB_LOG)"
