@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::firstOrCreate(
-            ['email' => 'manager@drivbot.test'],
+            ['email' => 'manager@dryvbot.com'],
             [
                 'name' => 'Manager',
                 'role' => UserRole::Manager,
@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::firstOrCreate(
-            ['email' => 'pharmacien@drivbot.test'],
+            ['email' => 'pharmacien@dryvbot.com'],
             [
                 'name' => 'Pharmacien',
                 'role' => UserRole::Pharmacist,
