@@ -78,12 +78,12 @@ Big picture</h1>
 <div class="line">                        │  (arrival room, deadline, critical?)</div>
 <div class="line">                        ▼</div>
 <div class="line">┌───────────────────────────────────────────────┐</div>
-<div class="line">│            DeliveryPlannerService              │</div>
-<div class="line">│                                                │</div>
-<div class="line">│   1. Split orders: critical  vs  non-critical  │</div>
-<div class="line">│   2. Order each batch by predicted travel time │</div>
-<div class="line">│      (greedy nearest-neighbour)                │</div>
-<div class="line">│   3. Produce an ordered delivery sequence      │</div>
+<div class="line">│            DeliveryPlannerService             │</div>
+<div class="line">│                                               │</div>
+<div class="line">│   1. Split orders: critical  vs  non-critical │</div>
+<div class="line">│   2. Order each batch by predicted travel time│</div>
+<div class="line">│      (greedy nearest-neighbour)               │</div>
+<div class="line">│   3. Produce an ordered delivery sequence     │</div>
 <div class="line">└───────────────────┬───────────────────────────┘</div>
 <div class="line">                    │ asks &quot;how long from room A to room B</div>
 <div class="line">                    │  leaving at time T?&quot;</div>
@@ -239,7 +239,7 @@ Key code map</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Concern   </th><th class="markdownTableHeadNone">File    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Sequencing &amp; batching ==logic==   </td><td class="markdownTableBodyNone"><code><a class="el" href="DeliveryPlannerService_8php.html">app/Services/DeliveryPlannerService.php</a></code>    </td></tr>
+<td class="markdownTableBodyNone">Sequencing &amp; batching==logic==   </td><td class="markdownTableBodyNone"><code><a class="el" href="DeliveryPlannerService_8php.html">app/Services/DeliveryPlannerService.php</a></code>    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Travel-time model client   </td><td class="markdownTableBodyNone"><code><a class="el" href="PredictionService_8php.html">app/Services/PredictionService.php</a></code>    </td></tr>
 <tr class="markdownTableRowOdd">

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['system_20architecture_1380',['System architecture',['../md_Documentation_pages_architecture.html',1,'']]]
+  ['troubleshooting_1402',['Troubleshooting',['../md_Documentation_pages_troubleshooting.html',1,'']]]
 ];

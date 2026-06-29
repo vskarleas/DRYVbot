@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['goalrelay_712',['GoalRelay',['../classdigital__twin_1_1goal__relay_1_1GoalRelay.html',1,'digital_twin::goal_relay']]]
+  ['goalrelay_724',['GoalRelay',['../classdigital__twin_1_1goal__relay_1_1GoalRelay.html',1,'digital_twin::goal_relay']]]
 ];

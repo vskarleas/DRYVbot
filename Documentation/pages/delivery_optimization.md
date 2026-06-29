@@ -15,12 +15,12 @@ keeps improving because every real robot movement is recorded and fed back into 
                                 │  (arrival room, deadline, critical?)
                                 ▼
         ┌───────────────────────────────────────────────┐
-        │            DeliveryPlannerService              │
-        │                                                │
-        │   1. Split orders: critical  vs  non-critical  │
-        │   2. Order each batch by predicted travel time │
-        │      (greedy nearest-neighbour)                │
-        │   3. Produce an ordered delivery sequence      │
+        │            DeliveryPlannerService             │
+        │                                               │
+        │   1. Split orders: critical  vs  non-critical │
+        │   2. Order each batch by predicted travel time│
+        │      (greedy nearest-neighbour)               │
+        │   3. Produce an ordered delivery sequence     │
         └───────────────────┬───────────────────────────┘
                             │ asks "how long from room A to room B
                             │  leaving at time T?"
@@ -225,15 +225,15 @@ This keeps the sequence optimal even if a delivery is added, cancelled, or takes
 
 ## Key code map
 
-| Concern                           | File                                                                            |
-| --------------------------------- | ------------------------------------------------------------------------------- |
-| Sequencing & batching ==logic==   | `app/Services/DeliveryPlannerService.php`                                     |
-| Travel-time model client          | `app/Services/PredictionService.php`                                          |
-| Model service URL                 | `config/services.php` → `prediction.url`                                   |
-| Room→robot command queue         | `app/Services/DtTaskQueueService.php`                                         |
-| Status handling / re-plan trigger | `app/Services/DtStatusService.php`                                            |
-| Recording delivery timings        | `app/Http/Controllers/Api/DtWebhookController.php`, `app/Models/DtData.php` |
-| Ground-truth trip logs (ROS)      | `digital_twin/digital_twin/simulation_logger.py`                              |
+| Concern                            | File                                                                            |
+| ---------------------------------- | ------------------------------------------------------------------------------- |
+| Sequencing & batching==logic== | `app/Services/DeliveryPlannerService.php`                                     |
+| Travel-time model client           | `app/Services/PredictionService.php`                                          |
+| Model service URL                  | `config/services.php` → `prediction.url`                                   |
+| Room→robot command queue          | `app/Services/DtTaskQueueService.php`                                         |
+| Status handling / re-plan trigger  | `app/Services/DtStatusService.php`                                            |
+| Recording delivery timings         | `app/Http/Controllers/Api/DtWebhookController.php`, `app/Models/DtData.php` |
+| Ground-truth trip logs (ROS)       | `digital_twin/digital_twin/simulation_logger.py`                              |
 
 ---
 

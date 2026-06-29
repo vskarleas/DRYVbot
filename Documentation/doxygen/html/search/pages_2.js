@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['foxglove_20user_20interface_1378',['Foxglove user interface',['../md_Documentation_pages_foxglove.html',1,'']]]
+  ['navigation_20logic_20layer_1400',['Navigation logic layer',['../md_Documentation_pages_navigation_logic.html',1,'']]]
 ];
