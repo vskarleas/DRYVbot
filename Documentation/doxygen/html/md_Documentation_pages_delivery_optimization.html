@@ -106,7 +106,7 @@ Big picture</h1>
 <div class="line">└───────────────────────────────────────────────┘</div>
 <div class="line">                    │</div>
 <div class="line">                    └──► model is retrained → better predictions</div>
-</div><!-- fragment --><p>There are <b>two feedback loops</b> in CloudTwin. The navigation feedback loop (robot ↔ digital twin, replanning around crowds) is described in <a class="el" href="md_Documentation_pages_architecture.html">architecture.md</a>. This page describes the second one: the <b>model feedback loop</b>, where recorded deliveries make the travel-time predictor more accurate over time.</p>
+</div><!-- fragment --><p>There are two feedback loops in DRYVbot. The navigation feedback loop (robot ↔ digital twin, replanning around crowds) is described in <a class="el" href="md_Documentation_pages_architecture.html">architecture.md</a>. This page describes the second one: the model feedback loop, where recorded deliveries make the travel-time predictor more accurate over time.</p>
 <hr  />
 <h1><a class="anchor" id="autotoc_md64"></a>
 The travel-time model (LightGBM regression)</h1>
@@ -255,7 +255,7 @@ Key code map</h1>
 </table>
 <hr  />
 <h1><a class="anchor" id="autotoc_md83"></a>
-Relationship to the rest of CloudTwin</h1>
+Relationship to the rest of DRYVbot</h1>
 <ul>
 <li>The <b>navigation</b> feedback loop (crowd-aware replanning) is independent and described in <a class="el" href="md_Documentation_pages_architecture.html">architecture.md</a>. The optimizer sits <em>above</em> it: it decides the <em>order of destinations</em>; Nav2 decides <em>how to drive</em> to each one.</li>
 <li>The room names the optimizer uses (<code>salle_pharmacie</code>, <code>salle_101</code>, …) are the same registry entries used by the room interpreter — see <a class="el" href="md_Documentation_pages_navigation_logic.html">navigation_==logic==.md</a> and <code><a class="el" href="room__registry_8yaml.html">room_registry.yaml</a></code>.</li>

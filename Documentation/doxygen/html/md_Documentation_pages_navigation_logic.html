@@ -70,7 +70,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><p>The navigation logic layer adds smart navigation capabilities on top of Nav2. It consists of three ROS2 nodes and a Foxglove extension panel, all launched together via <code><a class="el" href="logic_8launch_8py.html">logic.launch.py</a></code> (hence the name).</p>
 <blockquote class="doxtable">
-<p><b>A note on naming.</b> Two of these nodes are <b>deterministic algorithms</b>, not machine learning: <code>crowd_monitor</code> is plain Gaussian/costmap math, and <code>room_interpreter</code> is string normalisation plus a YAML lookup. The only genuine ML here is <code>speech_node</code>, which runs the <b>Whisper</b> speech-to-text model. (The other learned model in CloudTwin is the LightGBM delivery-time predictor — see <a class="el" href="md_Documentation_pages_delivery_optimization.html">delivery_optimization.md</a>.) The layer is named for what it does — navigation <em>logic</em> — rather than being labelled "AI". </p>
+<p><b>A note on naming.</b> Two of these nodes are <b>deterministic algorithms</b>, not machine learning: <code>crowd_monitor</code> is plain Gaussian/costmap math, and <code>room_interpreter</code> is string normalisation plus a YAML lookup. The only genuine ML here is <code>speech_node</code>, which runs the <b>Whisper</b> speech-to-text model. (The other learned model in DRYVbot is the LightGBM delivery-time predictor — see <a class="el" href="md_Documentation_pages_delivery_optimization.html">delivery_optimization.md</a>.) The layer is named for what it does — navigation <em>logic</em> — rather than being labelled "AI". </p>
 </blockquote>
 <h1><a class="anchor" id="autotoc_md110"></a>
 &lt;/blockquote&gt;</h1>

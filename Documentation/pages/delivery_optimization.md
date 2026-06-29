@@ -45,7 +45,7 @@ keeps improving because every real robot movement is recorded and fed back into 
                             └──► model is retrained → better predictions
 ```
 
-There are **two feedback loops** in CloudTwin. The navigation feedback loop (robot ↔ digital twin, replanning around crowds) is described in [architecture.md](architecture.md). This page describes the second one: the **model feedback loop**, where recorded deliveries make the travel-time predictor more accurate over time.
+There are two feedback loops in DRYVbot. The navigation feedback loop (robot ↔ digital twin, replanning around crowds) is described in [architecture.md](architecture.md). This page describes the second one: the model feedback loop, where recorded deliveries make the travel-time predictor more accurate over time.
 
 ---
 
@@ -237,10 +237,11 @@ This keeps the sequence optimal even if a delivery is added, cancelled, or takes
 
 ---
 
-## Relationship to the rest of CloudTwin
+## Relationship to the rest of DRYVbot
 
 - The **navigation** feedback loop (crowd-aware replanning) is independent and described in [architecture.md](architecture.md). The optimizer sits *above*
   it: it decides the *order of destinations*; Nav2 decides *how to drive* to each one.
 - The room names the optimizer uses (`salle_pharmacie`, `salle_101`, …) are the same registry entries used by the room interpreter — see
   [navigation_==logic==.md](navigation_logic.md) and `room_registry.yaml`.
 - Commands reach the robot over the same digital-twin socket described in the README's WebSocket section; the ROS machine's address is configurable from the web app under **Settings → Connection**.
+

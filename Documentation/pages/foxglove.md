@@ -126,13 +126,13 @@ The main visualisation panel. Fixed frame is `map`, follow mode is `follow-pose`
 
 ### Hidden topics (available for debug)
 
-| Topic                        | Why hidden                                                                          |
-| ---------------------------- | ----------------------------------------------------------------------------------- |
-| `/map_dynamic`             | Same as `/map` but with crowd walls — redundant with `/crowd_density` visually |
-| `/bcr_bot/scan`            | Lidar scan — clutters the view                                                     |
-| `/global_costmap/costmap`  | Full costmap — heavy to render, use updates instead                                |
-| `/local_costmap/costmap`   | Same reason                                                                         |
-| `/bcr_bot/kinect_camera/*` | Camera feeds shown in the Teleop tab instead                                        |
+| Topic                        | Why hidden                                                                         |
+| ---------------------------- | ---------------------------------------------------------------------------------- |
+| `/map_dynamic`             | Same as`/map` but with crowd walls — redundant with `/crowd_density` visually |
+| `/bcr_bot/scan`            | Lidar scan — clutters the view                                                    |
+| `/global_costmap/costmap`  | Full costmap — heavy to render, use updates instead                               |
+| `/local_costmap/costmap`   | Same reason                                                                        |
+| `/bcr_bot/kinect_camera/*` | Camera feeds shown in the Teleop tab instead                                       |
 
 ### Publishing goals
 
@@ -240,7 +240,7 @@ For manual robot control and camera monitoring.
 ```
 Foxglove/
 ├── foxglove_layout/
-│   └── CloudTwin.json          # Foxglove layout configuration
+│   └── DRYVbot.json          # Foxglove layout configuration
 └── foxglove_panels/
     └── room-command-panel/
         ├── src/
