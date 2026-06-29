@@ -706,10 +706,17 @@ It is the [Laravel React Starter Kit](https://github.com/laravel/react-starter-k
 | Database       | SQLite (default)                    | file at`database/database.sqlite`                  |
 | Laravel Reverb | bundled                             | WebSocket server for real-time UI updates            |
 
-Notable PHP packages: `inertiajs/inertia-laravel` (v3), `laravel/fortify`,
-`laravel/reverb`, `laravel/wayfinder`, `maatwebsite/excel` (Excel import/export),
-`smalot/pdfparser` (PDF parsing). Front-end: React 19, Inertia, TailwindCSS 4,
-Radix UI, Recharts, `laravel-echo` + `pusher-js` (Reverb client).
+Notable PHP packages: `inertiajs/inertia-laravel` (v3), `laravel/fortify`,`laravel/reverb`, `laravel/wayfinder`, `maatwebsite/excel` (Excel import/export),
+`smalot/pdfparser` (PDF parsing). Front-end: React 19, Inertia, TailwindCSS 4, Radix UI, Recharts, `laravel-echo` + `pusher-js` (Reverb client).
+
+You can connect on the different accounts using the test credential below by opening the http://localhost:8000 :
+
+1. Pharmacy
+   * Username : pharmacien@dryvbot.com
+   * Password : password
+2. Manager
+   * Username : manager@dryvbot.com
+   * Password : password
 
 ### Required PHP extensions
 
