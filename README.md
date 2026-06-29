@@ -1,4 +1,4 @@
-# CloudTwin : Digital Twin pour la navigation autonome et prédictive d'un robot mobile
+# DRYV Bot : Digital Twin pour la navigation autonome et prédictive d'un robot mobile tout en integrant une optimization d'ordre des commandes grace au modele LGBM
 
 ## Description
 
