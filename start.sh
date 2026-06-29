@@ -12,6 +12,8 @@
 #   ./start.sh                # interactive scenario menu
 #   ./start.sh emergency      # or: normal | crowd
 #   NO_WEB=1 ./start.sh       # skip the web app, ROS only
+#   RESET_DB=1 ./start.sh     # reset + seed the database, no prompt
+#   RESET_DB=0 ./start.sh     # keep the existing database, no prompt
 #
 # Dependencies are installed by ./installation.sh.
 
@@ -65,6 +67,30 @@ if [ "${NO_WEB:-0}" = "1" ]; then
 elif command -v php >/dev/null 2>&1 && command -v composer >/dev/null 2>&1 && [ -d "$WEB_DIR/vendor" ]; then
     mkdir -p "$LOG_DIR"
     WEB_LOG="$LOG_DIR/web.log"
+
+    # -----------------------------------------------------------------------
+    # Optional database reset + seed.
+    # "Reset" drops every table, re-runs the migrations, and re-seeds the
+    # default users, rooms and medications (a clean, empty-of-orders state).
+    # "Keep" leaves the existing database (orders, plans, ...) untouched.
+    # Pre-set RESET_DB=1 / RESET_DB=0 to skip the prompt.
+    # -----------------------------------------------------------------------
+    if [ -z "${RESET_DB:-}" ]; then
+        read -rp "Reset and seed the database? This deletes all orders/plans and recreates default data. [y/N]: " db_choice
+        case "$db_choice" in
+            y|Y|yes|YES) RESET_DB=1 ;;
+            *)           RESET_DB=0 ;;
+        esac
+    fi
+
+    if [ "${RESET_DB:-0}" = "1" ]; then
+        echo "==> Resetting and seeding the database ..."
+        ( cd "$WEB_DIR" && php artisan migrate:fresh --seed --force ) \
+            || echo "==> WARNING: database reset/seed failed (continuing)."
+    else
+        echo "==> Keeping the existing database (no reset/seed)."
+    fi
+
     echo "==> Starting delivery_optimization web app (logs: $WEB_LOG)"
     ( cd "$WEB_DIR" && composer run dev ) > "$WEB_LOG" 2>&1 &
     WEB_PID=$!
