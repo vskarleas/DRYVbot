@@ -1,5 +1,7 @@
 # DRYV Bot: Digital Twin for Hospital Delivery Orchestration
 
+> **Getting started?** Jump to the [installation instructions](#automated-installation-and-launch).
+
 ## Description
 
 DRYV Bot is a digital twin designed for hospital logistics. In a hospital, medications, equipment, meals, and documents must circulate between departments — sometimes urgently, always through spaces shared with staff, patients, and visitors. A delivery is not just a trip between two rooms: it is a mission that evolves in a living environment.
