@@ -1,9 +1,21 @@
-# Digital Twin pour la navigation autonome et prédictive d'un robot mobile tout en integrant une optimization d'ordre des commandes grace au modele LGBM
+# DRYV Bot: Digital Twin for Hospital Delivery Orchestration
 
 ## Description
 
-This project is a proof-of-concept for a Digital Twin application applied to mobile robotics. The core idea is that budget robots with limited onboard processing power offload heavy computation (trajectory planning, dynamic obstacle avoidance, predictive navigation) to their digital twin running on a cloud server — in our case, the local computer.
+DRYV Bot is a digital twin designed for hospital logistics. In a hospital, medications, equipment, meals, and documents must circulate between departments — sometimes urgently, always through spaces shared with staff, patients, and visitors. A delivery is not just a trip between two rooms: it is a mission that evolves in a living environment.
 
+A mobile robot can transport a payload and navigate using its sensors, but it remains limited by what it perceives locally. Its onboard resources are already dedicated to safety, perception, motors, navigation, and communication. Its LiDAR detects nearby surroundings, but it cannot know the global state of the hospital — whether a distant corridor is blocked or in what order multiple deliveries should be handled. In short, the robot knows how to transport, but it lacks a global vision to decide.
+
+DRYV Bot fills that gap. Rather than adding more computation on the robot itself, the system follows an edge–fog architecture: the robot stays on the ground handling local execution (movement, obstacle avoidance), while the digital twin runs on a nearby external machine. The twin continuously receives data from the robot and the environment, updates a representation of the situation, and sends back the decisions needed to carry out the mission.
+
+The system relies on two complementary components:
+
+1. **Safe and fast navigation** : adapts the robot's trajectory based on the dynamic state of the environment (people, obstacles, congested areas). It answers: *which path to take to reach the destination safely and efficiently?*
+2. **Delivery order optimization** : organizes orders to determine the sequence of deliveries, taking into account priorities and estimated durations. It answers: *which delivery to handle first, and in what order to continue the round?*
+
+Separately, each component addresses part of the problem. Together, they form a complete loop: observe the situation, organize the missions, guide the robot, then readjust decisions based on field feedback. DRYV Bot does not just simulate a robot or display a map — it orchestrates the mission.
+
+> **About the name:** DRYV Bot takes its initials from the team — **D**ounia, **R**amses, **Y**anis, and **V**asilis. The "Y" is not a typo, it's our signature. And for a robot meant to intelligently *drive* hospital deliveries, the wordplay was too good to pass up.
 The digital twin receives real-time data from the robot and the environment, computes the optimal path, and sends back motion commands. This creates a closed-loop feedback system (boucle de rétroaction) detailed in [Documentation/pages/architecture.md](Documentation/pages/architecture.md).
 
 Since we do not have a physical robot, Gazebo Classic 11 simulates the robot navigating a hospital environment. The simulation represents what would be a real robot connected via a 5G local network to the cloud.
