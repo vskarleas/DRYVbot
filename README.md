@@ -51,7 +51,7 @@ The project is organised in the following ROS2 packages:
 | Robot         | bcr_bot                  | Differential drive with lidar and camera |
 | Navigation    | Nav2 (DWB local planner) | Path planning and obstacle avoidance     |
 | Mapping       | slam_toolbox             | SLAM for map generation                  |
-| Visualisation | ==Foxglo==ve (web)       | Real-time monitoring and user interface  |
+| Visualisation | Foxglove (web)           | Real-time monitoring and user interface  |
 | Speech        | faster-whisper           | Local speech-to-text for voice commands  |
 
 ---
